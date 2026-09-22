@@ -1,0 +1,14 @@
+{
+  "status": "ok",
+  "protocol": "2025-11-25",
+  "transport": "stdio subprocess",
+  "tools": [
+    "resolve_company",
+    "get_annual_facts",
+    "calculate_metrics"
+  ],
+  "facts": 9,
+  "numeric_ratios": 6,
+  "unsupported_metric_refused": true,
+  "server_exit_code": 0
+}

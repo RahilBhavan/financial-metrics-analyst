@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-09-21T22:17:57.973977+00:00",
+  "scope_review": "Apple FY2023-FY2025 only; future annual periods require human review.",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+      "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+      "bytes": 3789099
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000320193.json",
+      "sha256": "21995788784b0bc55218499c45c6fc1878378176024c615170f97e1b65044fd4",
+      "bytes": 164231
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded without modification. Captured_at records packaging time on acquisition day. Direct SEC 10-K HTML curl returned HTTP 403; nine amounts and fiscal-week policy checked separately through the web reader of the official filing."
+}

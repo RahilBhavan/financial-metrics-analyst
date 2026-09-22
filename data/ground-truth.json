@@ -1,0 +1,43 @@
+{
+  "evidence_kind": "manually_transcribed_SEC_filing_values",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+  "accession": "0000320193-25-000079",
+  "filing_date": "2025-10-31",
+  "location": "Consolidated Statements of Operations, printed page 29; fiscal-week policy, printed page 21 and Note 1",
+  "verification": "Read the official SEC filing through web reader on 2026-09-21. Statement is in USD millions; values below are exact USD after multiplying by 1000000. Kept separately from the companyfacts extraction for comparison.",
+  "years": {
+    "2023": {
+      "start": "2022-09-25",
+      "end": "2023-09-30",
+      "days": 371,
+      "revenue": "383285000000",
+      "operating_income": "114301000000",
+      "net_income": "96995000000"
+    },
+    "2024": {
+      "start": "2023-10-01",
+      "end": "2024-09-28",
+      "days": 364,
+      "revenue": "391035000000",
+      "operating_income": "123216000000",
+      "net_income": "93736000000"
+    },
+    "2025": {
+      "start": "2024-09-29",
+      "end": "2025-09-27",
+      "days": 364,
+      "revenue": "416161000000",
+      "operating_income": "133050000000",
+      "net_income": "112010000000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2021-09-26",
+    "end": "2022-09-24",
+    "value": "394328000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+    "source_section": "Consolidated Statements of Operations, printed page 29, Total net sales, 2022 column; USD millions scaled to USD",
+    "latest_matching_accession": "0000320193-24-000123"
+  }
+}

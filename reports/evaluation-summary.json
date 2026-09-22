@@ -1,0 +1,51 @@
+{
+  "status": "ok",
+  "unit_tests": {
+    "run": 72,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "evaluation_counts": {
+    "exact_ratios": {
+      "passed": 12,
+      "total": 12
+    },
+    "filing_values": {
+      "passed": 18,
+      "total": 18
+    },
+    "provenance": {
+      "passed": 18,
+      "total": 18
+    },
+    "question_intent": {
+      "passed": 14,
+      "total": 14
+    },
+    "real_reference_cases": {
+      "passed": 3,
+      "total": 3
+    },
+    "scope_behavior": {
+      "passed": 3,
+      "total": 3
+    },
+    "supporting_values": {
+      "passed": 2,
+      "total": 2
+    },
+    "tool_refusals": {
+      "passed": 12,
+      "total": 12
+    }
+  },
+  "evaluation_passed": 82,
+  "evaluation_total": 82,
+  "warm_stdio_call_ms": {
+    "samples": 10,
+    "median": 5.644645499999434,
+    "maximum": 5.843041999998633,
+    "includes_model": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "evidence_kind": "manually_transcribed_SEC_restatement_note",
+  "issuer": "The Kraft Heinz Company",
+  "cik": "0001637459",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/1637459/000163745919000049/R9.htm",
+  "source_section": "Restatement of Previously Issued Consolidated Financial Statements; FY2017 income-statement bridge",
+  "reviewed_at": "2026-09-21",
+  "fiscal_year": 2017,
+  "start": "2017-01-01",
+  "end": "2017-12-30",
+  "tag": "us-gaap:OperatingIncomeLoss",
+  "original": {"value": "6773000000", "accn": "0001637459-18-000015", "filed": "2018-02-16"},
+  "restated_before_recast": "6693000000",
+  "restated_and_recast": {"value": "6057000000", "accn": "0001637459-19-000049", "filed": "2019-06-07"},
+  "interpretation": "The 716 million USD difference includes an 80 million USD restatement effect and a 636 million USD ASU 2017-07 presentation change. Do not call the entire difference an error correction.",
+  "missing_standard_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+  "missing_tag_interpretation": "The named standard revenue tag is absent from the downloaded companyfacts taxonomy, while the actual filing reports net sales. This demonstrates API/tag coverage failure, not missing business revenue.",
+  "reported_net_sales_after_restatement": "26076000000",
+  "scope": "Reference tests only. KHC is not a supported interactive issuer. Its NetIncomeLoss tag corresponds to income attributable to Kraft Heinz here; it must not inherit the AAPL/MSFT consolidated-net-income convention."
+}

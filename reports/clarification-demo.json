@@ -1,0 +1,9 @@
+{
+  "status": "needs_clarification",
+  "code": "ambiguous_profit",
+  "message": "Do you mean operating income or net income?",
+  "choices": [
+    "Operating income",
+    "Net income"
+  ]
+}

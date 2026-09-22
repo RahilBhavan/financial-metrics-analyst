@@ -1,0 +1,17 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-09-21T22:38:24.733037+00:00",
+  "scope_review": "Reference-only KHC FY2017 operating income revision and missing standard revenue tag",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001637459.json",
+      "sha256": "8fad66c16e535f7749f19126a986a9f43a087ca2472d063fa7742106196d88ac",
+      "bytes": 3417827
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001637459.json",
+      "sha256": "60160955203edcb64120df4c465f0b4b263aee27cab9ba1b6acb88c6d33bc7db",
+      "bytes": 143681
+    }
+  }
+}

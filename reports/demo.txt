@@ -1,0 +1,22 @@
+Apple Inc. | AAPL | CIK 0000320193
+As of 2026-09-21; SEC snapshot 2026-09-21T22:17:57.973977+00:00
+Amounts: USD millions. Percentages: 2 decimal places. FY labels use each issuer's fiscal calendar.
+
+Metric           | FY2023         | FY2024    | FY2025 
+-----------------+----------------+-----------+--------
+Revenue          | 383,285        | 391,035   | 416,161
+Operating income | 114,301        | 123,216   | 133,050
+Net income       | 96,995         | 93,736    | 112,010
+Operating margin | 29.82%         | 31.51%    | 31.97% 
+Revenue growth   | -2.80% [1] [2] | 2.02% [3] | 6.43%  
+FY2023: 2022-09-25 to 2023-09-30
+FY2024: 2023-10-01 to 2024-09-28
+FY2025: 2024-09-29 to 2025-09-27
+[1] FY2023 Revenue growth: comparison_uses_common_filing: 0000320193-24-000123; both values match latest eligible disclosures
+[2] FY2023 Revenue growth: unequal_period_lengths: current 371 days, prior 364 days; reported growth, not week-normalized
+[3] FY2024 Revenue growth: unequal_period_lengths: current 364 days, prior 371 days; reported growth, not week-normalized
+
+Source filings:
+https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm
+https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm
+Use --details for formulas and provenance, --json for full audit data, or --html for expandable evidence.

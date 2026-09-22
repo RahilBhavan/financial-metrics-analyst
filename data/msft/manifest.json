@@ -1,0 +1,17 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-09-21T22:38:24.721387+00:00",
+  "scope_review": "MSFT FY2023-FY2025 plus FY2022 revenue baseline",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+      "sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
+      "bytes": 4881196
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000789019.json",
+      "sha256": "551ff75d16e89942b05b48835f3548be1276d59159bf86f009468b99542a94b9",
+      "bytes": 185250
+    }
+  }
+}

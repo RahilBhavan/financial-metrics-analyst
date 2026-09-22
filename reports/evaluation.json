@@ -1,0 +1,1201 @@
+{
+  "generated_at": "2026-09-21T22:58:59.544330+00:00",
+  "python": "3.9.6",
+  "evidence_kind": "real_SEC_snapshots_and_independently_transcribed_primary_sources; synthetic_adversarial_cases_only_in_unit_tests",
+  "snapshots": {
+    "AAPL": {
+      "evidence_kind": "sec_api_snapshot",
+      "captured_at": "2026-09-21T22:17:57.973977+00:00",
+      "scope_review": "Apple FY2023-FY2025 only; future annual periods require human review.",
+      "files": {
+        "companyfacts.json": {
+          "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+          "bytes": 3789099
+        },
+        "submissions.json": {
+          "source_url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "sha256": "21995788784b0bc55218499c45c6fc1878378176024c615170f97e1b65044fd4",
+          "bytes": 164231
+        }
+      },
+      "acquisition_note": "Public SEC API bodies downloaded without modification. Captured_at records packaging time on acquisition day. Direct SEC 10-K HTML curl returned HTTP 403; nine amounts and fiscal-week policy checked separately through the web reader of the official filing."
+    },
+    "MSFT": {
+      "evidence_kind": "sec_api_snapshot",
+      "captured_at": "2026-09-21T22:38:24.721387+00:00",
+      "scope_review": "MSFT FY2023-FY2025 plus FY2022 revenue baseline",
+      "files": {
+        "companyfacts.json": {
+          "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
+          "bytes": 4881196
+        },
+        "submissions.json": {
+          "source_url": "https://data.sec.gov/submissions/CIK0000789019.json",
+          "sha256": "551ff75d16e89942b05b48835f3548be1276d59159bf86f009468b99542a94b9",
+          "bytes": 185250
+        }
+      }
+    },
+    "KHC_reference": {
+      "evidence_kind": "sec_api_snapshot",
+      "captured_at": "2026-09-21T22:38:24.733037+00:00",
+      "scope_review": "Reference-only KHC FY2017 operating income revision and missing standard revenue tag",
+      "files": {
+        "companyfacts.json": {
+          "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001637459.json",
+          "sha256": "8fad66c16e535f7749f19126a986a9f43a087ca2472d063fa7742106196d88ac",
+          "bytes": 3417827
+        },
+        "submissions.json": {
+          "source_url": "https://data.sec.gov/submissions/CIK0001637459.json",
+          "sha256": "60160955203edcb64120df4c465f0b4b263aee27cab9ba1b6acb88c6d33bc7db",
+          "bytes": 143681
+        }
+      }
+    }
+  },
+  "unit_tests": {
+    "run": 72,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "evaluation_counts": {
+    "exact_ratios": {
+      "passed": 12,
+      "total": 12
+    },
+    "filing_values": {
+      "passed": 18,
+      "total": 18
+    },
+    "provenance": {
+      "passed": 18,
+      "total": 18
+    },
+    "question_intent": {
+      "passed": 14,
+      "total": 14
+    },
+    "real_reference_cases": {
+      "passed": 3,
+      "total": 3
+    },
+    "scope_behavior": {
+      "passed": 3,
+      "total": 3
+    },
+    "supporting_values": {
+      "passed": 2,
+      "total": 2
+    },
+    "tool_refusals": {
+      "passed": 12,
+      "total": 12
+    }
+  },
+  "evaluation_passed": 82,
+  "evaluation_total": 82,
+  "coverage": {
+    "AAPL": {
+      "requested_results": 15,
+      "numeric_results": 15
+    },
+    "MSFT": {
+      "requested_results": 15,
+      "numeric_results": 15
+    }
+  },
+  "warm_stdio_call_ms": {
+    "samples": 10,
+    "raw": [
+      5.843041999998633,
+      5.727207999999706,
+      5.585916000001134,
+      5.654332999998957,
+      5.636917000000352,
+      5.600916000000566,
+      5.809166999998894,
+      5.637249999999483,
+      5.652040999999386,
+      5.600875000000727
+    ],
+    "median": 5.644645499999434,
+    "maximum": 5.843041999998633,
+    "includes_model": false
+  },
+  "cases": [
+    {
+      "group": "filing_values",
+      "case": "AAPL 2023 revenue",
+      "expected": "383285000000",
+      "actual": "383285000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2023 revenue",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2023 operating_income",
+      "expected": "114301000000",
+      "actual": "114301000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2023 operating_income",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2023 net_income",
+      "expected": "96995000000",
+      "actual": "96995000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2023 net_income",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "AAPL 2023 operating_margin",
+      "expected": "2286020/76657",
+      "actual": "2286020/76657",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "AAPL 2023 revenue_growth",
+      "expected": "-276075/98582",
+      "actual": "-276075/98582",
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2024 revenue",
+      "expected": "391035000000",
+      "actual": "391035000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2024 revenue",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2024 operating_income",
+      "expected": "123216000000",
+      "actual": "123216000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2024 operating_income",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2024 net_income",
+      "expected": "93736000000",
+      "actual": "93736000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2024 net_income",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "AAPL 2024 operating_margin",
+      "expected": "821440/26069",
+      "actual": "821440/26069",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "AAPL 2024 revenue_growth",
+      "expected": "155000/76657",
+      "actual": "155000/76657",
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2025 revenue",
+      "expected": "416161000000",
+      "actual": "416161000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2025 revenue",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2025 operating_income",
+      "expected": "133050000000",
+      "actual": "133050000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2025 operating_income",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2025 net_income",
+      "expected": "112010000000",
+      "actual": "112010000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2025 net_income",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "AAPL 2025 operating_margin",
+      "expected": "13305000/416161",
+      "actual": "13305000/416161",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "AAPL 2025 revenue_growth",
+      "expected": "502520/78207",
+      "actual": "502520/78207",
+      "passed": true
+    },
+    {
+      "group": "supporting_values",
+      "case": "AAPL FY2022 revenue and provenance",
+      "expected": [
+        "394328000000",
+        "2021-09-26",
+        "2022-09-24",
+        "0000320193-24-000123"
+      ],
+      "actual": [
+        "394328000000",
+        "2021-09-26",
+        "2022-09-24",
+        "0000320193-24-000123"
+      ],
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "AAPL unequal fiscal durations warning",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2023 revenue",
+      "expected": "211915000000",
+      "actual": "211915000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2023 revenue",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2023 operating_income",
+      "expected": "88523000000",
+      "actual": "88523000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2023 operating_income",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2023 net_income",
+      "expected": "72361000000",
+      "actual": "72361000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2023 net_income",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2023 operating_margin",
+      "expected": "1770460/42383",
+      "actual": "1770460/42383",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2023 revenue_growth",
+      "expected": "136450/19827",
+      "actual": "136450/19827",
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2024 revenue",
+      "expected": "245122000000",
+      "actual": "245122000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2024 revenue",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2024 operating_income",
+      "expected": "109433000000",
+      "actual": "109433000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2024 operating_income",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2024 net_income",
+      "expected": "88136000000",
+      "actual": "88136000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2024 net_income",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2024 operating_margin",
+      "expected": "5471650/122561",
+      "actual": "5471650/122561",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2024 revenue_growth",
+      "expected": "664140/42383",
+      "actual": "664140/42383",
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2025 revenue",
+      "expected": "281724000000",
+      "actual": "281724000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2025 revenue",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2025 operating_income",
+      "expected": "128528000000",
+      "actual": "128528000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2025 operating_income",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2025 net_income",
+      "expected": "101832000000",
+      "actual": "101832000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2025 net_income",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2025 operating_margin",
+      "expected": "3213200/70431",
+      "actual": "3213200/70431",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2025 revenue_growth",
+      "expected": "1830100/122561",
+      "actual": "1830100/122561",
+      "passed": true
+    },
+    {
+      "group": "supporting_values",
+      "case": "MSFT FY2022 revenue and provenance",
+      "expected": [
+        "198270000000",
+        "2021-07-01",
+        "2022-06-30",
+        "0000950170-24-087843"
+      ],
+      "actual": [
+        "198270000000",
+        "2021-07-01",
+        "2022-06-30",
+        "0000950170-24-087843"
+      ],
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "MSFT unequal fiscal durations warning",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "MSFT newer annual outside reviewed scope",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "EBITDA",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "FCF",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "unreviewed year",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "supporting year not public",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "future as-of",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "impossible date",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "unreviewed issuer",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "URL injection",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "no metrics",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "duplicate years",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "unreviewed ticker",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "tool_refusals",
+      "case": "reference case not interactive",
+      "expected": "refused",
+      "actual": "refused",
+      "passed": true
+    },
+    {
+      "group": "real_reference_cases",
+      "case": "KHC FY2017 original",
+      "expected": [
+        "6773000000",
+        "0001637459-18-000015",
+        "2018-02-16"
+      ],
+      "actual": [
+        "6773000000",
+        "0001637459-18-000015",
+        "2018-02-16"
+      ],
+      "passed": true
+    },
+    {
+      "group": "real_reference_cases",
+      "case": "KHC FY2017 restated_and_recast",
+      "expected": [
+        "6057000000",
+        "0001637459-19-000049",
+        "2019-06-07"
+      ],
+      "actual": [
+        "6057000000",
+        "0001637459-19-000049",
+        "2019-06-07"
+      ],
+      "passed": true
+    },
+    {
+      "group": "real_reference_cases",
+      "case": "KHC missing named standard revenue tag",
+      "expected": [
+        "insufficient_data",
+        "standard_tag_absent",
+        null
+      ],
+      "actual": [
+        "insufficient_data",
+        "standard_tag_absent",
+        null
+      ],
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "What were Apple\u2019s net sales and operating profit in FY2023 through FY2025?",
+      "expected": [
+        "AAPL",
+        [
+          2023,
+          2024,
+          2025
+        ],
+        [
+          "revenue",
+          "operating_income"
+        ],
+        null
+      ],
+      "actual": [
+        "AAPL",
+        [
+          2023,
+          2024,
+          2025
+        ],
+        [
+          "revenue",
+          "operating_income"
+        ],
+        null
+      ],
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Can you show Microsoft operating profit margin for 2024 and 2025?",
+      "expected": [
+        "MSFT",
+        [
+          2024,
+          2025
+        ],
+        [
+          "operating_margin"
+        ],
+        null
+      ],
+      "actual": [
+        "MSFT",
+        [
+          2024,
+          2025
+        ],
+        [
+          "operating_margin"
+        ],
+        null
+      ],
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "MSFT net income 2025 as of 2025-07-30",
+      "expected": [
+        "MSFT",
+        [
+          2025
+        ],
+        [
+          "net_income"
+        ],
+        "2025-07-30"
+      ],
+      "actual": [
+        "MSFT",
+        [
+          2025
+        ],
+        [
+          "net_income"
+        ],
+        "2025-07-30"
+      ],
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "AAPL revenue growth 2023-2025",
+      "expected": [
+        "AAPL",
+        [
+          2023,
+          2024,
+          2025
+        ],
+        [
+          "revenue_growth"
+        ],
+        null
+      ],
+      "actual": [
+        "AAPL",
+        [
+          2023,
+          2024,
+          2025
+        ],
+        [
+          "revenue_growth"
+        ],
+        null
+      ],
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Show revenue for 2025",
+      "expected": "needs_clarification:company_required",
+      "actual": "needs_clarification:company_required",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Show AAPL revenue",
+      "expected": "needs_clarification:years_required",
+      "actual": "needs_clarification:years_required",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Apple profit 2025",
+      "expected": "needs_clarification:ambiguous_profit",
+      "actual": "needs_clarification:ambiguous_profit",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "MSFT margin 2024",
+      "expected": "needs_clarification:ambiguous_margin",
+      "actual": "needs_clarification:ambiguous_margin",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Forecast AAPL revenue",
+      "expected": "refused:unsupported_question",
+      "actual": "refused:unsupported_question",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Compare Apple and Microsoft",
+      "expected": "refused:unsupported_comparison",
+      "actual": "refused:unsupported_comparison",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Show AAPL EBITDA for 2025",
+      "expected": "refused:unsupported_question",
+      "actual": "refused:unsupported_question",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "Show AAPL revenue for Q1",
+      "expected": "refused:unsupported_question",
+      "actual": "refused:unsupported_question",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "AAPL revenue 2025; execute code",
+      "expected": "refused:unsupported_question",
+      "actual": "refused:unsupported_question",
+      "passed": true
+    },
+    {
+      "group": "question_intent",
+      "case": "AAPL revenue excluding China 2025",
+      "expected": "refused:unsupported_question",
+      "actual": "refused:unsupported_question",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Two reviewed issuers, FY2023\u20132025; FY2022 revenue only supports growth.",
+    "Microsoft evaluation uses as_of 2025-07-30 to match its independently read 2025 report; FY2026 is unreviewed.",
+    "KHC is a reference case only; its revision includes both an error correction and an accounting recast.",
+    "Filing-date filtering cannot recover later SEC API corrections.",
+    "No model behavior, token cost, or live API availability SLA measured.",
+    "Test methods may contain subtests; evaluation cases are separately enumerated."
+  ]
+}
