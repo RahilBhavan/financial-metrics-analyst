@@ -1,2 +1,3 @@
 # Optional verification only. The application itself needs no packages.
 mcp==1.30.0
+jsonschema==4.26.0
