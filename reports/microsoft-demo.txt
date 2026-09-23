@@ -2,12 +2,14 @@ Microsoft Corporation | MSFT | CIK 0000789019
 As of 2025-07-30; SEC snapshot 2026-09-21T22:38:24.721387+00:00
 Amounts: USD millions. Percentages: 2 decimal places. FY labels use each issuer's fiscal calendar.
 
-Metric           | FY2023    | FY2024     | FY2025    
+Metric           | FY2023    | FY2024     | FY2025
 -----------------+-----------+------------+-----------
-Revenue          | 211,915   | 245,122    | 281,724   
-Operating income | 88,523    | 109,433    | 128,528   
-Net income       | 72,361    | 88,136     | 101,832   
-Operating margin | 41.77%    | 44.64%     | 45.62%    
+Revenue          | 211,915   | 245,122    | 281,724
+Gross profit     | 146,052   | 171,008    | 193,893
+Operating income | 88,523    | 109,433    | 128,528
+Net income       | 72,361    | 88,136     | 101,832
+Gross margin     | 68.92%    | 69.76%     | 68.82%
+Operating margin | 41.77%    | 44.64%     | 45.62%
 Revenue growth   | 6.88% [1] | 15.67% [2] | 14.93% [3]
 FY2023: 2022-07-01 to 2023-06-30
 FY2024: 2023-07-01 to 2024-06-30

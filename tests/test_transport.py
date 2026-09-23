@@ -20,7 +20,7 @@ class ToolTests(unittest.TestCase):
         cls.analyst = Analyst()
 
     def test_narrow_tool_list(self):
-        self.assertEqual(len(TOOLS), 3)
+        self.assertEqual(len(TOOLS), 4)
         for tool in TOOLS:
             self.assertTrue(tool["annotations"]["readOnlyHint"])
             self.assertFalse(tool["annotations"]["openWorldHint"])

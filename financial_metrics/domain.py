@@ -129,7 +129,7 @@ class Analyst:
         if not isinstance(fiscal_years, list) or not 1 <= len(fiscal_years) <= 3:
             raise Refusal("unsupported_years", "Request one to three reviewed fiscal years.")
         if any(type(y) is not int or y not in self.periods for y in fiscal_years) or len(set(fiscal_years)) != len(fiscal_years):
-            raise Refusal("unsupported_years", "Supported years are unique integers from 2023 through 2025.")
+            raise Refusal("unsupported_years", "Supported years for this issuer are: " + ", ".join(map(str, sorted(self.periods))) + ".")
         if (not isinstance(metrics, list) or not 1 <= len(metrics) <= len(allowed)
                 or any(not isinstance(m, str) or m not in allowed for m in metrics)
                 or len(set(metrics)) != len(metrics)):
@@ -140,7 +140,7 @@ class Analyst:
 
     def _select(self, year, metric, as_of):
         start, end = {**self.support_periods, **self.periods}[year]
-        tag = TAGS[metric]
+        tag = self.profile.get("tags", TAGS)[metric]
         eligible, rejected, dangerous = [], [], []
         counts = Counter()
         units = self.facts.get("facts", {}).get("us-gaap", {}).get(tag, {}).get("units", {})
@@ -231,6 +231,79 @@ class Analyst:
         results = [self._select(y, m, as_of) for y in sorted(fiscal_years) for m in metrics]
         return self._response(results, as_of)
 
+    def get_quarterly_facts(self, cik, fiscal_year, quarter, metrics, as_of):
+        if cik != self.cik:
+            raise Refusal("unsupported_company", "CIK does not match this reviewed issuer.")
+        key = (fiscal_year, quarter)
+        quarters = self.profile.get("quarters", {})
+        if key not in quarters:
+            raise Refusal("unsupported_quarter", "This issuer does not have that reviewed fiscal quarter.")
+        if (not isinstance(metrics, list) or not 1 <= len(metrics) <= len(TAGS)
+                or len(set(metrics)) != len(metrics) or any(metric not in TAGS for metric in metrics)):
+            raise Refusal("unsupported_metric", "Quarterly facts support: " + ", ".join(TAGS))
+        if iso_date(as_of) > self.captured_date:
+            raise Refusal("as_of_after_snapshot", "Cannot establish facts after snapshot date " + str(self.captured_date))
+        start, end = quarters[key]
+        results = [self._select_quarter(fiscal_year, quarter, start, end, metric, as_of) for metric in metrics]
+        return self._response(results, as_of)
+
+    def _select_quarter(self, fiscal_year, quarter, start, end, metric, as_of):
+        tag = self.profile.get("tags", TAGS)[metric]
+        eligible, rejected = [], []
+        counts = Counter()
+        units = self.facts.get("facts", {}).get("us-gaap", {}).get(tag, {}).get("units", {})
+        for unit, rows in units.items():
+            for raw in rows:
+                if raw.get("end") != end:
+                    continue
+                reason = None
+                accn = raw.get("accn", "")
+                filing = self.filings.get(accn)
+                if raw.get("start") != start:
+                    reason = "period_mismatch"
+                elif unit != "USD":
+                    reason = "unit_mismatch"
+                elif raw.get("form") not in ("10-Q", "10-Q/A") or raw.get("fp") != quarter:
+                    reason = "not_quarterly_filing"
+                else:
+                    try:
+                        if iso_date(raw.get("filed")) > iso_date(as_of):
+                            reason = "filed_after_as_of"
+                        elif (not filing or filing["form"] != raw["form"] or filing["filingDate"] != raw["filed"]
+                              or filing["reportDate"] != end or raw.get("fy") != fiscal_year):
+                            reason = "filing_metadata_mismatch"
+                        elif not re.fullmatch(r"\d{10}-\d{2}-\d{6}", accn) or not re.fullmatch(r"[A-Za-z0-9_.-]+\.htm[l]?", filing["primaryDocument"]):
+                            reason = "unsafe_source_identifier"
+                        else:
+                            value = number(raw.get("val"))
+                    except Refusal:
+                        reason = "invalid_fact"
+                if reason:
+                    counts[reason] += 1
+                    if len(rejected) < 20:
+                        rejected.append({"accn": str(accn)[:100], "start": raw.get("start"), "end": end,
+                                         "unit": str(unit)[:80], "filed": raw.get("filed"), "reason": reason})
+                    continue
+                eligible.append({
+                    "cik": self.cik, "metric": metric, "value": decimal_text(value), "unit": unit,
+                    "period_start": start, "period_end": end, "fiscal_year": fiscal_year,
+                    "reported_fy": raw["fy"], "fp": raw["fp"], "form": raw["form"], "filed": raw["filed"],
+                    "accn": accn, "tag": "us-gaap:" + tag,
+                    "source_url": "https://www.sec.gov/Archives/edgar/data/" + str(int(self.cik)) + "/" + accn.replace("-", "") + "/" + filing["primaryDocument"],
+                })
+        audit = {"rejection_counts": dict(counts), "rejected_candidates": rejected,
+                 "rejected_candidates_truncated": sum(counts.values()) - len(rejected)}
+        base = {"fiscal_year": fiscal_year, "metric": metric, "period_start": start, "period_end": end, **audit}
+        if not eligible:
+            return {**base, "status": "insufficient_data", "reason": "no_eligible_quarterly_USD_fact", "value": None}
+        eligible.sort(key=lambda fact: (fact["filed"], fact["accn"]))
+        selected = eligible[-1]
+        history = list({(fact["accn"], fact["value"]): fact for fact in eligible}.values())
+        changed = len({number(fact["value"]) for fact in history}) > 1
+        return {**base, **selected, "status": "ok", "original": history[0], "history": history,
+                "revision_candidate": changed,
+                "warnings": ["value_changed_across_filings: review revision history"] if changed else []}
+
     def _response(self, results, as_of):
         return {"status": "ok" if all(r["status"] == "ok" for r in results) else "partial",
                 "context": self.context(as_of), "results": results}
@@ -249,7 +322,12 @@ class Analyst:
                     results.append({**base, "status": "insufficient_data", "reason": "prior_year_outside_reviewed_scope"})
                     continue
                 revenue = self._select(year, "revenue", as_of)
-                other = self._select(year, "operating_income", as_of) if metric == "operating_margin" else self._select(year - 1, "revenue", as_of)
+                if metric == "operating_margin":
+                    other = self._select(year, "operating_income", as_of)
+                elif metric == "gross_margin":
+                    other = self._select(year, "gross_profit", as_of)
+                else:
+                    other = self._select(year - 1, "revenue", as_of)
                 inputs = [revenue, other]
                 base["inputs"] = inputs
                 if any(f["status"] != "ok" for f in inputs):
@@ -273,7 +351,7 @@ class Analyst:
                     results.append({**base, "status": "insufficient_data", "reason": "inconsistent_filing_basis"})
                     continue
                 current, previous = number(revenue["value"]), number(other["value"])
-                denominator = current if metric == "operating_margin" else previous
+                denominator = current if metric in ("operating_margin", "gross_margin") else previous
                 if denominator <= 0:
                     results.append({**base, "status": "insufficient_data", "reason": "nonpositive_revenue_denominator"})
                     continue
@@ -290,13 +368,14 @@ class Analyst:
                     formula = "(current_revenue - prior_revenue) / prior_revenue * 100"
                 else:
                     numerator = previous
-                    formula = "operating_income / revenue * 100"
+                    formula = ("gross_profit / revenue * 100" if metric == "gross_margin"
+                               else "operating_income / revenue * 100")
                 results.append({**base, **percentage(numerator, denominator), "status": "ok", "formula": formula, "warnings": warnings})
         return self._response(results, as_of)
 
 
 class AnalystService:
-    """Route the same three tools to fixed reviewed issuer snapshots."""
+    """Route the tools to fixed reviewed issuer snapshots."""
 
     def __init__(self, data_dir=DEFAULT_DATA):
         root = Path(data_dir)
@@ -312,7 +391,7 @@ class AnalystService:
             raise Refusal("invalid_ticker", "Ticker must be a string.")
         matches = [a for a in self.issuers.values() if a.profile["ticker"] == ticker.upper()]
         if len(matches) != 1:
-            raise Refusal("unsupported_company", "Reviewed companies are AAPL and MSFT; custom snapshots contain only their own issuer.")
+            raise Refusal("unsupported_company", "Reviewed companies are AAPL, MSFT, and NVDA; custom snapshots contain only their own issuer.")
         return matches[0].resolve_company(ticker)
 
     def _issuer(self, cik):
@@ -325,3 +404,6 @@ class AnalystService:
 
     def calculate_metrics(self, cik, fiscal_years, metrics, as_of):
         return self._issuer(cik).calculate_metrics(cik, fiscal_years, metrics, as_of)
+
+    def get_quarterly_facts(self, cik, fiscal_year, quarter, metrics, as_of):
+        return self._issuer(cik).get_quarterly_facts(cik, fiscal_year, quarter, metrics, as_of)

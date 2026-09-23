@@ -30,8 +30,8 @@ COMPANY = obj({"cik": CIK_SCHEMA, "name": TEXT, "ticker": {"type": "string", "pa
 CORE_PROPERTIES = {
     "cik": CIK_SCHEMA, "metric": {"enum": list(TAGS)}, "value": DECIMAL, "unit": {"const": "USD"},
     "fiscal_year": YEAR, "period_start": DATE, "period_end": DATE, "reported_fy": YEAR,
-    "fp": {"const": "FY"}, "form": {"enum": ["10-K", "10-K/A"]}, "filed": DATE,
-    "accn": ACCN, "tag": {"enum": ["us-gaap:" + tag for tag in TAGS.values()]}, "source_url": FILING_URL,
+    "fp": {"enum": ["FY", "Q1", "Q2", "Q3"]}, "form": {"enum": ["10-K", "10-K/A", "10-Q", "10-Q/A"]}, "filed": DATE,
+    "accn": ACCN, "tag": {"enum": ["us-gaap:" + tag for tag in set(TAGS.values()) | {"Revenues"}]}, "source_url": FILING_URL,
 }
 REJECTION = obj({"accn": {"type": "string", "maxLength": 100}, "start": {"anyOf": [TEXT, {"type": "null"}]},
                  "end": DATE, "unit": TEXT, "filed": {"anyOf": [DATE, {"type": "null"}]}, "reason": TEXT})
@@ -45,11 +45,11 @@ FACT_ERROR = obj({**ROW, **AUDIT, "metric": {"enum": list(TAGS)}, "value": {"typ
                   "status": {"enum": ["insufficient_data", "ambiguous"]}, "reason": TEXT,
                   "blocking_candidates": array({"$ref": "#/$defs/rejection"}, 1, 20), "blocking_candidates_total": COUNT},
                  optional=("blocking_candidates", "blocking_candidates_total"))
-RATIO_BASE = {**ROW, "metric": {"enum": ["operating_margin", "revenue_growth"]}, "unit": {"const": "percent"}}
+RATIO_BASE = {**ROW, "metric": {"enum": ["gross_margin", "operating_margin", "revenue_growth"]}, "unit": {"const": "percent"}}
 RATIO_OK = obj({**RATIO_BASE, "status": {"const": "ok"}, "value": DECIMAL, "display_value": DECIMAL,
                 "exact_fraction": obj({"numerator": INTEGER_TEXT, "denominator": {"type": "string", "pattern": "^[1-9][0-9]*$", "maxLength": 100}}),
                 "precision": obj({"significant_digits": {"const": 34}, "rounding": {"const": "ROUND_HALF_EVEN"}, "display_places": {"const": 2}}),
-                "formula": {"enum": ["operating_income / revenue * 100", "(current_revenue - prior_revenue) / prior_revenue * 100"]},
+                "formula": {"enum": ["gross_profit / revenue * 100", "operating_income / revenue * 100", "(current_revenue - prior_revenue) / prior_revenue * 100"]},
                 "inputs": array({"$ref": "#/$defs/fact_ok"}, 2, 2), "warnings": WARNINGS})
 RATIO_ERROR = obj({**RATIO_BASE, "status": {"const": "insufficient_data"}, "value": {"type": "null"}, "reason": TEXT,
                    "inputs": array({"$ref": "#/$defs/fact"}, 2, 2)}, optional=("inputs",))
@@ -72,7 +72,7 @@ def output_schema(kind):
                        "source_url": {"type": "string", "pattern": r"^https://data\.sec\.gov/submissions/CIK[0-9]{10}\.json$"}})
     else:
         success = obj({"status": {"enum": ["ok", "partial"]}, "context": CONTEXT,
-                       "results": array({"$ref": "#/$defs/fact" if kind == "get_annual_facts" else "#/$defs/result"}, 1, 15)})
+                       "results": array({"$ref": "#/$defs/fact" if kind in ("get_annual_facts", "get_quarterly_facts") else "#/$defs/result"}, 1, 21)})
     return {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "$defs": DEFS,
             "oneOf": [success, REFUSAL]}
 

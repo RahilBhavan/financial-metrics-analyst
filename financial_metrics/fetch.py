@@ -9,12 +9,19 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .policy import CIK, Refusal
+from .policy import PROFILES, Refusal
 
-ENDPOINTS = {
-    "companyfacts.json": "https://data.sec.gov/api/xbrl/companyfacts/CIK" + CIK + ".json",
-    "submissions.json": "https://data.sec.gov/submissions/CIK" + CIK + ".json",
-}
+TICKER_CIKS = {profile["ticker"]: cik for cik, profile in PROFILES.items()}
+
+
+def endpoints_for(cik):
+    return {
+        "companyfacts.json": "https://data.sec.gov/api/xbrl/companyfacts/CIK" + cik + ".json",
+        "submissions.json": "https://data.sec.gov/submissions/CIK" + cik + ".json",
+    }
+
+
+ENDPOINTS = endpoints_for(TICKER_CIKS["AAPL"])
 MAX_BYTES = 8 * 1024 * 1024
 
 
@@ -24,30 +31,34 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 
 class SECClient:
-    def __init__(self, user_agent, opener=None, sleep=time.sleep):
+    def __init__(self, user_agent, cik=TICKER_CIKS["AAPL"], opener=None, sleep=time.sleep):
         if (not isinstance(user_agent, str) or len(user_agent) > 200 or not re.fullmatch(r"[\x20-\x7e]+", user_agent)
                 or "@" not in user_agent):
             raise Refusal("invalid_user_agent", "Use an identifying ASCII User-Agent containing your real contact email.")
         self.user_agent = user_agent
+        if cik not in PROFILES:
+            raise Refusal("unsupported_company", "Refresh supports the reviewed AAPL, MSFT, and NVDA issuers.")
+        self.cik = cik
+        self.endpoints = endpoints_for(cik)
         self.opener = opener or urllib.request.build_opener(NoRedirect())
         self.sleep = sleep
 
     def get(self, filename):
-        if filename not in ENDPOINTS:
-            raise Refusal("endpoint_refused", "Only the two fixed Apple SEC endpoints are allowed.")
+        if filename not in self.endpoints:
+            raise Refusal("endpoint_refused", "Only the fixed SEC companyfacts and submissions endpoints are allowed.")
         for attempt in range(3):
             self.sleep(0.5)
-            request = urllib.request.Request(ENDPOINTS[filename], headers={"User-Agent": self.user_agent, "Accept": "application/json"})
+            request = urllib.request.Request(self.endpoints[filename], headers={"User-Agent": self.user_agent, "Accept": "application/json"})
             try:
                 with self.opener.open(request, timeout=10) as response:
-                    if response.geturl() != ENDPOINTS[filename]:
+                    if response.geturl() != self.endpoints[filename]:
                         raise Refusal("redirect_refused", "Unexpected response URL.")
                     raw = response.read(MAX_BYTES + 1)
                 if len(raw) > MAX_BYTES:
                     raise Refusal("response_too_large", "SEC response exceeds 8 MiB.")
                 try:
                     document = json.loads(raw)
-                    if str(document["cik"]).zfill(10) != CIK:
+                    if str(document["cik"]).zfill(10) != self.cik:
                         raise Refusal("wrong_entity", "SEC response identifies a different issuer.")
                 except (ValueError, KeyError, TypeError):
                     raise Refusal("invalid_response", "SEC did not return the expected JSON document.")
@@ -63,21 +74,26 @@ class SECClient:
         raise Refusal("sec_unavailable", "SEC request failed.")
 
 
-def manifest_for(payloads, captured_at):
+def manifest_for(payloads, captured_at, cik):
+    profile = PROFILES[cik]
+    endpoints = endpoints_for(cik)
     return {"evidence_kind": "sec_api_snapshot", "captured_at": captured_at,
-            "scope_review": "Apple FY2023-FY2025 only; future annual periods require human review.",
-            "files": {name: {"source_url": ENDPOINTS[name], "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
+            "scope_review": profile["ticker"] + " reviewed periods only; future periods require human review.",
+            "files": {name: {"source_url": endpoints[name], "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
                       for name, raw in payloads.items()}}
 
 
-def fetch_snapshot(output_dir, user_agent):
+def fetch_snapshot(output_dir, user_agent, ticker="AAPL"):
     output_dir = Path(output_dir)
     if output_dir.exists():
         raise Refusal("target_exists", "Choose a new directory; existing snapshots are never overwritten.")
-    client = SECClient(user_agent)
-    payloads = {name: client.get(name) for name in ENDPOINTS}
+    if not isinstance(ticker, str) or ticker.upper() not in TICKER_CIKS:
+        raise Refusal("unsupported_company", "Refresh supports AAPL, MSFT, and NVDA.")
+    cik = TICKER_CIKS[ticker.upper()]
+    client = SECClient(user_agent, cik)
+    payloads = {name: client.get(name) for name in endpoints_for(cik)}
     captured_at = datetime.now(timezone.utc).isoformat()
-    manifest = manifest_for(payloads, captured_at)
+    manifest = manifest_for(payloads, captured_at, cik)
     # Both requests succeed before creating any deliverable.
     output_dir.mkdir(parents=True, exist_ok=False)
     for name, raw in payloads.items():

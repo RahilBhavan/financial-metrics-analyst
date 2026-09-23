@@ -25,9 +25,9 @@ flowchart LR
 ## Read the code in this order
 
 1. `financial_metrics/policy.py`: the two issuer profiles, reviewed fiscal intervals, supporting revenue periods, tags, and accounting decisions.
-2. The three `ground-truth.json` cards: independently transcribed filing evidence, including the limits of each source check.
+2. The issuer and reference `ground-truth.json` cards: independently transcribed filing evidence, including the limits of each source check.
 3. `financial_metrics/domain.py`: manifest validation, issuer routing, candidate selection, revision history, common-filing comparison, and exact arithmetic.
-4. `financial_metrics/contracts.py` and `tools.py`: closed nested schemas and the three exposed operations. Invalid output becomes a refusal before crossing the tool boundary.
+4. `financial_metrics/contracts.py` and `tools.py`: closed nested schemas and the four exposed operations. Invalid output becomes a refusal before crossing the tool boundary.
 5. `financial_metrics/server.py` and `client.py`: a real stdio subprocess, including the default demo. `scripts/verify_sdk.py` checks it with a second client implementation.
 6. `financial_metrics/questions.py` and `presentation.py`: bounded intent parsing, explicit clarification, compact tables, and escaped standalone HTML.
 7. `tests/test_improvements.py`: regressions for all six changes, with synthetic mutations distinguished from real reference cases.

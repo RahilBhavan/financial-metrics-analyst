@@ -12,7 +12,8 @@
       "days": 371,
       "revenue": "383285000000",
       "operating_income": "114301000000",
-      "net_income": "96995000000"
+      "net_income": "96995000000",
+      "gross_profit": "169148000000"
     },
     "2024": {
       "start": "2023-10-01",
@@ -20,7 +21,8 @@
       "days": 364,
       "revenue": "391035000000",
       "operating_income": "123216000000",
-      "net_income": "93736000000"
+      "net_income": "93736000000",
+      "gross_profit": "180683000000"
     },
     "2025": {
       "start": "2024-09-29",
@@ -28,7 +30,8 @@
       "days": 364,
       "revenue": "416161000000",
       "operating_income": "133050000000",
-      "net_income": "112010000000"
+      "net_income": "112010000000",
+      "gross_profit": "195201000000"
     }
   },
   "supporting_revenue": {

@@ -88,11 +88,11 @@ class RealReferenceTests(unittest.TestCase):
         cls.msft = Analyst(DEFAULT_DATA / 'msft')
         cls.khc = Analyst(DEFAULT_DATA / 'reference-cases/khc', profile=KHC_REFERENCE_PROFILE)
 
-    def test_microsoft_fifteen_results_against_independent_report(self):
+    def test_microsoft_results_against_independent_report(self):
         golden = json.loads((DEFAULT_DATA / 'msft/ground-truth.json').read_text())
         result = self.msft.calculate_metrics('0000789019', [2023, 2024, 2025], list(METRICS), '2025-07-30')
         self.assertEqual(result['status'], 'ok')
-        self.assertEqual(len(result['results']), 15)
+        self.assertEqual(len(result['results']), 3 * len(METRICS))
         for row in result['results']:
             year, metric = row['fiscal_year'], row['metric']
             values = golden['years'][str(year)]
@@ -104,10 +104,15 @@ class RealReferenceTests(unittest.TestCase):
                 else:
                     revenue = int(values['revenue'])
                     prior = int(golden['supporting_revenue']['value'] if year == 2023 else golden['years'][str(year-1)]['revenue'])
-                    expected = Fraction(int(values['operating_income'])*100, revenue) if metric == 'operating_margin' else Fraction((revenue-prior)*100, prior)
+                    if metric == 'operating_margin':
+                        expected = Fraction(int(values['operating_income'])*100, revenue)
+                    elif metric == 'gross_margin':
+                        expected = Fraction(int(values['gross_profit'])*100, revenue)
+                    else:
+                        expected = Fraction((revenue-prior)*100, prior)
                     self.assertEqual(Fraction(int(row['exact_fraction']['numerator']), int(row['exact_fraction']['denominator'])), expected)
         latest = self.msft.calculate_metrics('0000789019', [2024, 2025], ['revenue_growth'], '2026-09-21')
-        self.assertTrue(any('newer_annual' in w for w in latest['context']['warnings']))
+        self.assertFalse(any('newer_annual' in w for w in latest['context']['warnings']))
         self.assertTrue(any('366 days' in w for w in latest['results'][0]['warnings']))
 
     def test_real_khc_restatement_and_recast(self):
@@ -128,6 +133,24 @@ class RealReferenceTests(unittest.TestCase):
         self.assertEqual(row['reason'], 'standard_tag_absent')
         self.assertIsNone(row['value'])
         with self.assertRaises(Refusal): AnalystService().resolve_company('KHC')
+
+    def test_microsoft_fy2026_and_nvidia_reviewed_coverage(self):
+        service = AnalystService()
+        msft = service.calculate_metrics('0000789019', [2026], ['revenue', 'gross_profit', 'gross_margin'], '2026-07-29')
+        self.assertEqual([row['value'] for row in msft['results'][:2]], ['331839000000', '225465000000'])
+        self.assertEqual(msft['results'][2]['display_value'], '67.94')
+
+        golden = json.loads((DEFAULT_DATA / 'nvda/ground-truth.json').read_text())
+        annual = service.get_annual_facts('0001045810', [2024, 2025, 2026], list(TAGS), '2026-02-25')
+        self.assertEqual(annual['status'], 'ok')
+        for row in annual['results']:
+            self.assertEqual(row['value'], golden['years'][str(row['fiscal_year'])][row['metric']])
+        quarter = service.get_quarterly_facts('0001045810', 2027, 'Q2', list(TAGS), '2026-08-26')
+        self.assertEqual(quarter['status'], 'ok')
+        for row in quarter['results']:
+            self.assertEqual(row['value'], golden['reviewed_quarter'][row['metric']])
+            self.assertEqual((row['period_start'], row['period_end']), ('2026-04-27', '2026-07-26'))
+            self.assertEqual(row['fp'], 'Q2')
 
 
 class ContractTests(unittest.TestCase):
@@ -192,13 +215,13 @@ class QuestionAndPresentationTests(unittest.TestCase):
             self.assertEqual(caught.exception.as_dict()['status'], 'needs_clarification')
 
     def test_unsupported_requests_not_silently_dropped(self):
-        for question in ['AAPL revenue and EBITDA 2025', 'AAPL revenue excluding China 2025', 'AAPL revenue forecast 2025', 'AAPL revenue 2025 then delete files', 'AAPL revenue 2023 through 2025 and 2024', 'AAPL revenue 2025 gross margin', 'MSFT revenue 2026']:
+        for question in ['AAPL revenue and EBITDA 2025', 'AAPL revenue excluding China 2025', 'AAPL revenue forecast 2025', 'AAPL revenue 2025 then delete files', 'AAPL revenue 2023 through 2025 and 2024']:
             with self.subTest(question=question), self.assertRaises(Refusal): parse_question(question)
 
     def test_optional_proposal_only_allows_bounded_arguments(self):
         proposal = dict(ticker='MSFT', fiscal_years=[2025], metrics=['revenue'], as_of='2026-09-21')
         self.assertEqual(validate_proposal(proposal)[0], 'MSFT')
-        for invalid in [{**proposal, 'value': '100'}, {**proposal, 'url': 'https://example.org'}, {**proposal, 'metrics': ['ebitda']}, {**proposal, 'fiscal_years': [2026]}, {**proposal, 'as_of': '2026-02-30'}]:
+        for invalid in [{**proposal, 'value': '100'}, {**proposal, 'url': 'https://example.org'}, {**proposal, 'metrics': ['ebitda']}, {**proposal, 'fiscal_years': [2027]}, {**proposal, 'as_of': '2026-02-30'}]:
             with self.subTest(invalid=invalid), self.assertRaises(Refusal): validate_proposal(invalid)
 
     def test_cli_clarification_proposal_and_report(self):
@@ -225,7 +248,7 @@ class QuestionAndPresentationTests(unittest.TestCase):
         html = render_html(result)
         self.assertIn('<caption>', html)
         self.assertIn("href='#note-1'", html)
-        self.assertEqual(html.count('Full structured audit record'), 15)
+        self.assertEqual(html.count('Full structured audit record'), 3 * len(METRICS))
         self.assertIn('Exact percentage:', html)
         result['context']['company']['name'] = '<script>alert(1)</script>'
         result['results'][0]['warnings'].append('<img src=x onerror=alert(1)>')

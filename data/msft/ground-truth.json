@@ -7,12 +7,39 @@
   "filing_accession": "0000950170-25-100235",
   "verification": "Read the issuer's published annual report independently of the SEC companyfacts extraction on 2026-09-21. Original amounts are in USD millions; multiply by 1000000. Latest API comparatives may use a later accession. FY2026 is outside the reviewed product scope.",
   "years": {
-    "2023": {"start": "2022-07-01", "end": "2023-06-30", "days": 365, "revenue": "211915000000", "operating_income": "88523000000", "net_income": "72361000000"},
-    "2024": {"start": "2023-07-01", "end": "2024-06-30", "days": 366, "revenue": "245122000000", "operating_income": "109433000000", "net_income": "88136000000"},
-    "2025": {"start": "2024-07-01", "end": "2025-06-30", "days": 365, "revenue": "281724000000", "operating_income": "128528000000", "net_income": "101832000000"}
+    "2023": {
+      "start": "2022-07-01",
+      "end": "2023-06-30",
+      "days": 365,
+      "revenue": "211915000000",
+      "operating_income": "88523000000",
+      "net_income": "72361000000",
+      "gross_profit": "146052000000"
+    },
+    "2024": {
+      "start": "2023-07-01",
+      "end": "2024-06-30",
+      "days": 366,
+      "revenue": "245122000000",
+      "operating_income": "109433000000",
+      "net_income": "88136000000",
+      "gross_profit": "171008000000"
+    },
+    "2025": {
+      "start": "2024-07-01",
+      "end": "2025-06-30",
+      "days": 365,
+      "revenue": "281724000000",
+      "operating_income": "128528000000",
+      "net_income": "101832000000",
+      "gross_profit": "193893000000"
+    }
   },
   "supporting_revenue": {
-    "fiscal_year": 2022, "start": "2021-07-01", "end": "2022-06-30", "value": "198270000000",
+    "fiscal_year": 2022,
+    "start": "2021-07-01",
+    "end": "2022-06-30",
+    "value": "198270000000",
     "source_url": "https://www.microsoft.com/investor/reports/ar24/index.html",
     "source_section": "Income Statements, Total revenue, 2022 column",
     "latest_matching_accession": "0000950170-24-087843"

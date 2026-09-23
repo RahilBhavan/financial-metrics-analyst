@@ -3,15 +3,15 @@
   "sdk_version": "1.30.0",
   "python": "3.11.15",
   "transport": "stdio subprocess",
-  "passed": 18,
-  "total": 18,
+  "passed": 21,
+  "total": 21,
   "checks": [
     {
       "case": "protocol negotiation",
       "passed": true
     },
     {
-      "case": "three named tools",
+      "case": "four named tools",
       "passed": true
     },
     {
@@ -20,6 +20,10 @@
     },
     {
       "case": "get_annual_facts valid schemas",
+      "passed": true
+    },
+    {
+      "case": "get_quarterly_facts valid schemas",
       "passed": true
     },
     {
@@ -48,6 +52,14 @@
     },
     {
       "case": "calculate_metrics ok",
+      "passed": true
+    },
+    {
+      "case": "resolve_company ok",
+      "passed": true
+    },
+    {
+      "case": "get_quarterly_facts ok",
       "passed": true
     },
     {

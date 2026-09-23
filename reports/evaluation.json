@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T22:58:59.544330+00:00",
+  "generated_at": "2026-09-23T16:17:33.740002+00:00",
   "python": "3.9.6",
   "evidence_kind": "real_SEC_snapshots_and_independently_transcribed_primary_sources; synthetic_adversarial_cases_only_in_unit_tests",
   "snapshots": {
@@ -38,6 +38,25 @@
         }
       }
     },
+    "NVDA": {
+      "captured_at": "2026-09-22T00:00:00-04:00",
+      "evidence_kind": "sec_api_snapshot",
+      "scope": "NVIDIA Corporation (CIK 0001045810), reviewed FY2024-FY2026",
+      "sources": {
+        "companyfacts.json": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+        "submissions.json": "https://data.sec.gov/submissions/CIK0001045810.json"
+      },
+      "files": {
+        "companyfacts.json": {
+          "bytes": 4092966,
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff"
+        },
+        "submissions.json": {
+          "bytes": 160132,
+          "sha256": "4442e047788ef7b070a4aa0c2ebcbe136aafecda1e103d2b823df8576f785892"
+        }
+      }
+    },
     "KHC_reference": {
       "evidence_kind": "sec_api_snapshot",
       "captured_at": "2026-09-21T22:38:24.733037+00:00",
@@ -57,7 +76,7 @@
     }
   },
   "unit_tests": {
-    "run": 72,
+    "run": 75,
     "failures": 0,
     "errors": 0,
     "skipped": 0
@@ -68,12 +87,12 @@
       "total": 12
     },
     "filing_values": {
-      "passed": 18,
-      "total": 18
+      "passed": 24,
+      "total": 24
     },
     "provenance": {
-      "passed": 18,
-      "total": 18
+      "passed": 24,
+      "total": 24
     },
     "question_intent": {
       "passed": 14,
@@ -96,34 +115,34 @@
       "total": 12
     }
   },
-  "evaluation_passed": 82,
-  "evaluation_total": 82,
+  "evaluation_passed": 94,
+  "evaluation_total": 94,
   "coverage": {
     "AAPL": {
       "requested_results": 15,
-      "numeric_results": 15
+      "numeric_results": 21
     },
     "MSFT": {
       "requested_results": 15,
-      "numeric_results": 15
+      "numeric_results": 21
     }
   },
   "warm_stdio_call_ms": {
     "samples": 10,
     "raw": [
-      5.843041999998633,
-      5.727207999999706,
-      5.585916000001134,
-      5.654332999998957,
-      5.636917000000352,
-      5.600916000000566,
-      5.809166999998894,
-      5.637249999999483,
-      5.652040999999386,
-      5.600875000000727
+      8.022249999999786,
+      8.134625000000284,
+      8.00258300000145,
+      7.887999999999451,
+      7.89629199999986,
+      8.411457999999428,
+      8.042333000000568,
+      7.745500000000405,
+      7.947667000001601,
+      7.864375000000479
     ],
-    "median": 5.644645499999434,
-    "maximum": 5.843041999998633,
+    "median": 7.975125000001526,
+    "maximum": 8.411457999999428,
     "includes_model": false
   },
   "cases": [
@@ -155,6 +174,40 @@
         "2022-09-25",
         "2023-09-30",
         "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2023 gross_profit",
+      "expected": "169148000000",
+      "actual": "169148000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2023 gross_profit",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2022-09-25",
+        "2023-09-30",
+        "us-gaap:GrossProfit",
         "USD",
         "2025-10-31",
         "10-K"
@@ -279,6 +332,40 @@
     },
     {
       "group": "filing_values",
+      "case": "AAPL 2024 gross_profit",
+      "expected": "180683000000",
+      "actual": "180683000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2024 gross_profit",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2023-10-01",
+        "2024-09-28",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
       "case": "AAPL 2024 operating_income",
       "expected": "123216000000",
       "actual": "123216000000",
@@ -387,6 +474,40 @@
         "2024-09-29",
         "2025-09-27",
         "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "AAPL 2025 gross_profit",
+      "expected": "195201000000",
+      "actual": "195201000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "AAPL 2025 gross_profit",
+      "expected": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-10-31",
+        "10-K"
+      ],
+      "actual": [
+        "0000320193",
+        "0000320193-25-000079",
+        "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+        "2024-09-29",
+        "2025-09-27",
+        "us-gaap:GrossProfit",
         "USD",
         "2025-10-31",
         "10-K"
@@ -535,6 +656,40 @@
     },
     {
       "group": "filing_values",
+      "case": "MSFT 2023 gross_profit",
+      "expected": "146052000000",
+      "actual": "146052000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2023 gross_profit",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2022-07-01",
+        "2023-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
       "case": "MSFT 2023 operating_income",
       "expected": "88523000000",
       "actual": "88523000000",
@@ -643,6 +798,40 @@
         "2023-07-01",
         "2024-06-30",
         "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2024 gross_profit",
+      "expected": "171008000000",
+      "actual": "171008000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2024 gross_profit",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2023-07-01",
+        "2024-06-30",
+        "us-gaap:GrossProfit",
         "USD",
         "2025-07-30",
         "10-K"
@@ -767,6 +956,40 @@
     },
     {
       "group": "filing_values",
+      "case": "MSFT 2025 gross_profit",
+      "expected": "193893000000",
+      "actual": "193893000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2025 gross_profit",
+      "expected": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0000950170-25-100235",
+        "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "2024-07-01",
+        "2025-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2025-07-30",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
       "case": "MSFT 2025 operating_income",
       "expected": "128528000000",
       "actual": "128528000000",
@@ -873,9 +1096,9 @@
     },
     {
       "group": "scope_behavior",
-      "case": "MSFT newer annual outside reviewed scope",
-      "expected": true,
-      "actual": true,
+      "case": "MSFT FY2026 included in reviewed scope",
+      "expected": false,
+      "actual": false,
       "passed": true
     },
     {
@@ -1191,8 +1414,8 @@
     }
   ],
   "limitations": [
-    "Two reviewed issuers, FY2023\u20132025; FY2022 revenue only supports growth.",
-    "Microsoft evaluation uses as_of 2025-07-30 to match its independently read 2025 report; FY2026 is unreviewed.",
+    "Three reviewed issuers with issuer-specific annual coverage; one NVIDIA quarter is reviewed.",
+    "Microsoft legacy evaluation uses as_of 2025-07-30 to match its independently read 2025 report; FY2026 has separate source checks.",
     "KHC is a reference case only; its revision includes both an error correction and an accounting recast.",
     "Filing-date filtering cannot recover later SEC API corrections.",
     "No model behavior, token cost, or live API availability SLA measured.",

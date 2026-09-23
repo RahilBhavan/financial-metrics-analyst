@@ -1,4 +1,4 @@
-"""The only three capabilities exposed to an MCP client."""
+"""The four bounded capabilities exposed to an MCP client."""
 
 import json
 
@@ -12,7 +12,7 @@ def analysis_schema(metrics):
             "properties": {
                 "cik": {"type": "string", "pattern": "^[0-9]{10}$"},
                 "fiscal_years": {"type": "array", "minItems": 1, "maxItems": 3, "uniqueItems": True,
-                                 "items": {"type": "integer", "minimum": 2023, "maximum": 2025}},
+                                 "items": {"type": "integer", "minimum": 2023, "maximum": 2026}},
                 "metrics": {"type": "array", "minItems": 1, "maxItems": len(metrics), "uniqueItems": True,
                             "items": {"type": "string", "enum": list(metrics)}},
                 "as_of": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
@@ -20,12 +20,22 @@ def analysis_schema(metrics):
 
 
 TOOLS = [
-    {"name": "resolve_company", "description": "Resolve AAPL or MSFT to its reviewed issuer using the bundled SEC submissions snapshot. No network or fuzzy search.",
+    {"name": "resolve_company", "description": "Resolve AAPL, MSFT, or NVDA to its reviewed issuer using the bundled SEC submissions snapshot. No network or fuzzy search.",
      "inputSchema": {"type": "object", "additionalProperties": False, "required": ["ticker"],
                      "properties": {"ticker": {"type": "string", "pattern": "^[A-Za-z]{1,5}$"}}}},
-    {"name": "get_annual_facts", "description": "Read reviewed AAPL/MSFT FY2023-FY2025 USD annual facts with filing provenance, candidate rejections, and revision history. as_of is inclusive and cannot exceed the snapshot date.",
+    {"name": "get_annual_facts", "description": "Read reviewed AAPL, MSFT, and NVDA annual facts through FY2026 where available, with filing provenance, candidate rejections, and revision history. as_of is inclusive and cannot exceed the snapshot date.",
      "inputSchema": analysis_schema(tuple(TAGS))},
-    {"name": "calculate_metrics", "description": "Calculate reviewed AAPL/MSFT annual metrics with exact inputs and rational results. Percentages are decimal strings. FY2022 revenue supports FY2023 growth. Growth flags unequal fiscal period lengths. Unsupported scope is refused.",
+    {"name": "get_quarterly_facts", "description": "Read NVIDIA's reviewed Q2 FY2027 facts using exact quarter dates, excluding year-to-date values. Additional quarters remain outside the reviewed scope.",
+     "inputSchema": {"type": "object", "additionalProperties": False,
+                     "required": ["cik", "fiscal_year", "quarter", "metrics", "as_of"],
+                     "properties": {
+                         "cik": {"type": "string", "pattern": "^[0-9]{10}$"},
+                         "fiscal_year": {"type": "integer", "minimum": 2027, "maximum": 2027},
+                         "quarter": {"type": "string", "enum": ["Q2"]},
+                         "metrics": {"type": "array", "minItems": 1, "maxItems": len(TAGS), "uniqueItems": True,
+                                     "items": {"type": "string", "enum": list(TAGS)}},
+                         "as_of": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}}}},
+    {"name": "calculate_metrics", "description": "Calculate reviewed annual facts, gross and operating margins, and revenue growth for AAPL, MSFT, and NVDA. Percentages are exact rational results rendered as decimal strings. Unsupported scope is refused.",
      "inputSchema": analysis_schema(METRICS)},
 ]
 for tool in TOOLS:

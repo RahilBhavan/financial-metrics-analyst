@@ -63,7 +63,8 @@ def run():
             record('scope_behavior', ticker + ' unequal fiscal durations warning', True,
                    any('unequal_period_lengths' in w for w in indexed[2024, 'revenue_growth']['warnings']))
         latest_msft = client.call('calculate_metrics', {**arguments, 'cik': '0000789019'})
-        record('scope_behavior', 'MSFT newer annual outside reviewed scope', True, any('newer_annual' in w for w in latest_msft['context']['warnings']))
+        record('scope_behavior', 'MSFT FY2026 included in reviewed scope', False,
+               any('newer_annual' in w for w in latest_msft['context']['warnings']))
         for name, tool, args in [
             ('EBITDA', 'calculate_metrics', {**arguments, 'metrics': ['ebitda']}),
             ('FCF', 'calculate_metrics', {**arguments, 'metrics': ['free_cash_flow']}),
@@ -117,13 +118,13 @@ def run():
     report = dict(
         generated_at=datetime.now(timezone.utc).isoformat(), python=platform.python_version(),
         evidence_kind='real_SEC_snapshots_and_independently_transcribed_primary_sources; synthetic_adversarial_cases_only_in_unit_tests',
-        snapshots={name: json.loads((directory / 'manifest.json').read_text()) for name, directory in [('AAPL', DEFAULT_DATA), ('MSFT', DEFAULT_DATA / 'msft'), ('KHC_reference', khc.data_dir)]},
+        snapshots={name: json.loads((directory / 'manifest.json').read_text()) for name, directory in [('AAPL', DEFAULT_DATA), ('MSFT', DEFAULT_DATA / 'msft'), ('NVDA', DEFAULT_DATA / 'nvda'), ('KHC_reference', khc.data_dir)]},
         unit_tests=dict(run=tests.testsRun, failures=len(tests.failures), errors=len(tests.errors), skipped=len(tests.skipped)),
         evaluation_counts=counts, evaluation_passed=sum(c['passed'] for c in cases), evaluation_total=len(cases), coverage=coverage,
         warm_stdio_call_ms=dict(samples=len(timings), raw=timings, median=statistics.median(timings), maximum=max(timings), includes_model=False),
         cases=cases,
-        limitations=['Two reviewed issuers, FY2023–2025; FY2022 revenue only supports growth.',
-                     'Microsoft evaluation uses as_of 2025-07-30 to match its independently read 2025 report; FY2026 is unreviewed.',
+        limitations=['Three reviewed issuers with issuer-specific annual coverage; one NVIDIA quarter is reviewed.',
+                     'Microsoft legacy evaluation uses as_of 2025-07-30 to match its independently read 2025 report; FY2026 has separate source checks.',
                      'KHC is a reference case only; its revision includes both an error correction and an accounting recast.',
                      'Filing-date filtering cannot recover later SEC API corrections.',
                      'No model behavior, token cost, or live API availability SLA measured.',

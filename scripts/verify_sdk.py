@@ -22,7 +22,7 @@ async def main():
             init = await session.initialize()
             checks.append({"case": "protocol negotiation", "passed": init.protocolVersion == "2025-11-25"})
             tools = (await session.list_tools()).tools
-            checks.append({"case": "three named tools", "passed": {t.name for t in tools} == {"resolve_company", "get_annual_facts", "calculate_metrics"}})
+            checks.append({"case": "four named tools", "passed": {t.name for t in tools} == {"resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics"}})
             for tool in tools:
                 Draft202012Validator.check_schema(tool.inputSchema)
                 Draft202012Validator.check_schema(tool.outputSchema)
@@ -35,6 +35,11 @@ async def main():
                      ("calculate_metrics", {**arguments, "metrics": ["ebitda"]}, "refused"),
                      ("resolve_company", {"ticker": "MSFT"}, "ok"),
                      ("calculate_metrics", {**arguments, "cik": "0000789019", "metrics": ["revenue", "net_income", "operating_income", "operating_margin", "revenue_growth"]}, "ok")]
+            calls.extend([
+                ("resolve_company", {"ticker": "NVDA"}, "ok"),
+                ("get_quarterly_facts", {"cik": "0001045810", "fiscal_year": 2027, "quarter": "Q2",
+                                         "metrics": ["revenue", "gross_profit"], "as_of": "2026-08-26"}, "ok"),
+            ])
             for tool, args, status in calls:
                 result = await session.call_tool(tool, args)
                 Draft202012Validator(schemas[tool], format_checker=FormatChecker()).validate(result.structuredContent)

@@ -8,7 +8,7 @@
         "-m",
         "financial_metrics.evaluate"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -23,7 +23,7 @@
         "financial_metrics",
         "smoke"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -40,7 +40,7 @@
         "--html",
         "reports/demo.html"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -56,7 +56,7 @@
         "ask",
         "What were Apple's net sales and operating profit in FY2023 through FY2025?"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -73,7 +73,7 @@
         "Apple profit 2025",
         "--json"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 3,
       "expected_exit_status": 3,
       "stderr": "",
@@ -90,7 +90,7 @@
         "--metrics",
         "ebitda"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 2,
       "expected_exit_status": 2,
       "stderr": "",
@@ -112,7 +112,7 @@
         "2024-10-31",
         "--json"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -129,7 +129,7 @@
         "--ticker",
         "MSFT"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -145,7 +145,7 @@
         "proposal",
         "--json"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -155,11 +155,11 @@
     },
     {
       "command": [
-        "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/work/mcp-check/bin/python",
+        "<SDK_ENV>/bin/python",
         "-B",
         "scripts/verify_sdk.py"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
@@ -177,14 +177,14 @@
         "scripts",
         "server_stdio.py"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/outputs/financial-metrics-analyst",
+      "cwd": "<PROJECT_ROOT>",
       "exit_status": 0,
       "expected_exit_status": 0,
       "stderr": "",
       "output": "reports/compile.txt",
       "passed": true,
       "environment": {
-        "PYTHONPYCACHEPREFIX": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/work/pycache"
+        "PYTHONPYCACHEPREFIX": "<BYTECODE_CACHE>"
       }
     }
   ],

@@ -44,12 +44,13 @@ def main():
     p = sub.add_parser("fetch")
     p.add_argument("--output", required=True)
     p.add_argument("--user-agent", required=True)
+    p.add_argument("--ticker", choices=("AAPL", "MSFT", "NVDA"), default="AAPL")
     args = parser.parse_args()
     try:
         if args.command == "smoke":
             result = smoke(args.data_dir)
         elif args.command == "fetch":
-            result = fetch_snapshot(args.output, args.user_agent)
+            result = fetch_snapshot(args.output, args.user_agent, args.ticker)
         else:
             if args.command == "ask":
                 ticker, years, metrics, as_of = parse_question(args.question)

@@ -3,7 +3,8 @@
 from decimal import Decimal, localcontext
 from html import escape
 
-LABELS = {"revenue": "Revenue", "operating_income": "Operating income", "net_income": "Net income",
+LABELS = {"revenue": "Revenue", "gross_profit": "Gross profit", "operating_income": "Operating income",
+          "net_income": "Net income", "gross_margin": "Gross margin",
           "operating_margin": "Operating margin", "revenue_growth": "Revenue growth"}
 
 
@@ -86,7 +87,7 @@ def render(result, details=False):
             lines.extend(["", "FY" + str(row["fiscal_year"]) + " " + LABELS[row["metric"]]] + detail_lines(row))
     else:
         lines.append("Use --details for formulas and provenance, --json for full audit data, or --html for expandable evidence.")
-    return "\n".join(lines)
+    return "\n".join(line.rstrip() for line in lines)
 
 
 def render_html(result):
@@ -101,7 +102,7 @@ def render_html(result):
              "body{font:16px/1.55 system-ui,sans-serif;color:#152538;background:#f4f7fa;margin:0;padding:32px}main{max-width:1100px;margin:auto}h1{margin-bottom:8px}table{border-collapse:collapse;width:100%;background:white}th,td{padding:14px;border-bottom:1px solid #d5dfe8;text-align:right}th:first-child{text-align:left}caption{text-align:left;margin:16px 0}.table-wrap{overflow:auto}details{background:white;border:1px solid #d5dfe8;padding:14px;margin:12px 0}summary{cursor:pointer;font-weight:600}a{color:#125c9e}.warning{color:#6c4200}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.5 ui-monospace,monospace}.meta{color:#405365}li{margin:8px 0}:focus-visible{outline:3px solid #156fd0;outline-offset:3px}@media(max-width:600px){body{padding:16px}th,td{padding:10px}}",
              "</style></head><body><main><h1>" + escape(company["name"]) + "</h1>",
              "<p class='meta'>" + escape(company["ticker"] + " · CIK " + company["cik"] + " · As of " + context["as_of"]) + "</p>",
-             "<p class='meta'>SEC snapshot " + escape(context["snapshot_captured_at"]) + ". Reviewed fiscal years 2023–2025.</p>"]
+             "<p class='meta'>SEC snapshot " + escape(context["snapshot_captured_at"]) + ". Issuer-specific reviewed fiscal periods.</p>"]
     for warning in context["warnings"]:
         parts.append("<p class='warning'>" + escape(warning) + "</p>")
     parts.append("<div class='table-wrap'><table><caption>Amounts in USD millions. Percentages rounded to two decimal places.</caption><thead><tr><th scope='col'>Metric</th>")

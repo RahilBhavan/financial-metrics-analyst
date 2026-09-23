@@ -9,12 +9,14 @@ ALIASES = {
     "revenue": "revenue", "sales": "revenue", "net sales": "revenue", "total revenue": "revenue",
     "operating income": "operating_income", "operating profit": "operating_income",
     "net income": "net_income", "net profit": "net_income",
+    "gross profit": "gross_profit", "gross margin": "gross_margin",
     "operating margin": "operating_margin", "operating profit margin": "operating_margin",
     "revenue growth": "revenue_growth", "yoy revenue growth": "revenue_growth",
     "year-over-year revenue growth": "revenue_growth",
 }
-COMPANIES = {"apple": "AAPL", "aapl": "AAPL", "microsoft": "MSFT", "msft": "MSFT"}
-FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|fcf|cash flow|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|gross margin|net margin|execute|shell|ignore|delete|send|email)\b"
+COMPANIES = {"apple": "AAPL", "aapl": "AAPL", "microsoft": "MSFT", "msft": "MSFT",
+             "nvidia": "NVDA", "nvda": "NVDA"}
+FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|fcf|cash flow|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|net margin|execute|shell|ignore|delete|send|email)\b"
 FILLER = {"what", "was", "were", "is", "the", "for", "in", "from", "to", "through", "and", "please", "show",
           "me", "give", "tell", "about", "of", "between", "fiscal", "years", "year", "fy", "how", "did", "change", "over"}
 
@@ -32,13 +34,13 @@ def parse_question(question):
     as_of = matches[0].group(1) if matches else None
     if matches:
         text = text[:matches[0].start()] + " " + text[matches[0].end():]
-    entities = {COMPANIES[m.group()] for m in re.finditer(r"\b(?:apple|aapl|microsoft|msft)\b", text)}
+    entities = {COMPANIES[m.group()] for m in re.finditer(r"\b(?:apple|aapl|microsoft|msft|nvidia|nvda)\b", text)}
     if len(entities) > 1:
         raise Refusal("unsupported_comparison", "Ask for one issuer at a time; cross-company comparisons are not supported.")
     if not entities:
-        raise Clarification("company_required", "Which reviewed company should I use?", ["Apple (AAPL)", "Microsoft (MSFT)"])
+        raise Clarification("company_required", "Which reviewed company should I use?", ["Apple (AAPL)", "Microsoft (MSFT)", "NVIDIA (NVDA)"])
     ticker = entities.pop()
-    text = re.sub(r"\b(?:apple|aapl|microsoft|msft)(?:'s)?\b", " ", text)
+    text = re.sub(r"\b(?:apple|aapl|microsoft|msft|nvidia|nvda)(?:'s)?\b", " ", text)
     range_match = re.search(r"\b(?:fy\s*)?(\d{4})\s*(?:through|to|-)\s*(?:fy\s*)?(\d{4})\b", text)
     if range_match:
         start, end = map(int, range_match.groups())
@@ -52,9 +54,9 @@ def parse_question(question):
         years = [int(y) for y in re.findall(r"\b(?:fy\s*)?(\d{4})\b", text)]
         text = re.sub(r"\b(?:fy\s*)?\d{4}\b", " ", text)
     if not years:
-        raise Clarification("years_required", "Which fiscal years? Both issuers have reviewed coverage for 2023 through 2025.", ["2023 through 2025", "2025"])
-    if len(years) > 3 or len(years) != len(set(years)) or any(y not in (2023, 2024, 2025) for y in years):
-        raise Refusal("unsupported_years", "Public queries support one to three distinct years from 2023 through 2025. FY2022 revenue is an internal supporting input.")
+        raise Clarification("years_required", "Which fiscal years? Coverage depends on the issuer and extends through FY2026.", ["2023 through 2025", "2026"])
+    if len(years) > 3 or len(years) != len(set(years)) or any(y not in (2023, 2024, 2025, 2026) for y in years):
+        raise Refusal("unsupported_years", "Public queries support up to three distinct reviewed years from 2023 through 2026, subject to issuer coverage.")
     metrics = []
     pattern = r"\b(?:" + "|".join(re.escape(a) for a in sorted(ALIASES, key=len, reverse=True)) + r")\b"
     def collect(match):
@@ -75,10 +77,10 @@ def parse_question(question):
     return ticker, sorted(years), list(dict.fromkeys(metrics)), as_of
 
 
-PROPOSAL_SCHEMA = obj({"ticker": {"type": "string", "enum": ["AAPL", "MSFT"]},
+PROPOSAL_SCHEMA = obj({"ticker": {"type": "string", "enum": ["AAPL", "MSFT", "NVDA"]},
                        "fiscal_years": {"type": "array", "minItems": 1, "maxItems": 3, "uniqueItems": True,
-                                        "items": {"type": "integer", "minimum": 2023, "maximum": 2025}},
-                       "metrics": {"type": "array", "minItems": 1, "maxItems": 5, "uniqueItems": True,
+                                        "items": {"type": "integer", "minimum": 2023, "maximum": 2026}},
+                       "metrics": {"type": "array", "minItems": 1, "maxItems": 7, "uniqueItems": True,
                                    "items": {"type": "string", "enum": sorted(set(ALIASES.values()))}},
                        "as_of": {"type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}})
 

@@ -1,0 +1,19 @@
+{
+  "captured_at": "2026-09-22T00:00:00-04:00",
+  "evidence_kind": "sec_api_snapshot",
+  "scope": "NVIDIA Corporation (CIK 0001045810), reviewed FY2024-FY2026",
+  "sources": {
+    "companyfacts.json": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+    "submissions.json": "https://data.sec.gov/submissions/CIK0001045810.json"
+  },
+  "files": {
+    "companyfacts.json": {
+      "bytes": 4092966,
+      "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff"
+    },
+    "submissions.json": {
+      "bytes": 160132,
+      "sha256": "4442e047788ef7b070a4aa0c2ebcbe136aafecda1e103d2b823df8576f785892"
+    }
+  }
+}

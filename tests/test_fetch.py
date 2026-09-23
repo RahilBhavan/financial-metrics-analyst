@@ -6,7 +6,7 @@ import urllib.error
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-from financial_metrics.fetch import SECClient, ENDPOINTS, MAX_BYTES, fetch_snapshot, NoRedirect
+from financial_metrics.fetch import SECClient, ENDPOINTS, MAX_BYTES, fetch_snapshot, NoRedirect, endpoints_for
 from financial_metrics.policy import Refusal
 
 
@@ -20,7 +20,7 @@ class FetchTests(unittest.TestCase):
         self.opener = Mock()
         self.opener.open.side_effect = effects
         self.sleep = Mock()
-        return SECClient("TestAgent test@example.test", self.opener, self.sleep)
+        return SECClient("TestAgent test@example.test", opener=self.opener, sleep=self.sleep)
 
     def test_success_and_identifying_header(self):
         client = self.client([Response(b'{"cik":320193}')])
@@ -28,6 +28,21 @@ class FetchTests(unittest.TestCase):
         request = self.opener.open.call_args[0][0]
         self.assertEqual(request.get_header("User-agent"), "TestAgent test@example.test")
         self.assertEqual(self.opener.open.call_args[1]["timeout"], 10)
+
+    def test_microsoft_uses_only_its_fixed_endpoints(self):
+        response = Response(b'{"cik":789019}')
+        response.geturl = Mock(return_value=endpoints_for("0000789019")["companyfacts.json"])
+        client = SECClient(
+            "TestAgent test@example.test",
+            "0000789019",
+            opener=Mock(open=Mock(return_value=response)),
+            sleep=Mock(),
+        )
+        self.assertEqual(json.loads(client.get("companyfacts.json"))["cik"], 789019)
+
+    def test_unreviewed_refresh_issuer_refused(self):
+        with self.assertRaises(Refusal):
+            SECClient("TestAgent test@example.test", "0001018724")
 
     def test_403_fails_without_retry(self):
         client = self.client([urllib.error.HTTPError("", 403, "Forbidden", {}, None)])

@@ -14,7 +14,7 @@
         "financial_metrics",
         "smoke"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/work/portable-check-vadqaos5/financial-metrics-analyst",
+      "cwd": "<PORTABLE_CHECK_ROOT>/financial-metrics-analyst",
       "exit_status": 0,
       "stderr": "",
       "passed": true,
@@ -43,7 +43,7 @@
         "Microsoft revenue and operating margin 2025 as of 2025-07-30",
         "--json"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/work/portable-check-vadqaos5/financial-metrics-analyst",
+      "cwd": "<PORTABLE_CHECK_ROOT>/financial-metrics-analyst",
       "exit_status": 0,
       "stderr": "",
       "passed": true,
@@ -304,10 +304,9 @@
       "command": [
         "/usr/bin/python3",
         "-B",
-        "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/work/portable-check-vadqaos5/financial-metrics-analyst/server_stdio.py"
+        "<PORTABLE_CHECK_ROOT>/financial-metrics-analyst/server_stdio.py"
       ],
-      "cwd": "/Users/rbhavan/Documents/Codex/2026-09-21/set-up-a-learning-and-build/work/portable-check-vadqaos5",
-      "exit_status": 0,
+      "cwd": "<PORTABLE_CHECK_ROOT>      "exit_status": 0,
       "stderr": "",
       "passed": true,
       "result": {

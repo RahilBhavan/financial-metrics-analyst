@@ -1,0 +1,49 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "NVIDIA Corporation",
+  "cik": "0001045810",
+  "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+  "filing_accession": "0001045810-26-000021",
+  "verification": "Cross-checked against the official SEC filing and raw companyfacts snapshot on 2026-09-22. Values are exact USD.",
+  "years": {
+    "2024": {
+      "start": "2023-01-30",
+      "end": "2024-01-28",
+      "days": 364,
+      "revenue": "60922000000",
+      "gross_profit": "44301000000",
+      "operating_income": "32972000000",
+      "net_income": "29760000000"
+    },
+    "2025": {
+      "start": "2024-01-29",
+      "end": "2025-01-26",
+      "days": 364,
+      "revenue": "130497000000",
+      "gross_profit": "97858000000",
+      "operating_income": "81453000000",
+      "net_income": "72880000000"
+    },
+    "2026": {
+      "start": "2025-01-27",
+      "end": "2026-01-25",
+      "days": 364,
+      "revenue": "215938000000",
+      "gross_profit": "153463000000",
+      "operating_income": "130387000000",
+      "net_income": "120067000000"
+    }
+  },
+  "reviewed_quarter": {
+    "fiscal_year": 2027,
+    "quarter": "Q2",
+    "start": "2026-04-27",
+    "end": "2026-07-26",
+    "filing_accession": "0001045810-26-000075",
+    "filed": "2026-08-26",
+    "revenue": "96221000000",
+    "gross_profit": "72142000000",
+    "operating_income": "63734000000",
+    "net_income": "59688000000"
+  }
+}

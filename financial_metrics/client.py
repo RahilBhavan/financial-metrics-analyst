@@ -105,7 +105,7 @@ class Client:
 def smoke(data_dir=None):
     with Client(data_dir) as client:
         names = [t["name"] for t in client.request("tools/list")["result"]["tools"]]
-        if names != ["resolve_company", "get_annual_facts", "calculate_metrics"]:
+        if names != ["resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics"]:
             raise RuntimeError("Unexpected tool list")
         resolved = client.call("resolve_company", {"ticker": "AAPL"})
         as_of = resolved["lookup_timestamp"][:10]

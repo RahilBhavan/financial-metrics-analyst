@@ -1,41 +1,8 @@
 # Financial metrics analyst
 
-An offline analyst for **Apple (AAPL) and Microsoft (MSFT), fiscal 2023–2025**. It reports revenue, operating income, consolidated net income, operating margin, and revenue growth through a real MCP stdio subprocess. Every number retains its source filing and exact inputs.
+An offline analyst for **Apple (AAPL), Microsoft (MSFT), and NVIDIA (NVDA)**. It reports revenue, gross profit, operating income, consolidated net income, gross margin, operating margin, and revenue growth through a real MCP stdio subprocess. Annual coverage is issuer-specific through FY2026; one reviewed NVIDIA quarter demonstrates exact-quarter selection. Every number retains its source filing and exact inputs.
 
 All six improvements are implemented; see [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md). The standard-library baseline requires Python 3.9 or newer. No account, API key, model, package installation, or network connection is needed.
-
-## Quickstart
-
-Python 3.9 or newer, standard library only. No install step, no API key, no network access.
-
-```sh
-git clone https://github.com/RahilBhavan/financial-metrics-analyst.git
-cd financial-metrics-analyst
-python3 -B -m unittest discover -s tests -v    # unit tests
-python3 -B -m financial_metrics.evaluate       # full evaluation, writes reports/
-python3 -B -m financial_metrics smoke          # MCP stdio round trip
-python3 -B -m financial_metrics demo           # Apple FY2023-2025 report
-```
-
-## Results
-
-Every figure below comes from [reports/evaluation-summary.json](reports/evaluation-summary.json), written by `python3 -B -m financial_metrics.evaluate`.
-
-| Measure | Value |
-| --- | ---: |
-| Unit tests | 72 run, 0 failures, 0 errors, 0 skipped |
-| Evaluation checks | 82/82 passed |
-| Exact ratio checks | 12/12 |
-| Filing value checks | 18/18 |
-| Provenance checks | 18/18 |
-| Question intent checks | 14/14 |
-| Tool refusal checks | 12/12 |
-| Real reference cases | 3/3 |
-| Scope behavior checks | 3/3 |
-| Supporting value checks | 2/2 |
-| Warm MCP stdio call, median of 10 | 5.64 ms |
-
-The timing excludes any model. Per-case records are in [reports/evaluation.json](reports/evaluation.json); the method and its limits are in [EVALUATION.md](EVALUATION.md).
 
 ## Run it
 
@@ -43,7 +10,8 @@ The timing excludes any model. Per-case records are in [reports/evaluation.json]
 cd financial-metrics-analyst
 python3 -B -m financial_metrics demo
 python3 -B -m financial_metrics demo --html reports/demo.html
-python3 -B -m financial_metrics analyze --ticker MSFT --as-of 2025-07-30
+python3 -B -m financial_metrics analyze --ticker MSFT --years 2026 --as-of 2026-07-29
+python3 -B -m financial_metrics analyze --ticker NVDA --years 2024 2025 2026 --as-of 2026-02-25
 python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"
 python3 -B -m financial_metrics ask 'Microsoft profit 2025'
 ```
@@ -68,7 +36,7 @@ Apple FY2023 contains 371 days; FY2022 and FY2024 contain 364. Both affected gro
 
 Microsoft uses years ending June 30. Its FY2023–2025 revenue is $211,915 million, $245,122 million, and $281,724 million. The independently checked [2025 annual report](https://www.microsoft.com/investor/reports/ar25/index.html) provides those years; the [2024 report](https://www.microsoft.com/investor/reports/ar24/index.html) provides FY2022 revenue of $198,270 million. FY2024 has 366 days, so the adjacent growth comparisons carry duration warnings.
 
-**Microsoft FY2026 is outside the reviewed scope.** Its API snapshot includes a newer annual filing, but that report could not be independently checked in this work. The default cutoff warns about this; the captured Microsoft demo uses `--as-of 2025-07-30` to align with the independently read 2025 report. Later comparative values for the reviewed years remain eligible under the declared selection policy.
+**Microsoft FY2026 is reviewed.** Revenue was $331.839 billion, gross profit $225.465 billion, operating income $155.237 billion, and net income $133.749 billion. NVIDIA FY2024–FY2026 and Q2 FY2027 are also reviewed from SEC filings. See [the source research](docs/issuer-expansion-research.md) and [NVIDIA ground truth](data/nvda/ground-truth.json).
 
 ## Selection and accounting rules
 
@@ -81,7 +49,7 @@ Microsoft uses years ending June 30. Its FY2023–2025 revenue is $211,915 milli
 - Operating margin = operating income / revenue × 100. Growth = (current revenue − prior revenue) / prior revenue × 100. Revenue denominators must be positive. Missing inputs stay unavailable; they never become zero.
 - Keep exact input decimals and exact rational percentages. Decimal renderings use 34 significant digits; display percentages use two decimal places and `ROUND_HALF_EVEN`.
 
-`as_of` cannot exceed the snapshot date. Filing-date filtering cannot reconstruct intraday availability or undo subsequent corrections to historical API records. A snapshot older than seven days generates a warning. Refreshing does not automatically review new years or expand issuer coverage.
+`as_of` cannot exceed the snapshot date. Filing-date filtering cannot reconstruct intraday availability or undo subsequent corrections to historical API records. A snapshot older than seven days generates a warning. Refreshing does not automatically review new years or quarters; policy changes still require source checks.
 
 ## Real reference cases
 
@@ -105,7 +73,7 @@ Proposals cannot contain financial answers, URLs, filenames, or executable actio
 
 ## MCP hosting and contracts
 
-The server implements MCP **2025-11-25** over newline-delimited JSON-RPC stdio: initialization, initialized notification, ping, tool discovery, and tool calls. It exposes exactly `resolve_company`, `get_annual_facts`, and `calculate_metrics`. It offers no HTTP transport or arbitrary network, file, or execution capability.
+The server implements MCP **2025-11-25** over newline-delimited JSON-RPC stdio: initialization, initialized notification, ping, tool discovery, and tool calls. It exposes `resolve_company`, `get_annual_facts`, `get_quarterly_facts`, and `calculate_metrics`. Quarterly coverage is intentionally limited to NVIDIA Q2 FY2027 until more periods are reviewed. It offers no HTTP transport or arbitrary network, file, or execution capability.
 
 Use your host's stdio configuration with the absolute launcher path:
 
@@ -120,7 +88,7 @@ Use your host's stdio configuration with the absolute launcher path:
 }
 ```
 
-Adjust executable and project paths when moving computers. The launcher works from an unrelated directory. The three tools publish and enforce closed input and **full nested output schemas**, including provenance, history, warnings, ratios, context, unavailable rows, and refusals. Invalid generated output becomes an `invalid_tool_output` refusal. Schemas validate structure; separate source and arithmetic checks validate financial meaning.
+Adjust executable and project paths when moving computers. The launcher works from an unrelated directory. The four tools publish and enforce closed input and **full nested output schemas**, including provenance, history, warnings, ratios, context, unavailable rows, and refusals. Invalid generated output becomes an `invalid_tool_output` refusal. Schemas validate structure; separate source and arithmetic checks validate financial meaning.
 
 ```sh
 python3 -B -m financial_metrics smoke
@@ -140,10 +108,10 @@ It uses the official `mcp==1.30.0` client and an independent JSON Schema validat
 
 ## Optional SEC refresh
 
-The separate operator command downloads **Apple only** from two fixed SEC endpoints. It refuses redirects and overwrites, bounds response sizes, uses timeouts and retries, and throttles each process. Use your own real contact information and follow the [SEC developer guidance](https://www.sec.gov/about/developer-resources).
+The separate operator command downloads **AAPL, MSFT, or NVDA** from issuer-specific fixed SEC endpoints. It refuses redirects and overwrites, bounds response sizes, uses timeouts and retries, and throttles each process. Use your own real contact information and follow the [SEC developer guidance](https://www.sec.gov/about/developer-resources).
 
 ```sh
-python3 -B -m financial_metrics fetch --output local-snapshots/new-capture --user-agent 'YourProject your-real-contact@example.com'
+python3 -B -m financial_metrics fetch --ticker NVDA --output local-snapshots/new-capture --user-agent 'YourProject your-real-contact@example.com'
 python3 -B -m financial_metrics demo --data-dir local-snapshots/new-capture
 ```
 

@@ -1,8 +1,8 @@
 # Evaluation record
 
-Verified on 21 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` for independent client checks.
+Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` for independent client checks.
 
-**72 test methods passed, with no failures, errors, or skips. The separately enumerated source/intent evaluation passed 82/82 cases. The official SDK check passed 18/18 checks.** Each public issuer produces 15 numeric results across the three reviewed years.
+**75 test methods passed, with no failures, errors, or skips. The separately enumerated source and intent evaluation passed 94/94 cases. The official SDK check passed 21/21 checks.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
 
 | Evaluation group | Passed / total |
 | --- | ---: |
@@ -30,7 +30,7 @@ The existing tests still cover exact decimal behavior, arithmetic signs and deno
 
 ## Independent MCP check
 
-The official Python SDK negotiates MCP 2025-11-25, discovers exactly three tools, validates their input and output schema documents, calls every tool, checks both issuers, exercises a refusal, compares text with structured content, and pings. `jsonschema` uses its date format checker for the independent nested validations.
+The official Python SDK negotiates MCP 2025-11-25, discovers exactly four tools, validates their input and output schema documents, calls every tool, checks both issuers, exercises a refusal, compares text with structured content, and pings. `jsonschema` uses its date format checker for the independent nested validations.
 
 The 18 checks are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
 
@@ -44,7 +44,7 @@ Run commands from the project directory. Exact executable paths, arguments, stdi
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | 72 tests; 82 evaluation cases; both issuer reports and timing samples |
+| `python3 -B -m financial_metrics.evaluate` | 0 | 75 tests; 94 evaluation cases; issuer reports and timing samples |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html reports/demo.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
@@ -53,7 +53,7 @@ Run commands from the project directory. Exact executable paths, arguments, stdi
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
 | `python3 -B -m financial_metrics analyze --ticker MSFT` | 0 | Reviewed results plus newer-annual-scope warning |
 | `python3 -B -m financial_metrics proposal --json` with recorded JSON stdin | 0 | Bounded Microsoft request; tool-computed values |
-| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | 18/18 independent checks |
+| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | 21/21 independent checks |
 | `python3 -m compileall -q financial_metrics tests scripts server_stdio.py` with workspace cache | 0 | Syntax compilation passed |
 
 A regression test initially constructed a conflicting quarterly record instead of an annual one. Correcting the fixture to the intended annual interval made the ambiguity check meaningful; the final suite passed. Earlier runs from the parent folder and with an unwritable default bytecode cache were corrected by using the project working directory and an explicit workspace cache. No application defect from these attempts remains unresolved.
@@ -70,10 +70,10 @@ API downloads succeeded. Some direct archive HTML requests returned HTTP 403; pu
 
 ## Remaining limits
 
-- Two reviewed companies, three report years, and supporting FY2022 revenue. This is not a general issuer, taxonomy, or accounting-basis resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
+- Three reviewed companies with issuer-specific annual coverage and one reviewed NVIDIA quarter. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
 - Historical filing-date filtering does not recreate past API contents or intraday availability. Changed values are flagged; formal restatement classification requires source evidence.
 - Quarters, forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
-- The optional refresher supports Apple only and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
+- The optional refresher supports AAPL, MSFT, and NVDA and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
 - Full nested schemas constrain structure. They do not by themselves establish correct source transcription, arithmetic, or semantic consistency; those have separate tests.
 - No paid or local language model was run. Natural-language interpretation remains bounded, and model-generated proposal fidelity has not been evaluated.
 - Snapshot integrity assumes a trusted local manifest. There is no remote service, authentication deployment, publication, or external messaging.
