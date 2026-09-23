@@ -82,6 +82,44 @@ class SelectionRegressionTests(unittest.TestCase):
         self.assertIsNone(row['value'])
 
 
+class QuarterSelectionRegressionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.baseline = Analyst(DEFAULT_DATA / 'nvda')
+        cls.args = dict(cik='0001045810', fiscal_year=2027, quarter='Q2', metrics=['revenue'], as_of='2026-09-21')
+
+    def quarter_rows(self, analyst):
+        units = analyst.facts['facts']['us-gaap']['Revenues']['units']['USD']
+        return units, next(r for r in units if r.get('start') == '2026-04-27' and r['end'] == '2026-07-26' and r['form'] == '10-Q')
+
+    def test_synthetic_conflicting_quarter_facts_on_same_filing_are_ambiguous(self):
+        analyst = copy.deepcopy(self.baseline)
+        units, fact = self.quarter_rows(analyst)
+        conflict = copy.deepcopy(fact)
+        conflict['val'] += 1
+        units.append(conflict)
+        row = call_tool(analyst, 'get_quarterly_facts', self.args)['structuredContent']['results'][0]
+        self.assertEqual(row['status'], 'ambiguous')
+        self.assertEqual(row['reason'], 'conflicting_values_on_same_filing_date')
+        self.assertIsNone(row['value'])
+
+    def test_synthetic_invalid_newer_quarter_amendment_never_falls_back(self):
+        analyst = copy.deepcopy(self.baseline)
+        units, fact = self.quarter_rows(analyst)
+        amendment = copy.deepcopy(fact)
+        amendment.update(accn='0001045810-26-000099', form='10-Q/A', filed='2026-09-01', val='NaN')
+        units.append(amendment)
+        analyst.filings[amendment['accn']] = {**analyst.filings[fact['accn']], 'accessionNumber': amendment['accn'],
+                                              'form': '10-Q/A', 'filingDate': '2026-09-01'}
+        row = call_tool(analyst, 'get_quarterly_facts', self.args)['structuredContent']['results'][0]
+        self.assertEqual(row['reason'], 'newer_or_same_date_candidate_invalid')
+        self.assertIsNone(row['value'])
+        self.assertEqual(row['blocking_candidates'][0]['accn'], amendment['accn'])
+        # Before the amendment's filing date, the original 10-Q is still selected.
+        earlier = analyst.get_quarterly_facts(**{**self.args, 'as_of': '2026-08-31'})['results'][0]
+        self.assertEqual((earlier['status'], earlier['accn']), ('ok', fact['accn']))
+
+
 class RealReferenceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

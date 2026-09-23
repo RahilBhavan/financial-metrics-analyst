@@ -208,6 +208,11 @@ class Analyst:
         base = {"fiscal_year": year, "metric": metric, "period_start": start, "period_end": end, **audit}
         if not eligible:
             return {**base, "status": "insufficient_data", "reason": "standard_tag_absent" if not units else "no_eligible_annual_USD_fact", "value": None}
+        return self._choose(base, eligible, dangerous)
+
+    @staticmethod
+    def _choose(base, eligible, dangerous):
+        """Shared by annual and quarterly selection: same-date conflicts and newer invalid candidates never fall back."""
         eligible.sort(key=lambda f: (f["filed"], f["accn"]))
         by_date = {}
         for fact in eligible:
@@ -249,7 +254,7 @@ class Analyst:
 
     def _select_quarter(self, fiscal_year, quarter, start, end, metric, as_of):
         tag = self.profile.get("tags", TAGS)[metric]
-        eligible, rejected = [], []
+        eligible, rejected, dangerous = [], [], []
         counts = Counter()
         units = self.facts.get("facts", {}).get("us-gaap", {}).get(tag, {}).get("units", {})
         for unit, rows in units.items():
@@ -259,7 +264,20 @@ class Analyst:
                 reason = None
                 accn = raw.get("accn", "")
                 filing = self.filings.get(accn)
-                if raw.get("start") != start:
+                known_date = filing["filingDate"] if filing else raw.get("filed")
+                try:
+                    stamp = iso_date(known_date).isoformat()
+                except Refusal:
+                    stamp = None
+                try:
+                    duration = (iso_date(end) - iso_date(raw.get("start"))).days + 1
+                except Refusal:
+                    duration = None
+                # Quarter-length or unknown-length 10-Q records can block; year-to-date records cannot.
+                quarter_candidate = ((filing and filing["form"] in ("10-Q", "10-Q/A")) or raw.get("form") in ("10-Q", "10-Q/A")) and (duration is None or duration < 120)
+                if stamp and stamp > as_of:
+                    reason = "filed_after_as_of"
+                elif raw.get("start") != start:
                     reason = "period_mismatch"
                 elif unit != "USD":
                     reason = "unit_mismatch"
@@ -268,7 +286,7 @@ class Analyst:
                 else:
                     try:
                         if iso_date(raw.get("filed")) > iso_date(as_of):
-                            reason = "filed_after_as_of"
+                            reason = "filing_metadata_mismatch"
                         elif (not filing or filing["form"] != raw["form"] or filing["filingDate"] != raw["filed"]
                               or filing["reportDate"] != end or raw.get("fy") != fiscal_year):
                             reason = "filing_metadata_mismatch"
@@ -280,9 +298,12 @@ class Analyst:
                         reason = "invalid_fact"
                 if reason:
                     counts[reason] += 1
+                    detail = {"accn": str(accn)[:100], "start": str(raw["start"])[:80] if raw.get("start") is not None else None,
+                              "end": end, "unit": str(unit)[:80], "filed": stamp, "reason": reason}
                     if len(rejected) < 20:
-                        rejected.append({"accn": str(accn)[:100], "start": raw.get("start"), "end": end,
-                                         "unit": str(unit)[:80], "filed": raw.get("filed"), "reason": reason})
+                        rejected.append(detail)
+                    if quarter_candidate and reason != "filed_after_as_of":
+                        dangerous.append(detail)
                     continue
                 eligible.append({
                     "cik": self.cik, "metric": metric, "value": decimal_text(value), "unit": unit,
@@ -296,13 +317,7 @@ class Analyst:
         base = {"fiscal_year": fiscal_year, "metric": metric, "period_start": start, "period_end": end, **audit}
         if not eligible:
             return {**base, "status": "insufficient_data", "reason": "no_eligible_quarterly_USD_fact", "value": None}
-        eligible.sort(key=lambda fact: (fact["filed"], fact["accn"]))
-        selected = eligible[-1]
-        history = list({(fact["accn"], fact["value"]): fact for fact in eligible}.values())
-        changed = len({number(fact["value"]) for fact in history}) > 1
-        return {**base, **selected, "status": "ok", "original": history[0], "history": history,
-                "revision_candidate": changed,
-                "warnings": ["value_changed_across_filings: review revision history"] if changed else []}
+        return self._choose(base, eligible, dangerous)
 
     def _response(self, results, as_of):
         return {"status": "ok" if all(r["status"] == "ok" for r in results) else "partial",
