@@ -14,5 +14,5 @@
       "bytes": 164231
     }
   },
-  "acquisition_note": "Public SEC API bodies downloaded without modification. Captured_at records packaging time on acquisition day. Direct SEC 10-K HTML curl returned HTTP 403; nine amounts and fiscal-week policy checked separately through the web reader of the official filing."
+  "acquisition_note": "Public SEC API bodies downloaded without modification. Captured_at records packaging time on acquisition day. At capture time, direct SEC 10-K HTML curl returned HTTP 403, so nine amounts and fiscal-week policy were checked through a web reader of the official filing; SEC archive HTML now returns HTTP 200 when requested with a User-Agent header."
 }

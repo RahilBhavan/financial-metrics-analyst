@@ -5,7 +5,9 @@
   "source_url": "https://www.microsoft.com/investor/reports/ar25/index.html",
   "source_section": "Income Statements, years ended June 30, 2025, 2024, 2023",
   "filing_accession": "0000950170-25-100235",
-  "verification": "Read the issuer's published annual report independently of the SEC companyfacts extraction on 2026-09-21. Original amounts are in USD millions; multiply by 1000000. Latest API comparatives may use a later accession. FY2026 is outside the reviewed product scope.",
+  "filing_date": "2025-07-30",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+  "verification": "Read the issuer's published annual report independently of the SEC companyfacts extraction on 2026-09-21. Original amounts are in USD millions; multiply by 1000000. Latest API comparatives may use a later accession. FY2026 is reviewed separately: its amounts come from the FY2026 Form 10-K and were checked against a fresh SEC companyfacts fetch (CIK0000789019) on 2026-09-23; that year carries its own accession and filing date.",
   "years": {
     "2023": {
       "start": "2022-07-01",
@@ -33,6 +35,18 @@
       "operating_income": "128528000000",
       "net_income": "101832000000",
       "gross_profit": "193893000000"
+    },
+    "2026": {
+      "start": "2025-07-01",
+      "end": "2026-06-30",
+      "days": 365,
+      "revenue": "331839000000",
+      "operating_income": "155237000000",
+      "net_income": "133749000000",
+      "gross_profit": "225465000000",
+      "accession": "0001193125-26-323660",
+      "filed": "2026-07-29",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
     }
   },
   "supporting_revenue": {

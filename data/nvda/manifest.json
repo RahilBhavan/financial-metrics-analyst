@@ -1,19 +1,19 @@
 {
-  "captured_at": "2026-09-22T00:00:00-04:00",
   "evidence_kind": "sec_api_snapshot",
-  "scope": "NVIDIA Corporation (CIK 0001045810), reviewed FY2024-FY2026",
-  "sources": {
-    "companyfacts.json": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
-    "submissions.json": "https://data.sec.gov/submissions/CIK0001045810.json"
-  },
+  "captured_at": "2026-09-22T00:00:00-04:00",
+  "captured_at_precision": "date-only",
+  "scope_review": "NVDA FY2024-FY2026 plus FY2023 revenue baseline and Q2 FY2027 (2026-04-27 to 2026-07-26)",
   "files": {
     "companyfacts.json": {
-      "bytes": 4092966,
-      "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff"
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+      "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "bytes": 4092966
     },
     "submissions.json": {
-      "bytes": 160132,
-      "sha256": "4442e047788ef7b070a4aa0c2ebcbe136aafecda1e103d2b823df8576f785892"
+      "source_url": "https://data.sec.gov/submissions/CIK0001045810.json",
+      "sha256": "4442e047788ef7b070a4aa0c2ebcbe136aafecda1e103d2b823df8576f785892",
+      "bytes": 160132
     }
-  }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded without modification on 2026-09-22 (US Eastern). The time of day was not recorded; the midnight timestamp only satisfies the date-time format and carries date precision."
 }

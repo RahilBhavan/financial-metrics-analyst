@@ -1,7 +1,7 @@
 {
   "evidence_kind": "sec_api_snapshot",
   "captured_at": "2026-09-21T22:38:24.721387+00:00",
-  "scope_review": "MSFT FY2023-FY2025 plus FY2022 revenue baseline",
+  "scope_review": "MSFT FY2023-FY2026 plus FY2022 revenue baseline",
   "files": {
     "companyfacts.json": {
       "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",

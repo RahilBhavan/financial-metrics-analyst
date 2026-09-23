@@ -4,6 +4,7 @@
   "cik": "0001045810",
   "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
   "filing_accession": "0001045810-26-000021",
+  "filing_date": "2026-02-25",
   "verification": "Cross-checked against the official SEC filing and raw companyfacts snapshot on 2026-09-22. Values are exact USD.",
   "years": {
     "2024": {
@@ -33,6 +34,15 @@
       "operating_income": "130387000000",
       "net_income": "120067000000"
     }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2023,
+    "start": "2022-01-31",
+    "end": "2023-01-29",
+    "value": "26974000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+    "source_section": "Consolidated Statements of Income, Revenue, fiscal year 2023 column; checked against SEC companyfacts (CIK0001045810, us-gaap:Revenues) on 2026-09-23",
+    "latest_matching_accession": "0001045810-25-000023"
   },
   "reviewed_quarter": {
     "fiscal_year": 2027,
