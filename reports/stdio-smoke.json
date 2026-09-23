@@ -5,6 +5,7 @@
   "tools": [
     "resolve_company",
     "get_annual_facts",
+    "get_quarterly_facts",
     "calculate_metrics"
   ],
   "facts": 9,

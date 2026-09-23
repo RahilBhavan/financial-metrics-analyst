@@ -1,8 +1,8 @@
 import copy
 import json
+import os
 import tempfile
 import unittest
-from datetime import date
 from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
@@ -185,8 +185,7 @@ class DomainTests(unittest.TestCase):
             self.a.resolve_company("AAPL")
 
     def test_stale_snapshot_warns(self):
-        with patch("financial_metrics.domain.date") as clock:
-            clock.today.return_value = date(2026, 10, 15)
+        with patch.dict(os.environ, {"FINANCIAL_METRICS_TODAY": "2026-10-15"}):
             self.assertTrue(any("snapshot_older" in w for w in self.a.context("2026-09-21")["warnings"]))
 
     def test_new_unreviewed_annual_period_warns(self):

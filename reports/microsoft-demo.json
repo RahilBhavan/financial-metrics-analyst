@@ -16,7 +16,7 @@
       "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual candidates block selection; conflicting values on any one filing date are ambiguous.",
       "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
       "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
-      "net_income": "Consolidated NetIncomeLoss, not income available to common shareholders.",
+      "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
       "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
       "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
       "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places."

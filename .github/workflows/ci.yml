@@ -21,6 +21,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -B -m unittest discover -s tests
       - run: python -B -m financial_metrics smoke
+      - name: Committed reports match current code
+        run: |
+          python -B scripts/regenerate_reports.py
+          git diff --exit-code reports/
 
   sdk-interoperability:
     runs-on: ubuntu-latest

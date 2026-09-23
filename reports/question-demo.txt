@@ -2,7 +2,7 @@ Apple Inc. | AAPL | CIK 0000320193
 As of 2026-09-21; SEC snapshot 2026-09-21T22:17:57.973977+00:00
 Amounts: USD millions. Percentages: 2 decimal places. FY labels use each issuer's fiscal calendar.
 
-Metric           | FY2023  | FY2024  | FY2025 
+Metric           | FY2023  | FY2024  | FY2025
 -----------------+---------+---------+--------
 Revenue          | 383,285 | 391,035 | 416,161
 Operating income | 114,301 | 123,216 | 133,050

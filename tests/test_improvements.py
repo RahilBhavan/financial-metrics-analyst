@@ -174,9 +174,13 @@ class RealReferenceTests(unittest.TestCase):
 
     def test_microsoft_fy2026_and_nvidia_reviewed_coverage(self):
         service = AnalystService()
-        msft = service.calculate_metrics('0000789019', [2026], ['revenue', 'gross_profit', 'gross_margin'], '2026-07-29')
-        self.assertEqual([row['value'] for row in msft['results'][:2]], ['331839000000', '225465000000'])
-        self.assertEqual(msft['results'][2]['display_value'], '67.94')
+        card = json.loads((DEFAULT_DATA / 'msft/ground-truth.json').read_text())['years']['2026']
+        msft = service.calculate_metrics('0000789019', [2026], ['revenue', 'gross_profit', 'gross_margin'], card['filed'])
+        self.assertEqual([row['value'] for row in msft['results'][:2]], [card['revenue'], card['gross_profit']])
+        self.assertEqual({row['accn'] for row in msft['results'][:2]}, {card['accession']})
+        margin = msft['results'][2]
+        self.assertEqual(Fraction(int(margin['exact_fraction']['numerator']), int(margin['exact_fraction']['denominator'])),
+                         Fraction(int(card['gross_profit']) * 100, int(card['revenue'])))
 
         golden = json.loads((DEFAULT_DATA / 'nvda/ground-truth.json').read_text())
         annual = service.get_annual_facts('0001045810', [2024, 2025, 2026], list(TAGS), '2026-02-25')

@@ -2,17 +2,19 @@ Microsoft Corporation | MSFT | CIK 0000789019
 As of 2026-09-21; SEC snapshot 2026-09-21T22:38:24.721387+00:00
 Amounts: USD millions. Percentages: 2 decimal places. FY labels use each issuer's fiscal calendar.
 
-Metric           | FY2023    | FY2024         | FY2025    
------------------+-----------+----------------+-----------
-Revenue          | 211,915   | 245,122        | 281,724   
-Operating income | 88,523    | 109,433        | 128,528   
-Net income       | 72,361    | 88,136         | 101,832   
-Operating margin | 41.77%    | 44.64%         | 45.62%    
-Revenue growth   | 6.88% [1] | 15.67% [2] [3] | 14.93% [4]
+Metric           | FY2023    | FY2024         | FY2025     | FY2026
+-----------------+-----------+----------------+------------+--------
+Revenue          | 211,915   | 245,122        | 281,724    | 331,839
+Gross profit     | 146,052   | 171,008        | 193,893    | 225,465
+Operating income | 88,523    | 109,433        | 128,528    | 155,237
+Net income       | 72,361    | 88,136         | 101,832    | 133,749
+Gross margin     | 68.92%    | 69.76%         | 68.82%     | 67.94%
+Operating margin | 41.77%    | 44.64%         | 45.62%     | 46.78%
+Revenue growth   | 6.88% [1] | 15.67% [2] [3] | 14.93% [4] | 17.79%
 FY2023: 2022-07-01 to 2023-06-30
 FY2024: 2023-07-01 to 2024-06-30
 FY2025: 2024-07-01 to 2025-06-30
-Snapshot warning: newer_annual_filing_outside_reviewed_scope: 2026-06-30
+FY2026: 2025-07-01 to 2026-06-30
 [1] FY2023 Revenue growth: comparison_uses_common_filing: 0000950170-24-087843; both values match latest eligible disclosures
 [2] FY2024 Revenue growth: comparison_uses_common_filing: 0000950170-25-100235; both values match latest eligible disclosures
 [3] FY2024 Revenue growth: unequal_period_lengths: current 366 days, prior 365 days; reported growth, not week-normalized

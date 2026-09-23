@@ -1,6 +1,5 @@
 {
-  "generated_at": "2026-09-23T16:17:33.740002+00:00",
-  "python": "3.9.6",
+  "clock": "2026-09-22",
   "evidence_kind": "real_SEC_snapshots_and_independently_transcribed_primary_sources; synthetic_adversarial_cases_only_in_unit_tests",
   "snapshots": {
     "AAPL": {
@@ -19,12 +18,12 @@
           "bytes": 164231
         }
       },
-      "acquisition_note": "Public SEC API bodies downloaded without modification. Captured_at records packaging time on acquisition day. Direct SEC 10-K HTML curl returned HTTP 403; nine amounts and fiscal-week policy checked separately through the web reader of the official filing."
+      "acquisition_note": "Public SEC API bodies downloaded without modification. Captured_at records packaging time on acquisition day. At capture time, direct SEC 10-K HTML curl returned HTTP 403, so nine amounts and fiscal-week policy were checked through a web reader of the official filing; SEC archive HTML now returns HTTP 200 when requested with a User-Agent header."
     },
     "MSFT": {
       "evidence_kind": "sec_api_snapshot",
       "captured_at": "2026-09-21T22:38:24.721387+00:00",
-      "scope_review": "MSFT FY2023-FY2025 plus FY2022 revenue baseline",
+      "scope_review": "MSFT FY2023-FY2026 plus FY2022 revenue baseline",
       "files": {
         "companyfacts.json": {
           "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
@@ -39,23 +38,23 @@
       }
     },
     "NVDA": {
-      "captured_at": "2026-09-22T00:00:00-04:00",
       "evidence_kind": "sec_api_snapshot",
-      "scope": "NVIDIA Corporation (CIK 0001045810), reviewed FY2024-FY2026",
-      "sources": {
-        "companyfacts.json": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
-        "submissions.json": "https://data.sec.gov/submissions/CIK0001045810.json"
-      },
+      "captured_at": "2026-09-22T00:00:00-04:00",
+      "captured_at_precision": "date-only",
+      "scope_review": "NVDA FY2024-FY2026 plus FY2023 revenue baseline and Q2 FY2027 (2026-04-27 to 2026-07-26)",
       "files": {
         "companyfacts.json": {
-          "bytes": 4092966,
-          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff"
+          "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+          "bytes": 4092966
         },
         "submissions.json": {
-          "bytes": 160132,
-          "sha256": "4442e047788ef7b070a4aa0c2ebcbe136aafecda1e103d2b823df8576f785892"
+          "source_url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "sha256": "4442e047788ef7b070a4aa0c2ebcbe136aafecda1e103d2b823df8576f785892",
+          "bytes": 160132
         }
-      }
+      },
+      "acquisition_note": "Public SEC API bodies downloaded without modification on 2026-09-22 (US Eastern). The time of day was not recorded; the midnight timestamp only satisfies the date-time format and carries date precision."
     },
     "KHC_reference": {
       "evidence_kind": "sec_api_snapshot",
@@ -76,23 +75,23 @@
     }
   },
   "unit_tests": {
-    "run": 75,
+    "run": 77,
     "failures": 0,
     "errors": 0,
     "skipped": 0
   },
   "evaluation_counts": {
     "exact_ratios": {
-      "passed": 12,
-      "total": 12
+      "passed": 30,
+      "total": 30
     },
     "filing_values": {
-      "passed": 24,
-      "total": 24
+      "passed": 44,
+      "total": 44
     },
     "provenance": {
-      "passed": 24,
-      "total": 24
+      "passed": 44,
+      "total": 44
     },
     "question_intent": {
       "passed": 14,
@@ -103,47 +102,37 @@
       "total": 3
     },
     "scope_behavior": {
-      "passed": 3,
-      "total": 3
+      "passed": 11,
+      "total": 11
     },
     "supporting_values": {
-      "passed": 2,
-      "total": 2
+      "passed": 3,
+      "total": 3
     },
     "tool_refusals": {
       "passed": 12,
       "total": 12
     }
   },
-  "evaluation_passed": 94,
-  "evaluation_total": 94,
+  "evaluation_passed": 161,
+  "evaluation_total": 161,
   "coverage": {
-    "AAPL": {
-      "requested_results": 15,
+    "AAPL FY2023-FY2025": {
+      "requested_results": 21,
       "numeric_results": 21
     },
-    "MSFT": {
-      "requested_results": 15,
+    "MSFT FY2023-FY2025": {
+      "requested_results": 21,
+      "numeric_results": 21
+    },
+    "MSFT FY2026": {
+      "requested_results": 7,
+      "numeric_results": 7
+    },
+    "NVDA FY2024-FY2026": {
+      "requested_results": 21,
       "numeric_results": 21
     }
-  },
-  "warm_stdio_call_ms": {
-    "samples": 10,
-    "raw": [
-      8.022249999999786,
-      8.134625000000284,
-      8.00258300000145,
-      7.887999999999451,
-      7.89629199999986,
-      8.411457999999428,
-      8.042333000000568,
-      7.745500000000405,
-      7.947667000001601,
-      7.864375000000479
-    ],
-    "median": 7.975125000001526,
-    "maximum": 8.411457999999428,
-    "includes_model": false
   },
   "cases": [
     {
@@ -284,6 +273,13 @@
     },
     {
       "group": "exact_ratios",
+      "case": "AAPL 2023 gross_margin",
+      "expected": "483280/10951",
+      "actual": "483280/10951",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
       "case": "AAPL 2023 operating_margin",
       "expected": "2286020/76657",
       "actual": "2286020/76657",
@@ -294,6 +290,13 @@
       "case": "AAPL 2023 revenue_growth",
       "expected": "-276075/98582",
       "actual": "-276075/98582",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "AAPL 2023 unequal fiscal durations warning",
+      "expected": true,
+      "actual": true,
       "passed": true
     },
     {
@@ -434,6 +437,13 @@
     },
     {
       "group": "exact_ratios",
+      "case": "AAPL 2024 gross_margin",
+      "expected": "3613660/78207",
+      "actual": "3613660/78207",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
       "case": "AAPL 2024 operating_margin",
       "expected": "821440/26069",
       "actual": "821440/26069",
@@ -444,6 +454,13 @@
       "case": "AAPL 2024 revenue_growth",
       "expected": "155000/76657",
       "actual": "155000/76657",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "AAPL 2024 unequal fiscal durations warning",
+      "expected": true,
+      "actual": true,
       "passed": true
     },
     {
@@ -584,6 +601,13 @@
     },
     {
       "group": "exact_ratios",
+      "case": "AAPL 2025 gross_margin",
+      "expected": "19520100/416161",
+      "actual": "19520100/416161",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
       "case": "AAPL 2025 operating_margin",
       "expected": "13305000/416161",
       "actual": "13305000/416161",
@@ -594,6 +618,13 @@
       "case": "AAPL 2025 revenue_growth",
       "expected": "502520/78207",
       "actual": "502520/78207",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "AAPL 2025 unequal fiscal durations warning",
+      "expected": false,
+      "actual": false,
       "passed": true
     },
     {
@@ -611,13 +642,6 @@
         "2022-09-24",
         "0000320193-24-000123"
       ],
-      "passed": true
-    },
-    {
-      "group": "scope_behavior",
-      "case": "AAPL unequal fiscal durations warning",
-      "expected": true,
-      "actual": true,
       "passed": true
     },
     {
@@ -758,6 +782,13 @@
     },
     {
       "group": "exact_ratios",
+      "case": "MSFT 2023 gross_margin",
+      "expected": "2921040/42383",
+      "actual": "2921040/42383",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
       "case": "MSFT 2023 operating_margin",
       "expected": "1770460/42383",
       "actual": "1770460/42383",
@@ -768,6 +799,13 @@
       "case": "MSFT 2023 revenue_growth",
       "expected": "136450/19827",
       "actual": "136450/19827",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "MSFT 2023 unequal fiscal durations warning",
+      "expected": false,
+      "actual": false,
       "passed": true
     },
     {
@@ -908,6 +946,13 @@
     },
     {
       "group": "exact_ratios",
+      "case": "MSFT 2024 gross_margin",
+      "expected": "8550400/122561",
+      "actual": "8550400/122561",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
       "case": "MSFT 2024 operating_margin",
       "expected": "5471650/122561",
       "actual": "5471650/122561",
@@ -918,6 +963,13 @@
       "case": "MSFT 2024 revenue_growth",
       "expected": "664140/42383",
       "actual": "664140/42383",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "MSFT 2024 unequal fiscal durations warning",
+      "expected": true,
+      "actual": true,
       "passed": true
     },
     {
@@ -1058,6 +1110,13 @@
     },
     {
       "group": "exact_ratios",
+      "case": "MSFT 2025 gross_margin",
+      "expected": "1615775/23477",
+      "actual": "1615775/23477",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
       "case": "MSFT 2025 operating_margin",
       "expected": "3213200/70431",
       "actual": "3213200/70431",
@@ -1068,6 +1127,13 @@
       "case": "MSFT 2025 revenue_growth",
       "expected": "1830100/122561",
       "actual": "1830100/122561",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "MSFT 2025 unequal fiscal durations warning",
+      "expected": true,
+      "actual": true,
       "passed": true
     },
     {
@@ -1088,10 +1154,796 @@
       "passed": true
     },
     {
+      "group": "filing_values",
+      "case": "MSFT 2026 revenue",
+      "expected": "331839000000",
+      "actual": "331839000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2026 revenue",
+      "expected": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2026 gross_profit",
+      "expected": "225465000000",
+      "actual": "225465000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2026 gross_profit",
+      "expected": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2026 operating_income",
+      "expected": "155237000000",
+      "actual": "155237000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2026 operating_income",
+      "expected": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "MSFT 2026 net_income",
+      "expected": "133749000000",
+      "actual": "133749000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "MSFT 2026 net_income",
+      "expected": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "actual": [
+        "0000789019",
+        "0001193125-26-323660",
+        "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+        "2025-07-01",
+        "2026-06-30",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-07-29",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2026 gross_margin",
+      "expected": "7515500/110613",
+      "actual": "7515500/110613",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2026 operating_margin",
+      "expected": "15523700/331839",
+      "actual": "15523700/331839",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "MSFT 2026 revenue_growth",
+      "expected": "417625/23477",
+      "actual": "417625/23477",
+      "passed": true
+    },
+    {
       "group": "scope_behavior",
-      "case": "MSFT unequal fiscal durations warning",
-      "expected": true,
-      "actual": true,
+      "case": "MSFT 2026 unequal fiscal durations warning",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2024 revenue",
+      "expected": "60922000000",
+      "actual": "60922000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2024 revenue",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:Revenues",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:Revenues",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2024 gross_profit",
+      "expected": "44301000000",
+      "actual": "44301000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2024 gross_profit",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2024 operating_income",
+      "expected": "32972000000",
+      "actual": "32972000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2024 operating_income",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2024 net_income",
+      "expected": "29760000000",
+      "actual": "29760000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2024 net_income",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2023-01-30",
+        "2024-01-28",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2024 gross_margin",
+      "expected": "2215050/30461",
+      "actual": "2215050/30461",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2024 operating_margin",
+      "expected": "1648600/30461",
+      "actual": "1648600/30461",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2024 revenue_growth",
+      "expected": "1697400/13487",
+      "actual": "1697400/13487",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "NVDA 2024 unequal fiscal durations warning",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2025 revenue",
+      "expected": "130497000000",
+      "actual": "130497000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2025 revenue",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:Revenues",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:Revenues",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2025 gross_profit",
+      "expected": "97858000000",
+      "actual": "97858000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2025 gross_profit",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2025 operating_income",
+      "expected": "81453000000",
+      "actual": "81453000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2025 operating_income",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2025 net_income",
+      "expected": "72880000000",
+      "actual": "72880000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2025 net_income",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2024-01-29",
+        "2025-01-26",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2025 gross_margin",
+      "expected": "9785800/130497",
+      "actual": "9785800/130497",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2025 operating_margin",
+      "expected": "2715100/43499",
+      "actual": "2715100/43499",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2025 revenue_growth",
+      "expected": "3478750/30461",
+      "actual": "3478750/30461",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "NVDA 2025 unequal fiscal durations warning",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2026 revenue",
+      "expected": "215938000000",
+      "actual": "215938000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2026 revenue",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:Revenues",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:Revenues",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2026 gross_profit",
+      "expected": "153463000000",
+      "actual": "153463000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2026 gross_profit",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:GrossProfit",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2026 operating_income",
+      "expected": "130387000000",
+      "actual": "130387000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2026 operating_income",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:OperatingIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA 2026 net_income",
+      "expected": "120067000000",
+      "actual": "120067000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA 2026 net_income",
+      "expected": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "actual": [
+        "0001045810",
+        "0001045810-26-000021",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+        "2025-01-27",
+        "2026-01-25",
+        "us-gaap:NetIncomeLoss",
+        "USD",
+        "2026-02-25",
+        "10-K"
+      ],
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2026 gross_margin",
+      "expected": "7673150/107969",
+      "actual": "7673150/107969",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2026 operating_margin",
+      "expected": "6519350/107969",
+      "actual": "6519350/107969",
+      "passed": true
+    },
+    {
+      "group": "exact_ratios",
+      "case": "NVDA 2026 revenue_growth",
+      "expected": "8544100/130497",
+      "actual": "8544100/130497",
+      "passed": true
+    },
+    {
+      "group": "scope_behavior",
+      "case": "NVDA 2026 unequal fiscal durations warning",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "group": "supporting_values",
+      "case": "NVDA FY2023 revenue and provenance",
+      "expected": [
+        "26974000000",
+        "2022-01-31",
+        "2023-01-29",
+        "0001045810-25-000023"
+      ],
+      "actual": [
+        "26974000000",
+        "2022-01-31",
+        "2023-01-29",
+        "0001045810-25-000023"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA Q2 FY2027 revenue",
+      "expected": "96221000000",
+      "actual": "96221000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA Q2 FY2027 revenue",
+      "expected": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "actual": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA Q2 FY2027 gross_profit",
+      "expected": "72142000000",
+      "actual": "72142000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA Q2 FY2027 gross_profit",
+      "expected": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "actual": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA Q2 FY2027 operating_income",
+      "expected": "63734000000",
+      "actual": "63734000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA Q2 FY2027 operating_income",
+      "expected": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "actual": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "passed": true
+    },
+    {
+      "group": "filing_values",
+      "case": "NVDA Q2 FY2027 net_income",
+      "expected": "59688000000",
+      "actual": "59688000000",
+      "passed": true
+    },
+    {
+      "group": "provenance",
+      "case": "NVDA Q2 FY2027 net_income",
+      "expected": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
+      "actual": [
+        "0001045810-26-000075",
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+        "2026-04-27",
+        "2026-07-26",
+        "2026-08-26",
+        "10-Q",
+        "Q2"
+      ],
       "passed": true
     },
     {

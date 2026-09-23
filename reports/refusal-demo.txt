@@ -1,1 +1,1 @@
-Refused (unsupported_metric): arguments.metrics[] must be one of revenue, operating_income, net_income, operating_margin, revenue_growth
+Refused (unsupported_metric): arguments.metrics[] must be one of revenue, gross_profit, operating_income, net_income, gross_margin, operating_margin, revenue_growth

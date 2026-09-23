@@ -1,28 +1,47 @@
 """Offline evaluation against independently transcribed primary-source cards."""
+import io
 import json
+import os
 import platform
 import statistics
 import time
 import unittest
-from datetime import datetime, timezone
+from datetime import date
 from fractions import Fraction
 from pathlib import Path
 
 from .client import Client
-from .domain import Analyst, DEFAULT_DATA
-from .policy import CIK, METRICS, TAGS, KHC_REFERENCE_PROFILE, Refusal
+from .domain import Analyst, DEFAULT_DATA, today
+from .policy import CIK, METRICS, PROFILES, TAGS, KHC_REFERENCE_PROFILE, Refusal
 from .questions import parse_question
 from .presentation import render, render_html
 
 ROOT = Path(__file__).resolve().parent.parent
+SNAPSHOTS = [('AAPL', DEFAULT_DATA), ('MSFT', DEFAULT_DATA / 'msft'), ('NVDA', DEFAULT_DATA / 'nvda'),
+             ('KHC_reference', DEFAULT_DATA / 'reference-cases/khc')]
+# Each run checks one ground-truth card's years at the cutoff where its cited filing is the latest.
+ANNUAL_RUNS = [('AAPL', DEFAULT_DATA, 'demo', [2023, 2024, 2025], '2026-09-21'),
+               ('MSFT', DEFAULT_DATA / 'msft', 'microsoft-demo', [2023, 2024, 2025], '2025-07-30'),
+               ('MSFT', DEFAULT_DATA / 'msft', None, [2026], '2026-09-21'),
+               ('NVDA', DEFAULT_DATA / 'nvda', 'nvidia-demo', [2024, 2025, 2026], '2026-02-25')]
+
+
+def days(start, end):
+    return (date.fromisoformat(end) - date.fromisoformat(start)).days + 1
+
+
+def fraction(row):
+    return Fraction(int(row['exact_fraction']['numerator']), int(row['exact_fraction']['denominator']))
 
 
 def run():
     reports = ROOT / 'reports'
     reports.mkdir(exist_ok=True)
+    # Reports are rendered against a fixed clock so reruns are byte-identical.
+    os.environ.setdefault('FINANCIAL_METRICS_TODAY', max(
+        json.loads((directory / 'manifest.json').read_text())['captured_at'][:10] for _, directory in SNAPSHOTS))
     suite = unittest.defaultTestLoader.discover(str(ROOT / 'tests'))
-    with (reports / 'tests.txt').open('w') as stream:
-        tests = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+    tests = unittest.TextTestRunner(stream=io.StringIO(), verbosity=2).run(suite)
     cases, timings, coverage = [], [], {}
 
     def record(group, name, expected, actual):
@@ -30,38 +49,55 @@ def run():
 
     arguments = dict(cik=CIK, fiscal_years=[2023, 2024, 2025], metrics=list(METRICS), as_of='2026-09-21')
     with Client() as client:
-        for ticker, directory, cik, cutoff, accession, filed, source in [
-            ('AAPL', DEFAULT_DATA, CIK, '2026-09-21', '0000320193-25-000079', '2025-10-31', 'https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm'),
-            ('MSFT', DEFAULT_DATA / 'msft', '0000789019', '2025-07-30', '0000950170-25-100235', '2025-07-30', 'https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm')]:
+        for ticker, directory, basename, years, cutoff in ANNUAL_RUNS:
+            cik = next(c for c, p in PROFILES.items() if p['ticker'] == ticker)
+            tags = PROFILES[cik].get('tags', TAGS)
             golden = json.loads((directory / 'ground-truth.json').read_text())
-            result = client.call('calculate_metrics', {**arguments, 'cik': cik, 'as_of': cutoff})
-            basename = 'demo' if ticker == 'AAPL' else 'microsoft-demo'
-            (reports / (basename + '.json')).write_text(json.dumps(result, indent=2) + '\n')
-            (reports / (basename + '.txt')).write_text(render(result) + '\n')
-            (reports / (basename + '.html')).write_text(render_html(result))
-            coverage[ticker] = dict(requested_results=15, numeric_results=sum(r['status'] == 'ok' for r in result['results']))
+            support = golden['supporting_revenue']
+            result = client.call('calculate_metrics', {**arguments, 'cik': cik, 'fiscal_years': years, 'as_of': cutoff})
+            if basename:
+                (reports / (basename + '.json')).write_text(json.dumps(result, indent=2) + '\n')
+                (reports / (basename + '.txt')).write_text(render(result) + '\n')
+                (reports / (basename + '.html')).write_text(render_html(result))
+            label = ticker + ' FY' + str(years[0]) + ('' if len(years) == 1 else '-FY' + str(years[-1]))
+            coverage[label] = dict(requested_results=len(result['results']), numeric_results=sum(r['status'] == 'ok' for r in result['results']))
             indexed = {(r['fiscal_year'], r['metric']): r for r in result['results']}
-            for year in (2023, 2024, 2025):
+            for year in years:
                 values = golden['years'][str(year)]
+                prior = support if year - 1 == support['fiscal_year'] else golden['years'][str(year - 1)]
+                name = ticker + ' ' + str(year) + ' '
                 for metric in TAGS:
                     row = indexed[year, metric]
-                    record('filing_values', ticker + ' ' + str(year) + ' ' + metric, values[metric], row['value'])
-                    expected = [cik, accession, source, values['start'], values['end'], 'us-gaap:' + TAGS[metric], 'USD', filed, '10-K']
+                    record('filing_values', name + metric, values[metric], row['value'])
+                    expected = [cik, values.get('accession') or golden.get('accession') or golden['filing_accession'],
+                                values.get('filing_url') or golden.get('filing_url') or golden['source_url'],
+                                values['start'], values['end'], 'us-gaap:' + tags[metric], 'USD',
+                                values.get('filed') or golden['filing_date'], '10-K']
                     actual = [row[k] for k in ('cik', 'accn', 'source_url', 'period_start', 'period_end', 'tag', 'unit', 'filed', 'form')]
-                    record('provenance', ticker + ' ' + str(year) + ' ' + metric, expected, actual)
-                for metric in ('operating_margin', 'revenue_growth'):
-                    row = indexed[year, metric]
-                    revenue = int(values['revenue'])
-                    prior = int(golden['supporting_revenue']['value'] if year == 2023 else golden['years'][str(year-1)]['revenue'])
-                    expected = Fraction(int(values['operating_income']) * 100, revenue) if metric == 'operating_margin' else Fraction((revenue-prior)*100, prior)
-                    actual = Fraction(int(row['exact_fraction']['numerator']), int(row['exact_fraction']['denominator']))
-                    record('exact_ratios', ticker + ' ' + str(year) + ' ' + metric, str(expected), str(actual))
-            baseline = indexed[2023, 'revenue_growth']['inputs'][1]
-            record('supporting_values', ticker + ' FY2022 revenue and provenance',
-                   [golden['supporting_revenue'][k] for k in ('value', 'start', 'end', 'latest_matching_accession')],
-                   [baseline[k] for k in ('value', 'period_start', 'period_end', 'accn')])
-            record('scope_behavior', ticker + ' unequal fiscal durations warning', True,
-                   any('unequal_period_lengths' in w for w in indexed[2024, 'revenue_growth']['warnings']))
+                    record('provenance', name + metric, expected, actual)
+                revenue = int(values['revenue'])
+                previous = int(prior.get('value') or prior['revenue'])
+                for metric, expected in [('gross_margin', Fraction(int(values['gross_profit']) * 100, revenue)),
+                                         ('operating_margin', Fraction(int(values['operating_income']) * 100, revenue)),
+                                         ('revenue_growth', Fraction((revenue - previous) * 100, previous))]:
+                    record('exact_ratios', name + metric, str(expected), str(fraction(indexed[year, metric])))
+                record('scope_behavior', name + 'unequal fiscal durations warning',
+                       days(values['start'], values['end']) != days(prior['start'], prior['end']),
+                       any('unequal_period_lengths' in w for w in indexed[year, 'revenue_growth']['warnings']))
+            if years[0] - 1 == support['fiscal_year']:
+                baseline = indexed[years[0], 'revenue_growth']['inputs'][1]
+                record('supporting_values', ticker + ' FY' + str(support['fiscal_year']) + ' revenue and provenance',
+                       [support[k] for k in ('value', 'start', 'end', 'latest_matching_accession')],
+                       [baseline[k] for k in ('value', 'period_start', 'period_end', 'accn')])
+        quarter = json.loads((DEFAULT_DATA / 'nvda/ground-truth.json').read_text())['reviewed_quarter']
+        result = client.call('get_quarterly_facts', {'cik': '0001045810', 'fiscal_year': quarter['fiscal_year'], 'quarter': quarter['quarter'],
+                                                     'metrics': list(TAGS), 'as_of': quarter['filed']})
+        for row in result['results']:
+            name = 'NVDA ' + quarter['quarter'] + ' FY' + str(quarter['fiscal_year']) + ' ' + row['metric']
+            record('filing_values', name, quarter[row['metric']], row['value'])
+            record('provenance', name,
+                   [quarter[k] for k in ('filing_accession', 'filing_url', 'start', 'end', 'filed')] + ['10-Q', quarter['quarter']],
+                   [row[k] for k in ('accn', 'source_url', 'period_start', 'period_end', 'filed', 'form', 'fp')])
         latest_msft = client.call('calculate_metrics', {**arguments, 'cik': '0000789019'})
         record('scope_behavior', 'MSFT FY2026 included in reviewed scope', False,
                any('newer_annual' in w for w in latest_msft['context']['warnings']))
@@ -115,13 +151,14 @@ def run():
     for group in sorted({c['group'] for c in cases}):
         rows = [c for c in cases if c['group'] == group]
         counts[group] = dict(passed=sum(c['passed'] for c in rows), total=len(rows))
+    # Timings and interpreter details vary per run, so they are printed but kept out of the committed report.
+    latency = dict(samples=len(timings), median=statistics.median(timings), maximum=max(timings), includes_model=False)
     report = dict(
-        generated_at=datetime.now(timezone.utc).isoformat(), python=platform.python_version(),
+        clock=today().isoformat(),
         evidence_kind='real_SEC_snapshots_and_independently_transcribed_primary_sources; synthetic_adversarial_cases_only_in_unit_tests',
-        snapshots={name: json.loads((directory / 'manifest.json').read_text()) for name, directory in [('AAPL', DEFAULT_DATA), ('MSFT', DEFAULT_DATA / 'msft'), ('NVDA', DEFAULT_DATA / 'nvda'), ('KHC_reference', khc.data_dir)]},
+        snapshots={name: json.loads((directory / 'manifest.json').read_text()) for name, directory in SNAPSHOTS},
         unit_tests=dict(run=tests.testsRun, failures=len(tests.failures), errors=len(tests.errors), skipped=len(tests.skipped)),
         evaluation_counts=counts, evaluation_passed=sum(c['passed'] for c in cases), evaluation_total=len(cases), coverage=coverage,
-        warm_stdio_call_ms=dict(samples=len(timings), raw=timings, median=statistics.median(timings), maximum=max(timings), includes_model=False),
         cases=cases,
         limitations=['Three reviewed issuers with issuer-specific annual coverage; one NVIDIA quarter is reviewed.',
                      'Microsoft legacy evaluation uses as_of 2025-07-30 to match its independently read 2025 report; FY2026 has separate source checks.',
@@ -133,7 +170,7 @@ def run():
     passed = tests.wasSuccessful() and all(c['passed'] for c in cases)
     print(json.dumps(dict(status='ok' if passed else 'failed', unit_tests=report['unit_tests'], evaluation_counts=counts,
                          evaluation_passed=report['evaluation_passed'], evaluation_total=len(cases),
-                         warm_stdio_call_ms={k:v for k,v in report['warm_stdio_call_ms'].items() if k != 'raw'}), indent=2))
+                         python=platform.python_version(), warm_stdio_call_ms=latency), indent=2))
     return 0 if passed else 1
 
 

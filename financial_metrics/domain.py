@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import re
 from collections import Counter
 from datetime import date
@@ -21,6 +22,12 @@ def iso_date(value):
         return date.fromisoformat(value)
     except ValueError:
         raise Refusal("invalid_date", "Date does not exist.")
+
+
+def today():
+    # A fixed clock (YYYY-MM-DD) makes regenerated reports byte-identical across runs.
+    fixed = os.environ.get("FINANCIAL_METRICS_TODAY")
+    return iso_date(fixed) if fixed else date.today()
 
 
 def number(value):
@@ -99,7 +106,7 @@ class Analyst:
 
     def context(self, as_of):
         warnings = []
-        age = (date.today() - self.captured_date).days
+        age = (today() - self.captured_date).days
         if age > 7:
             warnings.append("snapshot_older_than_7_days: historical results only; refresh separately for current coverage")
         unreviewed = [f["reportDate"] for f in self.filings.values()
