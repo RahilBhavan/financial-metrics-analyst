@@ -16,5 +16,5 @@
   "missing_standard_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "missing_tag_interpretation": "The named standard revenue tag is absent from the downloaded companyfacts taxonomy, while the actual filing reports net sales. This demonstrates API/tag coverage failure, not missing business revenue.",
   "reported_net_sales_after_restatement": "26076000000",
-  "scope": "Reference tests only. KHC is not a supported interactive issuer. Its NetIncomeLoss tag corresponds to income attributable to Kraft Heinz here; it must not inherit the AAPL/MSFT consolidated-net-income convention."
+  "scope": "Reference tests only. KHC is not a supported interactive issuer. Its NetIncomeLoss tag is net income attributable to the issuer (Kraft Heinz), which differs from consolidated net income (ProfitLoss) because KHC reports noncontrolling interests; exposing it would require a separate statement review."
 }

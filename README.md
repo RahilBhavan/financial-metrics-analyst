@@ -1,6 +1,6 @@
 # Financial metrics analyst
 
-An offline analyst for **Apple (AAPL), Microsoft (MSFT), and NVIDIA (NVDA)**. It reports revenue, gross profit, operating income, consolidated net income, gross margin, operating margin, and revenue growth through a real MCP stdio subprocess. Annual coverage is issuer-specific through FY2026; one reviewed NVIDIA quarter demonstrates exact-quarter selection. Every number retains its source filing and exact inputs.
+An offline analyst for **Apple (AAPL), Microsoft (MSFT), and NVIDIA (NVDA)**. It reports revenue, gross profit, operating income, net income attributable to the issuer (NetIncomeLoss), gross margin, operating margin, and revenue growth through a real MCP stdio subprocess. Annual coverage is issuer-specific through FY2026; one reviewed NVIDIA quarter demonstrates exact-quarter selection. Every number retains its source filing and exact inputs.
 
 All six improvements are implemented; see [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md). The standard-library baseline requires Python 3.9 or newer. No account, API key, model, package installation, or network connection is needed.
 
@@ -55,7 +55,7 @@ Microsoft uses years ending June 30. Its FY2023–2025 revenue is $211,915 milli
 
 The bundled Kraft Heinz case exercises the same selector but is **not an interactive issuer**. Its [restatement note](https://www.sec.gov/Archives/edgar/data/1637459/000163745919000049/R9.htm) reports FY2017 operating income of $6,773 million originally and $6,057 million after restatement and recasting. The $716 million difference includes an $80 million error-correction effect and a $636 million accounting-presentation change. The generic selector flags the changed value; the separate source card explains it.
 
-The named standard revenue tag is genuinely absent from that company's downloaded API taxonomy, even though its filing reports net sales. This is missing tag coverage, not zero or absent business revenue. KHC's net-income attribution also differs from the reviewed AAPL/MSFT convention, which is another reason not to expose it as a supported issuer. See [the reference card](data/reference-cases/khc/ground-truth.json).
+The named standard revenue tag is genuinely absent from that company's downloaded API taxonomy, even though its filing reports net sales. This is missing tag coverage, not zero or absent business revenue. KHC also reports noncontrolling interests, so its attributable net income differs from consolidated net income; that needs its own statement review, which is another reason not to expose it as a supported issuer. See [the reference card](data/reference-cases/khc/ground-truth.json).
 
 ## Questions and optional model proposals
 
