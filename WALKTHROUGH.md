@@ -14,7 +14,7 @@ The [source statement](https://www.sec.gov/Archives/edgar/data/320193/0000320193
 flowchart LR
     Q[Question or structured CLI request] --> I[Validated intent]
     I --> C[MCP subprocess client]
-    C --> T[Three tools with closed contracts]
+    C --> T[Four tools with closed contracts]
     T --> S[Period and filing selection]
     D[Local SEC snapshots] --> S
     S --> A[Exact arithmetic and provenance]
@@ -24,7 +24,7 @@ flowchart LR
 
 ## Read the code in this order
 
-1. `financial_metrics/policy.py`: the two issuer profiles, reviewed fiscal intervals, supporting revenue periods, tags, and accounting decisions.
+1. `financial_metrics/policy.py`: the three issuer profiles, reviewed fiscal intervals, supporting revenue periods, tags, and accounting decisions.
 2. The issuer and reference `ground-truth.json` cards: independently transcribed filing evidence, including the limits of each source check.
 3. `financial_metrics/domain.py`: manifest validation, issuer routing, candidate selection, revision history, common-filing comparison, and exact arithmetic.
 4. `financial_metrics/contracts.py` and `tools.py`: closed nested schemas and the four exposed operations. Invalid output becomes a refusal before crossing the tool boundary.
@@ -59,7 +59,7 @@ The two periods have different lengths—364 and 371 days—so the −2.80% resu
 python3 -B -m financial_metrics analyze --ticker MSFT --as-of 2025-07-30 --html reports/microsoft-demo.html
 ```
 
-Microsoft's periods end June 30. FY2024 has 366 days. The same contracts and arithmetic work, but the issuer profile supplies different dates. Microsoft FY2026 remains unreviewed; a current snapshot request warns about the newer annual filing.
+Microsoft's periods end June 30. FY2024 has 366 days. The same contracts and arithmetic work, but the issuer profile supplies different dates. Microsoft FY2026 is reviewed as well: `--years 2023 2024 2025 2026` shows all four years in one request, and a current snapshot request carries no newer-annual warning.
 
 The Kraft Heinz reference case is separate from the interactive company list. At a cutoff before June 7, 2019, the selector returns original FY2017 operating income of $6.773 billion. At that filing date it returns $6.057 billion and preserves the original. Its source card separates the $80 million restatement effect from the $636 million presentation change. The selector detects a difference; the source explains why.
 
@@ -76,7 +76,7 @@ python3 -B -m financial_metrics smoke
 
 The second command requests clarification; the third refuses unsupported scope. No model is required. An optional `proposal` command accepts validated JSON intent, but it does not validate whether a model understood a question correctly.
 
-The MCP tools have no network or file-writing path. A subprocess test denies network access and writes while the real server answers a request. Local report writing and optional Apple refresh are separate operator commands. A supplied data directory and its manifest are trusted local inputs.
+The MCP tools have no network or file-writing path. A subprocess test denies network access and writes while the real server answers a request. Local report writing and the optional AAPL/MSFT/NVDA refresh are separate operator commands. A supplied data directory and its manifest are trusted local inputs.
 
 ## A next learning exercise
 

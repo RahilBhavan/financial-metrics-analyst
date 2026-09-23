@@ -18,7 +18,7 @@ python3 -B -m financial_metrics ask 'Microsoft profit 2025'
 
 The last request asks you to choose operating income or net income; it returns `needs_clarification` and exit **3**. Submit a new question with that choice. Unsupported requests return `refused` and exit **2**. Successful and explicitly partial analyses return **0**. Use `--json` for structured output, `--details` for expanded text, or `--html PATH` for a local report with expandable evidence. HTML writing belongs to the operator CLI, not the MCP tools.
 
-After moving the folder, change only the `cd` path. Open [reports/demo.html](reports/demo.html) for Apple or [reports/microsoft-demo.html](reports/microsoft-demo.html) for Microsoft. Both are standalone, script-free reports with tables, nearby warning references, source links, and expandable audit records.
+After moving the folder, change only the `cd` path. Open [reports/demo.html](reports/demo.html) for Apple, [reports/microsoft-demo.html](reports/microsoft-demo.html) for Microsoft, or [reports/nvidia-demo.html](reports/nvidia-demo.html) for NVIDIA. All three are standalone, script-free reports with tables, nearby warning references, source links, and expandable audit records.
 
 ## Expected results
 
@@ -36,7 +36,7 @@ Apple FY2023 contains 371 days; FY2022 and FY2024 contain 364. Both affected gro
 
 Microsoft uses years ending June 30. Its FY2023–2025 revenue is $211,915 million, $245,122 million, and $281,724 million. The independently checked [2025 annual report](https://www.microsoft.com/investor/reports/ar25/index.html) provides those years; the [2024 report](https://www.microsoft.com/investor/reports/ar24/index.html) provides FY2022 revenue of $198,270 million. FY2024 has 366 days, so the adjacent growth comparisons carry duration warnings.
 
-**Microsoft FY2026 is reviewed.** Revenue was $331.839 billion, gross profit $225.465 billion, operating income $155.237 billion, and net income $133.749 billion. NVIDIA FY2024–FY2026 and Q2 FY2027 are also reviewed from SEC filings. See [the source research](docs/issuer-expansion-research.md) and [NVIDIA ground truth](data/nvda/ground-truth.json).
+**Microsoft FY2026 is reviewed** from its FY2026 Form 10-K (accession 0001193125-26-323660). Revenue was $331.839 billion, gross profit $225.465 billion, operating income $155.237 billion, and net income $133.749 billion. NVIDIA FY2024–FY2026 and Q2 FY2027 are also reviewed from SEC filings. See [the source research](docs/issuer-expansion-research.md) and [NVIDIA ground truth](data/nvda/ground-truth.json).
 
 ## Selection and accounting rules
 
@@ -44,12 +44,12 @@ Microsoft uses years ending June 30. Its FY2023–2025 revenue is $211,915 milli
 - Verify accession, filing date, report date, issuer, and safe document name against submissions metadata. Only the available submissions history is indexed.
 - Select the latest eligible filing on or before the inclusive `as_of` date. A rejected same-end annual candidate at the same or a newer filing date blocks an older value. Unknown candidate dates also block. The result identifies the blockers instead of silently returning a stale number.
 - The blocker test treats unknown durations or durations of at least 300 days as potentially annual. Known shorter quarter/YTD facts are rejected but do not block an otherwise valid annual fact. This is a reviewed-period policy, not a general detector for every malformed SEC record.
-- Collapse identical duplicates. Conflicting eligible values on a single filing date produce ambiguity. Preserve original values and filing history; a changed value is a revision candidate, not proof of a formal restatement.
+- Collapse identical duplicates. Conflicting eligible values on a single filing date produce ambiguity. Preserve original values and filing history; a changed value is a revision candidate, not proof of a formal restatement. Quarterly selection applies the same conflict and blocker rules to quarter-length 10-Q and 10-Q/A candidates.
 - Ratios use one filing accession. Growth may use the latest common filing only when both comparative values equal the latest individually selected values. This choice is disclosed. A changed latest value prevents substitution.
-- Operating margin = operating income / revenue × 100. Growth = (current revenue − prior revenue) / prior revenue × 100. Revenue denominators must be positive. Missing inputs stay unavailable; they never become zero.
+- Gross margin = gross profit / revenue × 100. Operating margin = operating income / revenue × 100. Growth = (current revenue − prior revenue) / prior revenue × 100. Revenue denominators must be positive. Missing inputs stay unavailable; they never become zero.
 - Keep exact input decimals and exact rational percentages. Decimal renderings use 34 significant digits; display percentages use two decimal places and `ROUND_HALF_EVEN`.
 
-`as_of` cannot exceed the snapshot date. Filing-date filtering cannot reconstruct intraday availability or undo subsequent corrections to historical API records. A snapshot older than seven days generates a warning. Refreshing does not automatically review new years or quarters; policy changes still require source checks.
+`as_of` cannot exceed the snapshot date. Filing-date filtering cannot reconstruct intraday availability or undo subsequent corrections to historical API records. A snapshot older than seven days generates a warning; set `FINANCIAL_METRICS_TODAY=YYYY-MM-DD` to fix that clock. Refreshing does not automatically review new years or quarters; policy changes still require source checks.
 
 ## Real reference cases
 
@@ -96,7 +96,7 @@ python3 -B -m unittest discover -s tests -v
 python3 -B -m financial_metrics.evaluate
 ```
 
-`evaluate` writes each case, raw timing samples, test logs, and both issuer demos into `reports/`. The optional independent SDK check needs Python 3.10 or newer and a separate environment:
+`evaluate` writes each case and the AAPL, MSFT, and NVDA demos into `reports/`, and prints unit-test counts and timing. `python3 scripts/regenerate_reports.py` rewrites every committed report against a fixed clock (`--today YYYY-MM-DD`, default the newest snapshot capture date); CI fails if the committed reports drift. The optional independent SDK check needs Python 3.10 or newer and a separate environment:
 
 ```sh
 python3.11 -m venv .venv-sdk
@@ -115,8 +115,8 @@ python3 -B -m financial_metrics fetch --ticker NVDA --output local-snapshots/new
 python3 -B -m financial_metrics demo --data-dir local-snapshots/new-capture
 ```
 
-A custom data directory loads only its own reviewed issuer. The bundled default loads both. The refresher was tested with controlled HTTP responses; live refresh using a user's contact was not run. The supplied raw snapshots were downloaded with curl. Their manifests record source URLs, sizes, hashes, and capture-day packaging timestamps. Hashes detect changes relative to a trusted manifest; they do not authenticate an untrusted manifest.
+A custom data directory loads only its own reviewed issuer. The bundled default loads all three. The refresher was tested with controlled HTTP responses; live refresh using a user's contact was not run. The supplied raw snapshots were downloaded with curl. Their manifests record source URLs, sizes, hashes, and capture-day packaging timestamps. Hashes detect changes relative to a trusted manifest; they do not authenticate an untrusted manifest.
 
 ## Read next
 
-[WALKTHROUGH.md](WALKTHROUGH.md) traces one answer through the code. [EVALUATION.md](EVALUATION.md) records measured results and limitations. Independent source transcriptions live in `data/ground-truth.json`, `data/msft/ground-truth.json`, and `data/reference-cases/khc/ground-truth.json`. Adversarial synthetic modifications exist only in tests.
+[WALKTHROUGH.md](WALKTHROUGH.md) traces one answer through the code. [EVALUATION.md](EVALUATION.md) records measured results and limitations. Independent source transcriptions live in `data/ground-truth.json`, `data/msft/ground-truth.json`, `data/nvda/ground-truth.json`, and `data/reference-cases/khc/ground-truth.json`. Adversarial synthetic modifications exist only in tests.

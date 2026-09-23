@@ -1,18 +1,18 @@
 # Evaluation record
 
-Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` for independent client checks.
+Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` and `jsonschema==4.26.0` for independent client checks.
 
-**75 test methods passed, with no failures, errors, or skips. The separately enumerated source and intent evaluation passed 94/94 cases. The official SDK check passed 21/21 checks.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
+**77 test methods passed, with no failures, errors, or skips. The separately enumerated source and intent evaluation passed 161/161 cases. The official SDK check passed 21/21 checks.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
 
 | Evaluation group | Passed / total |
 | --- | ---: |
-| exact ratios | 12 / 12 |
-| filing values | 18 / 18 |
-| provenance | 18 / 18 |
+| exact ratios | 30 / 30 |
+| filing values | 44 / 44 |
+| provenance | 44 / 44 |
 | question intent | 14 / 14 |
 | real reference cases | 3 / 3 |
-| scope behavior | 3 / 3 |
-| supporting values | 2 / 2 |
+| scope behavior | 11 / 11 |
+| supporting values | 3 / 3 |
 | tool refusals | 12 / 12 |
 
 Every evaluation case includes expected and actual values in [reports/evaluation.json](reports/evaluation.json). Test methods can contain multiple subtests; these are not added to the method count. The unit suite and enumerated evaluation overlap in coverage, so their counts should not be combined into a single accuracy score.
@@ -21,7 +21,7 @@ Every evaluation case includes expected and actual values in [reports/evaluation
 
 1. **Invalid newer facts block fallback.** Synthetic mutations cover invalid amounts, wrong currency, shifted or absent start dates, filing metadata disagreement, misleading future raw dates, invalid annual flags, and unsafe source documents. A valid older fact does not escape these blockers. Separate checks preserve filing-cutoff exclusions and legitimate short-period records.
 2. **FY2023 growth has a reviewed baseline.** Apple FY2022 revenue is independently transcribed from its 2024 filing. Exact rational arithmetic verifies −2.80% growth. The comparison uses a common filing whose values match the latest disclosures; a synthetic changed latest value prevents substitution. FY2022 remains unavailable as a public report year.
-3. **Real source coverage extends beyond Apple.** Microsoft's nine base amounts, six ratios, June reporting dates, and supporting revenue pass against separate annual-report transcriptions. Kraft Heinz's actual FY2017 revision and absent named revenue tag are tested on unmodified API snapshots. KHC is a reference case, not a supported interactive issuer.
+3. **Real source coverage extends beyond Apple.** Microsoft's twelve FY2023-FY2025 base amounts, nine ratios, June reporting dates, and supporting revenue pass against separate annual-report transcriptions. Microsoft FY2026 and NVIDIA FY2024-FY2026 plus Q2 FY2027 pass against their own source cards. Kraft Heinz's actual FY2017 revision and absent named revenue tag are tested on unmodified API snapshots. KHC is a reference case, not a supported interactive issuer.
 4. **Reports have compact tables and expandable evidence.** Checks cover full-dollar versus million-dollar presentation, negative growth, warning references, formula detail, source links, HTML escaping, and script-free output. The CLI creates a standalone HTML report in a temporary directory during testing. No screenshot-based visual or cross-browser audit was performed.
 5. **Questions accept useful variants and clarify ambiguity.** The evaluation contains accepted paraphrases, clarification cases, and refused requests. Additional tests cover ambiguous revenue change and optional JSON proposals. Proposal validation bounds permitted arguments; no model was called or evaluated.
 6. **Output contracts validate nested records.** The server checks facts, original/history records, ratio operands, exact fractions, precision, warnings, context, and refusals. Missing accessions, floating-point amounts, impossible dates, unknown nested fields, zero denominators, missing warning arrays, and broken history fail closed. The independent JSON Schema validator separately rejects six malformed nested outputs.
@@ -30,28 +30,28 @@ The existing tests still cover exact decimal behavior, arithmetic signs and deno
 
 ## Independent MCP check
 
-The official Python SDK negotiates MCP 2025-11-25, discovers exactly four tools, validates their input and output schema documents, calls every tool, checks both issuers, exercises a refusal, compares text with structured content, and pings. `jsonschema` uses its date format checker for the independent nested validations.
+The official Python SDK negotiates MCP 2025-11-25, discovers exactly four tools, validates their input and output schema documents, calls every tool, checks all three issuers, exercises a refusal, compares text with structured content, and pings. `jsonschema` uses its date format checker for the independent nested validations.
 
-The 18 checks are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
+The 21 checks are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
 
 ## Measured timing
 
-Ten warm sequential calls over one running MCP subprocess had a **5.645 ms median** and **5.843 ms maximum**. The report includes all samples. These timings include selection, calculations, nested validation, and local transport; they exclude startup, acquisition, and model inference. No production latency or throughput claim is made.
+Ten warm sequential calls over one running MCP subprocess had a **7.532 ms median** and **7.876 ms maximum** in the latest `evaluate` run. `evaluate` prints these figures; they stay out of the committed report because they change on every run. These timings include selection, calculations, nested validation, and local transport; they exclude startup, acquisition, and model inference. No production latency or throughput claim is made.
 
 ## Reproduction and exit statuses
 
-Run commands from the project directory. Exact executable paths, arguments, stdin where relevant, output files, stderr, and exit statuses are captured in [reports/verification.json](reports/verification.json).
+Run commands from the project directory. `python3 scripts/regenerate_reports.py` reruns the commands below, checks their exit statuses, and rewrites each report against a fixed clock. CI fails if the committed reports differ from a fresh run.
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | 75 tests; 94 evaluation cases; issuer reports and timing samples |
+| `python3 -B -m financial_metrics.evaluate` | 0 | 77 tests; 161 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html reports/demo.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
 | `python3 -B -m financial_metrics ask 'Apple profit 2025' --json` | 3 | Expected clarification between operating and net income |
 | `python3 -B -m financial_metrics analyze --metrics ebitda` | 2 | Expected refusal |
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
-| `python3 -B -m financial_metrics analyze --ticker MSFT` | 0 | Reviewed results plus newer-annual-scope warning |
+| `python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 2026` | 0 | Four reviewed years, FY2023-FY2026, with no scope warning |
 | `python3 -B -m financial_metrics proposal --json` with recorded JSON stdin | 0 | Bounded Microsoft request; tool-computed values |
 | Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | 21/21 independent checks |
 | `python3 -m compileall -q financial_metrics tests scripts server_stdio.py` with workspace cache | 0 | Syntax compilation passed |
@@ -64,18 +64,19 @@ Raw `companyfacts.json` and `submissions.json` files are unmodified SEC response
 
 - Apple main values: [2025 10-K, statement page 29](https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm). Supporting FY2022 revenue: [2024 10-K, statement page 29](https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm).
 - Microsoft main values: [2025 annual report, Income Statements](https://www.microsoft.com/investor/reports/ar25/index.html). Supporting FY2022 revenue: [2024 annual report](https://www.microsoft.com/investor/reports/ar24/index.html). The main provenance evaluation uses cutoff July 30, 2025 to match the independently reviewed filing. Latest API comparatives for reviewed years may use a later accession.
+- Microsoft FY2026: [FY2026 Form 10-K](https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm), accession 0001193125-26-323660. NVIDIA: [FY2026 Form 10-K](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm), FY2023 supporting revenue from the [FY2025 Form 10-K](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm), and the [Q2 FY2027 Form 10-Q](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm).
 - Kraft Heinz: [restatement and recast bridge](https://www.sec.gov/Archives/edgar/data/1637459/000163745919000049/R9.htm). Original FY2017 operating income of $6.773 billion becomes $6.057 billion after an $80 million restatement effect and a $636 million presentation change. The filing also reports net sales despite the missing named standard revenue tag in companyfacts.
 
-API downloads succeeded. Some direct archive HTML requests returned HTTP 403; public web readers and issuer annual reports supplied the independent statement checks. Microsoft FY2026 could not be independently checked and remains unreviewed. Complete filing HTML is not bundled. Offline checks reproduce comparisons to the source cards; independently auditing those transcriptions requires opening the cited source documents.
+API downloads succeeded. At capture time some direct archive HTML requests returned HTTP 403, so public web readers and issuer annual reports supplied the independent statement checks; the SEC archive now returns HTTP 200 when requested with a User-Agent header. Microsoft FY2026 is reviewed: its revenue, gross profit, operating income, and net income match a fresh SEC companyfacts fetch made on 2026-09-23 for accession 0001193125-26-323660. Complete filing HTML is not bundled. Offline checks reproduce comparisons to the source cards; independently auditing those transcriptions requires opening the cited source documents.
 
 ## Remaining limits
 
 - Three reviewed companies with issuer-specific annual coverage and one reviewed NVIDIA quarter. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
 - Historical filing-date filtering does not recreate past API contents or intraday availability. Changed values are flagged; formal restatement classification requires source evidence.
-- Quarters, forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
+- Quarters other than NVIDIA Q2 FY2027, forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
 - The optional refresher supports AAPL, MSFT, and NVDA and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
 - Full nested schemas constrain structure. They do not by themselves establish correct source transcription, arithmetic, or semantic consistency; those have separate tests.
 - No paid or local language model was run. Natural-language interpretation remains bounded, and model-generated proposal fidelity has not been evaluated.
 - Snapshot integrity assumes a trusted local manifest. There is no remote service, authentication deployment, publication, or external messaging.
 
-The plan's local implementation and verification gates are complete. Archive integrity and extracted-copy execution are recorded separately in `reports/package-verification.json` when packaging completes.
+The plan's local implementation and verification gates are complete.
