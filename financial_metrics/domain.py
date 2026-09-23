@@ -9,7 +9,7 @@ from decimal import Decimal, InvalidOperation, localcontext, ROUND_HALF_EVEN
 from fractions import Fraction
 from pathlib import Path
 
-from .policy import CIK, TAGS, METRICS, POLICY, PROFILES, Refusal
+from .policy import CIK, TAGS, MAX_YEARS, METRICS, POLICY, PROFILES, Refusal
 
 DEFAULT_DATA = Path(__file__).resolve().parent.parent / "data"
 
@@ -126,8 +126,8 @@ class Analyst:
     def validate(self, cik, fiscal_years, metrics, as_of, allowed):
         if cik != self.cik:
             raise Refusal("unsupported_company", "CIK does not match this reviewed issuer.")
-        if not isinstance(fiscal_years, list) or not 1 <= len(fiscal_years) <= 3:
-            raise Refusal("unsupported_years", "Request one to three reviewed fiscal years.")
+        if not isinstance(fiscal_years, list) or not 1 <= len(fiscal_years) <= MAX_YEARS:
+            raise Refusal("unsupported_years", "Request 1 to " + str(MAX_YEARS) + " reviewed fiscal years.")
         if any(type(y) is not int or y not in self.periods for y in fiscal_years) or len(set(fiscal_years)) != len(fiscal_years):
             raise Refusal("unsupported_years", "Supported years for this issuer are: " + ", ".join(map(str, sorted(self.periods))) + ".")
         if (not isinstance(metrics, list) or not 1 <= len(metrics) <= len(allowed)

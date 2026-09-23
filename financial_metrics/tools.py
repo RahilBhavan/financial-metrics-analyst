@@ -2,7 +2,7 @@
 
 import json
 
-from .policy import METRICS, TAGS, Refusal
+from .policy import MAX_YEARS, METRICS, TAGS, Refusal
 from .contracts import output_schema, validate_schema
 
 
@@ -11,7 +11,7 @@ def analysis_schema(metrics):
             "required": ["cik", "fiscal_years", "metrics", "as_of"],
             "properties": {
                 "cik": {"type": "string", "pattern": "^[0-9]{10}$"},
-                "fiscal_years": {"type": "array", "minItems": 1, "maxItems": 3, "uniqueItems": True,
+                "fiscal_years": {"type": "array", "minItems": 1, "maxItems": MAX_YEARS, "uniqueItems": True,
                                  "items": {"type": "integer", "minimum": 2023, "maximum": 2026}},
                 "metrics": {"type": "array", "minItems": 1, "maxItems": len(metrics), "uniqueItems": True,
                             "items": {"type": "string", "enum": list(metrics)}},

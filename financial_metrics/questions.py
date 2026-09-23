@@ -3,7 +3,7 @@
 import re
 
 from .contracts import obj, validate_schema
-from .policy import Clarification, Refusal
+from .policy import MAX_YEARS, Clarification, Refusal
 
 ALIASES = {
     "revenue": "revenue", "sales": "revenue", "net sales": "revenue", "total revenue": "revenue",
@@ -44,8 +44,8 @@ def parse_question(question):
     range_match = re.search(r"\b(?:fy\s*)?(\d{4})\s*(?:through|to|-)\s*(?:fy\s*)?(\d{4})\b", text)
     if range_match:
         start, end = map(int, range_match.groups())
-        if end < start or end - start > 2:
-            raise Refusal("unsupported_years", "Use an ascending range of at most three reviewed fiscal years.")
+        if end < start or end - start >= MAX_YEARS:
+            raise Refusal("unsupported_years", "Use an ascending range of at most " + str(MAX_YEARS) + " reviewed fiscal years.")
         years = list(range(start, end + 1))
         text = text[:range_match.start()] + " " + text[range_match.end():]
         if re.search(r"\b\d{4}\b", text):
@@ -55,8 +55,8 @@ def parse_question(question):
         text = re.sub(r"\b(?:fy\s*)?\d{4}\b", " ", text)
     if not years:
         raise Clarification("years_required", "Which fiscal years? Coverage depends on the issuer and extends through FY2026.", ["2023 through 2025", "2026"])
-    if len(years) > 3 or len(years) != len(set(years)) or any(y not in (2023, 2024, 2025, 2026) for y in years):
-        raise Refusal("unsupported_years", "Public queries support up to three distinct reviewed years from 2023 through 2026, subject to issuer coverage.")
+    if len(years) > MAX_YEARS or len(years) != len(set(years)) or any(y not in (2023, 2024, 2025, 2026) for y in years):
+        raise Refusal("unsupported_years", "Public queries support up to " + str(MAX_YEARS) + " distinct reviewed years from 2023 through 2026, subject to issuer coverage.")
     metrics = []
     pattern = r"\b(?:" + "|".join(re.escape(a) for a in sorted(ALIASES, key=len, reverse=True)) + r")\b"
     def collect(match):
@@ -78,7 +78,7 @@ def parse_question(question):
 
 
 PROPOSAL_SCHEMA = obj({"ticker": {"type": "string", "enum": ["AAPL", "MSFT", "NVDA"]},
-                       "fiscal_years": {"type": "array", "minItems": 1, "maxItems": 3, "uniqueItems": True,
+                       "fiscal_years": {"type": "array", "minItems": 1, "maxItems": MAX_YEARS, "uniqueItems": True,
                                         "items": {"type": "integer", "minimum": 2023, "maximum": 2026}},
                        "metrics": {"type": "array", "minItems": 1, "maxItems": 7, "uniqueItems": True,
                                    "items": {"type": "string", "enum": sorted(set(ALIASES.values()))}},

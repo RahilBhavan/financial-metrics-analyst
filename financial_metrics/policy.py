@@ -15,6 +15,8 @@ TAGS = {
     "net_income": "NetIncomeLoss",
 }
 METRICS = tuple(TAGS) + ("gross_margin", "operating_margin", "revenue_growth")
+# Four years lets the full MSFT FY2023-FY2026 profile fit in one request.
+MAX_YEARS = 4
 PROFILES = {
     CIK: {"cik": CIK, "name": NAME, "ticker": TICKER, "periods": PERIODS,
           "support_periods": {2022: ("2021-09-26", "2022-09-24")}, "directory": "."},

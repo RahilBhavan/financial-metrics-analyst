@@ -4,7 +4,7 @@ import json
 import re
 from datetime import date, datetime
 
-from .policy import METRICS, POLICY, TAGS, Refusal
+from .policy import MAX_YEARS, METRICS, POLICY, TAGS, Refusal
 
 
 def obj(properties, optional=()):
@@ -72,7 +72,7 @@ def output_schema(kind):
                        "source_url": {"type": "string", "pattern": r"^https://data\.sec\.gov/submissions/CIK[0-9]{10}\.json$"}})
     else:
         success = obj({"status": {"enum": ["ok", "partial"]}, "context": CONTEXT,
-                       "results": array({"$ref": "#/$defs/fact" if kind in ("get_annual_facts", "get_quarterly_facts") else "#/$defs/result"}, 1, 21)})
+                       "results": array({"$ref": "#/$defs/fact" if kind in ("get_annual_facts", "get_quarterly_facts") else "#/$defs/result"}, 1, MAX_YEARS * len(METRICS))})
     return {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "$defs": DEFS,
             "oneOf": [success, REFUSAL]}
 
@@ -117,7 +117,7 @@ def validate_schema(value, schema, path="arguments", root=None):
                 validate_schema(value[name], schema["additionalProperties"], path + "." + name, root)
     elif kind == "array":
         if not schema.get("minItems", 0) <= len(value) <= schema.get("maxItems", 1000):
-            raise Refusal("invalid_arguments", path + " has an invalid length")
+            raise Refusal("invalid_arguments", path + " must contain " + str(schema.get("minItems", 0)) + " to " + str(schema.get("maxItems", 1000)) + " items")
         if schema.get("uniqueItems") and len({json.dumps(item, sort_keys=True) for item in value}) != len(value):
             raise Refusal("invalid_arguments", path + " must contain unique values")
         for item in value:
