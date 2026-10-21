@@ -137,3 +137,45 @@ def validate_schema(value, schema, path="arguments", root=None):
     elif kind == "integer":
         if not schema.get("minimum", value) <= value <= schema.get("maximum", value):
             raise Refusal("unsupported_years", path + " is outside the allowed range")
+
+
+# Treasury tools (dat-accretion export). Numbers are decimal strings; every record carries its SEC filing.
+NULLABLE_DECIMAL = {"anyOf": [DECIMAL, {"type": "null"}]}
+SEC_URL = {"type": "string", "pattern": r"^https://www\.sec\.gov/Archives/edgar/data/[0-9]+/[0-9]{18}/[A-Za-z0-9_.-]+\.html?$"}
+TREASURY_FIRM = obj({"ticker": {"enum": ["MSTR", "BMNR", "SBET"]}, "name": TEXT, "cik": CIK_SCHEMA, "coin": {"enum": ["BTC", "ETH"]}})
+TREASURY_PROVENANCE = obj({"filed": DATE, "filing_url": SEC_URL, "accession": ACCN, "price_date": DATE}, optional=("price_date",))
+TREASURY_SOURCE = obj({"repository": {"const": "https://github.com/RahilBhavan/dat-accretion"},
+                       "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}, "engine": TEXT, "market_data": TEXT,
+                       "snapshot_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}})
+TREASURY_WEEK = obj({"week_end": DATE, "coin": {"enum": ["BTC", "ETH"]}, "coins_per_share": DECIMAL, "coins_per_share_unit": TEXT,
+                     "net_sats_per_share": NULLABLE_DECIMAL, "net_mnav": DECIMAL, "coin_price_usd": DECIMAL, "share_price_usd": DECIMAL, "diluted_shares": DECIMAL,
+                     "coin_holdings": DECIMAL, "preferred_close_usd": NULLABLE_DECIMAL, "provenance": TREASURY_PROVENANCE})
+TREASURY_ACTION = obj({
+    "week_end": DATE, "prior_week_end": DATE, "action": {"enum": ["issue_common", "buyback_common", "issue_pref", "retire_pref",
+                                                                  "buy_coin", "sell_coin", "carry", "est_issuance"]},
+    "ticker": {"type": "string", "pattern": "^[A-Z_]{1,12}$"}, "basis": {"enum": ["filed", "estimated"]}, "note": TEXT,
+    "usd": DECIMAL, "units": NULLABLE_DECIMAL, "avg_price_usd": NULLABLE_DECIMAL, "m_at_action": NULLABLE_DECIMAL,
+    "q_at_action": NULLABLE_DECIMAL, "coin": {"enum": ["BTC", "ETH"]}, "coins_per_share_before": DECIMAL,
+    "coins_per_share_change": DECIMAL, "coins_per_share_change_first_order": NULLABLE_DECIMAL,
+    "effect_bps_of_coins_per_share": DECIMAL, "value_to_common_usd": DECIMAL,
+    "direction": {"enum": ["adds", "reduces", "neutral"]}, "provenance": TREASURY_PROVENANCE})
+TREASURY_SUCCESS = {
+    "get_treasury_actions": obj({"status": {"const": "ok"}, "firm": TREASURY_FIRM, "matched": COUNT, "returned": COUNT,
+                                 "actions": array(TREASURY_ACTION, 1, 20), "source": TREASURY_SOURCE, "warnings": WARNINGS}),
+    "get_coins_per_share": obj({"status": {"const": "ok"}, "firm": TREASURY_FIRM, "week": TREASURY_WEEK,
+                                "comparison": {"anyOf": [{"type": "null"}, obj({"week": TREASURY_WEEK, "change_coins_per_share": DECIMAL,
+                                                                                   "change_percent": DECIMAL})]},
+                                "stated_weeks": obj({"first": DATE, "last": DATE, "count": COUNT}),
+                                "source": TREASURY_SOURCE, "warnings": WARNINGS}),
+    "get_break_even": obj({"status": {"const": "ok"}, "firm": TREASURY_FIRM, "break_even": obj({
+        "week_end": DATE, "preferred": {"enum": ["STRC", "BMNP"]}, "liquidation_preference_usd": {"const": "100"},
+        "net_mnav": DECIMAL, "break_even_price_usd": DECIMAL, "preferred_close_usd": DECIMAL, "gap_usd": DECIMAL,
+        "rotation": TEXT, "adds_while": TEXT, "adds_at_close": {"type": "boolean"}, "provenance": TREASURY_PROVENANCE}),
+        "source": TREASURY_SOURCE, "warnings": WARNINGS}),
+}
+TREASURY_EMPTY = obj({"status": {"const": "insufficient_data"}, "firm": TREASURY_FIRM, "reason": TEXT, "source": TREASURY_SOURCE})
+
+
+def treasury_output_schema(kind):
+    branches = [TREASURY_SUCCESS[kind], REFUSAL] + ([TREASURY_EMPTY] if kind == "get_treasury_actions" else [])
+    return {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "oneOf": branches}

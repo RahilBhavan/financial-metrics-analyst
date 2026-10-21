@@ -65,13 +65,17 @@ class Client:
         return reply["result"]
 
     def call(self, name, arguments):
+        return self.call_raw(name, arguments)["structuredContent"]
+
+    def call_raw(self, name, arguments):
+        """Full tools/call result, including isError; JSON-RPC errors raise RuntimeError."""
         reply = self.request("tools/call", {"name": name, "arguments": arguments})
         if "error" in reply:
             raise RuntimeError(reply["error"]["message"])
         result = reply["result"]
         if json.loads(result["content"][0]["text"]) != result["structuredContent"]:
             raise RuntimeError("Text and structured results differ")
-        return result["structuredContent"]
+        return result
 
     def close(self):
         if self.process.stdin and not self.process.stdin.closed:
@@ -105,7 +109,8 @@ class Client:
 def smoke(data_dir=None):
     with Client(data_dir) as client:
         names = [t["name"] for t in client.request("tools/list")["result"]["tools"]]
-        if names != ["resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics"]:
+        if names != ["resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics",
+                     "get_treasury_actions", "get_coins_per_share", "get_break_even"]:
             raise RuntimeError("Unexpected tool list")
         resolved = client.call("resolve_company", {"ticker": "AAPL"})
         as_of = resolved["lookup_timestamp"][:10]
@@ -113,13 +118,15 @@ def smoke(data_dir=None):
         facts = client.call("get_annual_facts", {**args, "metrics": ["revenue", "operating_income", "net_income"]})
         metrics = client.call("calculate_metrics", {**args, "metrics": ["operating_margin", "revenue_growth"]})
         refused = client.call("calculate_metrics", {**args, "metrics": ["ebitda"]})
-        if facts["status"] != "ok" or refused["status"] != "refused":
+        break_even = client.call("get_break_even", {"firm": "MSTR"})
+        if facts["status"] != "ok" or refused["status"] != "refused" or break_even["status"] != "ok":
             raise RuntimeError("Smoke result mismatch")
         counts = {"facts": len(facts["results"]), "numeric_ratios": sum(r["status"] == "ok" for r in metrics["results"])}
         if counts != {"facts": 9, "numeric_ratios": 6}:
             raise RuntimeError("Unexpected metric coverage")
     return {"status": "ok", "protocol": VERSION, "transport": "stdio subprocess",
-            "tools": names, **counts, "unsupported_metric_refused": True, "server_exit_code": client.process.returncode}
+            "tools": names, **counts, "unsupported_metric_refused": True,
+            "strategy_break_even_week": break_even["break_even"]["week_end"], "server_exit_code": client.process.returncode}
 
 
 if __name__ == "__main__":

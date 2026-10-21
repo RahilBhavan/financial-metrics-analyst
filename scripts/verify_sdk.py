@@ -22,7 +22,8 @@ async def main():
             init = await session.initialize()
             checks.append({"case": "protocol negotiation", "passed": init.protocolVersion == "2025-11-25"})
             tools = (await session.list_tools()).tools
-            checks.append({"case": "four named tools", "passed": {t.name for t in tools} == {"resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics"}})
+            checks.append({"case": "seven named tools", "passed": {t.name for t in tools} == {"resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics",
+                                                                               "get_treasury_actions", "get_coins_per_share", "get_break_even"}})
             for tool in tools:
                 Draft202012Validator.check_schema(tool.inputSchema)
                 Draft202012Validator.check_schema(tool.outputSchema)
@@ -39,6 +40,10 @@ async def main():
                 ("resolve_company", {"ticker": "NVDA"}, "ok"),
                 ("get_quarterly_facts", {"cik": "0001045810", "fiscal_year": 2027, "quarter": "Q2",
                                          "metrics": ["revenue", "gross_profit"], "as_of": "2026-08-26"}, "ok"),
+                ("get_treasury_actions", {"firm": "BMNR", "action": "buyback_common", "limit": 2}, "ok"),
+                ("get_coins_per_share", {"firm": "MSTR", "compare_to": "2026-07-26"}, "ok"),
+                ("get_break_even", {"firm": "MSTR"}, "ok"),
+                ("get_break_even", {"firm": "SBET"}, "refused"),
             ])
             for tool, args, status in calls:
                 result = await session.call_tool(tool, args)

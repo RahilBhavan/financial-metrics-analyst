@@ -4,6 +4,50 @@ An offline analyst for **Apple (AAPL), Microsoft (MSFT), and NVIDIA (NVDA)**. It
 
 All six improvements are implemented; see [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md). The standard-library baseline requires Python 3.9 or newer. No account, API key, model, package installation, or network connection is needed.
 
+## Treasury-analyst agent (branch `treasury-agent`)
+
+A Claude tool-use loop answers questions such as "How did BitMine's last ATM raise change ETH per share?" over this server, which now also serves three read-only tools built on [dat-accretion](https://github.com/RahilBhavan/dat-accretion)'s per-share engine. The model only proposes tool calls and writes prose. A deterministic check withholds any answer containing a number that no tool returned.
+
+**Frozen 50-task eval, one run, 2026-10-21.** Model `claude-haiku-5-5`, reached through the **Claude Code CLI adapter** (`claude -p --output-format json`, built-in tools disabled, JSON-text tool protocol), not the Messages API: this machine has no API key. The tasks were committed (450af5b) before any agent run. The prompt and tracer were built on the separate `evals/dev-questions.json` and were not changed after the run.
+
+| Metric | Result |
+| --- | ---: |
+| Tool selection (42 in-scope tasks) | 42 / 42 (100%) |
+| Arguments: scored args match and the call returns the expected record | 42 / 42 (100%) |
+| Expected numbers quoted in the delivered answer | 41 / 42 (97.6%) |
+| Numbers in delivered answers traced to a tool result | 368 / 368 (100%, enforced by the gate) |
+| Numbers in first drafts traced, before the gate | 379 / 383 (99.0%) |
+| Answers withheld by the gate | 1 (S06) |
+| Out-of-scope refusals | 8 / 8 |
+| False refusals on in-scope tasks | 0 |
+| Latency per task, p50 / p90 / max | 6.3 s / 9.3 s / 13.3 s |
+| Tokens per task, mean (input incl. cache + output) | 10,249 |
+| Cost per task, mean (CLI-reported, list price) | $0.0013; $0.066 for all 50 |
+| Tool calls per task, mean | 1.2 |
+
+By category: treasury actions 16/16, coins per share 9/9, break-even 7/7, SEC facts 9/10 on every column except tool and arguments (10/10). Full records: [reports/agent-runs.jsonl](reports/agent-runs.jsonl); scores: [reports/agent-eval.json](reports/agent-eval.json); a script-free viewer: [reports/agent-transcripts.html](reports/agent-transcripts.html).
+
+**Known failures and limits**
+
+- **S06 withheld (Microsoft FY2026 gross margin).** The first draft paraphrased the warning code `snapshot_older_than_7_days` as "older than 7 days". The tracer does not read numbers embedded in identifiers, so it flagged "7". The rewrite then mistyped the period start as 2026-07-01, and the gate withheld the answer. The second rejection was a real error caught; the first was a tracer false positive. The same "7" caused the other three first-draft rejections (S07, S09, S10), which passed after one rewrite. This was not fixed after the run, because that would tune against the frozen set.
+- The tasks are templated and name exact weeks and metrics, so these rates do not measure open-ended or ambiguous questions. One run per task at default sampling; no repeats or variance estimate.
+- Expected numbers come from the same deterministic tools, so the eval measures the agent's tool use and quoting, not tool correctness. Tool correctness rests on the existing 161-case evaluation and dat-accretion's own tests.
+- Tracing compares magnitudes at the precision shown. It accepts rounding and drops sign ("reduced by 0.85 bps" traces to −0.849852). Small integers must match exactly. Dates, accessions and URLs must appear verbatim. It proves that a number came from a tool result, not that it is attached to the right label.
+- Latency includes about 1 s of CLI start-up per model turn. Cost and tokens are the CLI's figures. The Messages API backend (`AnthropicMessages`, default `claude-haiku-5-5`) is unit-tested against the request and response shape but has not been run live.
+- Treasury data is a frozen export of dat-accretion commit `ce3b715` (weeks 2026-05-31 to 2026-10-11). BitMine does not file per-week ATM sales, so its "ATM" answers use `est_issuance` rows, labeled estimated. dat-accretion computes in binary floating point; values are served with ten significant digits.
+
+**Run it**
+
+```sh
+python3 -B -m financial_metrics.agent "How did BitMine's last ATM raise change ETH per share?"            # ANTHROPIC_API_KEY set: Messages API
+python3 -B -m financial_metrics.agent --backend claude-code "What is BitMine's BMNP break-even price?"  # local Claude Code CLI
+python3 -B -m financial_metrics.agent_eval --backend claude-code    # rewrites reports/agent-runs.jsonl and agent-eval.json
+python3 -B scripts/render_agent_transcripts.py                      # reports/agent-transcripts.html
+python3 -B scripts/export_dat_snapshot.py --dat-repo ../dat-accretion   # refresh data/treasury/snapshot.json
+```
+
+**Treasury tools.** `get_treasury_actions` (capital actions, most recent first, with the engine's exact change in net coins per share, basis points, USD value to common and the 8-K), `get_coins_per_share` (one stated week or two, with the change between them) and `get_break_even` (liquidation preference × net mNAV for STRC and BMNP). `scripts/export_dat_snapshot.py` runs `dat.engine.attribute` on a clean dat-accretion checkout. It refuses to write if the rebuild differs from that checkout's `attribution.csv` or `weekly.csv`. A CI job rebuilds the snapshot at the pinned commit and requires byte equality. Tests pin method.md's STRC anchor ($3.893M to common) and the memo's break-evens ($119.07 and $99.79), and they check that every served number carries an SEC filing URL and accession.
+
 ## Run it
 
 ```sh
@@ -69,11 +113,11 @@ python3 -B -m financial_metrics proposal <<'JSON'
 JSON
 ```
 
-Proposals cannot contain financial answers, URLs, filenames, or executable actions. Validation checks allowed arguments and scope; it does not prove that a model faithfully interpreted the original question. There is no model in the baseline, and model behavior, token costs, and injection resistance have not been measured.
+Proposals cannot contain financial answers, URLs, filenames, or executable actions. Validation checks allowed arguments and scope; it does not prove that a model faithfully interpreted the original question. There is no model in the baseline. The optional agent above measures model behavior and token costs on its frozen tasks; injection resistance has not been measured.
 
 ## MCP hosting and contracts
 
-The server implements MCP **2025-11-25** over newline-delimited JSON-RPC stdio: initialization, initialized notification, ping, tool discovery, and tool calls. It exposes `resolve_company`, `get_annual_facts`, `get_quarterly_facts`, and `calculate_metrics`. Quarterly coverage is intentionally limited to NVIDIA Q2 FY2027 until more periods are reviewed. It offers no HTTP transport or arbitrary network, file, or execution capability.
+The server implements MCP **2025-11-25** over newline-delimited JSON-RPC stdio: initialization, initialized notification, ping, tool discovery, and tool calls. It exposes `resolve_company`, `get_annual_facts`, `get_quarterly_facts`, and `calculate_metrics`, plus the three treasury tools above. Quarterly coverage is intentionally limited to NVIDIA Q2 FY2027 until more periods are reviewed. It offers no HTTP transport or arbitrary network, file, or execution capability.
 
 Use your host's stdio configuration with the absolute launcher path:
 
@@ -88,7 +132,7 @@ Use your host's stdio configuration with the absolute launcher path:
 }
 ```
 
-Adjust executable and project paths when moving computers. The launcher works from an unrelated directory. The four tools publish and enforce closed input and **full nested output schemas**, including provenance, history, warnings, ratios, context, unavailable rows, and refusals. Invalid generated output becomes an `invalid_tool_output` refusal. Schemas validate structure; separate source and arithmetic checks validate financial meaning.
+Adjust executable and project paths when moving computers. The launcher works from an unrelated directory. The seven tools publish and enforce closed input and **full nested output schemas**, including provenance, history, warnings, ratios, context, unavailable rows, and refusals. Invalid generated output becomes an `invalid_tool_output` refusal. Schemas validate structure; separate source and arithmetic checks validate financial meaning.
 
 ```sh
 python3 -B -m financial_metrics smoke

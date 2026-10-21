@@ -1,5 +1,7 @@
 # Evaluation record
 
+**Update, 21 October 2026 (branch `treasury-agent`).** 114 test methods pass on Python 3.14.7 and 3.9 (one, the dat-accretion snapshot rebuild, is skipped unless `DAT_ACCRETION_REPO` points at a checkout; it passed locally and runs in its own CI job). The source and intent evaluation still passes 161/161. The official SDK check now passes 28/28: it discovers seven tools and calls the three treasury tools, including one refusal. The agent's frozen 50-task trajectory eval is reported in the README's treasury-agent section and in `reports/agent-eval.json`. The record below is the 23 September baseline.
+
 Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` and `jsonschema==4.26.0` for independent client checks.
 
 **77 test methods passed, with no failures, errors, or skips. The separately enumerated source and intent evaluation passed 161/161 cases. The official SDK check passed 21/21 checks.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
