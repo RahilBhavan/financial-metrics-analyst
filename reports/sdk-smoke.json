@@ -1,17 +1,17 @@
 {
   "sdk": "mcp",
   "sdk_version": "1.30.0",
-  "python": "3.11.15",
+  "python": "3.11.16",
   "transport": "stdio subprocess",
-  "passed": 21,
-  "total": 21,
+  "passed": 28,
+  "total": 28,
   "checks": [
     {
       "case": "protocol negotiation",
       "passed": true
     },
     {
-      "case": "four named tools",
+      "case": "seven named tools",
       "passed": true
     },
     {
@@ -28,6 +28,18 @@
     },
     {
       "case": "calculate_metrics valid schemas",
+      "passed": true
+    },
+    {
+      "case": "get_treasury_actions valid schemas",
+      "passed": true
+    },
+    {
+      "case": "get_coins_per_share valid schemas",
+      "passed": true
+    },
+    {
+      "case": "get_break_even valid schemas",
       "passed": true
     },
     {
@@ -60,6 +72,22 @@
     },
     {
       "case": "get_quarterly_facts ok",
+      "passed": true
+    },
+    {
+      "case": "get_treasury_actions ok",
+      "passed": true
+    },
+    {
+      "case": "get_coins_per_share ok",
+      "passed": true
+    },
+    {
+      "case": "get_break_even ok",
+      "passed": true
+    },
+    {
+      "case": "get_break_even refused",
       "passed": true
     },
     {

@@ -37,3 +37,20 @@ jobs:
           cache-dependency-path: requirements-sdk-test.txt
       - run: python -m pip install -r requirements-sdk-test.txt
       - run: python -B scripts/verify_sdk.py
+
+  treasury-snapshot:
+    # Rebuild data/treasury/snapshot.json from dat-accretion at its pinned commit and require byte equality.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - name: Check out dat-accretion at the snapshot's commit
+        run: |
+          commit=$(python -c "import json; print(json.load(open('data/treasury/snapshot.json'))['source']['commit'])")
+          git clone --quiet https://github.com/RahilBhavan/dat-accretion "$RUNNER_TEMP/dat-accretion"
+          git -C "$RUNNER_TEMP/dat-accretion" checkout --quiet "$commit"
+      - run: python -B -m unittest tests.test_treasury -v
+        env:
+          DAT_ACCRETION_REPO: ${{ runner.temp }}/dat-accretion

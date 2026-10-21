@@ -275,5 +275,28 @@ class EvalScoringTests(unittest.TestCase):
         self.assertEqual(summary["latency_ms"]["p50"], 200.0)
 
 
+class TranscriptViewerTests(unittest.TestCase):
+    def test_static_viewer_escapes_and_has_no_script(self):
+        import importlib.util
+        import tempfile
+        from pathlib import Path
+        root = Path(__file__).resolve().parent.parent
+        spec = importlib.util.spec_from_file_location("viewer", root / "scripts" / "render_agent_transcripts.py")
+        viewer = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(viewer)
+        run_record = {"task_id": "O01", "status": "refused", "refusal": "<script>alert(1)</script>", "answer": None, "tool_calls": [],
+                      "results": [], "drafts": [], "traces": [], "latency_ms": 10.0, "cost_usd": None, "turns": 1,
+                      "usage": {"input_tokens": 1, "output_tokens": 1}}
+        report = agent_eval.report(agent_eval.TASKS, [run_record], {"backend": "scripted", "models_seen": ["m"]})
+        with tempfile.TemporaryDirectory() as directory:
+            runs, scored = Path(directory) / "runs.jsonl", Path(directory) / "eval.json"
+            runs.write_text(json.dumps({"meta": {}}) + "\n" + json.dumps(run_record) + "\n")
+            scored.write_text(json.dumps(report))
+            html = viewer.render(runs, scored)
+        self.assertNotIn("<script", html)
+        self.assertIn("&lt;script&gt;", html)
+        self.assertIn("Should I buy MSTR stock right now?", html)
+
+
 if __name__ == "__main__":
     unittest.main()
