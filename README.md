@@ -1,10 +1,21 @@
 # Financial metrics analyst
 
-An offline analyst for **Apple (AAPL), Microsoft (MSFT), and NVIDIA (NVDA)**. It reports revenue, gross profit, operating income, net income attributable to the issuer (NetIncomeLoss), gross margin, operating margin, and revenue growth through a real MCP stdio subprocess. Annual coverage is issuer-specific through FY2026; one reviewed NVIDIA quarter demonstrates exact-quarter selection. Every number retains its source filing and exact inputs.
+A dependency-free MCP server and CLI that returns SEC financial facts and ratios for **Apple (AAPL), Microsoft (MSFT), and NVIDIA (NVDA)** with full filing provenance, plus a Claude treasury-analyst agent that answers questions over it and [dat-accretion](https://github.com/RahilBhavan/dat-accretion)'s per-share engine.
 
-All six improvements are implemented; see [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md). The standard-library baseline requires Python 3.9 or newer. No account, API key, model, package installation, or network connection is needed.
+## Results
 
-## Treasury-analyst agent (branch `treasury-agent`)
+- **161/161 evaluation cases pass:** filing values, provenance, exact ratios, question intent, tool refusals, scope behavior and real reference cases (`python3 -B -m financial_metrics.evaluate`).
+- **MCP 2025-11-25 over stdio, hand-written on the standard library:** 7 tools with closed input and full nested output schemas. The official `mcp==1.30.0` Python SDK passes 28/28 interoperability checks in a separate CI job.
+- **Treasury-analyst agent, frozen 50-task eval (Claude Haiku 5.5, one run):** correct tool and arguments on 42/42 in-scope tasks, 8/8 out-of-scope refusals, 0 false refusals. A deterministic gate traced all 368 numbers in delivered answers to a tool result and withheld 1 answer.
+- **Refuses rather than guesses:** ambiguous prompts such as "Microsoft profit 2025" return `needs_clarification`, unsupported metrics are refused, and a newer conflicting filing blocks a stale value. The Kraft Heinz reference case flags FY2017 operating income restated from $6,773M to $6,057M.
+
+**How it works:** facts are selected from bundled SEC XBRL snapshots by exact period, tag and filing rules, ratios are computed with exact rational arithmetic, and every number carries its filing accession; the agent's model only proposes tool calls and writes prose.
+
+**Run the tests:** `python3 -B -m unittest discover -s tests` (114 tests, standard library only; one dat-accretion rebuild test is skipped unless `DAT_ACCRETION_REPO` is set)
+
+It reports revenue, gross profit, operating income, net income attributable to the issuer (NetIncomeLoss), gross margin, operating margin, and revenue growth. The baseline server and CLI need no account, API key, model, package installation, or network connection; the standard-library baseline requires Python 3.9 or newer. Annual coverage is issuer-specific through FY2026, and one reviewed NVIDIA quarter demonstrates exact-quarter selection. Only the optional agent calls a model. All six planned improvements are implemented; see [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md).
+
+## Treasury-analyst agent
 
 A Claude tool-use loop answers questions such as "How did BitMine's last ATM raise change ETH per share?" over this server, which now also serves three read-only tools built on [dat-accretion](https://github.com/RahilBhavan/dat-accretion)'s per-share engine. The model only proposes tool calls and writes prose. A deterministic check withholds any answer containing a number that no tool returned.
 
