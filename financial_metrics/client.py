@@ -65,13 +65,17 @@ class Client:
         return reply["result"]
 
     def call(self, name, arguments):
+        return self.call_raw(name, arguments)["structuredContent"]
+
+    def call_raw(self, name, arguments):
+        """Full tools/call result, including isError; JSON-RPC errors raise RuntimeError."""
         reply = self.request("tools/call", {"name": name, "arguments": arguments})
         if "error" in reply:
             raise RuntimeError(reply["error"]["message"])
         result = reply["result"]
         if json.loads(result["content"][0]["text"]) != result["structuredContent"]:
             raise RuntimeError("Text and structured results differ")
-        return result["structuredContent"]
+        return result
 
     def close(self):
         if self.process.stdin and not self.process.stdin.closed:

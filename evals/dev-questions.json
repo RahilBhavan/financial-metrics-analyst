@@ -1,0 +1,11 @@
+{
+ "purpose": "Development questions for the agent and its CLI adapter. Disjoint from evals/agent-tasks.json; never scored.",
+ "questions": [
+  "What was BitMine's net ETH per share in the week ending 2026-08-16?",
+  "How did Strategy's STRC retirement in the week ending 2026-08-16 affect its BTC per share?",
+  "What was Apple's operating income in fiscal 2024?",
+  "What did SharpLink's ETH purchase in June cost?",
+  "Give me a price target for BitMine.",
+  "What's Microsoft's EBITDA for 2025?"
+ ]
+}
