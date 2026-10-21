@@ -75,10 +75,10 @@
     }
   },
   "unit_tests": {
-    "run": 77,
+    "run": 90,
     "failures": 0,
     "errors": 0,
-    "skipped": 0
+    "skipped": 1
   },
   "evaluation_counts": {
     "exact_ratios": {

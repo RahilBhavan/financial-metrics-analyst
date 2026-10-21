@@ -6,10 +6,14 @@
     "resolve_company",
     "get_annual_facts",
     "get_quarterly_facts",
-    "calculate_metrics"
+    "calculate_metrics",
+    "get_treasury_actions",
+    "get_coins_per_share",
+    "get_break_even"
   ],
   "facts": 9,
   "numeric_ratios": 6,
   "unsupported_metric_refused": true,
+  "strategy_break_even_week": "2026-10-11",
   "server_exit_code": 0
 }

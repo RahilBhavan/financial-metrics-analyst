@@ -399,7 +399,9 @@ class Analyst:
 class AnalystService:
     """Route the tools to fixed reviewed issuer snapshots."""
 
-    def __init__(self, data_dir=DEFAULT_DATA):
+    def __init__(self, data_dir=DEFAULT_DATA, treasury_snapshot=None):
+        from .treasury import DEFAULT_SNAPSHOT, TreasuryService
+        self.treasury = TreasuryService(treasury_snapshot or DEFAULT_SNAPSHOT)
         root = Path(data_dir)
         primary = Analyst(root)
         self.issuers = {primary.cik: primary}
