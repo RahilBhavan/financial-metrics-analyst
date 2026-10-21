@@ -1,6 +1,8 @@
 # Evaluation record
 
-**Update, 21 October 2026 (branch `treasury-agent`).** 114 test methods pass on Python 3.14.7 and 3.9 (one, the dat-accretion snapshot rebuild, is skipped unless `DAT_ACCRETION_REPO` points at a checkout; it passed locally and runs in its own CI job). The source and intent evaluation still passes 161/161. The official SDK check now passes 28/28: it discovers seven tools and calls the three treasury tools, including one refusal. The agent's frozen 50-task trajectory eval is reported in the README's treasury-agent section and in `reports/agent-eval.json`. The record below is the 23 September baseline.
+This file records the 161-case source and intent evaluation, the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
+
+**Update, 21 October 2026 (branch `treasury-agent`).** 114 test methods pass on Python 3.14.7 and 3.9 (one, the dat-accretion snapshot rebuild, is skipped unless `DAT_ACCRETION_REPO` points at a checkout; it passed locally and runs in its own CI job). The source and intent evaluation still passes 161/161. The official SDK check now passes 28/28: it discovers seven tools and calls the three treasury tools, including one refusal. The agent's frozen 50-task trajectory eval is reported in [docs/treasury-agent.md](docs/treasury-agent.md) and in `reports/agent-eval.json`. The record below is the 23 September baseline.
 
 Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` and `jsonschema==4.26.0` for independent client checks.
 
@@ -32,13 +34,13 @@ The existing tests still cover exact decimal behavior, arithmetic signs and deno
 
 ## Independent MCP check
 
-The official Python SDK negotiates MCP 2025-11-25, discovers exactly four tools, validates their input and output schema documents, calls every tool, checks all three issuers, exercises a refusal, compares text with structured content, and pings. `jsonschema` uses its date format checker for the independent nested validations.
+On 23 September, before the treasury tools existed, the official Python SDK negotiated MCP 2025-11-25, discovered exactly four tools, validated their input and output schema documents, called every tool, checked all three issuers, exercised a refusal, compared text with structured content, and pinged. `jsonschema` uses its date format checker for the independent nested validations.
 
-The 21 checks are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
+The current 28 checks, which cover all seven tools, are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
 
 ## Measured timing
 
-Ten warm sequential calls over one running MCP subprocess had a **7.532 ms median** and **7.876 ms maximum** in the latest `evaluate` run. `evaluate` prints these figures; they stay out of the committed report because they change on every run. These timings include selection, calculations, nested validation, and local transport; they exclude startup, acquisition, and model inference. No production latency or throughput claim is made.
+Ten warm sequential calls over one running MCP subprocess had a **7.532 ms median** and **7.876 ms maximum** in the 23 September `evaluate` run. A run on 21 October 2026 with Python 3.14.7 measured a 4.405 ms median. `evaluate` prints these figures; they stay out of the committed report because they change on every run. These timings include selection, calculations, nested validation, and local transport; they exclude startup, acquisition, and model inference. No production latency or throughput claim is made.
 
 ## Reproduction and exit statuses
 
@@ -78,7 +80,7 @@ API downloads succeeded. At capture time some direct archive HTML requests retur
 - Quarters other than NVIDIA Q2 FY2027, forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
 - The optional refresher supports AAPL, MSFT, and NVDA and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
 - Full nested schemas constrain structure. They do not by themselves establish correct source transcription, arithmetic, or semantic consistency; those have separate tests.
-- No paid or local language model was run. Natural-language interpretation remains bounded, and model-generated proposal fidelity has not been evaluated.
+- The baseline evaluation calls no model. The optional treasury-analyst agent, added in October, is evaluated separately. Natural-language interpretation remains bounded, and model-generated proposal fidelity has not been evaluated.
 - Snapshot integrity assumes a trusted local manifest. There is no remote service, authentication deployment, publication, or external messaging.
 
 The plan's local implementation and verification gates are complete.

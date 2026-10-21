@@ -1,5 +1,7 @@
 # Follow an answer through the system
 
+This walkthrough traces one SEC answer through the server's code, in reading order. The optional treasury-analyst agent is covered in [docs/treasury-agent.md](docs/treasury-agent.md).
+
 Run:
 
 ```sh
@@ -14,7 +16,7 @@ The [source statement](https://www.sec.gov/Archives/edgar/data/320193/0000320193
 flowchart LR
     Q[Question or structured CLI request] --> I[Validated intent]
     I --> C[MCP subprocess client]
-    C --> T[Four tools with closed contracts]
+    C --> T[SEC tools with closed contracts]
     T --> S[Period and filing selection]
     D[Local SEC snapshots] --> S
     S --> A[Exact arithmetic and provenance]
@@ -27,7 +29,7 @@ flowchart LR
 1. `financial_metrics/policy.py`: the three issuer profiles, reviewed fiscal intervals, supporting revenue periods, tags, and accounting decisions.
 2. The issuer and reference `ground-truth.json` cards: independently transcribed filing evidence, including the limits of each source check.
 3. `financial_metrics/domain.py`: manifest validation, issuer routing, candidate selection, revision history, common-filing comparison, and exact arithmetic.
-4. `financial_metrics/contracts.py` and `tools.py`: closed nested schemas and the four exposed operations. Invalid output becomes a refusal before crossing the tool boundary.
+4. `financial_metrics/contracts.py` and `tools.py`: closed nested schemas and the seven exposed operations: four SEC tools and three treasury tools. Invalid output becomes a refusal before crossing the tool boundary.
 5. `financial_metrics/server.py` and `client.py`: a real stdio subprocess, including the default demo. `scripts/verify_sdk.py` checks it with a second client implementation.
 6. `financial_metrics/questions.py` and `presentation.py`: bounded intent parsing, explicit clarification, compact tables, and escaped standalone HTML.
 7. `tests/test_improvements.py`: regressions for all six changes, with synthetic mutations distinguished from real reference cases.
@@ -74,7 +76,7 @@ python3 -B -m financial_metrics analyze --metrics ebitda
 python3 -B -m financial_metrics smoke
 ```
 
-The second command requests clarification; the third refuses unsupported scope. No model is required. An optional `proposal` command accepts validated JSON intent, but it does not validate whether a model understood a question correctly.
+The second command requests clarification; the third refuses unsupported scope. The server and CLI need no model. An optional `proposal` command accepts validated JSON intent, but it does not validate whether a model understood a question correctly.
 
 The MCP tools have no network or file-writing path. A subprocess test denies network access and writes while the real server answers a request. Local report writing and the optional AAPL/MSFT/NVDA refresh are separate operator commands. A supplied data directory and its manifest are trusted local inputs.
 
@@ -82,4 +84,4 @@ The MCP tools have no network or file-writing path. A subprocess test denies net
 
 Start with passing tests. Add a case that removes only FY2022 revenue in a private in-memory copy. Verify that FY2023 revenue remains available, growth has no numeric value, and its unavailable operand explains why. Deliberately break the selection behavior to confirm your test catches the failure, then restore it. Do not alter the bundled source snapshots.
 
-For an interview demonstration, open the compact HTML, expand one ratio, trace its inputs to a source card and filing, show a clarification and refusal, and finish with the independent SDK report. Explain the limits: reviewed issuer scope, filing-date filtering, immutable snapshots, and no measured model behavior.
+For an interview demonstration, open the compact HTML, expand one ratio, trace its inputs to a source card and filing, show a clarification and refusal, and finish with the independent SDK report. Explain the limits: reviewed issuer scope, filing-date filtering, and immutable snapshots. The server calls no model. The optional agent's behavior is measured only on its frozen 50-task set.

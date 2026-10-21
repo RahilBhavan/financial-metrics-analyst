@@ -1,6 +1,6 @@
 # Implementation plan: six reliability and usability improvements
 
-Requested 21 September 2026. Original planning notes remain historical documents; this plan governs the upgrade.
+Requested 21 September 2026. All steps are complete; this file is a historical record. The counts below (77 tests, 21 SDK checks) are from 23 September; [EVALUATION.md](EVALUATION.md) has the current counts. Original planning notes remain historical documents; this plan governs the upgrade.
 
 | Step | Work | Acceptance evidence | Status |
 | --- | --- | --- | --- |
@@ -22,4 +22,4 @@ Implementation stays in this project workspace, with one agent, no paid model re
 - `reports/demo.html`, `reports/microsoft-demo.html`, and `reports/nvidia-demo.html` contain the compact tables and expandable evidence.
 - `scripts/regenerate_reports.py` rewrites every committed report from current code, and CI fails if they drift; `EVALUATION.md` states remaining scope and source limitations.
 
-Microsoft FY2026 is now reviewed; its source values and accession are in `data/msft/ground-truth.json`. Kraft Heinz is a source-backed reference case only. No model or deployment was introduced. Original planning notes outside this project were preserved.
+Microsoft FY2026 is now reviewed; its source values and accession are in `data/msft/ground-truth.json`. Kraft Heinz is a source-backed reference case only. No model or deployment was introduced by this plan. The optional treasury-analyst agent, added on 21 October 2026, is the first component that calls a model; see [docs/treasury-agent.md](docs/treasury-agent.md). Original planning notes outside this project were preserved.
