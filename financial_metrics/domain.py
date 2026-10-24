@@ -10,7 +10,7 @@ from decimal import Decimal, InvalidOperation, localcontext, ROUND_HALF_EVEN
 from fractions import Fraction
 from pathlib import Path
 
-from .policy import CIK, TAGS, MAX_YEARS, METRICS, POLICY, PROFILES, Refusal
+from .policy import TAGS, MAX_YEARS, METRICS, POLICY, PROFILES, Refusal
 
 DEFAULT_DATA = Path(__file__).resolve().parent.parent / "data"
 
