@@ -45,7 +45,7 @@ python3 -B -m financial_metrics smoke
 python3 -B -m financial_metrics demo
 ```
 
-On Python 3.14.7 the test command printed `Ran 114 tests` and `OK (skipped=1)`. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
+On Python 3.9, 3.11, 3.13 and 3.14.7 the test command printed `Ran 114 tests` and `OK (skipped=1)`. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
 
 More commands:
 
