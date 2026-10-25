@@ -75,7 +75,7 @@
     }
   },
   "unit_tests": {
-    "run": 114,
+    "run": 115,
     "failures": 0,
     "errors": 0,
     "skipped": 1

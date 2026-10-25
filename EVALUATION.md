@@ -2,11 +2,11 @@
 
 This file records the 161-case source and intent evaluation, the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
 
-**Update, 21 October 2026 (branch `treasury-agent`).** 114 test methods pass on Python 3.14.7 and 3.9 (one, the dat-accretion snapshot rebuild, is skipped unless `DAT_ACCRETION_REPO` points at a checkout; it passed locally and runs in its own CI job). The source and intent evaluation still passes 161/161. The official SDK check now passes 28/28: it discovers seven tools and calls the three treasury tools, including one refusal. The agent's frozen 50-task trajectory eval is reported in [docs/treasury-agent.md](docs/treasury-agent.md) and in `reports/agent-eval.json`. The record below is the 23 September baseline.
+**Update, 21 October 2026 (branch `treasury-agent`).** 115 test methods pass on Python 3.14.7 and 3.9 (one, the dat-accretion snapshot rebuild, is skipped unless `DAT_ACCRETION_REPO` points at a checkout; it passed locally and runs in its own CI job). The source and intent evaluation still passes 161/161. The official SDK check now passes 28/28: it discovers seven tools and calls the three treasury tools, including one refusal. The agent's frozen 50-task trajectory eval is reported in [docs/treasury-agent.md](docs/treasury-agent.md) and in `reports/agent-eval.json`. The record below is the 23 September baseline.
 
 Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` and `jsonschema==4.26.0` for independent client checks.
 
-**77 test methods passed, with no failures, errors, or skips. The separately enumerated source and intent evaluation passed 161/161 cases. The official SDK check passed 21/21 checks.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
+**Superseded baseline (23 September): 77 test methods passed, with no failures, errors, or skips; the 161-case evaluation passed 161/161; the official SDK check passed 21/21 checks. Current figures: 115 test methods (one skipped), 161/161 cases and 28/28 SDK checks; see the update above.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
 
 | Evaluation group | Passed / total |
 | --- | ---: |
@@ -48,7 +48,7 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | 77 tests; 161 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
+| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 115 (one skipped); 161 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html reports/demo.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
@@ -57,7 +57,7 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
 | `python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 2026` | 0 | Four reviewed years, FY2023-FY2026, with no scope warning |
 | `python3 -B -m financial_metrics proposal --json` with recorded JSON stdin | 0 | Bounded Microsoft request; tool-computed values |
-| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | 21/21 independent checks |
+| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | Baseline 21/21, superseded by 28/28 independent checks |
 | `python3 -m compileall -q financial_metrics tests scripts server_stdio.py` with workspace cache | 0 | Syntax compilation passed |
 
 A regression test initially constructed a conflicting quarterly record instead of an annual one. Correcting the fixture to the intended annual interval made the ambiguity check meaningful; the final suite passed. Earlier runs from the parent folder and with an unwritable default bytecode cache were corrected by using the project working directory and an explicit workspace cache. No application defect from these attempts remains unresolved.
