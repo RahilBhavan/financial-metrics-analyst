@@ -139,9 +139,9 @@ class FinalStatusTests(unittest.TestCase):
         self.assertEqual(record['refusal'], 'No supported financial evidence was selected.')
 
     def test_clarification_has_an_explicit_status(self):
-        record = run('Apple profit', ScriptedBackend([[text('{"clarification":"Which profit measure should I use?"}')]]), FakeClient())
+        record = run('Apple profit', ScriptedBackend([[text('{"clarification":"profit"}')]]), FakeClient())
         self.assertEqual(record['status'], 'needs_clarification')
-        self.assertEqual(record['answer'], 'Which profit measure should I use?')
+        self.assertEqual(record['answer'], 'Do you mean gross profit, operating income or net income?')
 
 
 class CompleteFinancialEvidenceTests(unittest.TestCase):
@@ -150,6 +150,30 @@ class CompleteFinancialEvidenceTests(unittest.TestCase):
             with self.subTest(prose=prose):
                 replies = [[tool()], [text(prose)], [text(prose)]]
                 self.assertEqual(run('q', ScriptedBackend(replies), FakeClient())['status'], 'abstained_untraced')
+
+    def test_arbitrary_clarification_cannot_deliver_claims(self):
+        import json
+        for intent in ('Revenue was one billion dollars.', 'Operating cash flow was positive.', 'unknown', [], None):
+            for retrieved in (False, True):
+                with self.subTest(intent=intent, retrieved=retrieved):
+                    reply = text(json.dumps({'clarification': intent}))
+                    steps = ([[tool()]] if retrieved else []) + [[reply], [reply]]
+                    record = run('q', ScriptedBackend(steps), FakeClient())
+                    self.assertEqual(record['status'], 'abstained_untraced')
+                    self.assertEqual(record.get('evidence', []), [])
+                    self.assertNotEqual(record['answer'], intent)
+
+    def test_treasury_prices_retain_actual_sources_and_snapshot(self):
+        from financial_metrics.treasury import TreasuryService
+        from financial_metrics.tracing import trace_numbers
+        result = TreasuryService().get_coins_per_share('MSTR')
+        answer = render_selection({'evidence': ['c0.week.share_price_usd', 'c0.week.coin_price_usd']}, evidence_catalog(result, 0))
+        for value in result['source'].values():
+            self.assertIn(value, answer)
+        self.assertIn('Underlying filing source: ' + result['week']['provenance']['filing_url'], answer)
+        self.assertIn('Yahoo', answer)
+        self.assertIn('CoinGecko', answer)
+        self.assertTrue(all(t['traced'] for t in trace_numbers(answer, [result])))
 
     def test_unstructured_text_without_evidence_is_not_delivered_as_refusal_detail(self):
         record = run('q', ScriptedBackend([[text('Revenue was one billion dollars.')]]), FakeClient())

@@ -26,7 +26,13 @@ def evidence_items(result, call_index):
         if row.get("provenance", {}).get("price_date"):
             text += " Market-price date: " + row["provenance"]["price_date"] + "."
         warnings = _warnings(result, row)
-        text += ''.join(' Source: ' + url + '.' for url in dict.fromkeys(urls))
+        source = result.get('source')
+        label = ' Underlying filing source: ' if source else ' Source: '
+        text += ''.join(label + url + '.' for url in dict.fromkeys(urls))
+        if source:
+            text += (' Dataset market data: ' + source['market_data'] + '. Calculation engine: ' + source['engine']
+                     + '. Snapshot repository: ' + source['repository'] + '; commit: ' + source['commit']
+                     + '; snapshot hash: ' + source['snapshot_sha256'] + '.')
         if warnings:
             text += ' Warnings: ' + '; '.join(warnings) + '.'
         catalog[prefix + key] = {"text": text, "path": path, "fields": tuple(displayed_fields)}
