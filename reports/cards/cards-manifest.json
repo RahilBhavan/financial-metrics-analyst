@@ -1,0 +1,68 @@
+{
+  "design_system": "rahil-design",
+  "version": "3.10.0",
+  "tokens_sha256": "e3e929a54479270d35db0079d4527ec816d19c6119557186d089442f8e91da5a",
+  "canvas_px": 390,
+  "export_px": 1080,
+  "cards": [
+    {
+      "id": "ambiguity",
+      "png": "docs/images/ambiguity-square.png",
+      "sha256": "ea24c6fa546d1684080651b53347c2c69bad2a4fa509cbee4c56e6a632c63047",
+      "size": [
+        1080,
+        1080
+      ],
+      "alt_file": "docs/images/ambiguity-alt.txt",
+      "alt_sha256": "7824e368b2fd037ef9c503dfd458f4bf6ce6d60931cfe96b5160031d8de14b3e",
+      "min_label_px": 22,
+      "title_px": 48,
+      "title_lines": 2,
+      "pixel_audit": "0.00% of pixels off-system (limit 0.01%)",
+      "feed_check": "at 326px feed width (canvas, 390px inspection) labels 18.4px, point 40.1px: ok",
+      "feeds": {
+        "feed-360": {
+          "file": "ambiguity-feed-360.png",
+          "image_px": 326,
+          "sha256": "6f57e5487220291f3055bb713e8de5a17833e78d939dcecd49a562fe65bfc3ec"
+        },
+        "feed-390": {
+          "file": "ambiguity-feed-390.png",
+          "image_px": 356,
+          "sha256": "7a05dd76ce37312b2f5bee8df26c2ef716a1f7f91378483030f7ab6884a99529"
+        }
+      }
+    },
+    {
+      "id": "restatement",
+      "png": "docs/images/restatement-square.png",
+      "sha256": "d247496acaa8d158998081c08448b97ce9982d9c9bc1e1ee97756c594e0c18f6",
+      "size": [
+        1080,
+        1080
+      ],
+      "alt_file": "docs/images/restatement-alt.txt",
+      "alt_sha256": "87bc542a0c7c605da9db9d20883a2943aab5f813675f4072027161bb6a15ec12",
+      "min_label_px": 22,
+      "title_px": 48,
+      "title_lines": 2,
+      "pixel_audit": "0.00% of pixels off-system (limit 0.01%)",
+      "feed_check": "at 326px feed width (canvas, 390px inspection) labels 18.4px, point 40.1px: ok",
+      "feeds": {
+        "feed-360": {
+          "file": "restatement-feed-360.png",
+          "image_px": 326,
+          "sha256": "fac4c255a57bf217c47cc2b891eceaf11b917845da0f585e1821c9e1e8816f9b"
+        },
+        "feed-390": {
+          "file": "restatement-feed-390.png",
+          "image_px": 356,
+          "sha256": "30a550a4886b5d2ebb2911f0bfb8139357ef5c4123afc178ef5787d4af849328"
+        }
+      }
+    }
+  ],
+  "palette_check": "reports/cards/palette-check.json",
+  "requested_version": "3.3.2: charcoal #111214, off-white #F5F5EF, yellow #FFE500, Anton and IBM Plex Sans, unchanged in the tokens since",
+  "design_review": "pending: no named reviewer has passed these exact bytes"
+}

@@ -1,0 +1,51 @@
+{
+  "scope": "solid-color Rahil role matrix; not full CSS/CVD audit",
+  "pairs": [
+    {
+      "foreground": "ink",
+      "background": "canvas",
+      "ratio": 17.126797713365804
+    },
+    {
+      "foreground": "figure-ink",
+      "background": "figure-surface",
+      "ratio": 17.126797713365804
+    },
+    {
+      "foreground": "figure-secondary",
+      "background": "figure-surface",
+      "ratio": 6.916424911441444
+    },
+    {
+      "foreground": "figure-ink",
+      "background": "accent",
+      "ratio": 14.69017535304755
+    }
+  ],
+  "cards": [
+    {
+      "path": "ambiguity card HTML (rebuilt by this script, not committed)",
+      "sha256": "06fecf5614be1304a97ddf22f4c550f27b64d9d2e06461cf05a699d0f18ff0dd",
+      "colors": [
+        "#111214",
+        "#52545A",
+        "#B7B8B1",
+        "#F5F5EF",
+        "#FFE500"
+      ]
+    },
+    {
+      "path": "restatement card HTML (rebuilt by this script, not committed)",
+      "sha256": "a25a44eb61cb16995062c963eabba9254ed81f281218d435685047b5a957d15c",
+      "colors": [
+        "#111214",
+        "#52545A",
+        "#B7B8B1",
+        "#F5F5EF",
+        "#FFE500"
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "restatement",
+  "title": "Only $80M was error correction.",
+  "system_version": "3.10.0",
+  "accents": 1,
+  "accent_meaning": "title-value",
+  "sizes_checked": [
+    "390x390",
+    "1080x1080"
+  ],
+  "measurement_basis": "canvas",
+  "measured_by": "social_bars/firefox",
+  "min_label_px": 22,
+  "point_px": 48,
+  "title_lines": 2,
+  "overflow": [],
+  "source": "SEC filing, Jun 7, 2019. Test fixture, not a supported issuer.",
+  "alt": "Only $80M was error correction. Kraft Heinz FY2017 operating income was revised by $716M, from $6,773M to $6,057M: $80M error correction plus $636M presentation change (ASU 2017-07). Source: SEC filing, Jun 7, 2019. Kraft Heinz is a test fixture in this project, not a supported issuer."
+}
