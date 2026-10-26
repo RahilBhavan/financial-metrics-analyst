@@ -45,6 +45,14 @@ async def main():
                 ("get_break_even", {"firm": "MSTR"}, "ok"),
                 ("get_break_even", {"firm": "SBET"}, "refused"),
             ])
+            # Widened coverage: a fiscal-year filer, an amended 10-K, a quarter, a metric the issuer does not report, an unreviewed quarter.
+            calls.extend([
+                ("resolve_company", {"ticker": "V"}, "ok"),
+                ("get_annual_facts", {"cik": "0001783879", "fiscal_years": [2025], "metrics": ["revenue", "net_income"], "as_of": "2026-10-25"}, "ok"),
+                ("get_quarterly_facts", {"cik": "0001318605", "fiscal_year": 2026, "quarter": "Q3", "metrics": ["revenue", "gross_profit"], "as_of": "2026-10-25"}, "ok"),
+                ("get_quarterly_facts", {"cik": "0001679788", "fiscal_year": 2026, "quarter": "Q2", "metrics": ["revenue", "gross_profit"], "as_of": "2026-10-25"}, "partial"),
+                ("get_quarterly_facts", {"cik": "0001318605", "fiscal_year": 2024, "quarter": "Q1", "metrics": ["revenue"], "as_of": "2026-10-25"}, "refused"),
+            ])
             for tool, args, status in calls:
                 result = await session.call_tool(tool, args)
                 Draft202012Validator(schemas[tool], format_checker=FormatChecker()).validate(result.structuredContent)

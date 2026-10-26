@@ -1,0 +1,156 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Robinhood Markets, Inc.",
+  "cik": "0001783879",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale millions of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "total net revenues",
+    "gross_profit": null,
+    "operating_income": null,
+    "net_income": "net income (loss) attributable to robinhood"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "days": 365,
+      "accession": "0001783879-26-000029",
+      "filed": "2026-02-20",
+      "form": "10-K/A",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000029/hood-20251231.htm",
+      "revenue": "1865000000",
+      "gross_profit": null,
+      "operating_income": null,
+      "net_income": "-541000000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "days": 366,
+      "accession": "0001783879-26-000029",
+      "filed": "2026-02-20",
+      "form": "10-K/A",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000029/hood-20251231.htm",
+      "revenue": "2951000000",
+      "gross_profit": null,
+      "operating_income": null,
+      "net_income": "1411000000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "days": 365,
+      "accession": "0001783879-26-000029",
+      "filed": "2026-02-20",
+      "form": "10-K/A",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000029/hood-20251231.htm",
+      "revenue": "4473000000",
+      "gross_profit": null,
+      "operating_income": null,
+      "net_income": "1883000000",
+      "original_accession": "0001783879-26-000023"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2022-01-01",
+    "end": "2022-12-31",
+    "value": "1358000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387925000049/hood-20241231.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0001783879-25-000049"
+  },
+  "point_in_time": {
+    "as_of": "2026-02-17",
+    "accession": "0001783879-25-000049",
+    "filed": "2025-02-18",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387925000049/hood-20241231.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "revenue": "1865000000",
+        "gross_profit": null,
+        "operating_income": null,
+        "net_income": "-541000000"
+      },
+      "2024": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "revenue": "2951000000",
+        "gross_profit": null,
+        "operating_income": null,
+        "net_income": "1411000000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "1865000000",
+        "1865000000"
+      ],
+      "2024": [
+        "2951000000",
+        "2951000000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filing_accession": "0001783879-25-000251",
+      "filed": "2025-07-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387925000251/hood-20250630.htm",
+      "form": "10-Q",
+      "revenue": "989000000",
+      "net_income": "386000000",
+      "gross_profit": null,
+      "operating_income": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001783879-25-000310",
+      "filed": "2025-11-06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387925000310/hood-20250930.htm",
+      "form": "10-Q",
+      "revenue": "1274000000",
+      "net_income": "556000000",
+      "gross_profit": null,
+      "operating_income": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001783879-26-000062",
+      "filed": "2026-04-29",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000062/hood-20260331.htm",
+      "form": "10-Q",
+      "revenue": "1067000000",
+      "net_income": "350000000",
+      "gross_profit": null,
+      "operating_income": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filing_accession": "0001783879-26-000114",
+      "filed": "2026-07-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000114/hood-20260630.htm",
+      "form": "10-Q",
+      "revenue": "1308000000",
+      "net_income": "561000000",
+      "gross_profit": null,
+      "operating_income": null
+    }
+  ]
+}

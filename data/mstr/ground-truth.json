@@ -1,0 +1,155 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Strategy Inc",
+  "cik": "0001050446",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale thousands of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "total revenues",
+    "gross_profit": "gross profit",
+    "operating_income": "loss from operations",
+    "net_income": "net (loss) income"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "days": 365,
+      "accession": "0001050446-26-000020",
+      "filed": "2026-02-19",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
+      "revenue": "496261000",
+      "gross_profit": "386317000",
+      "operating_income": "-115047000",
+      "net_income": "429121000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "days": 366,
+      "accession": "0001050446-26-000020",
+      "filed": "2026-02-19",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
+      "revenue": "463456000",
+      "gross_profit": "333988000",
+      "operating_income": "-1852978000",
+      "net_income": "-1166661000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "days": 365,
+      "accession": "0001050446-26-000020",
+      "filed": "2026-02-19",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
+      "revenue": "477233000",
+      "gross_profit": "327816000",
+      "operating_income": "-5444385000",
+      "net_income": "-3848152000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2022-01-01",
+    "end": "2022-12-31",
+    "value": "499264000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1050446/000095017025021814/mstr-20241231.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0000950170-25-021814"
+  },
+  "point_in_time": {
+    "as_of": "2026-02-18",
+    "accession": "0000950170-25-021814",
+    "filed": "2025-02-18",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000095017025021814/mstr-20241231.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "revenue": "496261000",
+        "gross_profit": "386317000",
+        "operating_income": "-115047000",
+        "net_income": "429121000"
+      },
+      "2024": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "revenue": "463456000",
+        "gross_profit": "333988000",
+        "operating_income": "-1852978000",
+        "net_income": "-1166661000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "496261000",
+        "496261000"
+      ],
+      "2024": [
+        "463456000",
+        "463456000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filing_accession": "0000950170-25-102209",
+      "filed": "2025-08-05",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000095017025102209/mstr-20250630.htm",
+      "form": "10-Q",
+      "revenue": "114488000",
+      "gross_profit": "78738000",
+      "operating_income": "14031990000",
+      "net_income": "10020846000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001193125-25-262568",
+      "filed": "2025-11-03",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312525262568/mstr-20250930.htm",
+      "form": "10-Q",
+      "revenue": "128691000",
+      "gross_profit": "90678000",
+      "operating_income": "3890842000",
+      "net_income": "2785024000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001050446-26-000031",
+      "filed": "2026-05-06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000031/mstr-20260331.htm",
+      "form": "10-Q",
+      "revenue": "124300000",
+      "gross_profit": "83354000",
+      "operating_income": "-14470419000",
+      "net_income": "-12542670000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filing_accession": "0001050446-26-000044",
+      "filed": "2026-08-03",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000044/mstr-20260630.htm",
+      "form": "10-Q",
+      "revenue": "122368000",
+      "gross_profit": "81550000",
+      "operating_income": "-8330950000",
+      "net_income": "-8219628000"
+    }
+  ]
+}

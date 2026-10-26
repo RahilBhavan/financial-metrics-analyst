@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-25T21:26:10-04:00",
+  "scope_review": "COIN reviewed annual periods and the latest four 10-Q quarters; later periods need human review",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001679788.json",
+      "sha256": "300d4810b90cc9eee95bde4ca98095d9412a5b89612c97473eb40c4dafa4e44a",
+      "bytes": 1414117
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001679788.json",
+      "sha256": "de4b03da095ad880baf0f4738ca80f8ab5639972d3fbb6d430f92462de3d63ad",
+      "bytes": 159216
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded unmodified with curl on 2026-10-25 using the User-Agent \"Rahil Bhavan <contact email>\"."
+}

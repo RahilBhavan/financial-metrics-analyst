@@ -29,7 +29,7 @@ COMMANDS = [
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--today", help="Fixed clock (YYYY-MM-DD); defaults to the newest snapshot capture date")
+    parser.add_argument("--today", help="Fixed clock (YYYY-MM-DD); defaults to evaluate.REPORT_CLOCK, the original September capture date")
     args = parser.parse_args()
     # evaluate discovers the whole suite, including the test that runs this script; stop that recursion.
     os.environ["FINANCIAL_METRICS_REGENERATING"] = "1"

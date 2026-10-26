@@ -1,0 +1,155 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Coinbase Global, Inc.",
+  "cik": "0001679788",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale thousands of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "total revenue",
+    "gross_profit": null,
+    "operating_income": "operating income (loss)",
+    "net_income": "net income"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "days": 365,
+      "accession": "0001679788-26-000015",
+      "filed": "2026-02-12",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+      "revenue": "3108383000",
+      "gross_profit": null,
+      "operating_income": "-161662000",
+      "net_income": "94871000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "days": 366,
+      "accession": "0001679788-26-000015",
+      "filed": "2026-02-12",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+      "revenue": "6564028000",
+      "gross_profit": null,
+      "operating_income": "2307160000",
+      "net_income": "2579066000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "days": 365,
+      "accession": "0001679788-26-000015",
+      "filed": "2026-02-12",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+      "revenue": "7181325000",
+      "gross_profit": null,
+      "operating_income": "1435441000",
+      "net_income": "1260327000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2022-01-01",
+    "end": "2022-12-31",
+    "value": "3194208000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0001679788-25-000022"
+  },
+  "point_in_time": {
+    "as_of": "2026-02-11",
+    "accession": "0001679788-25-000022",
+    "filed": "2025-02-13",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "revenue": "3108383000",
+        "gross_profit": null,
+        "operating_income": "-161662000",
+        "net_income": "94871000"
+      },
+      "2024": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "revenue": "6564028000",
+        "gross_profit": null,
+        "operating_income": "2307160000",
+        "net_income": "2579066000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "3108383000",
+        "3108383000"
+      ],
+      "2024": [
+        "6564028000",
+        "6564028000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filing_accession": "0001679788-25-000154",
+      "filed": "2025-07-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000154/coin-20250630.htm",
+      "form": "10-Q",
+      "revenue": "1497208000",
+      "operating_income": "-24650000",
+      "net_income": "1428900000",
+      "gross_profit": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001679788-25-000208",
+      "filed": "2025-10-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000208/coin-20250930.htm",
+      "form": "10-Q",
+      "revenue": "1868693000",
+      "operating_income": "480532000",
+      "net_income": "432552000",
+      "gross_profit": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001679788-26-000054",
+      "filed": "2026-05-07",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000054/coin-20260331.htm",
+      "form": "10-Q",
+      "revenue": "1412982000",
+      "operating_income": "-21421000",
+      "net_income": "-394117000",
+      "gross_profit": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filing_accession": "0001679788-26-000088",
+      "filed": "2026-07-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000088/coin-20260630.htm",
+      "form": "10-Q",
+      "revenue": "1220068000",
+      "operating_income": "-113488000",
+      "net_income": "-359468000",
+      "gross_profit": null
+    }
+  ]
+}

@@ -190,7 +190,7 @@ class RealReferenceTests(unittest.TestCase):
         quarter = service.get_quarterly_facts('0001045810', 2027, 'Q2', list(TAGS), '2026-08-26')
         self.assertEqual(quarter['status'], 'ok')
         for row in quarter['results']:
-            self.assertEqual(row['value'], golden['reviewed_quarter'][row['metric']])
+            self.assertEqual(row['value'], next(q for q in golden['reviewed_quarters'] if (q['fiscal_year'], q['quarter']) == (2027, 'Q2'))[row['metric']])
             self.assertEqual((row['period_start'], row['period_end']), ('2026-04-27', '2026-07-26'))
             self.assertEqual(row['fp'], 'Q2')
 

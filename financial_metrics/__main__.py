@@ -7,7 +7,7 @@ from pathlib import Path
 
 from .client import Client, smoke
 from .domain import DEFAULT_DATA
-from .fetch import fetch_snapshot
+from .fetch import TICKER_CIKS, fetch_snapshot
 from .policy import METRICS, Refusal
 
 from .questions import parse_question, validate_proposal
@@ -44,7 +44,7 @@ def main():
     p = sub.add_parser("fetch")
     p.add_argument("--output", required=True)
     p.add_argument("--user-agent", required=True)
-    p.add_argument("--ticker", choices=("AAPL", "MSFT", "NVDA"), default="AAPL")
+    p.add_argument("--ticker", choices=sorted(TICKER_CIKS), default="AAPL")
     args = parser.parse_args()
     try:
         if args.command == "smoke":

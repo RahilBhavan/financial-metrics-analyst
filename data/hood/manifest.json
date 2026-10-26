@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-25T21:26:15-04:00",
+  "scope_review": "HOOD reviewed annual periods and the latest four 10-Q quarters; later periods need human review",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001783879.json",
+      "sha256": "febaef3cd85df21b8c59dedc7a2b782497ad7a062a105bffddca8f5b863a5ef1",
+      "bytes": 1381849
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001783879.json",
+      "sha256": "0e5e799529c5797fed659dbfaac75c29bc2d781c7e5d812675315ea2e13d2432",
+      "bytes": 160508
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded unmodified with curl on 2026-10-25 using the User-Agent \"Rahil Bhavan <contact email>\"."
+}

@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-25T21:26:12-04:00",
+  "scope_review": "MSTR reviewed annual periods and the latest four 10-Q quarters; later periods need human review",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001050446.json",
+      "sha256": "eb05f38286048d652aa8e05feb66abb1d94025214a85cf9c7d0edbfb9a3283e8",
+      "bytes": 3014282
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001050446.json",
+      "sha256": "1f7c940614ab99cb3f4f06ee558f575d4b8c5d7f37cf681cc607d5aa97240c1d",
+      "bytes": 157522
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded unmodified with curl on 2026-10-25 using the User-Agent \"Rahil Bhavan <contact email>\"."
+}

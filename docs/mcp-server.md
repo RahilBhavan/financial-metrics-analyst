@@ -10,9 +10,9 @@ The server implements MCP **2025-11-25** over newline-delimited JSON-RPC on stdi
 
 | Tool | Data | What it returns |
 | --- | --- | --- |
-| `resolve_company` | SEC submissions snapshot | The reviewed issuer for AAPL, MSFT or NVDA. No network or fuzzy search. |
-| `get_annual_facts` | SEC companyfacts snapshot | Reviewed annual facts through FY2026 where available, with filing provenance, candidate rejections and revision history. |
-| `get_quarterly_facts` | SEC companyfacts snapshot | NVIDIA Q2 FY2027 only, with exact quarter dates and no year-to-date values. |
+| `resolve_company` | SEC submissions snapshot | The reviewed issuer for one of 10 tickers: AAPL, MSFT, NVDA, COIN, MSTR, HOOD, XYZ, PYPL, V or TSLA. No network or fuzzy search. |
+| `get_annual_facts` | SEC companyfacts snapshot | Reviewed annual facts (FY2023–FY2025 for every issuer, FY2026 for MSFT and NVDA), with filing provenance, candidate rejections and revision history. |
+| `get_quarterly_facts` | SEC companyfacts snapshot | Each issuer's four latest reviewed 10-Q quarters (Q1 to Q3), with exact quarter dates and no year-to-date values. Other quarters are refused. |
 | `calculate_metrics` | SEC companyfacts snapshot | Annual facts, gross and operating margins, and revenue growth as exact rational results. |
 | `get_treasury_actions` | dat-accretion export | Capital actions for MSTR, BMNR and SBET, with the change in net coins per share. |
 | `get_coins_per_share` | dat-accretion export | Net coins per diluted share for one or two weeks. |
@@ -47,7 +47,7 @@ python3 -B -m unittest discover -s tests -v
 python3 -B -m financial_metrics.evaluate
 ```
 
-`smoke` starts the server as a subprocess, lists the seven tools, reads 9 facts and 6 numeric ratios, checks that an unsupported metric is refused, and confirms a clean exit. `evaluate` writes each case and the AAPL, MSFT and NVDA demos into `reports/`, and prints unit-test counts and timing. `python3 scripts/regenerate_reports.py` rewrites every committed report against a fixed clock (`--today YYYY-MM-DD`, default the newest snapshot capture date). CI fails if the committed reports drift.
+`smoke` starts the server as a subprocess, lists the seven tools, reads 9 Apple facts and 6 numeric ratios, checks that an unsupported metric is refused, and confirms a clean exit. `evaluate` writes each case and the AAPL, MSFT and NVDA demos into `reports/`, and prints unit-test counts and timing. `python3 scripts/regenerate_reports.py` rewrites every committed report against a fixed clock (`--today YYYY-MM-DD`, default 2026-09-22, the original capture date, so later snapshots add no stale warnings). CI fails if the committed reports drift.
 
 ## Independent SDK check
 

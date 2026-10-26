@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-25T21:26:20-04:00",
+  "scope_review": "PYPL reviewed annual periods and the latest four 10-Q quarters; later periods need human review",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001633917.json",
+      "sha256": "1e4bee2c3cd8df25384bb009f13c01a0f8ee8ba8b545c84102672c7004555999",
+      "bytes": 3016984
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001633917.json",
+      "sha256": "c5678214696b6d9cfa6dc36f2501f3b4514def1ea65f761b56d0074b61cb49f4",
+      "bytes": 159649
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded unmodified with curl on 2026-10-25 using the User-Agent \"Rahil Bhavan <contact email>\"."
+}

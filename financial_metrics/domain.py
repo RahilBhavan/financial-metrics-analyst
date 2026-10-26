@@ -104,6 +104,11 @@ class Analyst:
         except (OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
             raise Refusal("invalid_snapshot", "Missing or malformed snapshot files: " + type(exc).__name__)
 
+    def fiscal_year_of(self, report_date):
+        """Fiscal year a filing reports on: a period ending after the fiscal-year-end month belongs to the next year."""
+        year, month = int(report_date[:4]), int(report_date[5:7])
+        return year + (1 if month > self.profile.get("fye_month", 12) else 0)
+
     def context(self, as_of):
         warnings = []
         age = (today() - self.captured_date).days
@@ -294,8 +299,10 @@ class Analyst:
                     try:
                         if iso_date(raw.get("filed")) > iso_date(as_of):
                             reason = "filing_metadata_mismatch"
+                        # A later 10-Q repeats the same quarter as its prior-year comparative: a revision candidate, not a mismatch.
                         elif (not filing or filing["form"] != raw["form"] or filing["filingDate"] != raw["filed"]
-                              or filing["reportDate"] != end or raw.get("fy") != fiscal_year):
+                              or filing["reportDate"] < end or type(raw.get("fy")) is not int
+                              or raw["fy"] != self.fiscal_year_of(filing["reportDate"])):
                             reason = "filing_metadata_mismatch"
                         elif not re.fullmatch(r"\d{10}-\d{2}-\d{6}", accn) or not re.fullmatch(r"[A-Za-z0-9_.-]+\.htm[l]?", filing["primaryDocument"]):
                             reason = "unsafe_source_identifier"
@@ -415,7 +422,7 @@ class AnalystService:
             raise Refusal("invalid_ticker", "Ticker must be a string.")
         matches = [a for a in self.issuers.values() if a.profile["ticker"] == ticker.upper()]
         if len(matches) != 1:
-            raise Refusal("unsupported_company", "Reviewed companies are AAPL, MSFT, and NVDA; custom snapshots contain only their own issuer.")
+            raise Refusal("unsupported_company", "Reviewed companies are " + ", ".join(sorted(a.profile["ticker"] for a in self.issuers.values())) + "; custom snapshots contain only their own issuer.")
         return matches[0].resolve_company(ticker)
 
     def _issuer(self, cik):

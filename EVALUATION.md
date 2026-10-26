@@ -1,6 +1,26 @@
 # Evaluation record
 
-This file records the 161-case source and intent evaluation, the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
+This file records the 885-case source and intent evaluation (161 cases before the ten-issuer expansion), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
+
+**Update, 25 October 2026 (ten issuers, four quarters each).** Seven issuers (Coinbase, Strategy, Robinhood, Block, PayPal, Visa, Tesla) joined Apple, Microsoft and NVIDIA, and every issuer now has its four latest reviewed 10-Q quarters (40 in all). 134 test methods run (133 pass, one skipped as before) on Python 3.9, 3.11, 3.13 and 3.14.7. The source and intent evaluation passes 885/885. The official SDK check passes 33/33, five calls more than before: Visa, an amended Robinhood 10-K, a Tesla quarter, a Coinbase quarter with an unreported metric, and a refused quarter. The table below shows the groups. The paragraphs after it describe the 21 October and 23 September records and are kept as history.
+
+| Evaluation group (25 October 2026) | Passed / total | What it checks |
+| --- | ---: | --- |
+| filing values | 284 / 284 | Every annual and quarterly value against the card transcribed from the filing |
+| provenance | 250 / 250 | Accession, filing URL, dates, tag, unit, filing date and form per value |
+| exact ratios | 78 / 78 | Gross margin, operating margin and growth against exact rational arithmetic |
+| point in time | 96 / 96 | An earlier cutoff returns the older filing's values; a quarter is invisible the day before its 10-Q |
+| stale values | 25 / 25 | The older filing stays the original; revision flags match the filing text; a newer relabelled PayPal record blocks a later cutoff |
+| question answers | 18 / 18 | Natural-language questions on the new issuers return the card's values, or "not reported" |
+| question intent | 32 / 32 | Accepted paraphrases, clarifications (profit, margin, change, missing company, year or metric) and refusals |
+| tool refusals | 42 / 42 | Unreviewed year, quarter, ticker, metric, future cutoff and bad quarter labels, for each added issuer |
+| scope behavior | 47 / 47 | Duration warnings, and metrics an issuer does not report staying unavailable instead of zero |
+| supporting values | 10 / 10 | The prior-year revenue that growth needs, with its filing |
+| real reference cases | 3 / 3 | Kraft Heinz restatement and missing revenue tag |
+
+Expected values for the seven added issuers, and for every issuer's quarters, come from `scripts/review_filings.py`. It reads the visible income statement in each cited filing document and never opens `companyfacts.json`. The first full run agreed with the server on every value. That includes NVIDIA's Q2 FY2027 quarter, which an earlier hand transcription had already recorded. Two disagreements surfaced and were fixed in the script: Robinhood's 2026 quarters first used consolidated net income instead of net income attributable to Robinhood, and a negative amount split across two cells in one Strategy 10-Q. The SEC API holds no facts for the PayPal and Visa 10-Qs filed in July 2026 (re-fetched on 25 October), so those two quarters are not reviewed and the next-oldest are used.
+
+The expansion also changed one rule. A later 10-Q repeats each quarter as its prior-year comparative. The quarter selector used to treat that record as a metadata mismatch, which blocked any quarter older than a year at the latest cutoff. It now accepts the record when its fiscal year matches its own filing, so the comparative becomes a revision candidate. Identical values remain unflagged. All 40 reviewed quarters returned their card values, and the values in a later 10-Q's comparative columns matched the original 10-Q everywhere they exist.
 
 **Update, 21 October 2026 (branch `treasury-agent`).** 115 test methods pass on Python 3.14.7 and 3.9 (one, the dat-accretion snapshot rebuild, is skipped unless `DAT_ACCRETION_REPO` points at a checkout; it passed locally and runs in its own CI job). The source and intent evaluation still passes 161/161. The official SDK check now passes 28/28: it discovers seven tools and calls the three treasury tools, including one refusal. The agent's frozen 50-task trajectory eval is reported in [docs/treasury-agent.md](docs/treasury-agent.md) and in `reports/agent-eval.json`. The record below is the 23 September baseline.
 
@@ -48,7 +68,7 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 115 (one skipped); 161 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
+| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 134 (one skipped); 885 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html reports/demo.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
@@ -57,12 +77,24 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
 | `python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 2026` | 0 | Four reviewed years, FY2023-FY2026, with no scope warning |
 | `python3 -B -m financial_metrics proposal --json` with recorded JSON stdin | 0 | Bounded Microsoft request; tool-computed values |
-| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | Baseline 21/21, superseded by 28/28 independent checks |
+| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | Baseline 21/21, superseded by 33/33 independent checks |
 | `python3 -m compileall -q financial_metrics tests scripts server_stdio.py` with workspace cache | 0 | Syntax compilation passed |
 
 A regression test initially constructed a conflicting quarterly record instead of an annual one. Correcting the fixture to the intended annual interval made the ambiguity check meaningful; the final suite passed. Earlier runs from the parent folder and with an unwritable default bytecode cache were corrected by using the project working directory and an explicit workspace cache. No application defect from these attempts remains unresolved.
 
 ## Source evidence
+
+Added on 25 October 2026. Each card in `data/<issuer>/ground-truth.json` names the filing accession and document for every value. Annual values come from the FY2025 Form 10-K income statement (three years); the older FY2024 10-K supplies FY2022 revenue and the point-in-time values.
+
+| Issuer | Annual filing | Notes |
+| --- | --- | --- |
+| Coinbase (COIN) | FY2025 10-K, 0001679788-26-000015 | No gross profit line |
+| Strategy (MSTR) | FY2025 10-K, 0001050446-26-000020 | Net income is the line before preferred dividends; revenue tag is `RevenueFromContractWithCustomerExcludingAssessedTax` |
+| Robinhood (HOOD) | FY2025 10-K 0001783879-26-000023, amended by 10-K/A 0001783879-26-000029 | No gross profit or operating income line. The 10-K/A fixes formatting only, so the server selects it and keeps the 10-K as the FY2025 original |
+| Block (XYZ) | FY2025 10-K, 0001628280-26-012254 | Net income attributable to common stockholders |
+| PayPal (PYPL) | FY2025 10-K, 0001633917-26-000024 | No gross profit line |
+| Visa (V) | FY2025 10-K, 0001403161-25-000089 (fiscal year ends 30 September) | No gross profit line |
+| Tesla (TSLA) | FY2025 10-K, 0001628280-26-003952 | Net income attributable to common stockholders |
 
 Raw `companyfacts.json` and `submissions.json` files are unmodified SEC response bodies. Each issuer/reference directory has a manifest containing URLs, byte counts, SHA-256 hashes, and a capture-day packaging timestamp. Source cards are independent manual transcriptions, not generated from the extraction being tested.
 
@@ -75,10 +107,10 @@ API downloads succeeded. At capture time some direct archive HTML requests retur
 
 ## Remaining limits
 
-- Three reviewed companies with issuer-specific annual coverage and one reviewed NVIDIA quarter. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
+- Ten reviewed companies with issuer-specific annual coverage and four reviewed 10-Q quarters each. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
 - Historical filing-date filtering does not recreate past API contents or intraday availability. Changed values are flagged; formal restatement classification requires source evidence.
-- Quarters other than NVIDIA Q2 FY2027, forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
-- The optional refresher supports AAPL, MSFT, and NVDA and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
+- Quarters beyond the four reviewed per issuer (including the fiscal fourth quarter, which has no 10-Q), forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
+- The optional refresher supports all ten tickers and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
 - Full nested schemas constrain structure. They do not by themselves establish correct source transcription, arithmetic, or semantic consistency; those have separate tests.
 - The baseline evaluation calls no model. The optional treasury-analyst agent, added in October, is evaluated separately. Natural-language interpretation remains bounded, and model-generated proposal fidelity has not been evaluated.
 - Snapshot integrity assumes a trusted local manifest. There is no remote service, authentication deployment, publication, or external messaging.

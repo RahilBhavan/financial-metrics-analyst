@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-25T21:26:26-04:00",
+  "scope_review": "TSLA reviewed annual periods and the latest four 10-Q quarters; later periods need human review",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json",
+      "sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+      "bytes": 3700279
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001318605.json",
+      "sha256": "f937c979c150f4ac4a3bd77ead42bcd63a2a1ef3f9c670ce4d31f217d8deac65",
+      "bytes": 162058
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded unmodified with curl on 2026-10-25 using the User-Agent \"Rahil Bhavan <contact email>\"."
+}
