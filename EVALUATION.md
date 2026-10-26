@@ -2,7 +2,7 @@
 
 This file records the 885-case source and intent evaluation (161 cases before the ten-issuer expansion), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
 
-**Update, 25 October 2026 (ten issuers, four quarters each).** Seven issuers (Coinbase, Strategy, Robinhood, Block, PayPal, Visa, Tesla) joined Apple, Microsoft and NVIDIA, and every issuer now has its four latest reviewed 10-Q quarters (40 in all). 134 test methods run (133 pass, one skipped as before) on Python 3.9, 3.11, 3.13 and 3.14.7. The source and intent evaluation passes 885/885. The official SDK check passes 33/33, five calls more than before: Visa, an amended Robinhood 10-K, a Tesla quarter, a Coinbase quarter with an unreported metric, and a refused quarter. The table below shows the groups. The paragraphs after it describe the 21 October and 23 September records and are kept as history.
+**Update, 25 October 2026 (ten issuers, four quarters each).** Seven issuers (Coinbase, Strategy, Robinhood, Block, PayPal, Visa, Tesla) joined Apple, Microsoft and NVIDIA, and every issuer now has its four latest reviewed 10-Q quarters (40 in all). 137 test methods run (136 pass, one skipped as before) on Python 3.9, 3.11, 3.13 and 3.14.7. The source and intent evaluation passes 885/885. The official SDK check passes 33/33, five calls more than before: Visa, an amended Robinhood 10-K, a Tesla quarter, a Coinbase quarter with an unreported metric, and a refused quarter. The table below shows the groups. The paragraphs after it describe the 21 October and 23 September records and are kept as history.
 
 | Evaluation group (25 October 2026) | Passed / total | What it checks |
 | --- | ---: | --- |
@@ -68,7 +68,7 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 134 (one skipped); 885 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
+| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 137 (one skipped); 885 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html reports/demo.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |

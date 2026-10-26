@@ -1,51 +1,59 @@
-"""Render the Eval Log card "Two right answers, so it asks" as PNGs.
+"""Render the Eval Log card "Microsoft profit has two answers" as PNGs, alt text and a hash manifest.
 
-Every number comes from data/msft/ground-truth.json (FY2026 operating income, net
-income, accession and fiscal year end), so the card cannot drift from the data the
-server is tested against. Needs `rsvg-convert` and the Anton and IBM Plex Sans font
-files (set RAHIL_DESIGN_FONTS, or pass --fonts). Writes
-docs/images/ambiguity-landscape.png (1200x675) and ambiguity-square.png (1080x1080).
+Every number comes from data/msft/ground-truth.json (FY2026 operating income, net income,
+accession, fiscal year end) and the snapshot date from data/msft/manifest.json, so the card cannot
+drift from the data the server is tested against. The design rules are in DESIGN.md.
 
-Palette: navy canvas and ink, paper panel, one red accent used only on "Asks which".
-Sizes are set for a phone: the 1200px canvas shows at about 390px, so every label is
-at least 28px and the footer at least 26px (asserted below).
+Needs Python 3.9+ and a Chromium binary (CHROMIUM, default "chromium"). Writes to docs/images/:
+ambiguity-landscape.png (1024x640), ambiguity-square.png (1024x1024), ambiguity-alt.txt and
+ambiguity-manifest.json (SHA-256 of each PNG). The script checks the rendered page (no text under
+26px, only Roboto Slab and Archivo, nothing overflowing, fonts loaded) and exits 1 if a check fails.
 """
 
-import argparse
+import base64
+import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
-from datetime import date
-from html import escape
+from datetime import date, datetime
+from html import escape, unescape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GROUND_TRUTH = ROOT / "data" / "msft" / "ground-truth.json"
+MANIFEST = ROOT / "data" / "msft" / "manifest.json"
+FONT_DIR = ROOT / "scripts" / "card-fonts"
 OUT = ROOT / "docs" / "images"
-DEFAULT_FONTS = Path.home() / ".t3/projects/main/.agents/skills/rahil-design/assets/fonts"
 
-NAVY, PAPER, INK, MUTED, RED, TOP = "#0E1A2F", "#F5F5EF", "#14233D", "#44506A", "#C8102E", "#C9D1DE"
-MIN_LABEL_PX, MIN_FOOT_PX = 28, 26
+NAVY, PAPER, INK, MUTED, RED, TOP = "#0B1F4B", "#F5F5EF", "#0B1F4B", "#44506A", "#C8102E", "#C9D1DE"
+WIDTH, MIN_PX = 1024, 26
+TITLE = "Microsoft “profit” has two answers, so it asks which"
+QUERY = "Asked “Microsoft profit 2026”"
+ASKS = "Asks which: operating income or net income?"
 
-# Per canvas: size, headline lines and px, subtitle lines and px, figure height, footer px.
+# Per canvas: height, title px, bar height px, outer padding px.
 LAYOUTS = {
-    "landscape": dict(w=1200, h=675, h1=["Two right answers, so it asks"], h1px=66, sub=['Both operating income and net income are "profit". It asks which.'], subpx=28, fig_h=232, footpx=26),
-    "square": dict(w=1080, h=1080, h1=["Two right answers,", "so it asks"], h1px=100, sub=['Both operating income and net', 'income are "profit". It asks which.'], subpx=34, fig_h=440, footpx=28),
+    "landscape": dict(h=640, title=46, bar=46, pad=36),
+    "square": dict(h=1024, title=60, bar=104, pad=48),
 }
-PAD, PANEL_PAD = 48, 30
+
+
+def long_date(d):
+    return f"{d:%b} {d.day}, {d.year}"
 
 
 def load_facts():
-    gt = json.loads(GROUND_TRUTH.read_text())
-    y = gt["years"]["2026"]
-    end = date.fromisoformat(y["end"])
+    y = json.loads(GROUND_TRUTH.read_text())["years"]["2026"]
+    captured = datetime.fromisoformat(json.loads(MANIFEST.read_text())["captured_at"]).date()
     return {
         "operating_income": int(y["operating_income"]),
         "net_income": int(y["net_income"]),
         "accession": y["accession"],
-        "year_end": f"{end:%b} {end.day}, {end.year}",
+        "year_end": long_date(date.fromisoformat(y["end"])),
+        "data_date": long_date(captured),
     }
 
 
@@ -53,79 +61,142 @@ def billions(v):
     return f"${v / 1e9:,.3f}B"
 
 
-def t(x, y, s, size, fill=INK, weight=400, anchor="start", family="IBM Plex Sans"):
-    return (f'<text x="{x:.1f}" y="{y:.1f}" font-family="{family}" font-size="{size}" font-weight="{weight}" '
-            f'fill="{fill}" text-anchor="{anchor}">{escape(s)}</text>')
+def footer_lines(f):
+    return [f"Source: Microsoft FY2026 10-K, year ended {f['year_end']}.",
+            f"Accession {f['accession']}. SEC data as of {f['data_date']}."]
 
 
-def card(kind, f):
+def alt_text(f):
+    return (f"Two bars on one scale from zero, from Microsoft's FY2026 10-K (year ended {f['year_end']}): "
+            f"operating income {billions(f['operating_income'])} and net income {billions(f['net_income'])}. "
+            f"Below them, in red: asked for Microsoft profit, the server asks which of the two is meant. "
+            f"Source: Microsoft FY2026 10-K, accession {f['accession']}; SEC data as of {f['data_date']}.")
+
+
+def font_face(family, weight, name):
+    data = base64.b64encode((FONT_DIR / name).read_bytes()).decode()
+    return (f"@font-face{{font-family:'{family}';font-weight:{weight};"
+            f"src:url(data:font/woff2;base64,{data}) format('woff2')}}")
+
+
+CHECK_JS = """
+document.fonts.ready.then(()=>{
+  const out={minPx:99,fonts:[],issues:[],texts:[]};
+  const card=document.querySelector('.card'),cb=card.getBoundingClientRect();
+  const w=document.createTreeWalker(card,NodeFilter.SHOW_TEXT);
+  for(let n;n=w.nextNode();){
+    if(!n.textContent.trim())continue;
+    const el=n.parentElement,cs=getComputedStyle(el);
+    out.minPx=Math.min(out.minPx,parseFloat(cs.fontSize));
+    const f=cs.fontFamily.split(',')[0].replace(/['"]/g,'');
+    if(!out.fonts.includes(f))out.fonts.push(f);
+    out.texts.push(n.textContent.trim());
+    if(el.scrollWidth>el.clientWidth+1)out.issues.push('overflow-x: '+n.textContent);
+  }
+  card.querySelectorAll('*').forEach(e=>{const b=e.getBoundingClientRect();
+    if(b.right>cb.right+0.5||b.bottom>cb.bottom+0.5||b.left<-0.5||b.top<-0.5)out.issues.push('outside card: '+e.className);});
+  const panel=document.querySelector('.panel').getBoundingClientRect(),foot=document.querySelector('.foot').getBoundingClientRect();
+  if(panel.bottom>foot.top)out.issues.push('panel overlaps footer');
+  if(foot.bottom>cb.bottom-8)out.issues.push('footer too close to the edge');
+  const bars=[...document.querySelectorAll('.bar')].map(e=>e.getBoundingClientRect().width);
+  out.barWidths=bars;
+  out.fontsLoaded=['700 20px "Roboto Slab"','400 20px Archivo','600 20px Archivo'].every(s=>document.fonts.check(s));
+  document.title='CHECK:'+JSON.stringify(out);
+});
+"""
+
+
+def build_html(kind, f):
     L = LAYOUTS[kind]
-    w, h = L["w"], L["h"]
-    assert L["subpx"] >= MIN_LABEL_PX and L["footpx"] >= MIN_FOOT_PX
-    foot = [f"FY2026 = year ended {f['year_end']} (Microsoft 10-K).",
-            f"Accession {f['accession']}. Returns needs_clarification.",
-            "Source: github.com/RahilBhavan/financial-metrics-analyst"]
-    s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
-         f'<rect width="{w}" height="{h}" fill="{NAVY}"/>']
-    y = PAD + MIN_LABEL_PX * 0.8
-    s.append(t(PAD, y, "Rahil Bhavan", MIN_LABEL_PX, TOP))
-    s.append(t(w - PAD, y, "Eval Log", MIN_LABEL_PX, PAPER, 600, "end"))
-    y += 18
-    for line in L["h1"]:
-        y += L["h1px"] * 0.98
-        s.append(t(PAD, y, line.upper(), L["h1px"], PAPER, 400, family="Anton"))
-    y += 10
-    for line in L["sub"]:
-        y += L["subpx"] * 1.3
-        s.append(t(PAD, y, line, L["subpx"], PAPER))
-    # Paper panel: figure, then footer.
-    top = y + 22
-    fx, fw, fh = PAD + PANEL_PAD, w - 2 * (PAD + PANEL_PAD), L["fig_h"]
-    foot_lh = L["footpx"] * 1.3
-    panel_h = 24 + fh + 8 + foot_lh * len(foot) + 18
-    s.append(f'<rect x="{PAD}" y="{top:.1f}" width="{w - 2 * PAD}" height="{panel_h:.1f}" rx="12" fill="{PAPER}"/>')
-    oy = top + 24
-    cy = oy + fh / 2
-    bx = fx + fw * 0.36  # value column
-    s.append(t(fx, cy - 6, '"Microsoft', 32, INK, 600))
-    s.append(t(fx, cy + 32, 'FY2026 profit?"', 32, INK, 600))
-    for lab, val, yy in (("Operating income", f["operating_income"], oy + fh * 0.26),
-                         ("Net income", f["net_income"], oy + fh * 0.74)):
-        s.append(f'<path d="M{bx - 78:.1f},{cy:.1f} C{bx - 44:.1f},{cy:.1f} {bx - 44:.1f},{yy:.1f} {bx - 10:.1f},{yy:.1f}" '
-                 f'fill="none" stroke="{INK}" stroke-width="3"/>')
-        s.append(t(bx, yy - 14, lab, MIN_LABEL_PX, MUTED))
-        s.append(t(bx, yy + 32, billions(val), 44, INK, 600))
-    ax = fx + fw
-    s.append(t(ax - 2, cy + 6, "Asks which", 36, RED, 600, "end"))
-    s.append(f'<rect x="{ax - 190}" y="{cy + 22:.1f}" width="188" height="9" fill="{INK}"/>')
-    fy = oy + fh + 8
-    for line in foot:
-        fy += foot_lh
-        s.append(t(fx, fy - 6, line, L["footpx"], MUTED))
-    assert top + panel_h <= h - PAD + 1, f"{kind}: panel bottom {top + panel_h:.0f} overflows {h - PAD}"
-    s.append("</svg>")
-    return "".join(s)
+    h, pad, bar_h = L["h"], L["pad"], L["bar"]
+    inner = WIDTH - 2 * pad - 2 * 28  # panel padding is 28px a side
+    top = max(f["operating_income"], f["net_income"])
+    rows = "".join(
+        f'<div class="lab">{escape(lab)}</div>'
+        f'<div class="bar" style="width:{v / top * inner:.2f}px"><span>{escape(billions(v))}</span></div>'
+        for lab, v in (("Operating income", f["operating_income"]), ("Net income", f["net_income"])))
+    fonts = (font_face("Roboto Slab", 700, "roboto-slab-latin-700-normal.woff2")
+             + font_face("Archivo", 400, "archivo-latin-400-normal.woff2")
+             + font_face("Archivo", 600, "archivo-latin-600-normal.woff2"))
+    foot = "".join(f"<div>{escape(line)}</div>" for line in footer_lines(f))
+    return f"""<!doctype html><html lang="en"><meta charset="utf-8"><title>{escape(TITLE)}</title>
+<style>{fonts}
+*{{box-sizing:border-box;margin:0}}
+html,body{{width:{WIDTH}px;height:{h}px;background:{NAVY};overflow:hidden}}
+.card{{width:{WIDTH}px;height:{h}px;padding:{pad}px;display:flex;flex-direction:column;color:{PAPER};
+  font:400 {MIN_PX}px/1.25 Archivo,sans-serif}}
+.kick{{font-weight:600;color:{TOP}}}
+h1{{text-wrap:balance;font:700 {L["title"]}px/1.15 'Roboto Slab',serif;margin-top:{10 if kind == "landscape" else 18}px}}
+.panel{{background:{PAPER};color:{INK};border-radius:12px;padding:{20 if kind == "landscape" else 32}px 28px;
+  margin-top:{16 if kind == "landscape" else 30}px}}
+.q{{color:{MUTED}}}
+.lab{{color:{MUTED};margin-top:{10 if kind == "landscape" else 30}px}}
+.bar{{background:{NAVY};height:{bar_h}px;margin-top:4px;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:14px;color:{PAPER};font-weight:600;font-size:{34 if kind == "landscape" else 44}px;white-space:nowrap}}
+.asks{{margin-top:{14 if kind == "landscape" else 44}px;border-top:4px solid {RED};padding-top:{8 if kind == "landscape" else 14}px;
+  color:{RED};font-weight:600;font-size:{30 if kind == "landscape" else 34}px;white-space:nowrap}}
+.foot{{margin-top:auto;color:{TOP}}}
+</style>
+<div class="card" role="img" aria-label="{escape(alt_text(f))}">
+<div class="kick">Eval Log</div>
+<h1>{escape(TITLE)}</h1>
+<div class="panel"><div class="q">{escape(QUERY)}</div>{rows}<div class="asks">{escape(ASKS)}</div></div>
+<div class="foot">{foot}</div>
+</div>
+<script>{CHECK_JS}</script></html>"""
+
+
+def chromium(*args):
+    # These flags avoid hangs seen with the default GPU path and with user flag files; a throwaway
+    # profile keeps it apart from any running browser.
+    with tempfile.TemporaryDirectory(prefix="card-chromium-") as profile:
+        return subprocess.run(
+            [os.environ.get("CHROMIUM", "chromium"), "--headless", "--no-sandbox", "--disable-gpu",
+             "--disable-gpu-compositing", "--use-gl=disabled", "--disable-extensions",
+             "--run-all-compositor-stages-before-draw", "--hide-scrollbars",
+             "--force-device-scale-factor=1", f"--user-data-dir={profile}", *args],
+            capture_output=True, text=True, timeout=90)
+
+
+def check(page, f):
+    dom = chromium("--virtual-time-budget=5000", "--dump-dom", f"file://{page}").stdout
+    m = re.search(r"<title>CHECK:(.*?)</title>", dom, re.S)
+    if not m:
+        return None, False
+    res = json.loads(unescape(m.group(1)))
+    shown = set(res["texts"])
+    wanted = {billions(f["operating_income"]), billions(f["net_income"]), TITLE, ASKS, *footer_lines(f)}
+    top = max(f["operating_income"], f["net_income"])
+    ratio = res["barWidths"][1] / res["barWidths"][0]
+    ok = (res["minPx"] >= MIN_PX and not res["issues"] and res["fontsLoaded"]
+          and set(res["fonts"]) == {"Roboto Slab", "Archivo"} and wanted <= shown
+          and abs(ratio - f["net_income"] / top) < 0.005)  # bars keep the data ratio from zero
+    return res, ok
 
 
 def main():
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--fonts", type=Path, default=Path(os.environ.get("RAHIL_DESIGN_FONTS", DEFAULT_FONTS)))
-    ap.add_argument("--out", type=Path, default=OUT)
-    args = ap.parse_args()
-    facts = load_facts()
-    args.out.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory() as tmp:
-        conf = Path(tmp) / "fonts.conf"
-        conf.write_text(f'<?xml version="1.0"?><fontconfig><dir>{args.fonts}</dir><cachedir>{tmp}/cache</cachedir>'
-                        '<include ignore_missing="yes">/etc/fonts/fonts.conf</include></fontconfig>')
-        env = {**os.environ, "FONTCONFIG_FILE": str(conf)}
-        for kind in LAYOUTS:
-            svg = Path(tmp) / f"{kind}.svg"
-            svg.write_text(card(kind, facts))
-            png = args.out / f"ambiguity-{kind}.png"
-            subprocess.run(["rsvg-convert", str(svg), "-o", str(png)], check=True, env=env)
-            print(png)
+    f = load_facts()
+    OUT.mkdir(parents=True, exist_ok=True)
+    failed, hashes = False, {}
+    with tempfile.TemporaryDirectory(prefix="ambiguity-card-") as tmp:
+        for kind, L in LAYOUTS.items():
+            page = Path(tmp) / f"{kind}.html"
+            page.write_text(build_html(kind, f))
+            res, ok = check(page, f)
+            print(f"{kind}: {'PASS' if ok else 'FAIL'} {json.dumps({k: v for k, v in (res or {}).items() if k != 'texts'})}")
+            failed |= not ok
+            png = OUT / f"ambiguity-{kind}.png"
+            png.unlink(missing_ok=True)
+            chromium("--virtual-time-budget=5000", f"--window-size={WIDTH},{L['h']}", f"--screenshot={png}", f"file://{page}")
+            if not png.exists():
+                sys.exit(f"chromium did not write {png}")
+            hashes[png.name] = {"sha256": hashlib.sha256(png.read_bytes()).hexdigest(), "width": WIDTH, "height": L["h"]}
+            print(f"wrote {png.relative_to(ROOT)}")
+    (OUT / "ambiguity-alt.txt").write_text(alt_text(f) + "\n")
+    (OUT / "ambiguity-manifest.json").write_text(json.dumps(
+        {"title": TITLE, "alt_file": "ambiguity-alt.txt", "images": hashes}, indent=2) + "\n")
+    sys.exit(1 if failed else 0)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

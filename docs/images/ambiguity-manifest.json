@@ -1,0 +1,16 @@
+{
+  "title": "Microsoft \u201cprofit\u201d has two answers, so it asks which",
+  "alt_file": "ambiguity-alt.txt",
+  "images": {
+    "ambiguity-landscape.png": {
+      "sha256": "5a7f0a2bae90e98e3be64900a450224a249051b8134b6c2c19551aff38b6d106",
+      "width": 1024,
+      "height": 640
+    },
+    "ambiguity-square.png": {
+      "sha256": "1130bc0b3fa29216f11ae932784a800b1e78665c590c21fb4a99e3280d39dd08",
+      "width": 1024,
+      "height": 1024
+    }
+  }
+}
