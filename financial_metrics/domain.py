@@ -10,9 +10,20 @@ from decimal import Decimal, InvalidOperation, localcontext, ROUND_HALF_EVEN
 from fractions import Fraction
 from pathlib import Path
 
-from .policy import TAGS, MAX_YEARS, METRICS, POLICY, PROFILES, Refusal
+from .policy import MAX_SNAPSHOT_BYTES, MAX_YEARS, METRICS, POLICY, PROFILES, TAGS, Refusal
 
 DEFAULT_DATA = Path(__file__).resolve().parent.parent / "data"
+FILING_KEYS = ("accessionNumber", "filingDate", "reportDate", "form", "primaryDocument")
+SUBMISSION_PAGE = r"CIK[0-9]{10}-submissions-[0-9]{3}\.json"
+# Same-end records of these lengths could be a corrupted version of the reviewed period, so they block.
+# A quarter blocker needs a quarter-like length, so one-month stub periods in a 10-Q do not block.
+PERIOD_KINDS = {
+    "annual": {"forms": ("10-K", "10-K/A"), "may_block": lambda days: days is None or days >= 300,
+               "wrong_form": "not_annual_filing", "none": "no_eligible_annual_USD_fact"},
+    "quarter": {"forms": ("10-Q", "10-Q/A"), "may_block": lambda days: days is None or 70 <= days < 120,
+                "wrong_form": "not_quarterly_filing", "none": "no_eligible_quarterly_USD_fact"},
+}
+AUDIT_KEYS = ("rejection_counts", "rejected_candidates", "rejected_candidates_truncated")
 
 
 def iso_date(value):
@@ -69,10 +80,11 @@ class Analyst:
         self.data_dir = Path(data_dir)
         try:
             self.manifest = json.loads((self.data_dir / "manifest.json").read_text())
+            pages = sorted(name for name in self.manifest["files"] if re.fullmatch(SUBMISSION_PAGE, name))
             payloads = {}
-            for name in ("companyfacts.json", "submissions.json"):
+            for name in ("companyfacts.json", "submissions.json", *pages):
                 raw = (self.data_dir / name).read_bytes()
-                if len(raw) > 8 * 1024 * 1024:
+                if len(raw) > MAX_SNAPSHOT_BYTES:
                     raise Refusal("invalid_snapshot", "Snapshot exceeds the size limit.")
                 if hashlib.sha256(raw).hexdigest() != self.manifest["files"][name]["sha256"]:
                     raise Refusal("snapshot_integrity", "Snapshot hash does not match its manifest.")
@@ -91,16 +103,16 @@ class Analyst:
                 raise Refusal("invalid_snapshot", "This loader requires a labeled SEC API snapshot.")
             if identity != self.cik or str(self.submissions["cik"]).zfill(10) != self.cik:
                 raise Refusal("wrong_entity", "Snapshot identity does not match the reviewed issuer.")
-            recent = self.submissions["filings"]["recent"]
-            keys = ("accessionNumber", "filingDate", "reportDate", "form", "primaryDocument")
-            if len({len(recent[k]) for k in keys}) != 1:
-                raise Refusal("invalid_snapshot", "Filing metadata arrays have different lengths.")
+            # SEC keeps about 1,000 filings in "recent"; older ones are only in paged files.
             self.filings = {}
-            for i, accn in enumerate(recent["accessionNumber"]):
-                record = {k: recent[k][i] for k in keys}
-                if accn in self.filings and self.filings[accn] != record:
-                    raise Refusal("invalid_snapshot", "Conflicting accession metadata.")
-                self.filings[accn] = record
+            for block in [self.submissions["filings"]["recent"]] + [payloads[name] for name in pages]:
+                if len({len(block[k]) for k in FILING_KEYS}) != 1:
+                    raise Refusal("invalid_snapshot", "Filing metadata arrays have different lengths.")
+                for i, accn in enumerate(block["accessionNumber"]):
+                    record = {k: block[k][i] for k in FILING_KEYS}
+                    if accn in self.filings and self.filings[accn] != record:
+                        raise Refusal("invalid_snapshot", "Conflicting accession metadata.")
+                    self.filings[accn] = record
         except (OSError, KeyError, TypeError, json.JSONDecodeError) as exc:
             raise Refusal("invalid_snapshot", "Missing or malformed snapshot files: " + type(exc).__name__)
 
@@ -115,7 +127,7 @@ class Analyst:
         if age > 7:
             warnings.append("snapshot_older_than_7_days: historical results only; refresh separately for current coverage")
         unreviewed = [f["reportDate"] for f in self.filings.values()
-                      if f["form"] == "10-K" and f["filingDate"] <= as_of and f["reportDate"] > self.periods[max(self.periods)][1]]
+                      if f["form"] in ("10-K", "10-K/A") and f["filingDate"] <= as_of and f["reportDate"] > self.periods[max(self.periods)][1]]
         if unreviewed:
             warnings.append("newer_annual_filing_outside_reviewed_scope: " + ", ".join(sorted(set(unreviewed))))
         return {
@@ -152,13 +164,29 @@ class Analyst:
 
     def _select(self, year, metric, as_of):
         start, end = {**self.support_periods, **self.periods}[year]
+        return self._select_period(year, "FY", start, end, metric, as_of)
+
+    def _fiscal_year_matches(self, raw, filing):
+        """The fact's fy is its filing's fiscal year; a later filing repeats a period as a comparative under its own fy."""
+        fy = raw.get("fy")
+        if type(fy) is not int:
+            return False
+        report = iso_date(filing["reportDate"])
+        if raw["fp"] == "FY":
+            # 52/53-week years ending in early January carry the prior calendar year as fy.
+            return fy == report.year or (fy == report.year - 1 and (report.month, report.day) <= (1, 7))
+        return fy == self.fiscal_year_of(filing["reportDate"])
+
+    def _select_period(self, fiscal_year, fp, start, end, metric, as_of):
+        """Annual (fp FY) and quarterly selection share every eligibility and blocking rule."""
+        kind = PERIOD_KINDS["annual" if fp == "FY" else "quarter"]
         tag = self.profile.get("tags", TAGS)[metric]
-        eligible, rejected, dangerous = [], [], []
+        eligible, rejected, dangerous, unindexed = [], [], [], []
         counts = Counter()
         units = self.facts.get("facts", {}).get("us-gaap", {}).get(tag, {}).get("units", {})
         for unit, rows in units.items():
             for raw in rows:
-                # Other years are irrelevant; retain same-end quarter/instant traps.
+                # Other periods are irrelevant; retain same-end traps such as YTD or instant records.
                 if raw.get("end") != end:
                     continue
                 reason = None
@@ -173,15 +201,18 @@ class Analyst:
                     duration = (iso_date(end) - iso_date(raw.get("start"))).days + 1
                 except Refusal:
                     duration = None
-                annual_candidate = ((filing and filing["form"] in ("10-K", "10-K/A")) or raw.get("form") in ("10-K", "10-K/A")) and (duration is None or duration >= 300)
+                candidate = (((filing and filing["form"] in kind["forms"]) or raw.get("form") in kind["forms"])
+                             and kind["may_block"](duration))
                 if stamp and stamp > as_of:
                     reason = "filed_after_as_of"
                 elif raw.get("start") != start:
                     reason = "period_mismatch"
                 elif unit != "USD":
                     reason = "unit_mismatch"
-                elif raw.get("form") not in ("10-K", "10-K/A") or raw.get("fp") != "FY":
-                    reason = "not_annual_filing"
+                elif raw.get("form") not in kind["forms"] or raw.get("fp") != fp:
+                    reason = kind["wrong_form"]
+                elif not filing:
+                    reason = "accession_not_indexed"
                 else:
                     try:
                         filed = iso_date(raw.get("filed"))
@@ -189,9 +220,9 @@ class Analyst:
                             reason = "filing_metadata_mismatch"
                         elif filed < iso_date(end):
                             reason = "filed_before_period_end"
-                        elif (not filing or filing["form"] != raw["form"] or filing["filingDate"] != raw["filed"]
-                              or filing["reportDate"] < end or type(raw.get("fy")) is not int
-                              or raw["fy"] != int(filing["reportDate"][:4])):
+                        elif (filing["form"] != raw["form"] or filing["filingDate"] != raw["filed"]
+                              or iso_date(filing["reportDate"]) < iso_date(end)
+                              or not self._fiscal_year_matches(raw, filing)):
                             reason = "filing_metadata_mismatch"
                         elif not re.fullmatch(r"\d{10}-\d{2}-\d{6}", accn) or not re.fullmatch(r"[A-Za-z0-9_.-]+\.htm[l]?", filing["primaryDocument"]):
                             reason = "unsafe_source_identifier"
@@ -205,26 +236,30 @@ class Analyst:
                               "end": end, "unit": str(unit)[:80], "filed": stamp, "reason": reason}
                     if len(rejected) < 20:
                         rejected.append(detail)
-                    if annual_candidate and reason != "filed_after_as_of":
+                    if candidate and reason != "filed_after_as_of":
                         dangerous.append(detail)
+                    if reason == "accession_not_indexed":
+                        unindexed.append(detail)
                     continue
                 eligible.append({
                     "cik": self.cik, "metric": metric, "value": decimal_text(value), "unit": unit,
-                    "period_start": start, "period_end": end, "fiscal_year": year,
+                    "period_start": start, "period_end": end, "fiscal_year": fiscal_year,
                     "reported_fy": raw["fy"], "fp": raw["fp"], "form": raw["form"],
                     "filed": raw["filed"], "accn": accn, "tag": "us-gaap:" + tag,
                     "source_url": "https://www.sec.gov/Archives/edgar/data/" + str(int(self.cik)) + "/" + accn.replace("-", "") + "/" + filing["primaryDocument"],
                 })
         audit = {"rejection_counts": dict(counts), "rejected_candidates": rejected,
                  "rejected_candidates_truncated": sum(counts.values()) - len(rejected)}
-        base = {"fiscal_year": year, "metric": metric, "period_start": start, "period_end": end, **audit}
+        base = {"fiscal_year": fiscal_year, "metric": metric, "period_start": start, "period_end": end, **audit}
+        if fp != "FY":
+            base["fp"] = fp
         if not eligible:
-            return {**base, "status": "insufficient_data", "reason": "standard_tag_absent" if not units else "no_eligible_annual_USD_fact", "value": None}
-        return self._choose(base, eligible, dangerous)
+            return {**base, "status": "insufficient_data", "reason": "standard_tag_absent" if not units else kind["none"], "value": None}
+        return self._choose(base, eligible, dangerous, unindexed)
 
     @staticmethod
-    def _choose(base, eligible, dangerous):
-        """Shared by annual and quarterly selection: same-date conflicts and newer invalid candidates never fall back."""
+    def _choose(base, eligible, dangerous, unindexed=()):
+        """Same-date conflicts and newer invalid candidates never fall back to an older value."""
         eligible.sort(key=lambda f: (f["filed"], f["accn"]))
         by_date = {}
         for fact in eligible:
@@ -239,9 +274,14 @@ class Analyst:
         # Preserve all distinct filing/value records, including original provenance.
         history = list({(f["accn"], f["value"]): f for f in eligible}.values())
         changed = len({number(f["value"]) for f in history}) > 1
+        warnings = ["value_changed_across_filings: review revision history"] if changed else []
+        older = sorted({r["accn"] for r in unindexed if r["filed"] is None or r["filed"] < selected["filed"]})
+        if older:
+            # Without submissions metadata the earliest disclosure cannot be verified, so "original" may be later.
+            warnings.append("history_incomplete: earlier filing(s) missing from indexed submissions (" + ", ".join(older[:5])
+                            + "); original value and revision status are unverified")
         return {**base, **selected, "status": "ok", "original": history[0], "history": history,
-                "revision_candidate": changed,
-                "warnings": ["value_changed_across_filings: review revision history"] if changed else []}
+                "revision_candidate": changed, "warnings": warnings}
 
     def get_annual_facts(self, cik, fiscal_years, metrics, as_of):
         self.validate(cik, fiscal_years, metrics, as_of, tuple(TAGS))
@@ -261,77 +301,8 @@ class Analyst:
         if iso_date(as_of) > self.captured_date:
             raise Refusal("as_of_after_snapshot", "Cannot establish facts after snapshot date " + str(self.captured_date))
         start, end = quarters[key]
-        results = [self._select_quarter(fiscal_year, quarter, start, end, metric, as_of) for metric in metrics]
+        results = [self._select_period(fiscal_year, quarter, start, end, metric, as_of) for metric in metrics]
         return self._response(results, as_of)
-
-    def _select_quarter(self, fiscal_year, quarter, start, end, metric, as_of):
-        tag = self.profile.get("tags", TAGS)[metric]
-        eligible, rejected, dangerous = [], [], []
-        counts = Counter()
-        units = self.facts.get("facts", {}).get("us-gaap", {}).get(tag, {}).get("units", {})
-        for unit, rows in units.items():
-            for raw in rows:
-                if raw.get("end") != end:
-                    continue
-                reason = None
-                accn = raw.get("accn", "")
-                filing = self.filings.get(accn)
-                known_date = filing["filingDate"] if filing else raw.get("filed")
-                try:
-                    stamp = iso_date(known_date).isoformat()
-                except Refusal:
-                    stamp = None
-                try:
-                    duration = (iso_date(end) - iso_date(raw.get("start"))).days + 1
-                except Refusal:
-                    duration = None
-                # Quarter-length or unknown-length 10-Q records can block; year-to-date records cannot.
-                quarter_candidate = ((filing and filing["form"] in ("10-Q", "10-Q/A")) or raw.get("form") in ("10-Q", "10-Q/A")) and (duration is None or duration < 120)
-                if stamp and stamp > as_of:
-                    reason = "filed_after_as_of"
-                elif raw.get("start") != start:
-                    reason = "period_mismatch"
-                elif unit != "USD":
-                    reason = "unit_mismatch"
-                elif raw.get("form") not in ("10-Q", "10-Q/A") or raw.get("fp") != quarter:
-                    reason = "not_quarterly_filing"
-                else:
-                    try:
-                        if iso_date(raw.get("filed")) > iso_date(as_of):
-                            reason = "filing_metadata_mismatch"
-                        # A later 10-Q repeats the same quarter as its prior-year comparative: a revision candidate, not a mismatch.
-                        elif (not filing or filing["form"] != raw["form"] or filing["filingDate"] != raw["filed"]
-                              or filing["reportDate"] < end or type(raw.get("fy")) is not int
-                              or raw["fy"] != self.fiscal_year_of(filing["reportDate"])):
-                            reason = "filing_metadata_mismatch"
-                        elif not re.fullmatch(r"\d{10}-\d{2}-\d{6}", accn) or not re.fullmatch(r"[A-Za-z0-9_.-]+\.htm[l]?", filing["primaryDocument"]):
-                            reason = "unsafe_source_identifier"
-                        else:
-                            value = number(raw.get("val"))
-                    except Refusal:
-                        reason = "invalid_fact"
-                if reason:
-                    counts[reason] += 1
-                    detail = {"accn": str(accn)[:100], "start": str(raw["start"])[:80] if raw.get("start") is not None else None,
-                              "end": end, "unit": str(unit)[:80], "filed": stamp, "reason": reason}
-                    if len(rejected) < 20:
-                        rejected.append(detail)
-                    if quarter_candidate and reason != "filed_after_as_of":
-                        dangerous.append(detail)
-                    continue
-                eligible.append({
-                    "cik": self.cik, "metric": metric, "value": decimal_text(value), "unit": unit,
-                    "period_start": start, "period_end": end, "fiscal_year": fiscal_year,
-                    "reported_fy": raw["fy"], "fp": raw["fp"], "form": raw["form"], "filed": raw["filed"],
-                    "accn": accn, "tag": "us-gaap:" + tag,
-                    "source_url": "https://www.sec.gov/Archives/edgar/data/" + str(int(self.cik)) + "/" + accn.replace("-", "") + "/" + filing["primaryDocument"],
-                })
-        audit = {"rejection_counts": dict(counts), "rejected_candidates": rejected,
-                 "rejected_candidates_truncated": sum(counts.values()) - len(rejected)}
-        base = {"fiscal_year": fiscal_year, "metric": metric, "period_start": start, "period_end": end, **audit}
-        if not eligible:
-            return {**base, "status": "insufficient_data", "reason": "no_eligible_quarterly_USD_fact", "value": None}
-        return self._choose(base, eligible, dangerous)
 
     def _response(self, results, as_of):
         return {"status": "ok" if all(r["status"] == "ok" for r in results) else "partial",
@@ -339,31 +310,42 @@ class Analyst:
 
     def calculate_metrics(self, cik, fiscal_years, metrics, as_of):
         self.validate(cik, fiscal_years, metrics, as_of, METRICS)
+        cache = {}
+
+        def select(year, metric):
+            if (year, metric) not in cache:
+                cache[year, metric] = self._select(year, metric, as_of)
+            return cache[year, metric]
+
+        def operand(fact):
+            # The requested fact rows carry the full candidate audit; ratio operands keep provenance only.
+            return {k: v for k, v in fact.items() if k not in AUDIT_KEYS} if fact["status"] == "ok" else fact
+
         results = []
         for year in sorted(fiscal_years):
             for metric in metrics:
                 if metric in TAGS:
-                    results.append(self._select(year, metric, as_of))
+                    results.append(select(year, metric))
                     continue
                 base = {"fiscal_year": year, "metric": metric, "unit": "percent",
                         "period_start": self.periods[year][0], "period_end": self.periods[year][1], "value": None}
                 if metric == "revenue_growth" and year - 1 not in {**self.support_periods, **self.periods}:
                     results.append({**base, "status": "insufficient_data", "reason": "prior_year_outside_reviewed_scope"})
                     continue
-                revenue = self._select(year, "revenue", as_of)
+                revenue = operand(select(year, "revenue"))
                 if metric == "operating_margin":
-                    other = self._select(year, "operating_income", as_of)
+                    other = operand(select(year, "operating_income"))
                 elif metric == "gross_margin":
-                    other = self._select(year, "gross_profit", as_of)
+                    other = operand(select(year, "gross_profit"))
                 else:
-                    other = self._select(year - 1, "revenue", as_of)
+                    other = operand(select(year - 1, "revenue"))
                 inputs = [revenue, other]
                 base["inputs"] = inputs
                 if any(f["status"] != "ok" for f in inputs):
                     results.append({**base, "status": "insufficient_data", "reason": "operand_unavailable"})
                     continue
                 basis_warnings = []
-                if revenue["accn"] != other["accn"] and metric == "revenue_growth":
+                if revenue["accn"] != other["accn"]:
                     left = {f["accn"]: f for f in revenue["history"]}
                     right = {f["accn"]: f for f in other["history"]}
                     common = [a for a in left.keys() & right.keys()
@@ -403,8 +385,17 @@ class Analyst:
         return self._response(results, as_of)
 
 
+def snapshot_ticker(data_dir=DEFAULT_DATA):
+    """The issuer a snapshot directory's root belongs to, without loading its facts."""
+    try:
+        cik = str(json.loads((Path(data_dir) / "submissions.json").read_text())["cik"]).zfill(10)
+    except (OSError, KeyError, TypeError, ValueError):
+        return None
+    return PROFILES[cik]["ticker"] if cik in PROFILES else None
+
+
 class AnalystService:
-    """Route the tools to fixed reviewed issuer snapshots."""
+    """Route the tools to reviewed issuer snapshots: the root issuer plus any reviewed issuer subdirectories."""
 
     def __init__(self, data_dir=DEFAULT_DATA, treasury_snapshot=None):
         from .treasury import DEFAULT_SNAPSHOT, TreasuryService
@@ -412,29 +403,39 @@ class AnalystService:
         root = Path(data_dir)
         primary = Analyst(root)
         self.issuers = {primary.cik: primary}
-        if root.resolve() == DEFAULT_DATA.resolve():
-            for cik, profile in PROFILES.items():
-                if cik != primary.cik:
-                    self.issuers[cik] = Analyst(root / profile["directory"])
+        # Other issuers load on first use, so a one-issuer query parses one companyfacts file.
+        # The bundled data must contain every issuer; a missing one fails loudly instead of disappearing.
+        bundled = root.resolve() == DEFAULT_DATA.resolve()
+        self.pending = {cik: root / profile["directory"] for cik, profile in PROFILES.items()
+                        if cik != primary.cik and profile["directory"] != "."
+                        and (bundled or (root / profile["directory"] / "manifest.json").is_file())}
+
+    def _load(self, cik):
+        if cik in self.pending:
+            # Load before forgetting the path, so a failed load fails the same way every time.
+            self.issuers[cik] = Analyst(self.pending[cik])
+            del self.pending[cik]
+        return self.issuers[cik]
 
     def resolve_company(self, ticker):
         if not isinstance(ticker, str):
             raise Refusal("invalid_ticker", "Ticker must be a string.")
-        matches = [a for a in self.issuers.values() if a.profile["ticker"] == ticker.upper()]
+        profiles = {**{cik: PROFILES[cik] for cik in self.pending}, **{cik: a.profile for cik, a in self.issuers.items()}}
+        matches = [cik for cik, profile in profiles.items() if profile["ticker"] == ticker.upper()]
         if len(matches) != 1:
-            raise Refusal("unsupported_company", "Reviewed companies are " + ", ".join(sorted(a.profile["ticker"] for a in self.issuers.values())) + "; custom snapshots contain only their own issuer.")
-        return matches[0].resolve_company(ticker)
+            raise Refusal("unsupported_company", "Reviewed companies are " + ", ".join(sorted(p["ticker"] for p in profiles.values())) + "; custom snapshots contain only their own issuer.")
+        return self._load(matches[0]).resolve_company(ticker)
 
-    def _issuer(self, cik):
-        if not isinstance(cik, str) or cik not in self.issuers:
+    def issuer(self, cik):
+        if not isinstance(cik, str) or (cik not in self.issuers and cik not in self.pending):
             raise Refusal("unsupported_company", "CIK is not in the loaded reviewed snapshots.")
-        return self.issuers[cik]
+        return self._load(cik)
 
     def get_annual_facts(self, cik, fiscal_years, metrics, as_of):
-        return self._issuer(cik).get_annual_facts(cik, fiscal_years, metrics, as_of)
+        return self.issuer(cik).get_annual_facts(cik, fiscal_years, metrics, as_of)
 
     def calculate_metrics(self, cik, fiscal_years, metrics, as_of):
-        return self._issuer(cik).calculate_metrics(cik, fiscal_years, metrics, as_of)
+        return self.issuer(cik).calculate_metrics(cik, fiscal_years, metrics, as_of)
 
     def get_quarterly_facts(self, cik, fiscal_year, quarter, metrics, as_of):
-        return self._issuer(cik).get_quarterly_facts(cik, fiscal_year, quarter, metrics, as_of)
+        return self.issuer(cik).get_quarterly_facts(cik, fiscal_year, quarter, metrics, as_of)

@@ -134,8 +134,20 @@ class DomainTests(unittest.TestCase):
     def test_first_growth_uses_supporting_revenue(self):
         self.assertEqual(self.calc(2023, "revenue_growth")["display_value"], "-2.80")
 
-    def test_mixed_accession_ratio_refused(self):
+    def test_margin_uses_common_filing_when_values_match(self):
         self.rows("operating_income", 2024)[-1]["start"] = "2024-01-01"
+        row = self.calc(2024)
+        self.assertEqual(row["status"], "ok")
+        self.assertTrue(any(w.startswith("comparison_uses_common_filing") for w in row["warnings"]))
+        self.assertEqual(row["inputs"][0]["accn"], row["inputs"][1]["accn"])
+
+    def test_mixed_accession_ratio_refused(self):
+        # A changed latest value means no common filing reproduces both selected operands.
+        latest = self.rows(year=2024)[-1]
+        self.rows("operating_income", 2024)[-1]["start"] = "2024-01-01"
+        for row in self.rows(year=2024):
+            if row["accn"] == latest["accn"]:
+                row["val"] = 391036000000
         self.assertEqual(self.calc(2024)["reason"], "inconsistent_filing_basis")
 
     def test_filing_metadata_must_agree(self):

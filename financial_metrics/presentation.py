@@ -1,11 +1,10 @@
 """Compact tables and local HTML with native expandable evidence sections."""
 
+import json
 from decimal import Decimal, localcontext
 from html import escape
 
-LABELS = {"revenue": "Revenue", "gross_profit": "Gross profit", "operating_income": "Operating income",
-          "net_income": "Net income", "gross_margin": "Gross margin",
-          "operating_margin": "Operating margin", "revenue_growth": "Revenue growth"}
+from .policy import LABELS
 
 
 def display(row):
@@ -17,6 +16,12 @@ def display(row):
         context.prec = 60
         amount = format(Decimal(row["value"]) / Decimal(1000000), ",f")
         return amount.rstrip("0").rstrip(".") if "." in amount else amount
+
+
+def period_label(row):
+    """Quarterly rows say which quarter; a three-month column must never read as a fiscal year."""
+    fp = row.get("fp")
+    return (fp + " FY" if fp and fp != "FY" else "FY") + str(row["fiscal_year"])
 
 
 def table_data(result):
@@ -44,7 +49,8 @@ def detail_lines(row):
     for source in row.get("inputs", [row]):
         if source["status"] != "ok":
             if source is not row:
-                lines.extend(detail_lines(source))
+                # Name the failed operand, for example the prior-year revenue behind a growth rate.
+                lines.extend(period_label(source) + " " + source["metric"] + ": " + line for line in detail_lines(source))
             continue
         lines.append(source["metric"] + ": " + source["value"] + " USD; " + source["period_start"] + " to " + source["period_end"])
         lines.append(source["tag"] + "; " + source["form"] + "; filed " + source["filed"] + "; " + source["accn"])
@@ -65,7 +71,7 @@ def render(result, details=False):
     lines = [company["name"] + " | " + company["ticker"] + " | CIK " + company["cik"],
              "As of " + context["as_of"] + "; SEC snapshot " + context["snapshot_captured_at"],
              "Amounts: USD millions. Percentages: 2 decimal places. FY labels use each issuer's fiscal calendar.", ""]
-    cells = [["Metric"] + ["FY" + str(y) for y in years]]
+    cells = [["Metric"] + [period_label(lookup[y, metrics[0]]) for y in years]]
     for metric in metrics:
         cells.append([LABELS[metric]] + [display(lookup[y, metric]) + "".join(" [" + str(n) + "]" for n in references.get((y, metric), [])) for y in years])
     widths = [max(len(row[i]) for row in cells) for i in range(len(cells[0]))]
@@ -75,16 +81,16 @@ def render(result, details=False):
             lines.append("-+-".join("-" * width for width in widths))
     for y in years:
         row = lookup[y, metrics[0]]
-        lines.append("FY" + str(y) + ": " + row["period_start"] + " to " + row["period_end"])
+        lines.append(period_label(row) + ": " + row["period_start"] + " to " + row["period_end"])
     for warning in context["warnings"]:
         lines.append("Snapshot warning: " + warning)
     for n, (row, message) in enumerate(notes, 1):
-        lines.append("[" + str(n) + "] FY" + str(row["fiscal_year"]) + " " + LABELS[row["metric"]] + ": " + message)
+        lines.append("[" + str(n) + "] " + period_label(row) + " " + LABELS[row["metric"]] + ": " + message)
     sources = sorted({source["source_url"] for row in result["results"] for source in row.get("inputs", [row]) if source["status"] == "ok"})
     lines.extend(["", "Source filings:"] + sources)
     if details:
         for row in result["results"]:
-            lines.extend(["", "FY" + str(row["fiscal_year"]) + " " + LABELS[row["metric"]]] + detail_lines(row))
+            lines.extend(["", period_label(row) + " " + LABELS[row["metric"]]] + detail_lines(row))
     else:
         lines.append("Use --details for formulas and provenance, --json for full audit data, or --html for expandable evidence.")
     return "\n".join(line.rstrip() for line in lines)
@@ -106,7 +112,7 @@ def render_html(result):
     for warning in context["warnings"]:
         parts.append("<p class='warning'>" + escape(warning) + "</p>")
     parts.append("<div class='table-wrap'><table><caption>Amounts in USD millions. Percentages rounded to two decimal places.</caption><thead><tr><th scope='col'>Metric</th>")
-    parts.extend("<th scope='col'>FY" + str(y) + "</th>" for y in years)
+    parts.extend("<th scope='col'>" + period_label(lookup[y, metrics[0]]) + "</th>" for y in years)
     parts.append("</tr></thead><tbody>")
     for metric in metrics:
         parts.append("<tr><th scope='row'>" + escape(LABELS[metric]) + "</th>")
@@ -117,16 +123,15 @@ def render_html(result):
     parts.append("</tbody></table></div>")
     for y in years:
         row = lookup[y, metrics[0]]
-        parts.append("<p class='meta'>FY" + str(y) + ": " + row["period_start"] + " to " + row["period_end"] + "</p>")
+        parts.append("<p class='meta'>" + period_label(row) + ": " + row["period_start"] + " to " + row["period_end"] + "</p>")
     if notes:
         parts.append("<h2>Warnings and comparison notes</h2><ol>")
         for n, (row, message) in enumerate(notes, 1):
-            parts.append("<li id='note-" + str(n) + "'>FY" + str(row["fiscal_year"]) + " " + escape(LABELS[row["metric"]] + ": " + message) + "</li>")
+            parts.append("<li id='note-" + str(n) + "'>" + period_label(row) + " " + escape(LABELS[row["metric"]] + ": " + message) + "</li>")
         parts.append("</ol>")
     parts.append("<h2>Explore the evidence</h2><p>Expand a result to see its formula, full dollar amounts, filing references, and audit record.</p>")
-    import json
     for row in result["results"]:
-        parts.append("<details><summary>FY" + str(row["fiscal_year"]) + " · " + escape(LABELS[row["metric"]]) + " · " + escape(display(row)) + "</summary>")
+        parts.append("<details><summary>" + period_label(row) + " · " + escape(LABELS[row["metric"]]) + " · " + escape(display(row)) + "</summary>")
         for line in detail_lines(row):
             if line.startswith("https://www.sec.gov/Archives/edgar/data/"):
                 parts.append("<p><a href='" + escape(line, quote=True) + "' rel='noreferrer'>Open source filing</a></p>")

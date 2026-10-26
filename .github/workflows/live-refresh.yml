@@ -1,0 +1,25 @@
+name: Live SEC refresh check
+
+on:
+  workflow_dispatch:
+    inputs:
+      contact:
+        description: Real contact email for the SEC User-Agent
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - run: python -B scripts/live_refresh_check.py --user-agent "financial-metrics-analyst ${{ inputs.contact }}" --output "$RUNNER_TEMP/live-refresh.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: live-refresh
+          path: ${{ runner.temp }}/live-refresh.json

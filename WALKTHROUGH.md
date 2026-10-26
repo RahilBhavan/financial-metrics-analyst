@@ -58,7 +58,7 @@ The two periods have different lengths—364 and 371 days—so the −2.80% resu
 ## What the second company and real revision teach
 
 ```sh
-python3 -B -m financial_metrics analyze --ticker MSFT --as-of 2025-07-30 --html reports/microsoft-demo.html
+python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 --as-of 2025-07-30 --html /tmp/microsoft-report.html
 ```
 
 Microsoft's periods end June 30. FY2024 has 366 days. The same contracts and arithmetic work, but the issuer profile supplies different dates. Microsoft FY2026 is reviewed as well: `--years 2023 2024 2025 2026` shows all four years in one request, and a current snapshot request carries no newer-annual warning.

@@ -1,8 +1,9 @@
 {
   "status": "needs_clarification",
   "code": "ambiguous_profit",
-  "message": "Do you mean operating income or net income?",
+  "message": "Which profit measure?",
   "choices": [
+    "Gross profit",
     "Operating income",
     "Net income"
   ]

@@ -1,3 +1,3 @@
-"""Offline-first, deterministic financial analysis for a reviewed Apple scope."""
+"""Offline-first, deterministic financial analysis for reviewed SEC issuer scopes."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
