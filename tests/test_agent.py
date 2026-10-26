@@ -93,7 +93,7 @@ def text(value):
 
 class AgentLoopTests(unittest.TestCase):
     def test_tool_call_then_traced_answer(self):
-        backend = ScriptedBackend([[tool()], [text("BitMine spent $85.9M in the week ending 2026-07-19 (0.85 bps).")]])
+        backend = ScriptedBackend([[tool()], [text('{"evidence": ["c0.a0"]}')]])
         client = FakeClient()
         record = run("question", backend, client)
         self.assertEqual(record["status"], "answered")
@@ -103,10 +103,10 @@ class AgentLoopTests(unittest.TestCase):
         self.assertAlmostEqual(record["cost_usd"], 0.002)
         result_block = backend.seen[1][2]["content"][0]
         self.assertEqual((result_block["type"], result_block["tool_use_id"]), ("tool_result", "c1"))
-        self.assertEqual(json.loads(result_block["content"]), ACTION)
+        self.assertEqual(json.loads(result_block["content"])["data"], ACTION)
 
     def test_untraced_draft_gets_one_rewrite(self):
-        backend = ScriptedBackend([[tool()], [text("It spent $90M.")], [text("It spent $85.9M.")]])
+        backend = ScriptedBackend([[tool()], [text("It spent $90M.")], [text('{"evidence": ["c0.a0"]}')]])
         record = run("q", backend, FakeClient())
         self.assertEqual((record["status"], len(record["drafts"])), ("answered", 2))
         self.assertIn("$90M", backend.seen[2][-1]["content"])
@@ -130,7 +130,7 @@ class AgentLoopTests(unittest.TestCase):
         record = run("q", backend, client)
         self.assertEqual(client.calls, [])
         self.assertEqual([c["status"] for c in record["tool_calls"]], ["rejected_by_agent", "rejected_by_agent"])
-        self.assertEqual(record["status"], "answered")
+        self.assertEqual(record["status"], "refused")
 
     def test_turn_limit_and_backend_errors(self):
         self.assertEqual(run("q", ScriptedBackend([[tool()]] * 6), FakeClient())["status"], "abstained_max_turns")
@@ -139,7 +139,7 @@ class AgentLoopTests(unittest.TestCase):
 
     def test_real_mcp_subprocess(self):
         backend = ScriptedBackend([[tool("get_break_even", {"firm": "MSTR"})],
-                                   [text("STRC break-even was $119.07 in the week ending 2026-10-11; STRC closed at $99.65.")]])
+                                   [text('{"evidence": ["c0.break_even"]}')]])
         with Client() as client:
             record = run("At what STRC price does the rotation stop adding?", backend, client)
         self.assertEqual(record["status"], "answered")

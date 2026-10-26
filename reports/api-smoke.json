@@ -1,0 +1,10 @@
+{
+  "backend": "anthropic-messages-api",
+  "model_requested": "claude-haiku-5-5",
+  "checked_at": "2026-10-26T22:00:55+00:00",
+  "checks": [],
+  "status": "not_run",
+  "reason": "ANTHROPIC_API_KEY is not available",
+  "passed": 0,
+  "total": 3
+}

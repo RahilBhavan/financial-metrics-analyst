@@ -49,6 +49,9 @@ def corpus(results, question=""):
                 numbers.append((direct, path))
             else:
                 numbers.extend((value, path + " (text)") for value in text_numbers(value))
+                # Only this defined warning has a numeric threshold; do not mine arbitrary identifiers.
+                if value.startswith("snapshot_older_than_7_days:"):
+                    numbers.append((Decimal(7), path + " (staleness threshold)"))
         elif isinstance(value, dict):
             for key, item in value.items():
                 walk(item, path + "." + key if path else key)

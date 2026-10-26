@@ -1,0 +1,53 @@
+{
+  "verification": "Visible annual cash-flow statement; scripts/review_cash_flows.py never reads companyfacts.",
+  "ticker": "PYPL",
+  "cik": "0001633917",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "accession": "0001633917-26-000024",
+      "filed": "2026-02-03",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash provided by investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "4843000000",
+      "investing_cash_flow": "752000000",
+      "financing_cash_flow": "-2993000000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "accession": "0001633917-26-000024",
+      "filed": "2026-02-03",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash provided by investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "7450000000",
+      "investing_cash_flow": "1689000000",
+      "financing_cash_flow": "-8276000000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "accession": "0001633917-26-000024",
+      "filed": "2026-02-03",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash provided by investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "6416000000",
+      "investing_cash_flow": "797000000",
+      "financing_cash_flow": "-5958000000"
+    }
+  }
+}

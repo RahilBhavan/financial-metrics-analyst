@@ -10,7 +10,7 @@ from decimal import Decimal, InvalidOperation, localcontext, ROUND_HALF_EVEN
 from fractions import Fraction
 from pathlib import Path
 
-from .policy import MAX_SNAPSHOT_BYTES, MAX_YEARS, METRICS, POLICY, PROFILES, TAGS, Refusal
+from .policy import ANNUAL_TAGS, MAX_SNAPSHOT_BYTES, MAX_YEARS, METRICS, POLICY, PROFILES, TAGS, Refusal
 
 DEFAULT_DATA = Path(__file__).resolve().parent.parent / "data"
 FILING_KEYS = ("accessionNumber", "filingDate", "reportDate", "form", "primaryDocument")
@@ -284,7 +284,7 @@ class Analyst:
                 "revision_candidate": changed, "warnings": warnings}
 
     def get_annual_facts(self, cik, fiscal_years, metrics, as_of):
-        self.validate(cik, fiscal_years, metrics, as_of, tuple(TAGS))
+        self.validate(cik, fiscal_years, metrics, as_of, tuple(ANNUAL_TAGS))
         results = [self._select(y, m, as_of) for y in sorted(fiscal_years) for m in metrics]
         return self._response(results, as_of)
 
@@ -324,7 +324,7 @@ class Analyst:
         results = []
         for year in sorted(fiscal_years):
             for metric in metrics:
-                if metric in TAGS:
+                if metric in ANNUAL_TAGS:
                     results.append(select(year, metric))
                     continue
                 base = {"fiscal_year": year, "metric": metric, "unit": "percent",
@@ -417,10 +417,13 @@ class AnalystService:
             del self.pending[cik]
         return self.issuers[cik]
 
+    def reviewed_profiles(self):
+        return {**{cik: PROFILES[cik] for cik in self.pending}, **{cik: a.profile for cik, a in self.issuers.items()}}
+
     def resolve_company(self, ticker):
         if not isinstance(ticker, str):
             raise Refusal("invalid_ticker", "Ticker must be a string.")
-        profiles = {**{cik: PROFILES[cik] for cik in self.pending}, **{cik: a.profile for cik, a in self.issuers.items()}}
+        profiles = self.reviewed_profiles()
         matches = [cik for cik, profile in profiles.items() if profile["ticker"] == ticker.upper()]
         if len(matches) != 1:
             raise Refusal("unsupported_company", "Reviewed companies are " + ", ".join(sorted(p["ticker"] for p in profiles.values())) + "; custom snapshots contain only their own issuer.")

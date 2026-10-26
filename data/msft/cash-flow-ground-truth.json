@@ -1,0 +1,68 @@
+{
+  "verification": "Visible annual cash-flow statement; scripts/review_cash_flows.py never reads companyfacts.",
+  "ticker": "MSFT",
+  "cik": "0000789019",
+  "unit": "USD",
+  "years": {
+    "2024": {
+      "start": "2023-07-01",
+      "end": "2024-06-30",
+      "accession": "0001193125-26-323660",
+      "filed": "2026-07-29",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash from operations",
+        "financing_cash_flow": "Net cash used in financing",
+        "investing_cash_flow": "Net cash used in investing"
+      },
+      "operating_cash_flow": "118548000000",
+      "financing_cash_flow": "-37757000000",
+      "investing_cash_flow": "-96970000000"
+    },
+    "2025": {
+      "start": "2024-07-01",
+      "end": "2025-06-30",
+      "accession": "0001193125-26-323660",
+      "filed": "2026-07-29",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash from operations",
+        "financing_cash_flow": "Net cash used in financing",
+        "investing_cash_flow": "Net cash used in investing"
+      },
+      "operating_cash_flow": "136162000000",
+      "financing_cash_flow": "-51699000000",
+      "investing_cash_flow": "-72599000000"
+    },
+    "2026": {
+      "start": "2025-07-01",
+      "end": "2026-06-30",
+      "accession": "0001193125-26-323660",
+      "filed": "2026-07-29",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash from operations",
+        "financing_cash_flow": "Net cash used in financing",
+        "investing_cash_flow": "Net cash used in investing"
+      },
+      "operating_cash_flow": "182935000000",
+      "financing_cash_flow": "-52546000000",
+      "investing_cash_flow": "-139500000000"
+    },
+    "2023": {
+      "start": "2022-07-01",
+      "end": "2023-06-30",
+      "accession": "0000950170-25-100235",
+      "filed": "2025-07-30",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash from operations",
+        "financing_cash_flow": "Net cash used in financing",
+        "investing_cash_flow": "Net cash used in investing"
+      },
+      "operating_cash_flow": "87582000000",
+      "financing_cash_flow": "-43935000000",
+      "investing_cash_flow": "-22680000000"
+    }
+  }
+}

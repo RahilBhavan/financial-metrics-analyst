@@ -1,10 +1,10 @@
 {
   "sdk": "mcp",
   "sdk_version": "1.30.0",
-  "python": "3.11.16",
+  "python": "3.14.7",
   "transport": "stdio subprocess",
-  "passed": 33,
-  "total": 33,
+  "passed": 37,
+  "total": 37,
   "checks": [
     {
       "case": "protocol negotiation",
@@ -108,6 +108,22 @@
     },
     {
       "case": "get_quarterly_facts refused",
+      "passed": true
+    },
+    {
+      "case": "get_annual_facts ok",
+      "passed": true
+    },
+    {
+      "case": "calculate_metrics ok",
+      "passed": true
+    },
+    {
+      "case": "get_quarterly_facts refused",
+      "passed": true
+    },
+    {
+      "case": "cash-flow signs and values",
       "passed": true
     },
     {

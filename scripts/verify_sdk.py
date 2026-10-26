@@ -53,11 +53,22 @@ async def main():
                 ("get_quarterly_facts", {"cik": "0001679788", "fiscal_year": 2026, "quarter": "Q2", "metrics": ["revenue", "gross_profit"], "as_of": "2026-10-25"}, "partial"),
                 ("get_quarterly_facts", {"cik": "0001318605", "fiscal_year": 2024, "quarter": "Q1", "metrics": ["revenue"], "as_of": "2026-10-25"}, "refused"),
             ])
+            cash_args = {**arguments, "fiscal_years": [2025],
+                         "metrics": ["operating_cash_flow", "investing_cash_flow", "financing_cash_flow"]}
+            calls.extend([
+                ("get_annual_facts", cash_args, "ok"),
+                ("calculate_metrics", cash_args, "ok"),
+                ("get_quarterly_facts", {"cik": "0000320193", "fiscal_year": 2026, "quarter": "Q3",
+                                         "metrics": ["operating_cash_flow"], "as_of": "2026-09-21"}, "refused"),
+            ])
             for tool, args, status in calls:
                 result = await session.call_tool(tool, args)
                 Draft202012Validator(schemas[tool], format_checker=FormatChecker()).validate(result.structuredContent)
                 checks.append({"case": tool + " " + status,
                                "passed": result.structuredContent["status"] == status and json.loads(result.content[0].text) == result.structuredContent and result.isError == (status == "refused")})
+            cash = (await session.call_tool("get_annual_facts", cash_args)).structuredContent
+            checks.append({"case": "cash-flow signs and values", "passed":
+                           [r["value"] for r in cash["results"]] == ["111482000000", "15195000000", "-120686000000"]})
             # Exercise a second validator against deliberately malformed nested output.
             valid = (await session.call_tool("calculate_metrics", {**arguments, "metrics": ["revenue_growth"]})).structuredContent
             validator = Draft202012Validator(schemas["calculate_metrics"], format_checker=FormatChecker())

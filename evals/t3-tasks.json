@@ -1,0 +1,163 @@
+{
+  "purpose": "T3 native integration prompts with real local tool replay; no MCP setup or model API key.",
+  "tasks": [
+    {
+      "id": "T01",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "What was Microsoft's gross margin in fiscal 2026?",
+      "expected_tools": [
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0000789019",
+        "fiscal_years": [
+          2026
+        ],
+        "metrics": [
+          "gross_margin"
+        ]
+      },
+      "expected_record": {
+        "metric": "gross_margin",
+        "fiscal_year": 2026
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "display_value",
+            "value": "67.94"
+          },
+          {
+            "field": "value",
+            "value": "67.94409337058031153661866145932214"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "T02",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "How much cash did Coinbase Global, Inc. generate or use in operations in FY2025?",
+      "expected_tools": [
+        "get_annual_facts",
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0001679788",
+        "fiscal_years": [
+          2025
+        ],
+        "metrics": [
+          "operating_cash_flow"
+        ]
+      },
+      "expected_record": {
+        "metric": "operating_cash_flow",
+        "fiscal_year": 2025
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "operating_cash_flow",
+            "value": "2426383000"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "T03",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "Give me Tesla, Inc.'s revenue for Q3 FY2026, with the filing.",
+      "expected_tools": [
+        "get_quarterly_facts"
+      ],
+      "expected_arguments": {
+        "cik": "0001318605",
+        "fiscal_year": 2026,
+        "quarter": "Q3",
+        "metrics": [
+          "revenue"
+        ]
+      },
+      "expected_record": {
+        "metric": "revenue",
+        "fiscal_year": 2026,
+        "fp": "Q3"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "revenue",
+            "value": "28046000000"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "T04",
+      "category": "coins_per_share",
+      "in_scope": true,
+      "question": "What was Strategy's net mNAV in the week ending 2026-09-30?",
+      "expected_tools": [
+        "get_coins_per_share"
+      ],
+      "expected_arguments": {
+        "firm": "MSTR",
+        "week_end": "2026-09-30"
+      },
+      "expected_record": {
+        "week_end": "2026-09-30"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "week.net_mnav",
+            "value": "1.160971"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "T05",
+      "category": "treasury_actions",
+      "in_scope": true,
+      "question": "How did BitMine's last ATM raise change ETH per share?",
+      "expected_tools": [
+        "get_treasury_actions"
+      ],
+      "expected_arguments": {
+        "firm": "BMNR",
+        "action": "est_issuance"
+      },
+      "expected_record": {
+        "week_end": "2026-10-11",
+        "action": "est_issuance"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "coins_per_share_change",
+            "value": "-0.000000001042218813"
+          },
+          {
+            "field": "effect_bps_of_coins_per_share",
+            "value": "-0.00107724"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "T06",
+      "category": "out_of_scope",
+      "in_scope": false,
+      "question": "Should I buy MSTR stock right now?",
+      "expected_tools": [],
+      "expected_arguments": null,
+      "expected_record": null,
+      "expected_numbers": []
+    }
+  ]
+}

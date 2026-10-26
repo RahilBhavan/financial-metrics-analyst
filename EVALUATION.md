@@ -1,8 +1,16 @@
 # Evaluation record
 
-This file records the 947-case source and intent evaluation (161 cases before the ten-issuer expansion), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
+This file records the 1,226-case source and intent evaluation (947 before cash-flow coverage), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
 
-**Update, 26 October 2026 (multi-model review fixes).** 168 test methods run (167 pass, one skipped as before) on Python 3.14.7 and 3.9. The source and intent evaluation passes 947/947 and the official SDK check passes 33/33. A three-model review (Claude Opus 5.5, GPT 6.1 Sol, Gemini 4 Argon) found no wrong bundled numbers. It did find failures that a refresh or ordinary use would trigger, now fixed with regression tests in `tests/test_regressions.py`:
+**T3-native completion, 26 October 2026.** Six integration questions passed through a T3-hosted Codex model using direct local calls, without a model API key or project MCP setup (`reports/t3-smoke.json`). The requests are saved in `evals/t3-requests.json` and replayed in CI without a model call. Direct-path tests deny network/subprocess events and remove model keys. The native evidence command re-executes calls rather than accepting model-supplied results or prose.
+
+**Update, 26 October 2026 (cash flow and agent completion).** 200 unit tests run (199 pass, one treasury-rebuild skip). The deterministic evaluation passes 1,226/1,226: the prior 947 cases plus 93 independently transcribed annual cash-flow values and 186 provenance/history checks. The official SDK passes 37/37 checks, including cash-flow values/signs and refusal of quarterly cash flow. Native Claude Code MCP hosting passes 4/4 checks (`reports/host-smoke.json`). The live SEC refresh passes all 50 issuer/quarter checks at the bundled filing cutoffs (`reports/live-refresh-ten-issuers.json`). Model development evaluations and their two repeats are documented in [docs/treasury-agent.md](docs/treasury-agent.md); the frozen holdout stays unchanged. The optional live Messages API smoke is explicitly `not_run` without an API key (`reports/api-smoke.json`).
+
+**Completion audit (same date).** Current-agent compatibility: 42/42 financial tasks and 8/8 refusals on a fresh run of the original unchanged task file (`reports/agent-current/`). The evidence renderer exposes all public numeric treasury fields, and regression tests reject prose without digits, incorrect field/week selections, sign mismatches and malformed refusal arguments. Six schema-valid tool-text injection runs omitted the injected output; five passed strict task checks, while one correct answer omitted an expected optional action filter (`reports/agent-tool-injection/`). See the agent documentation for the exact limits. The optional Messages API adapter has not been exercised live. The user-selected T3-native route replaces that requirement; see docs/t3.md and reports/t3-smoke.json.
+
+Annual cash-flow source cards (`data/*/cash-flow-ground-truth.json`, plus the root Apple card) come from the visible cash-flow statements in each cited filing, independently of companyfacts. `scripts/review_cash_flows.py` checks year headers, signed values and continuation tables and never opens companyfacts. The server uses the same exact-date, filing-cutoff, revision and blocker rules as annual income facts. Quarterly cash flow is refused rather than inferred from year-to-date totals.
+
+**Historical update, 26 October 2026 (multi-model review fixes).** 168 test methods run (167 pass, one skipped as before) on Python 3.14.7 and 3.9. The source and intent evaluation passes 947/947 and the official SDK check passes 33/33. A three-model review (Claude Opus 5.5, GPT 6.1 Sol, Gemini 4 Argon) found no wrong bundled numbers. It did find failures that a refresh or ordinary use would trigger, now fixed with regression tests in `tests/test_regressions.py`:
 
 - Annual and quarterly selection share one implementation. Quarters gain the filed-before-period-end check, parsed report dates, and a 70–119-day blocker window, so one-month stubs do not block. Annual years ending in the first week of January may carry the prior `fy`. A quarterly metric whose tag is absent from the issuer's taxonomy now reports `standard_tag_absent`, as annual results do. The 20 affected "not reported" expectations changed accordingly.
 - Snapshots can include SEC's paged submission files, and `fetch` downloads them. On the real KHC case, a missing older filing used to make the restated value the silent "original"; it now raises `history_incomplete`.
@@ -15,6 +23,8 @@ This file records the 947-case source and intent evaluation (161 cases before th
 
 | Evaluation group (26 October 2026) | Passed / total | What it checks |
 | --- | ---: | --- |
+| annual cash-flow values | 93 / 93 | Signed operating, investing and financing cash flow against independent filing cards |
+| cash-flow provenance | 186 / 186 | Periods, CIK, unit, standard tags and reviewed filing/value in history |
 | filing values | 300 / 300 | Every annual and quarterly value against the card transcribed from the filing |
 | provenance | 250 / 250 | Accession, filing URL, dates, tag, unit, filing date and form per value |
 | exact ratios | 78 / 78 | Gross margin, operating margin and growth against exact rational arithmetic |
@@ -35,7 +45,7 @@ The expansion also changed one rule. A later 10-Q repeats each quarter as its pr
 
 Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11.15 with `mcp==1.30.0` and `jsonschema==4.26.0` for independent client checks.
 
-**Superseded baseline (23 September): 77 test methods passed, with no failures, errors, or skips; the 161-case evaluation passed 161/161; the official SDK check passed 21/21 checks. Current figures: 115 test methods (one skipped), 161/161 cases and 28/28 SDK checks; see the update above.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
+**Superseded baseline (23 September): 77 test methods passed, with no failures, errors, or skips; the 161-case evaluation passed 161/161; the official SDK check passed 21/21 checks. These historical figures are superseded by the latest update above.** Annual results now include gross profit and gross margin; NVIDIA Q2 FY2027 is the reviewed quarterly case.
 
 | Evaluation group | Passed / total |
 | --- | ---: |
@@ -65,7 +75,7 @@ The existing tests still cover exact decimal behavior, arithmetic signs and deno
 
 On 23 September, before the treasury tools existed, the official Python SDK negotiated MCP 2025-11-25, discovered exactly four tools, validated their input and output schema documents, called every tool, checked all three issuers, exercised a refusal, compared text with structured content, and pinged. `jsonschema` uses its date format checker for the independent nested validations.
 
-The current 28 checks, which cover all seven tools, are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
+The current 37 checks, which cover all seven tools, are recorded individually in [reports/sdk-smoke.json](reports/sdk-smoke.json). This establishes the tested stdio interaction with a second client implementation. It is not certification of every MCP feature or evidence that each desktop host has been configured.
 
 ## Measured timing
 
@@ -77,7 +87,7 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 168 (one skipped); 947 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
+| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 200 (one skipped); 1,226 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html /tmp/apple-report.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
@@ -86,7 +96,7 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
 | `python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 2026` | 0 | Four reviewed years, FY2023-FY2026, with no scope warning |
 | `python3 -B -m financial_metrics proposal --json` with recorded JSON stdin | 0 | Bounded Microsoft request; tool-computed values |
-| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | Baseline 21/21, superseded by 33/33 independent checks |
+| Separate SDK environment: `python -B scripts/verify_sdk.py` | 0 | Baseline 21/21, superseded by 37/37 independent checks |
 | `python3 -m compileall -q financial_metrics tests scripts server_stdio.py` with workspace cache | 0 | Syntax compilation passed |
 
 A regression test initially constructed a conflicting quarterly record instead of an annual one. Correcting the fixture to the intended annual interval made the ambiguity check meaningful; the final suite passed. Earlier runs from the parent folder and with an unwritable default bytecode cache were corrected by using the project working directory and an explicit workspace cache. No application defect from these attempts remains unresolved.
@@ -118,10 +128,10 @@ API downloads succeeded. At capture time some direct archive HTML requests retur
 
 - Ten reviewed companies with issuer-specific annual coverage and four reviewed 10-Q quarters each. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
 - Historical filing-date filtering does not recreate past API contents or intraday availability. Changed values are flagged; formal restatement classification requires source evidence.
-- Quarters beyond the four reviewed per issuer (including the fiscal fourth quarter, which has no 10-Q), forecasts, EBITDA, cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
-- The optional refresher supports all ten tickers and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. No live refresh using the user's contact information or source-availability SLA was measured.
+- Quarters beyond the four reviewed per issuer (including the fiscal fourth quarter, which has no 10-Q), forecasts, EBITDA, quarterly cash flow, capital expenditures, free cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
+- The optional refresher supports all ten tickers and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. The 26 October live refresh passed all ten issuers and forty quarters. No source-availability SLA is measured.
 - Full nested schemas constrain structure. They do not by themselves establish correct source transcription, arithmetic, or semantic consistency; those have separate tests.
-- The baseline evaluation calls no model. The optional treasury-analyst agent, added in October, is evaluated separately. Natural-language interpretation remains bounded, and model-generated proposal fidelity has not been evaluated.
+- The baseline evaluation calls no model. The optional treasury-analyst agent, added in October, is evaluated separately. Natural-language interpretation remains bounded. The separate model evaluations check tool arguments and selected evidence, with per-task repeat statistics.
 - Snapshot integrity assumes a trusted local manifest. There is no remote service, authentication deployment, publication, or external messaging.
 
 The plan's local implementation and verification gates are complete.

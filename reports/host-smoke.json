@@ -1,0 +1,265 @@
+{
+  "host": "Claude Code CLI, native MCP tools",
+  "model_requested": "haiku",
+  "checks": [
+    {
+      "check": "annual_cash_flow",
+      "passed": true,
+      "exit_code": 0,
+      "events": [
+        {
+          "type": "assistant",
+          "message": {
+            "content": [
+              {
+                "type": "tool_use",
+                "id": "toolu_01B3jrvhsAvo83YKzFefn3pA",
+                "name": "mcp__financial_metrics__get_annual_facts",
+                "input": {
+                  "cik": "0000320193",
+                  "fiscal_years": [
+                    2025
+                  ],
+                  "metrics": [
+                    "operating_cash_flow"
+                  ],
+                  "as_of": "2026-09-21"
+                },
+                "caller": {
+                  "type": "direct"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "user",
+          "message": {
+            "content": [
+              {
+                "tool_use_id": "toolu_01B3jrvhsAvo83YKzFefn3pA",
+                "type": "tool_result",
+                "content": "{\"status\":\"ok\",\"context\":{\"company\":{\"cik\":\"0000320193\",\"name\":\"Apple Inc.\",\"ticker\":\"AAPL\"},\"as_of\":\"2026-09-21\",\"snapshot_captured_at\":\"2026-09-21T22:17:57.973977+00:00\",\"evidence_kind\":\"sec_api_snapshot\",\"snapshot_sha256\":\"73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43\",\"policy\":{\"version\":\"reviewed-annual-quarterly-v5\",\"scope\":\"Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD\",\"selection\":\"Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.\",\"as_of\":\"Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.\",\"revision\":\"Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.\",\"net_income\":\"Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.\",\"cash_flow\":\"Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.\",\"growth\":\"Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.\",\"basis\":\"Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.\",\"precision\":\"Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places.\"},\"warnings\":[\"snapshot_older_than_7_days: historical results only; refresh separately for current coverage\"]},\"results\":[{\"fiscal_year\":2025,\"metric\":\"operating_cash_flow\",\"period_start\":\"2024-09-29\",\"period_end\":\"2025-09-27\",\"rejection_counts\":{},\"rejected_candidates\":[],\"rejected_candidates_truncated\":0,\"cik\":\"0000320193\",\"value\":\"111482000000\",\"unit\":\"USD\",\"reported_fy\":2025,\"fp\":\"FY\",\"form\":\"10-K\",\"filed\":\"2025-10-31\",\"accn\":\"0000320193-25-000079\",\"tag\":\"us-gaap:NetCashProvidedByUsedInOperatingActivities\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm\",\"status\":\"ok\",\"original\":{\"cik\":\"0000320193\",\"metric\":\"operating_cash_flow\",\"value\":\"111482000000\",\"unit\":\"USD\",\"period_start\":\"2024-09-29\",\"period_end\":\"2025-09-27\",\"fiscal_year\":2025,\"reported_fy\":2025,\"fp\":\"FY\",\"form\":\"10-K\",\"filed\":\"2025-10-31\",\"accn\":\"0000320193-25-000079\",\"tag\":\"us-gaap:NetCashProvidedByUsedInOperatingActivities\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm\"},\"history\":[{\"cik\":\"0000320193\",\"metric\":\"operating_cash_flow\",\"value\":\"111482000000\",\"unit\":\"USD\",\"period_start\":\"2024-09-29\",\"period_end\":\"2025-09-27\",\"fiscal_year\":2025,\"reported_fy\":2025,\"fp\":\"FY\",\"form\":\"10-K\",\"filed\":\"2025-10-31\",\"accn\":\"0000320193-25-000079\",\"tag\":\"us-gaap:NetCashProvidedByUsedInOperatingActivities\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm\"}],\"revision_candidate\":false,\"warnings\":[]}]}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "result",
+          "is_error": false,
+          "result": "Apple's FY2025 operating cash flow was **$111,482,000,000 (about $111.48 billion)**, as of 2026-09-21.\n\n- **Period:** 2024-09-29 to 2025-09-27\n- **Source:** Form 10-K, filed 2025-10-31, accession 0000320193-25-000079\n- **XBRL tag:** us-gaap:NetCashProvidedByUsedInOperatingActivities\n- **Revisions:** None. The value has one history entry and is not a revision candidate.\n\nThe snapshot is dated 2026-09-21, so the service flags it as historical only. Today is 2026-10-26, so current coverage would need a separate refresh.",
+          "modelUsage": {
+            "claude-haiku-5-5": {
+              "inputTokens": 1222,
+              "outputTokens": 530,
+              "cacheReadInputTokens": 7907,
+              "cacheCreationInputTokens": 2146,
+              "webSearchRequests": 0,
+              "costUSD": 0.00089547,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 124,
+              "canonicalModel": "claude-haiku-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.00089547
+        }
+      ]
+    },
+    {
+      "check": "quarter",
+      "passed": true,
+      "exit_code": 0,
+      "events": [
+        {
+          "type": "assistant",
+          "message": {
+            "content": [
+              {
+                "type": "tool_use",
+                "id": "toolu_01SP3di8VzFG7CJ5sUxS2ZM2",
+                "name": "mcp__financial_metrics__get_quarterly_facts",
+                "input": {
+                  "cik": "0001318605",
+                  "fiscal_year": 2026,
+                  "quarter": "Q3",
+                  "metrics": [
+                    "revenue"
+                  ],
+                  "as_of": "2026-10-25"
+                },
+                "caller": {
+                  "type": "direct"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "user",
+          "message": {
+            "content": [
+              {
+                "tool_use_id": "toolu_01SP3di8VzFG7CJ5sUxS2ZM2",
+                "type": "tool_result",
+                "content": "{\"status\":\"ok\",\"context\":{\"company\":{\"cik\":\"0001318605\",\"name\":\"Tesla, Inc.\",\"ticker\":\"TSLA\"},\"as_of\":\"2026-10-25\",\"snapshot_captured_at\":\"2026-10-25T21:26:26-04:00\",\"evidence_kind\":\"sec_api_snapshot\",\"snapshot_sha256\":\"c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1\",\"policy\":{\"version\":\"reviewed-annual-quarterly-v5\",\"scope\":\"Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD\",\"selection\":\"Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.\",\"as_of\":\"Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.\",\"revision\":\"Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.\",\"net_income\":\"Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.\",\"cash_flow\":\"Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.\",\"growth\":\"Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.\",\"basis\":\"Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.\",\"precision\":\"Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places.\"},\"warnings\":[]},\"results\":[{\"fiscal_year\":2026,\"metric\":\"revenue\",\"period_start\":\"2026-07-01\",\"period_end\":\"2026-09-30\",\"rejection_counts\":{\"period_mismatch\":1},\"rejected_candidates\":[{\"accn\":\"0001628280-26-066775\",\"start\":\"2026-01-01\",\"end\":\"2026-09-30\",\"unit\":\"USD\",\"filed\":\"2026-10-22\",\"reason\":\"period_mismatch\"}],\"rejected_candidates_truncated\":0,\"fp\":\"Q3\",\"cik\":\"0001318605\",\"value\":\"28046000000\",\"unit\":\"USD\",\"reported_fy\":2026,\"form\":\"10-Q\",\"filed\":\"2026-10-22\",\"accn\":\"0001628280-26-066775\",\"tag\":\"us-gaap:Revenues\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm\",\"status\":\"ok\",\"original\":{\"cik\":\"0001318605\",\"metric\":\"revenue\",\"value\":\"28046000000\",\"unit\":\"USD\",\"period_start\":\"2026-07-01\",\"period_end\":\"2026-09-30\",\"fiscal_year\":2026,\"reported_fy\":2026,\"fp\":\"Q3\",\"form\":\"10-Q\",\"filed\":\"2026-10-22\",\"accn\":\"0001628280-26-066775\",\"tag\":\"us-gaap:Revenues\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm\"},\"history\":[{\"cik\":\"0001318605\",\"metric\":\"revenue\",\"value\":\"28046000000\",\"unit\":\"USD\",\"period_start\":\"2026-07-01\",\"period_end\":\"2026-09-30\",\"fiscal_year\":2026,\"reported_fy\":2026,\"fp\":\"Q3\",\"form\":\"10-Q\",\"filed\":\"2026-10-22\",\"accn\":\"0001628280-26-066775\",\"tag\":\"us-gaap:Revenues\",\"source_url\":\"https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm\"}],\"revision_candidate\":false,\"warnings\":[]}]}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "result",
+          "is_error": false,
+          "result": "Tesla's (CIK 0001318605) Q3 FY2026 revenue was **$28,046,000,000** (USD 28.05 billion) for the quarter from 2026-07-01 to 2026-09-30.\n\n- **Filing:** Form 10-Q, accession 0001628280-26-066775, filed 2026-10-22\n- **Tag:** us-gaap:Revenues\n- **Source:** https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm\n- **Excluded candidate:** the same filing's year-to-date figure (2026-01-01 to 2026-09-30) was rejected as a period mismatch, so the value above is the standalone quarter.\n- **Revisions:** none. The value has no revision history and is not flagged as a revision candidate.",
+          "modelUsage": {
+            "claude-haiku-5-5": {
+              "inputTokens": 1226,
+              "outputTokens": 595,
+              "cacheReadInputTokens": 7915,
+              "cacheCreationInputTokens": 2149,
+              "webSearchRequests": 0,
+              "costUSD": 0.0009290500000000001,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 116,
+              "canonicalModel": "claude-haiku-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.0009290500000000001
+        }
+      ]
+    },
+    {
+      "check": "treasury",
+      "passed": true,
+      "exit_code": 0,
+      "events": [
+        {
+          "type": "assistant",
+          "message": {
+            "content": [
+              {
+                "type": "tool_use",
+                "id": "toolu_01XZTXNp4Le5N9VBWRgwKHpD",
+                "name": "mcp__financial_metrics__get_break_even",
+                "input": {
+                  "firm": "MSTR"
+                },
+                "caller": {
+                  "type": "direct"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "user",
+          "message": {
+            "content": [
+              {
+                "tool_use_id": "toolu_01XZTXNp4Le5N9VBWRgwKHpD",
+                "type": "tool_result",
+                "content": "{\"status\":\"ok\",\"firm\":{\"ticker\":\"MSTR\",\"name\":\"Strategy\",\"cik\":\"0001050446\",\"coin\":\"BTC\"},\"break_even\":{\"week_end\":\"2026-10-11\",\"preferred\":\"STRC\",\"liquidation_preference_usd\":\"100\",\"net_mnav\":\"1.190726\",\"break_even_price_usd\":\"119.07\",\"preferred_close_usd\":\"99.65\",\"gap_usd\":\"-19.42\",\"rotation\":\"Strategy issues common stock and retires STRC with the proceeds.\",\"adds_while\":\"STRC trades below the break-even price (liquidation preference x net mNAV)\",\"adds_at_close\":true,\"provenance\":{\"filed\":\"2026-10-13\",\"filing_url\":\"https://www.sec.gov/Archives/edgar/data/1050446/000119312526419726/mstr-ex99_1.htm\",\"accession\":\"0001193125-26-419726\",\"price_date\":\"2026-10-09\"}},\"source\":{\"repository\":\"https://github.com/RahilBhavan/dat-accretion\",\"commit\":\"ce3b7151b539d495c721bae5b2936bb42830418c\",\"engine\":\"dat.engine.attribute (exact recompute through dat.balances.net)\",\"market_data\":\"CoinGecko daily closes (BTC, ETH); Yahoo daily closes (common and preferred shares)\",\"snapshot_sha256\":\"0b87d8e5dbc835d209f3330b2e9b0b8a7e5aa62e4cb3c8efee0fa88c16a2bbdb\"},\"warnings\":[\"Per-share effects are measured, not judged; no forecast or investment view.\"]}"
+              }
+            ]
+          }
+        },
+        {
+          "type": "result",
+          "is_error": false,
+          "result": "For Strategy (MSTR), the latest week in the export is the week ending **2026-10-11**.\n\n- **Preferred:** STRC, liquidation preference $100\n- **Net mNAV:** 1.190726\n- **Break-even price:** $119.07 (liquidation preference \u00d7 net mNAV)\n- **STRC close:** $99.65 (price date 2026-10-09)\n- **Gap:** -$19.42, so STRC trades below break-even.\n\nUnder the stated rotation, Strategy issues common stock and retires STRC with the proceeds. This adds net coins per share while STRC trades below the break-even price, and at this close it does.\n\nThe filing is dated 2026-10-13 (accession 0001193125-26-419726). The export is frozen and its latest week is October 11, so this is not a reading as of today (October 26).",
+          "modelUsage": {
+            "claude-haiku-5-5": {
+              "inputTokens": 1183,
+              "outputTokens": 602,
+              "cacheReadInputTokens": 7829,
+              "cacheCreationInputTokens": 1042,
+              "webSearchRequests": 0,
+              "costUSD": 0.00070599,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 249,
+              "canonicalModel": "claude-haiku-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.00070599
+        }
+      ]
+    },
+    {
+      "check": "refusal",
+      "passed": true,
+      "exit_code": 0,
+      "events": [
+        {
+          "type": "assistant",
+          "message": {
+            "content": [
+              {
+                "type": "tool_use",
+                "id": "toolu_01BPpnvTXjqHoRab4H4hgfgN",
+                "name": "mcp__financial_metrics__get_annual_facts",
+                "input": {
+                  "cik": "0000320193",
+                  "fiscal_years": [
+                    2026
+                  ],
+                  "metrics": [
+                    "revenue"
+                  ],
+                  "as_of": "2026-09-21"
+                },
+                "caller": {
+                  "type": "direct"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "user",
+          "message": {
+            "content": [
+              {
+                "type": "tool_result",
+                "content": "{\"status\":\"refused\",\"code\":\"unsupported_years\",\"message\":\"Supported years for this issuer are: 2023, 2024, 2025.\"}",
+                "is_error": true,
+                "tool_use_id": "toolu_01BPpnvTXjqHoRab4H4hgfgN"
+              }
+            ]
+          }
+        },
+        {
+          "type": "result",
+          "is_error": false,
+          "result": "The call was refused. The tool doesn't have FY2026 data for Apple (CIK 0000320193). It says the supported years for this issuer are 2023, 2024, and 2025. I didn't retry with those years because you asked specifically for 2026.\n\nIf you want Apple's revenue for FY2023 through FY2025 as of 2026-09-21, I can pull that instead.",
+          "modelUsage": {
+            "claude-haiku-5-5": {
+              "inputTokens": 1217,
+              "outputTokens": 369,
+              "cacheReadInputTokens": 7897,
+              "cacheCreationInputTokens": 646,
+              "webSearchRequests": 0,
+              "costUSD": 0.0005143700000000001,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 72,
+              "canonicalModel": "claude-haiku-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.0005143700000000001
+        }
+      ]
+    }
+  ],
+  "passed": 4,
+  "total": 4
+}

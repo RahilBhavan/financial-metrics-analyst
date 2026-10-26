@@ -1,0 +1,1228 @@
+{
+  "host": "T3 Code native conversation",
+  "transport": "direct in-process financial tools",
+  "model_api_required": false,
+  "mcp_required": false,
+  "verification": "Real tool replay of model-selected requests; task/field/sign/value checks, not an inference-cost benchmark.",
+  "passed": 6,
+  "total": 6,
+  "checks": [
+    {
+      "id": "T01",
+      "passed": true,
+      "score": {
+        "id": "T01",
+        "repeat": 1,
+        "category": "sec_facts",
+        "in_scope": true,
+        "status": "answered",
+        "latency_ms": 46.0,
+        "cost_usd": null,
+        "turns": 1,
+        "tokens": 0,
+        "tool_calls": 2,
+        "numbers_delivered": 5,
+        "numbers_delivered_traced": 5,
+        "numbers_first_draft": 5,
+        "numbers_first_draft_traced": 5,
+        "rewrites": 0,
+        "tool_correct": true,
+        "arguments_correct": true,
+        "answer_numbers_correct": true,
+        "evidence_correct": true,
+        "false_refusal": false
+      },
+      "run": {
+        "status": "answered",
+        "backend": "t3-native-direct",
+        "question": "What was Microsoft's gross margin in fiscal 2026?",
+        "answer": "MSFT FY2026 gross margin: 67.94% (2025-07-01 to 2026-06-30). Source: https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm. Warnings: snapshot_older_than_7_days: historical results only; refresh separately for current coverage.",
+        "evidence": [
+          "c1.r0"
+        ],
+        "traces": [
+          {
+            "text": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+            "kind": "url",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2025-07-01",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-06-30",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026",
+            "kind": "number",
+            "traced": true,
+            "source": "call[0].lookup_timestamp (text)",
+            "tool_value": "2026"
+          },
+          {
+            "text": "67.94%",
+            "kind": "number",
+            "traced": true,
+            "source": "call[1].results[0].value",
+            "tool_value": "67.94409337058031153661866145932214"
+          }
+        ],
+        "results": [
+          {
+            "status": "ok",
+            "cik": "0000789019",
+            "name": "Microsoft Corporation",
+            "ticker": "MSFT",
+            "lookup_timestamp": "2026-09-21T22:38:24.721387+00:00",
+            "lookup_is_cached": true,
+            "source_url": "https://data.sec.gov/submissions/CIK0000789019.json"
+          },
+          {
+            "status": "ok",
+            "context": {
+              "company": {
+                "cik": "0000789019",
+                "name": "Microsoft Corporation",
+                "ticker": "MSFT"
+              },
+              "as_of": "2026-09-21",
+              "snapshot_captured_at": "2026-09-21T22:38:24.721387+00:00",
+              "evidence_kind": "sec_api_snapshot",
+              "snapshot_sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
+              "policy": {
+                "version": "reviewed-annual-quarterly-v5",
+                "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
+                "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
+                "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
+                "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
+                "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
+                "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.",
+                "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
+                "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
+                "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places."
+              },
+              "warnings": [
+                "snapshot_older_than_7_days: historical results only; refresh separately for current coverage"
+              ]
+            },
+            "results": [
+              {
+                "fiscal_year": 2026,
+                "metric": "gross_margin",
+                "unit": "percent",
+                "period_start": "2025-07-01",
+                "period_end": "2026-06-30",
+                "value": "67.94409337058031153661866145932214",
+                "inputs": [
+                  {
+                    "fiscal_year": 2026,
+                    "metric": "revenue",
+                    "period_start": "2025-07-01",
+                    "period_end": "2026-06-30",
+                    "cik": "0000789019",
+                    "value": "331839000000",
+                    "unit": "USD",
+                    "reported_fy": 2026,
+                    "fp": "FY",
+                    "form": "10-K",
+                    "filed": "2026-07-29",
+                    "accn": "0001193125-26-323660",
+                    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+                    "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+                    "status": "ok",
+                    "original": {
+                      "cik": "0000789019",
+                      "metric": "revenue",
+                      "value": "331839000000",
+                      "unit": "USD",
+                      "period_start": "2025-07-01",
+                      "period_end": "2026-06-30",
+                      "fiscal_year": 2026,
+                      "reported_fy": 2026,
+                      "fp": "FY",
+                      "form": "10-K",
+                      "filed": "2026-07-29",
+                      "accn": "0001193125-26-323660",
+                      "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+                      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+                    },
+                    "history": [
+                      {
+                        "cik": "0000789019",
+                        "metric": "revenue",
+                        "value": "331839000000",
+                        "unit": "USD",
+                        "period_start": "2025-07-01",
+                        "period_end": "2026-06-30",
+                        "fiscal_year": 2026,
+                        "reported_fy": 2026,
+                        "fp": "FY",
+                        "form": "10-K",
+                        "filed": "2026-07-29",
+                        "accn": "0001193125-26-323660",
+                        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+                        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+                      }
+                    ],
+                    "revision_candidate": false,
+                    "warnings": []
+                  },
+                  {
+                    "fiscal_year": 2026,
+                    "metric": "gross_profit",
+                    "period_start": "2025-07-01",
+                    "period_end": "2026-06-30",
+                    "cik": "0000789019",
+                    "value": "225465000000",
+                    "unit": "USD",
+                    "reported_fy": 2026,
+                    "fp": "FY",
+                    "form": "10-K",
+                    "filed": "2026-07-29",
+                    "accn": "0001193125-26-323660",
+                    "tag": "us-gaap:GrossProfit",
+                    "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+                    "status": "ok",
+                    "original": {
+                      "cik": "0000789019",
+                      "metric": "gross_profit",
+                      "value": "225465000000",
+                      "unit": "USD",
+                      "period_start": "2025-07-01",
+                      "period_end": "2026-06-30",
+                      "fiscal_year": 2026,
+                      "reported_fy": 2026,
+                      "fp": "FY",
+                      "form": "10-K",
+                      "filed": "2026-07-29",
+                      "accn": "0001193125-26-323660",
+                      "tag": "us-gaap:GrossProfit",
+                      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+                    },
+                    "history": [
+                      {
+                        "cik": "0000789019",
+                        "metric": "gross_profit",
+                        "value": "225465000000",
+                        "unit": "USD",
+                        "period_start": "2025-07-01",
+                        "period_end": "2026-06-30",
+                        "fiscal_year": 2026,
+                        "reported_fy": 2026,
+                        "fp": "FY",
+                        "form": "10-K",
+                        "filed": "2026-07-29",
+                        "accn": "0001193125-26-323660",
+                        "tag": "us-gaap:GrossProfit",
+                        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+                      }
+                    ],
+                    "revision_candidate": false,
+                    "warnings": []
+                  }
+                ],
+                "display_value": "67.94",
+                "exact_fraction": {
+                  "numerator": "7515500",
+                  "denominator": "110613"
+                },
+                "precision": {
+                  "significant_digits": 34,
+                  "rounding": "ROUND_HALF_EVEN",
+                  "display_places": 2
+                },
+                "status": "ok",
+                "formula": "gross_profit / revenue * 100",
+                "warnings": []
+              }
+            ]
+          }
+        ],
+        "tool_calls": [
+          {
+            "turn": 1,
+            "name": "resolve_company",
+            "arguments": {
+              "ticker": "MSFT"
+            },
+            "status": "ok",
+            "result_index": 0
+          },
+          {
+            "turn": 1,
+            "name": "calculate_metrics",
+            "arguments": {
+              "cik": "0000789019",
+              "fiscal_years": [
+                2026
+              ],
+              "metrics": [
+                "gross_margin"
+              ],
+              "as_of": "2026-09-21"
+            },
+            "status": "ok",
+            "result_index": 1
+          }
+        ],
+        "drafts": [
+          {
+            "text": "MSFT FY2026 gross margin: 67.94% (2025-07-01 to 2026-06-30). Source: https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm. Warnings: snapshot_older_than_7_days: historical results only; refresh separately for current coverage.",
+            "selection": {
+              "evidence": [
+                "c1.r0"
+              ]
+            },
+            "traces": [
+              {
+                "text": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+                "kind": "url",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2025-07-01",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-06-30",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026",
+                "kind": "number",
+                "traced": true,
+                "source": "call[0].lookup_timestamp (text)",
+                "tool_value": "2026"
+              },
+              {
+                "text": "67.94%",
+                "kind": "number",
+                "traced": true,
+                "source": "call[1].results[0].value",
+                "tool_value": "67.94409337058031153661866145932214"
+              }
+            ]
+          }
+        ],
+        "turns": 1,
+        "usage": {},
+        "cost_usd": null,
+        "latency_ms": 46.0
+      }
+    },
+    {
+      "id": "T02",
+      "passed": true,
+      "score": {
+        "id": "T02",
+        "repeat": 1,
+        "category": "sec_facts",
+        "in_scope": true,
+        "status": "answered",
+        "latency_ms": 14.6,
+        "cost_usd": null,
+        "turns": 1,
+        "tokens": 0,
+        "tool_calls": 2,
+        "numbers_delivered": 5,
+        "numbers_delivered_traced": 5,
+        "numbers_first_draft": 5,
+        "numbers_first_draft_traced": 5,
+        "rewrites": 0,
+        "tool_correct": true,
+        "arguments_correct": true,
+        "answer_numbers_correct": true,
+        "evidence_correct": true,
+        "false_refusal": false
+      },
+      "run": {
+        "status": "answered",
+        "backend": "t3-native-direct",
+        "question": "How much cash did Coinbase Global, Inc. generate or use in operations in FY2025?",
+        "answer": "COIN FY2025 operating cash flow: 2426383000 USD (2025-01-01 to 2025-12-31). Source: https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm.",
+        "evidence": [
+          "c1.r0"
+        ],
+        "traces": [
+          {
+            "text": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+            "kind": "url",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2025-01-01",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2025-12-31",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2025",
+            "kind": "number",
+            "traced": true,
+            "source": "call[1].context.policy.scope (text)",
+            "tool_value": "2025"
+          },
+          {
+            "text": "2426383000",
+            "kind": "number",
+            "traced": true,
+            "source": "call[1].results[0].value",
+            "tool_value": "2426383000"
+          }
+        ],
+        "results": [
+          {
+            "status": "ok",
+            "cik": "0001679788",
+            "name": "Coinbase Global, Inc.",
+            "ticker": "COIN",
+            "lookup_timestamp": "2026-10-25T21:26:10-04:00",
+            "lookup_is_cached": true,
+            "source_url": "https://data.sec.gov/submissions/CIK0001679788.json"
+          },
+          {
+            "status": "ok",
+            "context": {
+              "company": {
+                "cik": "0001679788",
+                "name": "Coinbase Global, Inc.",
+                "ticker": "COIN"
+              },
+              "as_of": "2026-10-25",
+              "snapshot_captured_at": "2026-10-25T21:26:10-04:00",
+              "evidence_kind": "sec_api_snapshot",
+              "snapshot_sha256": "300d4810b90cc9eee95bde4ca98095d9412a5b89612c97473eb40c4dafa4e44a",
+              "policy": {
+                "version": "reviewed-annual-quarterly-v5",
+                "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
+                "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
+                "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
+                "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
+                "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
+                "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.",
+                "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
+                "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
+                "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places."
+              },
+              "warnings": []
+            },
+            "results": [
+              {
+                "fiscal_year": 2025,
+                "metric": "operating_cash_flow",
+                "period_start": "2025-01-01",
+                "period_end": "2025-12-31",
+                "rejection_counts": {},
+                "rejected_candidates": [],
+                "rejected_candidates_truncated": 0,
+                "cik": "0001679788",
+                "value": "2426383000",
+                "unit": "USD",
+                "reported_fy": 2025,
+                "fp": "FY",
+                "form": "10-K",
+                "filed": "2026-02-12",
+                "accn": "0001679788-26-000015",
+                "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+                "status": "ok",
+                "original": {
+                  "cik": "0001679788",
+                  "metric": "operating_cash_flow",
+                  "value": "2426383000",
+                  "unit": "USD",
+                  "period_start": "2025-01-01",
+                  "period_end": "2025-12-31",
+                  "fiscal_year": 2025,
+                  "reported_fy": 2025,
+                  "fp": "FY",
+                  "form": "10-K",
+                  "filed": "2026-02-12",
+                  "accn": "0001679788-26-000015",
+                  "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                  "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm"
+                },
+                "history": [
+                  {
+                    "cik": "0001679788",
+                    "metric": "operating_cash_flow",
+                    "value": "2426383000",
+                    "unit": "USD",
+                    "period_start": "2025-01-01",
+                    "period_end": "2025-12-31",
+                    "fiscal_year": 2025,
+                    "reported_fy": 2025,
+                    "fp": "FY",
+                    "form": "10-K",
+                    "filed": "2026-02-12",
+                    "accn": "0001679788-26-000015",
+                    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+                    "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm"
+                  }
+                ],
+                "revision_candidate": false,
+                "warnings": []
+              }
+            ]
+          }
+        ],
+        "tool_calls": [
+          {
+            "turn": 1,
+            "name": "resolve_company",
+            "arguments": {
+              "ticker": "COIN"
+            },
+            "status": "ok",
+            "result_index": 0
+          },
+          {
+            "turn": 1,
+            "name": "get_annual_facts",
+            "arguments": {
+              "cik": "0001679788",
+              "fiscal_years": [
+                2025
+              ],
+              "metrics": [
+                "operating_cash_flow"
+              ],
+              "as_of": "2026-10-25"
+            },
+            "status": "ok",
+            "result_index": 1
+          }
+        ],
+        "drafts": [
+          {
+            "text": "COIN FY2025 operating cash flow: 2426383000 USD (2025-01-01 to 2025-12-31). Source: https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm.",
+            "selection": {
+              "evidence": [
+                "c1.r0"
+              ]
+            },
+            "traces": [
+              {
+                "text": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+                "kind": "url",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2025-01-01",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2025-12-31",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2025",
+                "kind": "number",
+                "traced": true,
+                "source": "call[1].context.policy.scope (text)",
+                "tool_value": "2025"
+              },
+              {
+                "text": "2426383000",
+                "kind": "number",
+                "traced": true,
+                "source": "call[1].results[0].value",
+                "tool_value": "2426383000"
+              }
+            ]
+          }
+        ],
+        "turns": 1,
+        "usage": {},
+        "cost_usd": null,
+        "latency_ms": 14.6
+      }
+    },
+    {
+      "id": "T03",
+      "passed": true,
+      "score": {
+        "id": "T03",
+        "repeat": 1,
+        "category": "sec_facts",
+        "in_scope": true,
+        "status": "answered",
+        "latency_ms": 33.6,
+        "cost_usd": null,
+        "turns": 1,
+        "tokens": 0,
+        "tool_calls": 2,
+        "numbers_delivered": 5,
+        "numbers_delivered_traced": 5,
+        "numbers_first_draft": 5,
+        "numbers_first_draft_traced": 5,
+        "rewrites": 0,
+        "tool_correct": true,
+        "arguments_correct": true,
+        "answer_numbers_correct": true,
+        "evidence_correct": true,
+        "false_refusal": false
+      },
+      "run": {
+        "status": "answered",
+        "backend": "t3-native-direct",
+        "question": "Give me Tesla, Inc.'s revenue for Q3 FY2026, with the filing.",
+        "answer": "TSLA Q3 FY2026 revenue: 28046000000 USD (2026-07-01 to 2026-09-30). Source: https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm.",
+        "evidence": [
+          "c1.r0"
+        ],
+        "traces": [
+          {
+            "text": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+            "kind": "url",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-07-01",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-09-30",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026",
+            "kind": "number",
+            "traced": true,
+            "source": "call[0].lookup_timestamp (text)",
+            "tool_value": "2026"
+          },
+          {
+            "text": "28046000000",
+            "kind": "number",
+            "traced": true,
+            "source": "call[1].results[0].value",
+            "tool_value": "28046000000"
+          }
+        ],
+        "results": [
+          {
+            "status": "ok",
+            "cik": "0001318605",
+            "name": "Tesla, Inc.",
+            "ticker": "TSLA",
+            "lookup_timestamp": "2026-10-25T21:26:26-04:00",
+            "lookup_is_cached": true,
+            "source_url": "https://data.sec.gov/submissions/CIK0001318605.json"
+          },
+          {
+            "status": "ok",
+            "context": {
+              "company": {
+                "cik": "0001318605",
+                "name": "Tesla, Inc.",
+                "ticker": "TSLA"
+              },
+              "as_of": "2026-10-25",
+              "snapshot_captured_at": "2026-10-25T21:26:26-04:00",
+              "evidence_kind": "sec_api_snapshot",
+              "snapshot_sha256": "c951e0ae2402dd8cf8f39319928adccc4196b997941fe40b0d4d6b8060802db1",
+              "policy": {
+                "version": "reviewed-annual-quarterly-v5",
+                "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
+                "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
+                "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
+                "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
+                "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
+                "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.",
+                "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
+                "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
+                "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places."
+              },
+              "warnings": []
+            },
+            "results": [
+              {
+                "fiscal_year": 2026,
+                "metric": "revenue",
+                "period_start": "2026-07-01",
+                "period_end": "2026-09-30",
+                "rejection_counts": {
+                  "period_mismatch": 1
+                },
+                "rejected_candidates": [
+                  {
+                    "accn": "0001628280-26-066775",
+                    "start": "2026-01-01",
+                    "end": "2026-09-30",
+                    "unit": "USD",
+                    "filed": "2026-10-22",
+                    "reason": "period_mismatch"
+                  }
+                ],
+                "rejected_candidates_truncated": 0,
+                "fp": "Q3",
+                "cik": "0001318605",
+                "value": "28046000000",
+                "unit": "USD",
+                "reported_fy": 2026,
+                "form": "10-Q",
+                "filed": "2026-10-22",
+                "accn": "0001628280-26-066775",
+                "tag": "us-gaap:Revenues",
+                "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+                "status": "ok",
+                "original": {
+                  "cik": "0001318605",
+                  "metric": "revenue",
+                  "value": "28046000000",
+                  "unit": "USD",
+                  "period_start": "2026-07-01",
+                  "period_end": "2026-09-30",
+                  "fiscal_year": 2026,
+                  "reported_fy": 2026,
+                  "fp": "Q3",
+                  "form": "10-Q",
+                  "filed": "2026-10-22",
+                  "accn": "0001628280-26-066775",
+                  "tag": "us-gaap:Revenues",
+                  "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+                },
+                "history": [
+                  {
+                    "cik": "0001318605",
+                    "metric": "revenue",
+                    "value": "28046000000",
+                    "unit": "USD",
+                    "period_start": "2026-07-01",
+                    "period_end": "2026-09-30",
+                    "fiscal_year": 2026,
+                    "reported_fy": 2026,
+                    "fp": "Q3",
+                    "form": "10-Q",
+                    "filed": "2026-10-22",
+                    "accn": "0001628280-26-066775",
+                    "tag": "us-gaap:Revenues",
+                    "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+                  }
+                ],
+                "revision_candidate": false,
+                "warnings": []
+              }
+            ]
+          }
+        ],
+        "tool_calls": [
+          {
+            "turn": 1,
+            "name": "resolve_company",
+            "arguments": {
+              "ticker": "TSLA"
+            },
+            "status": "ok",
+            "result_index": 0
+          },
+          {
+            "turn": 1,
+            "name": "get_quarterly_facts",
+            "arguments": {
+              "cik": "0001318605",
+              "fiscal_year": 2026,
+              "quarter": "Q3",
+              "metrics": [
+                "revenue"
+              ],
+              "as_of": "2026-10-25"
+            },
+            "status": "ok",
+            "result_index": 1
+          }
+        ],
+        "drafts": [
+          {
+            "text": "TSLA Q3 FY2026 revenue: 28046000000 USD (2026-07-01 to 2026-09-30). Source: https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm.",
+            "selection": {
+              "evidence": [
+                "c1.r0"
+              ]
+            },
+            "traces": [
+              {
+                "text": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+                "kind": "url",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-07-01",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-09-30",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026",
+                "kind": "number",
+                "traced": true,
+                "source": "call[0].lookup_timestamp (text)",
+                "tool_value": "2026"
+              },
+              {
+                "text": "28046000000",
+                "kind": "number",
+                "traced": true,
+                "source": "call[1].results[0].value",
+                "tool_value": "28046000000"
+              }
+            ]
+          }
+        ],
+        "turns": 1,
+        "usage": {},
+        "cost_usd": null,
+        "latency_ms": 33.6
+      }
+    },
+    {
+      "id": "T04",
+      "passed": true,
+      "score": {
+        "id": "T04",
+        "repeat": 1,
+        "category": "coins_per_share",
+        "in_scope": true,
+        "status": "answered",
+        "latency_ms": 0.4,
+        "cost_usd": null,
+        "turns": 1,
+        "tokens": 0,
+        "tool_calls": 1,
+        "numbers_delivered": 4,
+        "numbers_delivered_traced": 4,
+        "numbers_first_draft": 4,
+        "numbers_first_draft_traced": 4,
+        "rewrites": 0,
+        "tool_correct": true,
+        "arguments_correct": true,
+        "answer_numbers_correct": true,
+        "evidence_correct": true,
+        "false_refusal": false
+      },
+      "run": {
+        "status": "answered",
+        "backend": "t3-native-direct",
+        "question": "What was Strategy's net mNAV in the week ending 2026-09-30?",
+        "answer": "MSTR week ending 2026-09-30: net mNAV: 1.160971. Market-price date: 2026-09-30. Source: https://www.sec.gov/Archives/edgar/data/1050446/000119312526413164/mstr-20261005.htm. Warnings: Per-share effects are measured, not judged; no forecast or investment view..",
+        "evidence": [
+          "c0.week.net_mnav"
+        ],
+        "traces": [
+          {
+            "text": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526413164/mstr-20261005.htm",
+            "kind": "url",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-09-30",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-09-30",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "1.160971",
+            "kind": "number",
+            "traced": true,
+            "source": "call[0].week.net_mnav",
+            "tool_value": "1.160971"
+          }
+        ],
+        "results": [
+          {
+            "status": "ok",
+            "firm": {
+              "ticker": "MSTR",
+              "name": "Strategy",
+              "cik": "0001050446",
+              "coin": "BTC"
+            },
+            "week": {
+              "week_end": "2026-09-30",
+              "coin": "BTC",
+              "coins_per_share": "0.001577767998",
+              "coins_per_share_unit": "BTC per diluted share",
+              "net_sats_per_share": "157776.80",
+              "net_mnav": "1.160971",
+              "coin_price_usd": "83576.13",
+              "share_price_usd": "153.09",
+              "diluted_shares": "430835442",
+              "coin_holdings": "847666",
+              "preferred_close_usd": "99.35",
+              "provenance": {
+                "filed": "2026-10-05",
+                "filing_url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526413164/mstr-20261005.htm",
+                "accession": "0001193125-26-413164",
+                "price_date": "2026-09-30"
+              }
+            },
+            "comparison": null,
+            "stated_weeks": {
+              "first": "2026-05-31",
+              "last": "2026-10-11",
+              "count": 22
+            },
+            "source": {
+              "repository": "https://github.com/RahilBhavan/dat-accretion",
+              "commit": "ce3b7151b539d495c721bae5b2936bb42830418c",
+              "engine": "dat.engine.attribute (exact recompute through dat.balances.net)",
+              "market_data": "CoinGecko daily closes (BTC, ETH); Yahoo daily closes (common and preferred shares)",
+              "snapshot_sha256": "0b87d8e5dbc835d209f3330b2e9b0b8a7e5aa62e4cb3c8efee0fa88c16a2bbdb"
+            },
+            "warnings": [
+              "Per-share effects are measured, not judged; no forecast or investment view."
+            ]
+          }
+        ],
+        "tool_calls": [
+          {
+            "turn": 1,
+            "name": "get_coins_per_share",
+            "arguments": {
+              "firm": "MSTR",
+              "week_end": "2026-09-30"
+            },
+            "status": "ok",
+            "result_index": 0
+          }
+        ],
+        "drafts": [
+          {
+            "text": "MSTR week ending 2026-09-30: net mNAV: 1.160971. Market-price date: 2026-09-30. Source: https://www.sec.gov/Archives/edgar/data/1050446/000119312526413164/mstr-20261005.htm. Warnings: Per-share effects are measured, not judged; no forecast or investment view..",
+            "selection": {
+              "evidence": [
+                "c0.week.net_mnav"
+              ]
+            },
+            "traces": [
+              {
+                "text": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526413164/mstr-20261005.htm",
+                "kind": "url",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-09-30",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-09-30",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "1.160971",
+                "kind": "number",
+                "traced": true,
+                "source": "call[0].week.net_mnav",
+                "tool_value": "1.160971"
+              }
+            ]
+          }
+        ],
+        "turns": 1,
+        "usage": {},
+        "cost_usd": null,
+        "latency_ms": 0.4
+      }
+    },
+    {
+      "id": "T05",
+      "passed": true,
+      "score": {
+        "id": "T05",
+        "repeat": 1,
+        "category": "treasury_actions",
+        "in_scope": true,
+        "status": "answered",
+        "latency_ms": 0.5,
+        "cost_usd": null,
+        "turns": 1,
+        "tokens": 0,
+        "tool_calls": 1,
+        "numbers_delivered": 5,
+        "numbers_delivered_traced": 5,
+        "numbers_first_draft": 5,
+        "numbers_first_draft_traced": 5,
+        "rewrites": 0,
+        "tool_correct": true,
+        "arguments_correct": true,
+        "answer_numbers_correct": true,
+        "evidence_correct": true,
+        "false_refusal": false
+      },
+      "run": {
+        "status": "answered",
+        "backend": "t3-native-direct",
+        "question": "How did BitMine's last ATM raise change ETH per share?",
+        "answer": "BMNR est_issuance (estimated), week ending 2026-10-11: change in coins per diluted share: -0.000000001042218813. Source: https://www.sec.gov/Archives/edgar/data/1829311/000149315226046744/ex99-1.htm. Warnings: BitMine diluted shares (S) are estimated between 10-Q filings; counting staked ETH as bought biases S upward by up to 0.55% at 2026-10-11.; Per-share effects are measured, not judged; no forecast or investment view..",
+        "evidence": [
+          "c0.a0.coins_per_share_change"
+        ],
+        "traces": [
+          {
+            "text": "https://www.sec.gov/Archives/edgar/data/1829311/000149315226046744/ex99-1.htm",
+            "kind": "url",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-10-11",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "2026-10-11",
+            "kind": "date",
+            "traced": true,
+            "source": "verbatim",
+            "tool_value": null
+          },
+          {
+            "text": "-0.000000001042218813",
+            "kind": "number",
+            "traced": true,
+            "source": "call[0].actions[0].coins_per_share_change",
+            "tool_value": "-1.042218813E-9"
+          },
+          {
+            "text": "0.55%",
+            "kind": "number",
+            "traced": true,
+            "source": "call[0].warnings[0] (text)",
+            "tool_value": "0.55"
+          }
+        ],
+        "results": [
+          {
+            "status": "ok",
+            "firm": {
+              "ticker": "BMNR",
+              "name": "BitMine Immersion Technologies",
+              "cik": "0001829311",
+              "coin": "ETH"
+            },
+            "matched": 17,
+            "returned": 1,
+            "actions": [
+              {
+                "week_end": "2026-10-11",
+                "prior_week_end": "2026-10-04",
+                "action": "est_issuance",
+                "ticker": "BMNR",
+                "basis": "estimated",
+                "note": "release 000149315226046744; R = cash & marketable securities (incl. securities); D = 0 (10-Q 5/31: no debt); S estimated: 7/09 anchor + unexplained dR / BMNR close (unscaled) - buybacks; awards/warrants in S at close 24.03: 4,328,119; q = BMNP close / 100",
+                "usd": "797303.92",
+                "units": "33180",
+                "avg_price_usd": "24.03000069",
+                "m_at_action": "0.9979466",
+                "q_at_action": null,
+                "coin": "ETH",
+                "coins_per_share_before": "0.009674864073",
+                "coins_per_share_change": "-0.000000001042218813",
+                "coins_per_share_change_first_order": "-0.000000001042273423",
+                "effect_bps_of_coins_per_share": "-0.00107724",
+                "value_to_common_usd": "-1640.51",
+                "direction": "reduces",
+                "provenance": {
+                  "filed": "2026-10-13",
+                  "filing_url": "https://www.sec.gov/Archives/edgar/data/1829311/000149315226046744/ex99-1.htm",
+                  "accession": "0001493152-26-046744"
+                }
+              }
+            ],
+            "source": {
+              "repository": "https://github.com/RahilBhavan/dat-accretion",
+              "commit": "ce3b7151b539d495c721bae5b2936bb42830418c",
+              "engine": "dat.engine.attribute (exact recompute through dat.balances.net)",
+              "market_data": "CoinGecko daily closes (BTC, ETH); Yahoo daily closes (common and preferred shares)",
+              "snapshot_sha256": "0b87d8e5dbc835d209f3330b2e9b0b8a7e5aa62e4cb3c8efee0fa88c16a2bbdb"
+            },
+            "warnings": [
+              "BitMine diluted shares (S) are estimated between 10-Q filings; counting staked ETH as bought biases S upward by up to 0.55% at 2026-10-11.",
+              "Per-share effects are measured, not judged; no forecast or investment view."
+            ]
+          }
+        ],
+        "tool_calls": [
+          {
+            "turn": 1,
+            "name": "get_treasury_actions",
+            "arguments": {
+              "firm": "BMNR",
+              "action": "est_issuance",
+              "limit": 1
+            },
+            "status": "ok",
+            "result_index": 0
+          }
+        ],
+        "drafts": [
+          {
+            "text": "BMNR est_issuance (estimated), week ending 2026-10-11: change in coins per diluted share: -0.000000001042218813. Source: https://www.sec.gov/Archives/edgar/data/1829311/000149315226046744/ex99-1.htm. Warnings: BitMine diluted shares (S) are estimated between 10-Q filings; counting staked ETH as bought biases S upward by up to 0.55% at 2026-10-11.; Per-share effects are measured, not judged; no forecast or investment view..",
+            "selection": {
+              "evidence": [
+                "c0.a0.coins_per_share_change"
+              ]
+            },
+            "traces": [
+              {
+                "text": "https://www.sec.gov/Archives/edgar/data/1829311/000149315226046744/ex99-1.htm",
+                "kind": "url",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-10-11",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "2026-10-11",
+                "kind": "date",
+                "traced": true,
+                "source": "verbatim",
+                "tool_value": null
+              },
+              {
+                "text": "-0.000000001042218813",
+                "kind": "number",
+                "traced": true,
+                "source": "call[0].actions[0].coins_per_share_change",
+                "tool_value": "-1.042218813E-9"
+              },
+              {
+                "text": "0.55%",
+                "kind": "number",
+                "traced": true,
+                "source": "call[0].warnings[0] (text)",
+                "tool_value": "0.55"
+              }
+            ]
+          }
+        ],
+        "turns": 1,
+        "usage": {},
+        "cost_usd": null,
+        "latency_ms": 0.5
+      }
+    },
+    {
+      "id": "T06",
+      "passed": true,
+      "score": {
+        "id": "T06",
+        "repeat": 1,
+        "category": "out_of_scope",
+        "in_scope": false,
+        "status": "refused",
+        "latency_ms": 0,
+        "cost_usd": null,
+        "turns": 1,
+        "tokens": 0,
+        "tool_calls": 0,
+        "numbers_delivered": 0,
+        "numbers_delivered_traced": 0,
+        "numbers_first_draft": 0,
+        "numbers_first_draft_traced": 0,
+        "rewrites": 0,
+        "refusal_correct": true,
+        "data_tool_calls": 0
+      },
+      "run": {
+        "status": "refused",
+        "refusal": "Investment advice about whether to buy MSTR right now is outside the reviewed historical-data workflow; it provides no buy/sell recommendations or live prices.",
+        "answer": null,
+        "traces": [],
+        "tool_calls": [],
+        "results": [],
+        "drafts": [],
+        "latency_ms": 0,
+        "turns": 1,
+        "usage": {}
+      }
+    }
+  ],
+  "t3": {
+    "provider": "codex",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  }
+}

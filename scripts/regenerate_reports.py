@@ -17,6 +17,8 @@ REPORTS = ROOT / "reports"
 PROPOSAL = {"ticker": "MSFT", "fiscal_years": [2025], "metrics": ["revenue", "operating_margin"], "as_of": "2025-07-30"}
 # (output file, CLI arguments, stdin, expected exit status)
 COMMANDS = [
+    ("cash-flow-demo.txt", ["analyze", "--ticker", "AAPL", "--metrics", "operating_cash_flow", "investing_cash_flow", "financing_cash_flow", "--html", str(REPORTS / "cash-flow-demo.html")], None, 0),
+    ("cash-flow-demo.json", ["analyze", "--ticker", "AAPL", "--metrics", "operating_cash_flow", "investing_cash_flow", "financing_cash_flow", "--json"], None, 0),
     ("stdio-smoke.json", ["smoke"], None, 0),
     ("question-demo.txt", ["ask", "What were Apple's net sales and operating profit in FY2023 through FY2025?"], None, 0),
     ("clarification-demo.json", ["ask", "Apple profit 2025", "--json"], None, 3),

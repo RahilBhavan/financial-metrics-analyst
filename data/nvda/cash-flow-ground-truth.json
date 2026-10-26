@@ -1,0 +1,53 @@
+{
+  "verification": "Visible annual cash-flow statement; scripts/review_cash_flows.py never reads companyfacts.",
+  "ticker": "NVDA",
+  "cik": "0001045810",
+  "unit": "USD",
+  "years": {
+    "2024": {
+      "start": "2023-01-30",
+      "end": "2024-01-28",
+      "accession": "0001045810-26-000021",
+      "filed": "2026-02-25",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "28090000000",
+      "investing_cash_flow": "-10566000000",
+      "financing_cash_flow": "-13633000000"
+    },
+    "2025": {
+      "start": "2024-01-29",
+      "end": "2025-01-26",
+      "accession": "0001045810-26-000021",
+      "filed": "2026-02-25",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "64089000000",
+      "investing_cash_flow": "-20421000000",
+      "financing_cash_flow": "-42359000000"
+    },
+    "2026": {
+      "start": "2025-01-27",
+      "end": "2026-01-25",
+      "accession": "0001045810-26-000021",
+      "filed": "2026-02-25",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "102718000000",
+      "investing_cash_flow": "-52228000000",
+      "financing_cash_flow": "-48474000000"
+    }
+  }
+}

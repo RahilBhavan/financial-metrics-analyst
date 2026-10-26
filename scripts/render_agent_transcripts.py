@@ -3,6 +3,7 @@
     python3 -B scripts/render_agent_transcripts.py   # writes reports/agent-transcripts.html
 """
 
+import argparse
 import json
 import sys
 from html import escape
@@ -32,7 +33,7 @@ def render(runs_path, eval_path):
     runs = [json.loads(line) for line in lines[1:]]
     report = json.loads(Path(eval_path).read_text())
     meta, summary = report["meta"], report["summary"]
-    scores = {s["id"]: s for s in report["scores"]}
+    scores = {(s["id"], s.get("repeat", 1)): s for s in report["scores"]}
     tasks = {t["id"]: t for t in json.loads((ROOT / meta["tasks_file"]).read_text())["tasks"]}
     rows = [("Tool selection (in scope)", rate(summary["tool_selection"])), ("Arguments (in scope)", rate(summary["arguments"])),
             ("Expected numbers quoted (in scope)", rate(summary["answer_numbers"])),
@@ -47,16 +48,16 @@ def render(runs_path, eval_path):
     parts = ["<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>",
              "<meta http-equiv='Content-Security-Policy' content=\"default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'\">",
              "<title>Treasury agent transcripts</title><style>" + STYLE + "</style></head><body><main>",
-             "<h1>Treasury agent: 50 frozen tasks</h1>",
+             "<h1>Treasury agent: " + str(len(runs)) + " runs</h1>",
              "<p class='meta'>Backend " + escape(meta["backend"]) + ", model " + escape(", ".join(meta.get("models_seen", []))) + ", code "
              + escape(meta.get("code_commit", "")[:7]) + ", run " + escape(meta.get("started", "")) + ". Tasks sha256 "
              + escape(meta["tasks_sha256"][:12]) + ".</p><table><tbody>"]
     parts += ["<tr><th scope='row'>" + escape(k) + "</th><td class='n'>" + escape(v) + "</td></tr>" for k, v in rows]
     parts.append("</tbody></table>")
     for run in runs:
-        task, score = tasks[run["task_id"]], scores[run["task_id"]]
+        task, score = tasks[run["task_id"]], scores[run["task_id"], run.get("repeat", 1)]
         verdict = score["refusal_correct"] if not task["in_scope"] else (score["tool_correct"] and score["arguments_correct"] and score["answer_numbers_correct"])
-        parts.append("<details><summary>" + escape(task["id"]) + " " + mark(verdict) + " " + escape(task["question"]) + "</summary>")
+        parts.append("<details><summary>" + escape(task["id"]) + " (run " + str(run.get("repeat", 1)) + ") " + mark(verdict) + " " + escape(task["question"]) + "</summary>")
         parts.append("<p class='meta'>" + escape(run["status"]) + ", " + str(run["latency_ms"]) + " ms, " + str(score["tokens"]) + " tokens"
                      + (", $" + format(run["cost_usd"], ".5f") if run.get("cost_usd") is not None else "") + "</p>")
         if task["in_scope"]:
@@ -82,6 +83,9 @@ def render(runs_path, eval_path):
 
 
 if __name__ == "__main__":
-    reports = ROOT / "reports"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--reports-dir", type=Path, default=ROOT / "reports")
+    args = parser.parse_args()
+    reports = args.reports_dir
     (reports / "agent-transcripts.html").write_text(render(reports / "agent-runs.jsonl", reports / "agent-eval.json"))
     sys.exit(0)

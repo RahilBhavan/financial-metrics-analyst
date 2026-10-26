@@ -8,6 +8,8 @@ from .policy import ANNUAL_YEARS, LABELS, MAX_YEARS, METRICS, TICKERS, Clarifica
 ALIASES = {
     "revenue": "revenue", "sales": "revenue", "net sales": "revenue", "total revenue": "revenue",
     "operating income": "operating_income", "operating profit": "operating_income",
+    "operating cash flow": "operating_cash_flow", "cash from operations": "operating_cash_flow",
+    "investing cash flow": "investing_cash_flow", "financing cash flow": "financing_cash_flow",
     "net income": "net_income", "net profit": "net_income",
     "gross profit": "gross_profit", "gross margin": "gross_margin", "gross profit margin": "gross_margin",
     "operating margin": "operating_margin", "operating profit margin": "operating_margin",
@@ -22,7 +24,7 @@ COMPANIES = {"apple": "AAPL", "aapl": "AAPL", "microsoft": "MSFT", "msft": "MSFT
 COMPANY_WORDS = "|".join(sorted(COMPANIES, key=len, reverse=True))
 CHOICES = ["Apple (AAPL)", "Microsoft (MSFT)", "NVIDIA (NVDA)", "Coinbase (COIN)", "Strategy (MSTR)", "Robinhood (HOOD)",
            "Block (XYZ)", "PayPal (PYPL)", "Visa (V)", "Tesla (TSLA)"]
-FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|fcf|cash flow|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|net margin|execute|shell|ignore|delete|send|email)\b"
+FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|fcf|free cash flow|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|net margin|execute|shell|ignore|delete|send|email)\b"
 FILLER = {"what", "was", "were", "is", "the", "for", "in", "from", "to", "through", "and", "please", "show",
           "me", "give", "tell", "about", "of", "fiscal", "years", "year", "fy", "how", "did", "over",
           "vs", "versus", "inc", "corp", "corporation", "its", "their"}

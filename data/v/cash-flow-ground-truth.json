@@ -1,0 +1,53 @@
+{
+  "verification": "Visible annual cash-flow statement; scripts/review_cash_flows.py never reads companyfacts.",
+  "ticker": "V",
+  "cik": "0001403161",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2022-10-01",
+      "end": "2023-09-30",
+      "accession": "0001403161-25-000089",
+      "filed": "2025-11-06",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "20755000000",
+      "investing_cash_flow": "-2006000000",
+      "financing_cash_flow": "-17772000000"
+    },
+    "2024": {
+      "start": "2023-10-01",
+      "end": "2024-09-30",
+      "accession": "0001403161-25-000089",
+      "filed": "2025-11-06",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "19950000000",
+      "investing_cash_flow": "-1926000000",
+      "financing_cash_flow": "-20633000000"
+    },
+    "2025": {
+      "start": "2024-10-01",
+      "end": "2025-09-30",
+      "accession": "0001403161-25-000089",
+      "filed": "2025-11-06",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1403161/000140316125000089/v-20250930.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "23059000000",
+      "investing_cash_flow": "708000000",
+      "financing_cash_flow": "-18963000000"
+    }
+  }
+}

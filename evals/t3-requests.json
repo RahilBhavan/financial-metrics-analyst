@@ -1,0 +1,127 @@
+[
+  {
+    "id": "T01",
+    "request": {
+      "calls": [
+        {
+          "name": "resolve_company",
+          "arguments": {
+            "ticker": "MSFT"
+          }
+        },
+        {
+          "name": "calculate_metrics",
+          "arguments": {
+            "cik": "0000789019",
+            "fiscal_years": [
+              2026
+            ],
+            "metrics": [
+              "gross_margin"
+            ],
+            "as_of": "2026-09-21"
+          }
+        }
+      ],
+      "evidence": [
+        "c1.r0"
+      ]
+    }
+  },
+  {
+    "id": "T02",
+    "request": {
+      "calls": [
+        {
+          "name": "resolve_company",
+          "arguments": {
+            "ticker": "COIN"
+          }
+        },
+        {
+          "name": "get_annual_facts",
+          "arguments": {
+            "cik": "0001679788",
+            "fiscal_years": [
+              2025
+            ],
+            "metrics": [
+              "operating_cash_flow"
+            ],
+            "as_of": "2026-10-25"
+          }
+        }
+      ],
+      "evidence": [
+        "c1.r0"
+      ]
+    }
+  },
+  {
+    "id": "T03",
+    "request": {
+      "calls": [
+        {
+          "name": "resolve_company",
+          "arguments": {
+            "ticker": "TSLA"
+          }
+        },
+        {
+          "name": "get_quarterly_facts",
+          "arguments": {
+            "cik": "0001318605",
+            "fiscal_year": 2026,
+            "quarter": "Q3",
+            "metrics": [
+              "revenue"
+            ],
+            "as_of": "2026-10-25"
+          }
+        }
+      ],
+      "evidence": [
+        "c1.r0"
+      ]
+    }
+  },
+  {
+    "id": "T04",
+    "request": {
+      "calls": [
+        {
+          "name": "get_coins_per_share",
+          "arguments": {
+            "firm": "MSTR",
+            "week_end": "2026-09-30"
+          }
+        }
+      ],
+      "evidence": [
+        "c0.week.net_mnav"
+      ]
+    }
+  },
+  {
+    "id": "T05",
+    "request": {
+      "calls": [
+        {
+          "name": "get_treasury_actions",
+          "arguments": {
+            "firm": "BMNR",
+            "action": "est_issuance",
+            "limit": 1
+          }
+        }
+      ],
+      "evidence": [
+        "c0.a0.coins_per_share_change"
+      ]
+    }
+  },
+  {
+    "id": "T06",
+    "refusal": "Investment advice about whether to buy MSTR right now is outside the reviewed historical-data workflow; it provides no buy/sell recommendations or live prices."
+  }
+]

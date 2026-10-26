@@ -4,7 +4,7 @@ import json
 import re
 from datetime import date, datetime
 
-from .policy import ANNUAL_YEARS, MAX_YEARS, METRICS, POLICY, REVIEWED_TAGS, TAGS, Refusal
+from .policy import ANNUAL_TAGS, ANNUAL_YEARS, MAX_YEARS, METRICS, POLICY, REVIEWED_TAGS, TAGS, Refusal
 
 
 def obj(properties, optional=()):
@@ -46,13 +46,14 @@ CONTEXT = obj({"company": COMPANY, "as_of": DATE,
 def definitions(quarterly):
     """Annual and quarterly results differ only in which forms and fiscal periods are valid."""
     forms, fps = (["10-Q", "10-Q/A"], QUARTER_FPS) if quarterly else (["10-K", "10-K/A"], ["FY"])
-    core = {"cik": CIK_SCHEMA, "metric": {"enum": list(TAGS)}, "value": DECIMAL, "unit": {"const": "USD"},
+    facts = TAGS if quarterly else ANNUAL_TAGS
+    core = {"cik": CIK_SCHEMA, "metric": {"enum": list(facts)}, "value": DECIMAL, "unit": {"const": "USD"},
             "fiscal_year": YEAR, "period_start": DATE, "period_end": DATE, "reported_fy": YEAR,
             "fp": {"enum": fps}, "form": {"enum": forms}, "filed": DATE,
             "accn": ACCN, "tag": {"enum": ["us-gaap:" + tag for tag in REVIEWED_TAGS]}, "source_url": FILING_URL}
     provenance = {**core, "status": {"const": "ok"}, "original": {"$ref": "#/$defs/fact_core"},
                   "history": array({"$ref": "#/$defs/fact_core"}, 1), "revision_candidate": {"type": "boolean"}, "warnings": WARNINGS}
-    error = obj({**ROW, **AUDIT, "metric": {"enum": list(TAGS)}, "value": {"type": "null"}, "fp": {"enum": fps},
+    error = obj({**ROW, **AUDIT, "metric": {"enum": list(facts)}, "value": {"type": "null"}, "fp": {"enum": fps},
                  "status": {"enum": ["insufficient_data", "ambiguous"]}, "reason": TEXT,
                  "blocking_candidates": array({"$ref": "#/$defs/rejection"}, 1, 20), "blocking_candidates_total": COUNT},
                 optional=("fp", "blocking_candidates", "blocking_candidates_total"))
