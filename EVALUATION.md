@@ -1,18 +1,27 @@
 # Evaluation record
 
-This file records the 885-case source and intent evaluation (161 cases before the ten-issuer expansion), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
+This file records the 947-case source and intent evaluation (161 cases before the ten-issuer expansion), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
+
+**Update, 26 October 2026 (multi-model review fixes).** 168 test methods run (167 pass, one skipped as before) on Python 3.14.7 and 3.9. The source and intent evaluation passes 947/947 and the official SDK check passes 33/33. A three-model review (Claude Opus 5.5, GPT 6.1 Sol, Gemini 4 Argon) found no wrong bundled numbers. It did find failures that a refresh or ordinary use would trigger, now fixed with regression tests in `tests/test_regressions.py`:
+
+- Annual and quarterly selection share one implementation. Quarters gain the filed-before-period-end check, parsed report dates, and a 70–119-day blocker window, so one-month stubs do not block. Annual years ending in the first week of January may carry the prior `fy`. A quarterly metric whose tag is absent from the issuer's taxonomy now reports `standard_tag_absent`, as annual results do. The 20 affected "not reported" expectations changed accordingly.
+- Snapshots can include SEC's paged submission files, and `fetch` downloads them. On the real KHC case, a missing older filing used to make the restated value the silent "original"; it now raises `history_incomplete`.
+- The live refresh check compares only the financial answer, covers every issuer and reviewed quarter, and returns with the restored workflow.
+- `analyze` defaults to the data directory's issuer and its reviewed years, adds `--quarter`, and surfaces server stderr. `smoke --data-dir` works for every issuer. The `ask` parser handles `between X and Y`, en dashes, `thru`, `FY24`, `vs`, plurals, gross margin, gross-profit clarification, and change questions; question intent grew from 32 to 78 cases.
+- MCP: null `params` are accepted, errors with an unknown id omit `id`, client responses get no reply, non-object arguments return -32602, refusal codes name the failed field, `date-time` requires RFC 3339, and quarterly outputs reject annual forms.
+- Scope (tickers, years, quarters, tags) derives from `PROFILES`, with a consistency test. Issuers in subdirectories load on first use. Ratio operands omit the candidate audit, and margins use the same common-filing rule as growth. The Microsoft demo shows FY2023–FY2026.
 
 **Update, 25 October 2026 (ten issuers, four quarters each).** Seven issuers (Coinbase, Strategy, Robinhood, Block, PayPal, Visa, Tesla) joined Apple, Microsoft and NVIDIA, and every issuer now has its four latest reviewed 10-Q quarters (40 in all). 134 test methods run (133 pass, one skipped as before) on Python 3.9, 3.11, 3.13 and 3.14.7. The source and intent evaluation passes 885/885. The official SDK check passes 33/33, five calls more than before: Visa, an amended Robinhood 10-K, a Tesla quarter, a Coinbase quarter with an unreported metric, and a refused quarter. The table below shows the groups. The paragraphs after it describe the 21 October and 23 September records and are kept as history.
 
-| Evaluation group (25 October 2026) | Passed / total | What it checks |
+| Evaluation group (26 October 2026) | Passed / total | What it checks |
 | --- | ---: | --- |
-| filing values | 284 / 284 | Every annual and quarterly value against the card transcribed from the filing |
+| filing values | 300 / 300 | Every annual and quarterly value against the card transcribed from the filing |
 | provenance | 250 / 250 | Accession, filing URL, dates, tag, unit, filing date and form per value |
 | exact ratios | 78 / 78 | Gross margin, operating margin and growth against exact rational arithmetic |
 | point in time | 96 / 96 | An earlier cutoff returns the older filing's values; a quarter is invisible the day before its 10-Q |
 | stale values | 25 / 25 | The older filing stays the original; revision flags match the filing text; a newer relabelled PayPal record blocks a later cutoff |
 | question answers | 18 / 18 | Natural-language questions on the new issuers return the card's values, or "not reported" |
-| question intent | 32 / 32 | Accepted paraphrases, clarifications (profit, margin, change, missing company, year or metric) and refusals |
+| question intent | 78 / 78 | Accepted paraphrases, clarifications (profit, margin, change, missing company, year or metric) and refusals |
 | tool refusals | 42 / 42 | Unreviewed year, quarter, ticker, metric, future cutoff and bad quarter labels, for each added issuer |
 | scope behavior | 47 / 47 | Duration warnings, and metrics an issuer does not report staying unavailable instead of zero |
 | supporting values | 10 / 10 | The prior-year revenue that growth needs, with its filing |
@@ -68,11 +77,11 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 134 (one skipped); 885 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
+| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 168 (one skipped); 947 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
-| `python3 -B -m financial_metrics demo --html reports/demo.html` | 0 | Three-year Apple table and expandable local report |
+| `python3 -B -m financial_metrics demo --html /tmp/apple-report.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
-| `python3 -B -m financial_metrics ask 'Apple profit 2025' --json` | 3 | Expected clarification between operating and net income |
+| `python3 -B -m financial_metrics ask 'Apple profit 2025' --json` | 3 | Expected clarification among gross profit, operating income and net income |
 | `python3 -B -m financial_metrics analyze --metrics ebitda` | 2 | Expected refusal |
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
 | `python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 2026` | 0 | Four reviewed years, FY2023-FY2026, with no scope warning |

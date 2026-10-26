@@ -1,0 +1,61 @@
+{
+  "AAPL": {
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 20,
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "reviewed_output_identical": true
+  },
+  "MSFT": {
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 4,
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228"
+    ],
+    "reviewed_output_identical": true
+  },
+  "NVDA": {
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "reviewed_output_identical": true
+  }
+}

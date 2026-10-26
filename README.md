@@ -15,8 +15,8 @@ This project has two parts. The first is a hand-written MCP stdio server and CLI
 
 | Check | Result | Source |
 | --- | --- | --- |
-| Source and intent evaluation | 885 / 885 cases pass (161 before the ten-issuer expansion) | `reports/evaluation.json` |
-| Unit tests | 134 run, 133 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
+| Source and intent evaluation | 947 / 947 cases pass (161 before the ten-issuer expansion) | `reports/evaluation.json` |
+| Unit tests | 168 run, 167 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
 | Official `mcp==1.30.0` SDK interoperability | 33 / 33 checks pass | `reports/sdk-smoke.json` |
 | Agent: correct tool and arguments, 42 in-scope tasks | 42 / 42 | `reports/agent-eval.json` |
 | Agent: out-of-scope refusals, false refusals | 8 / 8, 0 | `reports/agent-eval.json` |
@@ -47,17 +47,18 @@ python3 -B -m financial_metrics smoke
 python3 -B -m financial_metrics demo
 ```
 
-On Python 3.9, 3.11, 3.13 and 3.14.7 the test command printed `Ran 134 tests` and `OK (skipped=1)`. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
+On Python 3.9 and 3.14.7 the test command printed `Ran 168 tests` and `OK (skipped=1)`; CI also runs 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
 
 More commands:
 
 ```sh
-python3 -B -m financial_metrics analyze --ticker NVDA --years 2024 2025 2026 --as-of 2026-02-25
+python3 -B -m financial_metrics analyze --ticker NVDA --as-of 2026-02-25   # every reviewed NVIDIA year
+python3 -B -m financial_metrics analyze --ticker NVDA --quarter Q2          # latest reviewed Q2, labeled Q2 FY2027
 python3 -B -m financial_metrics ask 'Microsoft profit 2025'   # needs_clarification, exit 3
-python3 -B -m financial_metrics.evaluate                      # 885 cases; rewrites files in reports/
+python3 -B -m financial_metrics.evaluate                      # 947 cases; rewrites files in reports/
 ```
 
-To use the server from an MCP host, point the host's stdio configuration at `server_stdio.py`. See [docs/mcp-server.md](docs/mcp-server.md) for the configuration and the SDK check, which needs Python 3.10 or newer and `requirements-sdk-test.txt`.
+To use the server from an MCP host, point the host's stdio configuration at `server_stdio.py` (it also works under `python -P`), or run `pip install -e .` for `financial-metrics` and `financial-metrics-mcp` commands. Use an editable install: the snapshots in `data/` are not packaged. See [docs/mcp-server.md](docs/mcp-server.md) for the configuration and the SDK check, which needs Python 3.10 or newer and `requirements-sdk-test.txt`.
 
 The agent needs a Claude model. Set `ANTHROPIC_API_KEY` for the Messages API backend, or have a signed-in `claude` CLI for the `claude-code` backend:
 
@@ -83,7 +84,7 @@ python3 -B -m financial_metrics.agent --backend claude-code "What is BitMine's B
 - [docs/mcp-server.md](docs/mcp-server.md): protocol, tool list, host configuration and the SDK interoperability check.
 - [docs/treasury-agent.md](docs/treasury-agent.md): the agent loop, the number gate, the treasury tools and the 50-task evaluation with known failures.
 - [docs/issuer-expansion-research.md](docs/issuer-expansion-research.md): primary-source evidence for Microsoft FY2026 and NVIDIA.
-- [EVALUATION.md](EVALUATION.md): the 885-case evaluation by group, reproduction commands and remaining limits.
+- [EVALUATION.md](EVALUATION.md): the 947-case evaluation by group, reproduction commands and remaining limits.
 - [WALKTHROUGH.md](WALKTHROUGH.md): one answer traced through the code, in reading order.
 - [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md): the September 2026 reliability plan and its completion evidence.
 
@@ -101,7 +102,7 @@ python3 -B -m financial_metrics.agent --backend claude-code "What is BitMine's B
 - The SDK check is interoperability evidence with one second client, not protocol certification or a test in each desktop host.
 - The agent evaluation is one run of templated tasks. It does not measure open-ended questions, run-to-run variance or prompt-injection resistance. The Messages API backend has not been run live.
 - Filing-date filtering does not recreate past API contents. A changed value is flagged as a revision, not classified as a restatement without a source.
-- No live SEC refresh with a user's contact information was run.
+- A live SEC refresh with a real contact User-Agent was run once, on 2026-10-18, for AAPL, MSFT and NVDA (`reports/live-refresh.json`). `scripts/live_refresh_check.py` now covers all ten issuers and every reviewed quarter, but has not been rerun live since.
 
 ## License
 

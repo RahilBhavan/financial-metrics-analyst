@@ -2,13 +2,13 @@
 
 import json
 
-from .policy import MAX_YEARS, METRICS, PROFILES, TAGS, Refusal
-from .contracts import output_schema, treasury_output_schema, validate_schema
+from .policy import MAX_YEARS, METRICS, PROFILES, QUARTERS, TAGS, Refusal
+from .contracts import DATE, REVIEWED_YEAR, output_schema, treasury_output_schema, validate_schema
 from .treasury import ACTIONS, FIRMS
 
 
 TICKERS = ", ".join(profile["ticker"] for profile in PROFILES.values())
-QUARTER_YEARS = sorted({year for profile in PROFILES.values() for year, _ in profile["quarters"]})
+QUARTER_YEARS = sorted({year for year, _ in QUARTERS})
 
 
 def analysis_schema(metrics):
@@ -17,10 +17,10 @@ def analysis_schema(metrics):
             "properties": {
                 "cik": {"type": "string", "pattern": "^[0-9]{10}$"},
                 "fiscal_years": {"type": "array", "minItems": 1, "maxItems": MAX_YEARS, "uniqueItems": True,
-                                 "items": {"type": "integer", "minimum": 2023, "maximum": 2026}},
+                                 "items": REVIEWED_YEAR},
                 "metrics": {"type": "array", "minItems": 1, "maxItems": len(metrics), "uniqueItems": True,
                             "items": {"type": "string", "enum": list(metrics)}},
-                "as_of": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+                "as_of": DATE,
             }}
 
 
@@ -36,10 +36,10 @@ TOOLS = [
                      "properties": {
                          "cik": {"type": "string", "pattern": "^[0-9]{10}$"},
                          "fiscal_year": {"type": "integer", "minimum": min(QUARTER_YEARS), "maximum": max(QUARTER_YEARS)},
-                         "quarter": {"type": "string", "enum": ["Q1", "Q2", "Q3"]},
+                         "quarter": {"type": "string", "enum": sorted({quarter for _, quarter in QUARTERS})},
                          "metrics": {"type": "array", "minItems": 1, "maxItems": len(TAGS), "uniqueItems": True,
                                      "items": {"type": "string", "enum": list(TAGS)}},
-                         "as_of": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}}}},
+                         "as_of": DATE}}},
     {"name": "calculate_metrics", "description": "Calculate reviewed annual facts, gross and operating margins, and revenue growth for " + TICKERS + ". Percentages are exact rational results rendered as decimal strings. Unsupported scope is refused.",
      "inputSchema": analysis_schema(METRICS)},
 ]

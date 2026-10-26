@@ -56,7 +56,7 @@ def changed(rows, **fields):
 
 class CoverageTests(unittest.TestCase):
     def test_ten_issuers_with_four_reviewed_quarters_each(self):
-        self.assertEqual(len(SERVICE.issuers), 10)
+        self.assertEqual(len(SERVICE.issuers) + len(SERVICE.pending), 10)
         self.assertEqual(sorted(p["ticker"] for p in PROFILES.values()),
                          sorted(["AAPL", "MSFT", "NVDA", "COIN", "MSTR", "HOOD", "XYZ", "PYPL", "V", "TSLA"]))
         for cik, profile in PROFILES.items():
@@ -68,7 +68,7 @@ class CoverageTests(unittest.TestCase):
     def test_every_card_year_matches_server(self):
         for cik, profile in PROFILES.items():
             card = CARDS[cik]
-            captured = SERVICE.issuers[cik].captured_date.isoformat()
+            captured = SERVICE.issuer(cik).captured_date.isoformat()
             result = SERVICE.get_annual_facts(cik, sorted(profile["periods"]), list(TAGS), captured)
             for row in result["results"]:
                 expected = card["years"][str(row["fiscal_year"])][row["metric"]]
@@ -93,7 +93,7 @@ class CoverageTests(unittest.TestCase):
         by_ticker = {p["ticker"]: cik for cik, p in PROFILES.items()}
         for ticker, metric in [("COIN", "gross_profit"), ("HOOD", "operating_income"), ("PYPL", "gross_profit"), ("V", "gross_profit")]:
             cik = by_ticker[ticker]
-            captured = SERVICE.issuers[cik].captured_date.isoformat()
+            captured = SERVICE.issuer(cik).captured_date.isoformat()
             ratio = "gross_margin" if metric == "gross_profit" else "operating_margin"
             row = SERVICE.calculate_metrics(cik, [2025], [ratio], captured)["results"][0]
             with self.subTest(ticker=ticker):
@@ -111,7 +111,7 @@ class CoverageTests(unittest.TestCase):
         from fractions import Fraction
         for cik in NEW_CIKS:
             card = CARDS[cik]
-            captured = SERVICE.issuers[cik].captured_date.isoformat()
+            captured = SERVICE.issuer(cik).captured_date.isoformat()
             for year in (2023, 2024, 2025):
                 prior = card["supporting_revenue"]["value"] if year == 2023 else card["years"][str(year - 1)]["revenue"]
                 current = card["years"][str(year)]["revenue"]
@@ -126,7 +126,7 @@ class StaleValueGuardTests(unittest.TestCase):
 
     @staticmethod
     def newest(cik):
-        analyst = SERVICE.issuers[cik]
+        analyst = SERVICE.issuer(cik)
         year = max(analyst.periods)
         card = CARDS[cik]["years"][str(year)]
         return analyst, year, card
@@ -172,7 +172,7 @@ class StaleValueGuardTests(unittest.TestCase):
 
     def test_synthetic_conflicting_quarter_values_are_ambiguous(self):
         for cik in PROFILES:
-            analyst = SERVICE.issuers[cik]
+            analyst = SERVICE.issuer(cik)
             quarter = CARDS[cik]["reviewed_quarters"][-1]
             tag = analyst.profile.get("tags", TAGS)["revenue"]
             rows = [r for r in analyst.facts["facts"]["us-gaap"][tag]["units"]["USD"]
@@ -185,7 +185,7 @@ class StaleValueGuardTests(unittest.TestCase):
 
     def test_synthetic_invalid_newer_quarter_amendment_never_falls_back(self):
         for cik in PROFILES:
-            analyst = SERVICE.issuers[cik]
+            analyst = SERVICE.issuer(cik)
             quarter = CARDS[cik]["reviewed_quarters"][-1]
             tag = analyst.profile.get("tags", TAGS)["revenue"]
             original = next(r for r in analyst.facts["facts"]["us-gaap"][tag]["units"]["USD"]
@@ -208,7 +208,7 @@ class StaleValueGuardTests(unittest.TestCase):
     def test_later_ten_q_comparative_is_a_revision_candidate_not_a_mismatch(self):
         checked = 0
         for cik in PROFILES:
-            analyst = SERVICE.issuers[cik]
+            analyst = SERVICE.issuer(cik)
             for quarter in CARDS[cik]["reviewed_quarters"]:
                 tag = analyst.profile.get("tags", TAGS)["revenue"]
                 rows = [r for r in analyst.facts["facts"]["us-gaap"][tag]["units"]["USD"]
@@ -251,7 +251,7 @@ class StaleValueGuardTests(unittest.TestCase):
 class RefusalAndIntentTests(unittest.TestCase):
     def test_new_issuers_refuse_unreviewed_scope(self):
         for cik in NEW_CIKS:
-            analyst = SERVICE.issuers[cik]
+            analyst = SERVICE.issuer(cik)
             captured = analyst.captured_date.isoformat()
             ticker = PROFILES[cik]["ticker"]
             with self.subTest(ticker=ticker):

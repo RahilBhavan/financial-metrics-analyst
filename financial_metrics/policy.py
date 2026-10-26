@@ -15,8 +15,13 @@ TAGS = {
     "net_income": "NetIncomeLoss",
 }
 METRICS = tuple(TAGS) + ("gross_margin", "operating_margin", "revenue_growth")
+LABELS = {"revenue": "Revenue", "gross_profit": "Gross profit", "operating_income": "Operating income",
+          "net_income": "Net income", "gross_margin": "Gross margin",
+          "operating_margin": "Operating margin", "revenue_growth": "Revenue growth"}
 # Four years lets the full MSFT FY2023-FY2026 profile fit in one request.
 MAX_YEARS = 4
+# Large issuers' companyfacts exceed 8 MiB; the cap still bounds memory per file.
+MAX_SNAPSHOT_BYTES = 32 * 1024 * 1024
 
 
 def calendar_profile(cik, name, ticker, directory, tags=None):
@@ -116,6 +121,12 @@ REVIEWED_QUARTERS = {
 }
 for _profile in PROFILES.values():
     _profile["quarters"] = REVIEWED_QUARTERS[_profile["ticker"]]
+# Everything below derives from PROFILES so adding a reviewed period changes one place.
+TICKERS = tuple(profile["ticker"] for profile in PROFILES.values())
+PROFILE_BY_TICKER = {profile["ticker"]: profile for profile in PROFILES.values()}
+ANNUAL_YEARS = tuple(sorted({year for profile in PROFILES.values() for year in profile["periods"]}))
+QUARTERS = tuple(sorted({key for profile in PROFILES.values() for key in profile["quarters"]}))
+REVIEWED_TAGS = tuple(sorted({tag for profile in PROFILES.values() for tag in profile.get("tags", TAGS).values()}))
 KHC_REFERENCE_PROFILE = {
     "cik": "0001637459", "name": "The Kraft Heinz Company", "ticker": "KHC",
     "periods": {2017: ("2017-01-01", "2017-12-30")}, "support_periods": {},

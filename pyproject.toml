@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "financial-metrics-analyst"
+dynamic = ["version"]
+description = "Offline, source-backed financial metrics for reviewed SEC issuers, served over MCP stdio"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+dependencies = []
+
+[project.scripts]
+financial-metrics = "financial_metrics.__main__:main"
+financial-metrics-mcp = "financial_metrics.server:main"
+
+[tool.setuptools]
+packages = ["financial_metrics"]
+
+[tool.setuptools.dynamic]
+version = { attr = "financial_metrics.__version__" }

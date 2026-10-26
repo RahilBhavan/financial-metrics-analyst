@@ -4,7 +4,7 @@ import json
 import re
 from datetime import date, datetime
 
-from .policy import MAX_YEARS, METRICS, POLICY, TAGS, Refusal
+from .policy import ANNUAL_YEARS, MAX_YEARS, METRICS, POLICY, REVIEWED_TAGS, TAGS, Refusal
 
 
 def obj(properties, optional=()):
@@ -25,56 +25,76 @@ CIK_SCHEMA = {"type": "string", "pattern": r"^[0-9]{10}$"}
 ACCN = {"type": "string", "pattern": r"^[0-9]{10}-[0-9]{2}-[0-9]{6}$"}
 FILING_URL = {"type": "string", "pattern": r"^https://www\.sec\.gov/Archives/edgar/data/[0-9]+/[0-9]{18}/[A-Za-z0-9_.-]+\.html?$"}
 YEAR = {"type": "integer", "minimum": 1900, "maximum": 2100}
+REVIEWED_YEAR = {"type": "integer", "minimum": ANNUAL_YEARS[0], "maximum": ANNUAL_YEARS[-1]}
 WARNINGS = array(TEXT, maximum=100)
 COMPANY = obj({"cik": CIK_SCHEMA, "name": TEXT, "ticker": {"type": "string", "pattern": "^[A-Z]{1,5}$"}})
-CORE_PROPERTIES = {
-    "cik": CIK_SCHEMA, "metric": {"enum": list(TAGS)}, "value": DECIMAL, "unit": {"const": "USD"},
-    "fiscal_year": YEAR, "period_start": DATE, "period_end": DATE, "reported_fy": YEAR,
-    "fp": {"enum": ["FY", "Q1", "Q2", "Q3"]}, "form": {"enum": ["10-K", "10-K/A", "10-Q", "10-Q/A"]}, "filed": DATE,
-    "accn": ACCN, "tag": {"enum": ["us-gaap:" + tag for tag in set(TAGS.values()) | {"Revenues"}]}, "source_url": FILING_URL,
-}
 REJECTION = obj({"accn": {"type": "string", "maxLength": 100}, "start": {"anyOf": [TEXT, {"type": "null"}]},
                  "end": DATE, "unit": TEXT, "filed": {"anyOf": [DATE, {"type": "null"}]}, "reason": TEXT})
 AUDIT = {"rejection_counts": {"type": "object", "additionalProperties": COUNT},
          "rejected_candidates": array({"$ref": "#/$defs/rejection"}, maximum=20), "rejected_candidates_truncated": COUNT}
-FACT_OK = obj({**CORE_PROPERTIES, **AUDIT, "status": {"const": "ok"},
-               "original": {"$ref": "#/$defs/fact_core"}, "history": array({"$ref": "#/$defs/fact_core"}, 1),
-               "revision_candidate": {"type": "boolean"}, "warnings": WARNINGS})
 ROW = {"fiscal_year": YEAR, "period_start": DATE, "period_end": DATE}
-FACT_ERROR = obj({**ROW, **AUDIT, "metric": {"enum": list(TAGS)}, "value": {"type": "null"},
-                  "status": {"enum": ["insufficient_data", "ambiguous"]}, "reason": TEXT,
-                  "blocking_candidates": array({"$ref": "#/$defs/rejection"}, 1, 20), "blocking_candidates_total": COUNT},
-                 optional=("blocking_candidates", "blocking_candidates_total"))
+QUARTER_FPS = ["Q1", "Q2", "Q3"]
 RATIO_BASE = {**ROW, "metric": {"enum": ["gross_margin", "operating_margin", "revenue_growth"]}, "unit": {"const": "percent"}}
-RATIO_OK = obj({**RATIO_BASE, "status": {"const": "ok"}, "value": DECIMAL, "display_value": DECIMAL,
-                "exact_fraction": obj({"numerator": INTEGER_TEXT, "denominator": {"type": "string", "pattern": "^[1-9][0-9]*$", "maxLength": 100}}),
-                "precision": obj({"significant_digits": {"const": 34}, "rounding": {"const": "ROUND_HALF_EVEN"}, "display_places": {"const": 2}}),
-                "formula": {"enum": ["gross_profit / revenue * 100", "operating_income / revenue * 100", "(current_revenue - prior_revenue) / prior_revenue * 100"]},
-                "inputs": array({"$ref": "#/$defs/fact_ok"}, 2, 2), "warnings": WARNINGS})
-RATIO_ERROR = obj({**RATIO_BASE, "status": {"const": "insufficient_data"}, "value": {"type": "null"}, "reason": TEXT,
-                   "inputs": array({"$ref": "#/$defs/fact"}, 2, 2)}, optional=("inputs",))
 REFUSAL = obj({"status": {"const": "refused"}, "code": TEXT, "message": TEXT})
 CONTEXT = obj({"company": COMPANY, "as_of": DATE,
                "snapshot_captured_at": {"type": "string", "format": "date-time"},
                "evidence_kind": {"const": "sec_api_snapshot"},
                "snapshot_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
                "policy": obj({key: TEXT for key in POLICY}), "warnings": WARNINGS})
-DEFS = {"fact_core": obj(CORE_PROPERTIES), "rejection": REJECTION, "fact_ok": FACT_OK,
-        "fact_error": FACT_ERROR, "fact": {"oneOf": [{"$ref": "#/$defs/fact_ok"}, {"$ref": "#/$defs/fact_error"}]},
-        "ratio_ok": RATIO_OK, "ratio_error": RATIO_ERROR,
-        "result": {"oneOf": [{"$ref": "#/$defs/" + name} for name in ("fact_ok", "fact_error", "ratio_ok", "ratio_error")]}}
+
+
+def definitions(quarterly):
+    """Annual and quarterly results differ only in which forms and fiscal periods are valid."""
+    forms, fps = (["10-Q", "10-Q/A"], QUARTER_FPS) if quarterly else (["10-K", "10-K/A"], ["FY"])
+    core = {"cik": CIK_SCHEMA, "metric": {"enum": list(TAGS)}, "value": DECIMAL, "unit": {"const": "USD"},
+            "fiscal_year": YEAR, "period_start": DATE, "period_end": DATE, "reported_fy": YEAR,
+            "fp": {"enum": fps}, "form": {"enum": forms}, "filed": DATE,
+            "accn": ACCN, "tag": {"enum": ["us-gaap:" + tag for tag in REVIEWED_TAGS]}, "source_url": FILING_URL}
+    provenance = {**core, "status": {"const": "ok"}, "original": {"$ref": "#/$defs/fact_core"},
+                  "history": array({"$ref": "#/$defs/fact_core"}, 1), "revision_candidate": {"type": "boolean"}, "warnings": WARNINGS}
+    error = obj({**ROW, **AUDIT, "metric": {"enum": list(TAGS)}, "value": {"type": "null"}, "fp": {"enum": fps},
+                 "status": {"enum": ["insufficient_data", "ambiguous"]}, "reason": TEXT,
+                 "blocking_candidates": array({"$ref": "#/$defs/rejection"}, 1, 20), "blocking_candidates_total": COUNT},
+                optional=("fp", "blocking_candidates", "blocking_candidates_total"))
+    ratio_ok = obj({**RATIO_BASE, "status": {"const": "ok"}, "value": DECIMAL, "display_value": DECIMAL,
+                    "exact_fraction": obj({"numerator": INTEGER_TEXT, "denominator": {"type": "string", "pattern": "^[1-9][0-9]*$", "maxLength": 100}}),
+                    "precision": obj({"significant_digits": {"const": 34}, "rounding": {"const": "ROUND_HALF_EVEN"}, "display_places": {"const": 2}}),
+                    "formula": {"enum": ["gross_profit / revenue * 100", "operating_income / revenue * 100", "(current_revenue - prior_revenue) / prior_revenue * 100"]},
+                    "inputs": array({"$ref": "#/$defs/operand_ok"}, 2, 2), "warnings": WARNINGS})
+    ratio_error = obj({**RATIO_BASE, "status": {"const": "insufficient_data"}, "value": {"type": "null"}, "reason": TEXT,
+                       "inputs": array({"oneOf": [{"$ref": "#/$defs/operand_ok"}, {"$ref": "#/$defs/fact_error"}]}, 2, 2)},
+                      optional=("inputs",))
+    return {"fact_core": obj(core), "rejection": REJECTION, "fact_ok": obj({**provenance, **AUDIT}),
+            # Ratio operands keep provenance; the candidate audit stays on the requested fact rows.
+            "operand_ok": obj(provenance), "fact_error": error,
+            "fact": {"oneOf": [{"$ref": "#/$defs/fact_ok"}, {"$ref": "#/$defs/fact_error"}]},
+            "ratio_ok": ratio_ok, "ratio_error": ratio_error,
+            "result": {"oneOf": [{"$ref": "#/$defs/" + name} for name in ("fact_ok", "fact_error", "ratio_ok", "ratio_error")]}}
 
 
 def output_schema(kind):
+    quarterly = kind == "get_quarterly_facts"
     if kind == "resolve_company":
         success = obj({**COMPANY["properties"], "status": {"const": "ok"},
                        "lookup_timestamp": {"type": "string", "format": "date-time"}, "lookup_is_cached": {"const": True},
                        "source_url": {"type": "string", "pattern": r"^https://data\.sec\.gov/submissions/CIK[0-9]{10}\.json$"}})
     else:
+        limit = len(TAGS) if quarterly else MAX_YEARS * len(METRICS)
         success = obj({"status": {"enum": ["ok", "partial"]}, "context": CONTEXT,
-                       "results": array({"$ref": "#/$defs/fact" if kind in ("get_annual_facts", "get_quarterly_facts") else "#/$defs/result"}, 1, MAX_YEARS * len(METRICS))})
-    return {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "$defs": DEFS,
+                       "results": array({"$ref": "#/$defs/fact" if kind in ("get_annual_facts", "get_quarterly_facts") else "#/$defs/result"}, 1, limit)})
+    return {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "$defs": definitions(quarterly),
             "oneOf": [success, REFUSAL]}
+
+
+# Agents act on refusal codes, so a failed field maps to the code its domain check would give.
+FIELD_CODES = (("metrics", "unsupported_metric"), ("fiscal_year", "unsupported_years"),
+               ("ticker", "unsupported_company"), ("firm", "unsupported_company"), ("quarter", "unsupported_quarter"))
+RFC3339 = r"[0-9]{4}-[0-9]{2}-[0-9]{2}[Tt][0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]+)?(?:[Zz]|[+-][0-9]{2}:[0-9]{2})"
+
+
+def field_code(path):
+    field = path.split(".")[-1].rstrip("[]")
+    return next((code for name, code in FIELD_CODES if field.startswith(name)), "invalid_arguments")
 
 
 def validate_schema(value, schema, path="arguments", root=None):
@@ -98,7 +118,7 @@ def validate_schema(value, schema, path="arguments", root=None):
     if "const" in schema and (type(value) is not type(schema["const"]) or value != schema["const"]):
         raise Refusal("invalid_arguments", path + " has an invalid constant")
     if "enum" in schema and value not in schema["enum"]:
-        raise Refusal("unsupported_metric", path + " must be one of " + ", ".join(map(str, schema["enum"])))
+        raise Refusal(field_code(path), path + " must be one of " + ", ".join(map(str, schema["enum"])))
     kind = schema.get("type")
     types = {"object": dict, "array": list, "string": str, "integer": int, "boolean": bool, "null": type(None)}
     if kind and type(value) is not types[kind]:
@@ -129,14 +149,15 @@ def validate_schema(value, schema, path="arguments", root=None):
             if schema.get("format") == "date":
                 date.fromisoformat(value)
             if schema.get("format") == "date-time":
-                stamp = datetime.fromisoformat(value.replace("Z", "+00:00"))
-                if stamp.tzinfo is None:
+                if not re.fullmatch(RFC3339, value):
                     raise ValueError()
+                # Fractions are dropped because Python 3.9 parses only 3- or 6-digit fractions.
+                datetime.fromisoformat(value[:10] + "T" + re.sub(r"\.[0-9]+", "", value[11:]).upper().replace("Z", "+00:00"))
         except ValueError:
-            raise Refusal("invalid_arguments", path + " has an invalid date")
+            raise Refusal("invalid_date", path + " has an invalid date")
     elif kind == "integer":
         if not schema.get("minimum", value) <= value <= schema.get("maximum", value):
-            raise Refusal("unsupported_years", path + " is outside the allowed range")
+            raise Refusal(field_code(path), path + " is outside the allowed range")
 
 
 # Treasury tools (dat-accretion export). Numbers are decimal strings; every record carries its SEC filing.

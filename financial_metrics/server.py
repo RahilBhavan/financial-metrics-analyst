@@ -8,6 +8,7 @@ import argparse
 import json
 import sys
 
+from . import __version__
 from .domain import AnalystService, DEFAULT_DATA
 from .policy import Refusal
 from .tools import TOOLS, call_tool
@@ -17,7 +18,11 @@ MAX_LINE = 65536
 
 
 def error(request_id, code, message):
-    return {"jsonrpc": "2.0", "id": request_id, "error": {"code": code, "message": message}}
+    # MCP's schema allows a string or integer id, or none at all when the request id is unknown.
+    reply = {"jsonrpc": "2.0", "error": {"code": code, "message": message}}
+    if request_id is not None:
+        reply["id"] = request_id
+    return reply
 
 
 class Session:
@@ -27,6 +32,10 @@ class Session:
         self.ready = False
 
     def receive(self, message):
+        if (isinstance(message, dict) and message.get("jsonrpc") == "2.0" and "method" not in message
+                and ("result" in message or "error" in message)):
+            # A client response; JSON-RPC forbids replying to it, and this server sends no requests.
+            return None
         if (not isinstance(message, dict) or message.get("jsonrpc") != "2.0"
                 or not isinstance(message.get("method"), str)):
             return error(None, -32600, "Invalid JSON-RPC request")
@@ -35,7 +44,9 @@ class Session:
         if not notification and (type(request_id) not in (int, str)):
             return error(None, -32600, "Request id must be a string or integer")
         method = message["method"]
-        params = message.get("params", {})
+        params = message.get("params")
+        # Some typed clients serialize omitted optional params as null.
+        params = {} if params is None else params
         if not isinstance(params, dict):
             return None if notification else error(request_id, -32602, "params must be an object")
         if notification:
@@ -53,7 +64,7 @@ class Session:
             self.initialized = True
             # MCP negotiation returns a supported version if the offered version differs.
             result = {"protocolVersion": VERSION, "capabilities": {"tools": {"listChanged": False}},
-                      "serverInfo": {"name": "financial-metrics-analyst", "version": "0.1.0"},
+                      "serverInfo": {"name": "financial-metrics-analyst", "version": __version__},
                       "instructions": "Use structuredContent. Missing values are not zero. Preserve period, revision, snapshot, and comparability warnings."}
         elif method == "ping":
             result = {}
@@ -66,8 +77,12 @@ class Session:
         elif method == "tools/call":
             if not isinstance(params.get("name"), str):
                 return error(request_id, -32602, "Tool name is required")
+            arguments = params.get("arguments", {})
+            if not isinstance(arguments, dict):
+                # A malformed call envelope is a protocol error, not a tool argument refusal.
+                return error(request_id, -32602, "Tool arguments must be an object")
             try:
-                result = call_tool(self.analyst, params["name"], params.get("arguments", {}))
+                result = call_tool(self.analyst, params["name"], arguments)
             except Refusal:
                 return error(request_id, -32602, "Unknown tool")
         else:

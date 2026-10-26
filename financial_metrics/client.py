@@ -7,6 +7,8 @@ import sys
 import threading
 from pathlib import Path
 
+from .domain import snapshot_ticker
+from .policy import PROFILE_BY_TICKER
 from .server import VERSION
 
 
@@ -51,7 +53,9 @@ class Client:
         except queue.Empty:
             raise RuntimeError("MCP server did not respond within 10 seconds")
         if isinstance(response, Exception):
-            raise response
+            # Surface the server's own refusal (for example invalid_snapshot) instead of a bare EOF.
+            self.stderr_reader.join(timeout=1)
+            raise RuntimeError(str(response) + ("; server stderr: " + " | ".join(self.diagnostics) if self.diagnostics else ""))
         if response.get("id") != self.next_id or response.get("jsonrpc") != "2.0":
             raise RuntimeError("Invalid response correlation")
         return response
@@ -107,22 +111,31 @@ class Client:
 
 
 def smoke(data_dir=None):
+    ticker = snapshot_ticker(data_dir) if data_dir is not None else "AAPL"
+    if ticker is None:
+        raise RuntimeError("Snapshot issuer has no reviewed profile")
+    years = sorted(PROFILE_BY_TICKER[ticker]["periods"])[-3:]
     with Client(data_dir) as client:
         names = [t["name"] for t in client.request("tools/list")["result"]["tools"]]
         if names != ["resolve_company", "get_annual_facts", "get_quarterly_facts", "calculate_metrics",
                      "get_treasury_actions", "get_coins_per_share", "get_break_even"]:
             raise RuntimeError("Unexpected tool list")
-        resolved = client.call("resolve_company", {"ticker": "AAPL"})
+        resolved = client.call("resolve_company", {"ticker": ticker})
+        if resolved["status"] != "ok":
+            raise RuntimeError("Could not resolve " + ticker + ": " + resolved.get("message", resolved["status"]))
         as_of = resolved["lookup_timestamp"][:10]
-        args = {"cik": resolved["cik"], "fiscal_years": [2023, 2024, 2025], "as_of": as_of}
+        args = {"cik": resolved["cik"], "fiscal_years": years, "as_of": as_of}
         facts = client.call("get_annual_facts", {**args, "metrics": ["revenue", "operating_income", "net_income"]})
         metrics = client.call("calculate_metrics", {**args, "metrics": ["operating_margin", "revenue_growth"]})
         refused = client.call("calculate_metrics", {**args, "metrics": ["ebitda"]})
         break_even = client.call("get_break_even", {"firm": "MSTR"})
-        if facts["status"] != "ok" or refused["status"] != "refused" or break_even["status"] != "ok":
+        # An issuer that does not report a metric (Robinhood has no operating income) answers partially, never with zero.
+        complete = facts["status"] == "ok" or (ticker != "AAPL" and facts["status"] == "partial" and all(
+            r["status"] == "ok" or r.get("reason") == "standard_tag_absent" for r in facts["results"]))
+        if not complete or refused["status"] != "refused" or break_even["status"] != "ok":
             raise RuntimeError("Smoke result mismatch")
         counts = {"facts": len(facts["results"]), "numeric_ratios": sum(r["status"] == "ok" for r in metrics["results"])}
-        if counts != {"facts": 9, "numeric_ratios": 6}:
+        if counts["facts"] != 9 or (ticker == "AAPL" and counts["numeric_ratios"] != 6):
             raise RuntimeError("Unexpected metric coverage")
     return {"status": "ok", "protocol": VERSION, "transport": "stdio subprocess",
             "tools": names, **counts, "unsupported_metric_refused": True,

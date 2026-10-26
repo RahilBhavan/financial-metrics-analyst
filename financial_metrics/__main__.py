@@ -6,21 +6,40 @@ import sys
 from pathlib import Path
 
 from .client import Client, smoke
-from .domain import DEFAULT_DATA
+from .domain import DEFAULT_DATA, snapshot_ticker
 from .fetch import TICKER_CIKS, fetch_snapshot
-from .policy import METRICS, Refusal
+from .policy import METRICS, PROFILE_BY_TICKER, TAGS, Refusal
 
 from .questions import parse_question, validate_proposal
 from .presentation import render, render_html
 
 
-def analyze(data_dir, ticker, years, metrics, as_of):
+def analyze(data_dir, ticker, years, metrics, as_of, quarter=None):
     with Client(data_dir) as client:
         resolved = client.call("resolve_company", {"ticker": ticker})
         if resolved["status"] == "refused":
             return resolved
         as_of = as_of or resolved["lookup_timestamp"][:10]
-        return client.call("calculate_metrics", {"cik": resolved["cik"], "fiscal_years": years, "metrics": metrics, "as_of": as_of})
+        if quarter:
+            if not years:
+                labels = sorted({q for _, q in PROFILE_BY_TICKER.get(ticker, {}).get("quarters", {})})
+                raise Refusal("unsupported_quarter", "This issuer has no reviewed " + quarter + " quarter. Reviewed: " + ", ".join(labels) + ".")
+            if len(years) != 1:
+                raise Refusal("unsupported_years", "Name exactly one fiscal year with --quarter.")
+            # Quarterly ratios are not calculated; the tool refuses them rather than dropping them here.
+            return client.call("get_quarterly_facts", {"cik": resolved["cik"], "fiscal_year": years[0], "quarter": quarter,
+                                                       "metrics": metrics or list(TAGS), "as_of": as_of})
+        return client.call("calculate_metrics", {"cik": resolved["cik"], "fiscal_years": years, "metrics": metrics or list(METRICS), "as_of": as_of})
+
+
+def defaults(data_dir, ticker, years, quarter):
+    """Omitted options mean the snapshot's own issuer and all of its reviewed periods."""
+    ticker = (ticker or snapshot_ticker(data_dir) or "AAPL").upper()
+    profile = PROFILE_BY_TICKER.get(ticker)
+    if years is None and profile:
+        # A quarter defaults to its latest reviewed fiscal year.
+        years = sorted({y for y, q in profile["quarters"] if q == quarter})[-1:] if quarter else sorted(profile["periods"])
+    return ticker, years
 
 
 def main():
@@ -35,9 +54,10 @@ def main():
         if name == "ask":
             p.add_argument("question")
         elif name != "proposal":
-            p.add_argument("--ticker", default="AAPL")
-            p.add_argument("--years", nargs="+", type=int, default=[2023, 2024, 2025])
-            p.add_argument("--metrics", nargs="+", default=list(METRICS))
+            p.add_argument("--ticker", help="Defaults to the issuer of --data-dir")
+            p.add_argument("--years", nargs="+", type=int, help="Defaults to every reviewed year for the issuer")
+            p.add_argument("--quarter", help="Read reviewed quarterly facts, for example Q2 with --years 2027")
+            p.add_argument("--metrics", nargs="+", help="Defaults to every annual metric, or every fact for --quarter")
             p.add_argument("--as-of")
     p = sub.add_parser("smoke")
     p.add_argument("--data-dir", default=str(DEFAULT_DATA))
@@ -64,8 +84,10 @@ def main():
                     raise Refusal("invalid_proposal", "Proposal must be a JSON object on stdin.")
                 ticker, years, metrics, as_of = validate_proposal(proposal)
             else:
-                ticker, years, metrics, as_of = args.ticker, args.years, args.metrics, args.as_of
-            result = analyze(args.data_dir, ticker, years, metrics, as_of)
+                args.quarter = args.quarter.upper() if getattr(args, "quarter", None) else None
+                ticker, years = defaults(args.data_dir, args.ticker, args.years, args.quarter)
+                metrics, as_of = args.metrics, args.as_of
+            result = analyze(args.data_dir, ticker, years, metrics, as_of, getattr(args, "quarter", None))
     except Refusal as exc:
         result = exc.as_dict()
     except (RuntimeError, OSError) as exc:

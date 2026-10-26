@@ -6,7 +6,7 @@
       "name": "Microsoft Corporation",
       "ticker": "MSFT"
     },
-    "as_of": "2025-07-30",
+    "as_of": "2026-09-21",
     "snapshot_captured_at": "2026-09-21T22:38:24.721387+00:00",
     "evidence_kind": "sec_api_snapshot",
     "snapshot_sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
@@ -433,20 +433,6 @@
           "metric": "revenue",
           "period_start": "2022-07-01",
           "period_end": "2023-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2022-07-01",
-              "end": "2023-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "211915000000",
           "unit": "USD",
@@ -532,20 +518,6 @@
           "metric": "gross_profit",
           "period_start": "2022-07-01",
           "period_end": "2023-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2022-07-01",
-              "end": "2023-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "146052000000",
           "unit": "USD",
@@ -654,20 +626,6 @@
           "metric": "revenue",
           "period_start": "2022-07-01",
           "period_end": "2023-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2022-07-01",
-              "end": "2023-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "211915000000",
           "unit": "USD",
@@ -753,20 +711,6 @@
           "metric": "operating_income",
           "period_start": "2022-07-01",
           "period_end": "2023-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2022-07-01",
-              "end": "2023-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "88523000000",
           "unit": "USD",
@@ -875,20 +819,6 @@
           "metric": "revenue",
           "period_start": "2022-07-01",
           "period_end": "2023-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2022-07-01",
-              "end": "2023-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "211915000000",
           "unit": "USD",
@@ -974,20 +904,6 @@
           "metric": "revenue",
           "period_start": "2021-07-01",
           "period_end": "2022-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2021-07-01",
-              "end": "2022-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "198270000000",
           "unit": "USD",
@@ -1091,8 +1007,7 @@
       "period_start": "2023-07-01",
       "period_end": "2024-06-30",
       "rejection_counts": {
-        "not_annual_filing": 1,
-        "filed_after_as_of": 1
+        "not_annual_filing": 1
       },
       "rejected_candidates": [
         {
@@ -1102,27 +1017,19 @@
           "unit": "USD",
           "filed": "2024-12-03",
           "reason": "not_annual_filing"
-        },
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2023-07-01",
-          "end": "2024-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
         }
       ],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "245122000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -1172,6 +1079,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "revenue",
+          "value": "245122000000",
+          "unit": "USD",
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "fiscal_year": 2024,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -1183,8 +1106,7 @@
       "period_start": "2023-07-01",
       "period_end": "2024-06-30",
       "rejection_counts": {
-        "not_annual_filing": 1,
-        "filed_after_as_of": 1
+        "not_annual_filing": 1
       },
       "rejected_candidates": [
         {
@@ -1194,27 +1116,19 @@
           "unit": "USD",
           "filed": "2024-12-03",
           "reason": "not_annual_filing"
-        },
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2023-07-01",
-          "end": "2024-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
         }
       ],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "171008000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:GrossProfit",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -1264,6 +1178,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:GrossProfit",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "gross_profit",
+          "value": "171008000000",
+          "unit": "USD",
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "fiscal_year": 2024,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:GrossProfit",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -1275,8 +1205,7 @@
       "period_start": "2023-07-01",
       "period_end": "2024-06-30",
       "rejection_counts": {
-        "not_annual_filing": 1,
-        "filed_after_as_of": 1
+        "not_annual_filing": 1
       },
       "rejected_candidates": [
         {
@@ -1286,27 +1215,19 @@
           "unit": "USD",
           "filed": "2024-12-03",
           "reason": "not_annual_filing"
-        },
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2023-07-01",
-          "end": "2024-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
         }
       ],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "109433000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:OperatingIncomeLoss",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -1356,6 +1277,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:OperatingIncomeLoss",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "operating_income",
+          "value": "109433000000",
+          "unit": "USD",
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "fiscal_year": 2024,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:OperatingIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -1367,8 +1304,7 @@
       "period_start": "2023-07-01",
       "period_end": "2024-06-30",
       "rejection_counts": {
-        "not_annual_filing": 1,
-        "filed_after_as_of": 1
+        "not_annual_filing": 1
       },
       "rejected_candidates": [
         {
@@ -1378,27 +1314,19 @@
           "unit": "USD",
           "filed": "2024-12-03",
           "reason": "not_annual_filing"
-        },
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2023-07-01",
-          "end": "2024-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
         }
       ],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "88136000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:NetIncomeLoss",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -1448,6 +1376,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:NetIncomeLoss",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "net_income",
+          "value": "88136000000",
+          "unit": "USD",
+          "period_start": "2023-07-01",
+          "period_end": "2024-06-30",
+          "fiscal_year": 2024,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:NetIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -1466,39 +1410,16 @@
           "metric": "revenue",
           "period_start": "2023-07-01",
           "period_end": "2024-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1,
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            },
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "245122000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -1548,6 +1469,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "245122000000",
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "fiscal_year": 2024,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -1558,39 +1495,16 @@
           "metric": "gross_profit",
           "period_start": "2023-07-01",
           "period_end": "2024-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1,
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            },
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "171008000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:GrossProfit",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -1640,6 +1554,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:GrossProfit",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "gross_profit",
+              "value": "171008000000",
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "fiscal_year": 2024,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:GrossProfit",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -1673,39 +1603,16 @@
           "metric": "revenue",
           "period_start": "2023-07-01",
           "period_end": "2024-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1,
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            },
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "245122000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -1755,6 +1662,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "245122000000",
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "fiscal_year": 2024,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -1765,39 +1688,16 @@
           "metric": "operating_income",
           "period_start": "2023-07-01",
           "period_end": "2024-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1,
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            },
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "109433000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:OperatingIncomeLoss",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -1847,6 +1747,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:OperatingIncomeLoss",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "operating_income",
+              "value": "109433000000",
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "fiscal_year": 2024,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:OperatingIncomeLoss",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -1880,29 +1796,6 @@
           "metric": "revenue",
           "period_start": "2023-07-01",
           "period_end": "2024-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1,
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            },
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "245122000000",
           "unit": "USD",
@@ -1962,6 +1855,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "245122000000",
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "fiscal_year": 2024,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -1972,20 +1881,6 @@
           "metric": "revenue",
           "period_start": "2022-07-01",
           "period_end": "2023-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2022-07-01",
-              "end": "2023-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "211915000000",
           "unit": "USD",
@@ -2080,6 +1975,7 @@
       "status": "ok",
       "formula": "(current_revenue - prior_revenue) / prior_revenue * 100",
       "warnings": [
+        "comparison_uses_common_filing: 0000950170-25-100235; both values match latest eligible disclosures",
         "unequal_period_lengths: current 366 days, prior 365 days; reported growth, not week-normalized"
       ]
     },
@@ -2088,30 +1984,19 @@
       "metric": "revenue",
       "period_start": "2024-07-01",
       "period_end": "2025-06-30",
-      "rejection_counts": {
-        "filed_after_as_of": 1
-      },
-      "rejected_candidates": [
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2024-07-01",
-          "end": "2025-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
-        }
-      ],
+      "rejection_counts": {},
+      "rejected_candidates": [],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "281724000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -2145,6 +2030,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "revenue",
+          "value": "281724000000",
+          "unit": "USD",
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "fiscal_year": 2025,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -2155,30 +2056,19 @@
       "metric": "gross_profit",
       "period_start": "2024-07-01",
       "period_end": "2025-06-30",
-      "rejection_counts": {
-        "filed_after_as_of": 1
-      },
-      "rejected_candidates": [
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2024-07-01",
-          "end": "2025-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
-        }
-      ],
+      "rejection_counts": {},
+      "rejected_candidates": [],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "193893000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:GrossProfit",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -2212,6 +2102,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:GrossProfit",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "gross_profit",
+          "value": "193893000000",
+          "unit": "USD",
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "fiscal_year": 2025,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:GrossProfit",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -2222,30 +2128,19 @@
       "metric": "operating_income",
       "period_start": "2024-07-01",
       "period_end": "2025-06-30",
-      "rejection_counts": {
-        "filed_after_as_of": 1
-      },
-      "rejected_candidates": [
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2024-07-01",
-          "end": "2025-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
-        }
-      ],
+      "rejection_counts": {},
+      "rejected_candidates": [],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "128528000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:OperatingIncomeLoss",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -2279,6 +2174,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:OperatingIncomeLoss",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "operating_income",
+          "value": "128528000000",
+          "unit": "USD",
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "fiscal_year": 2025,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:OperatingIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -2289,30 +2200,19 @@
       "metric": "net_income",
       "period_start": "2024-07-01",
       "period_end": "2025-06-30",
-      "rejection_counts": {
-        "filed_after_as_of": 1
-      },
-      "rejected_candidates": [
-        {
-          "accn": "0001193125-26-323660",
-          "start": "2024-07-01",
-          "end": "2025-06-30",
-          "unit": "USD",
-          "filed": "2026-07-29",
-          "reason": "filed_after_as_of"
-        }
-      ],
+      "rejection_counts": {},
+      "rejected_candidates": [],
       "rejected_candidates_truncated": 0,
       "cik": "0000789019",
       "value": "101832000000",
       "unit": "USD",
-      "reported_fy": 2025,
+      "reported_fy": 2026,
       "fp": "FY",
       "form": "10-K",
-      "filed": "2025-07-30",
-      "accn": "0000950170-25-100235",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
       "tag": "us-gaap:NetIncomeLoss",
-      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
       "status": "ok",
       "original": {
         "cik": "0000789019",
@@ -2346,6 +2246,22 @@
           "accn": "0000950170-25-100235",
           "tag": "us-gaap:NetIncomeLoss",
           "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        },
+        {
+          "cik": "0000789019",
+          "metric": "net_income",
+          "value": "101832000000",
+          "unit": "USD",
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "fiscal_year": 2025,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:NetIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
         }
       ],
       "revision_candidate": false,
@@ -2364,30 +2280,16 @@
           "metric": "revenue",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "281724000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -2421,6 +2323,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "281724000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -2431,30 +2349,16 @@
           "metric": "gross_profit",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "193893000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:GrossProfit",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -2488,6 +2392,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:GrossProfit",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "gross_profit",
+              "value": "193893000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:GrossProfit",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -2521,30 +2441,16 @@
           "metric": "revenue",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "281724000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -2578,6 +2484,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "281724000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -2588,30 +2510,16 @@
           "metric": "operating_income",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "128528000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:OperatingIncomeLoss",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -2645,6 +2553,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:OperatingIncomeLoss",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "operating_income",
+              "value": "128528000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:OperatingIncomeLoss",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -2678,30 +2602,16 @@
           "metric": "revenue",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "281724000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -2735,6 +2645,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "281724000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -2745,39 +2671,16 @@
           "metric": "revenue",
           "period_start": "2023-07-01",
           "period_end": "2024-06-30",
-          "rejection_counts": {
-            "not_annual_filing": 1,
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0000950170-24-132722",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2024-12-03",
-              "reason": "not_annual_filing"
-            },
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2023-07-01",
-              "end": "2024-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "245122000000",
           "unit": "USD",
-          "reported_fy": 2025,
+          "reported_fy": 2026,
           "fp": "FY",
           "form": "10-K",
-          "filed": "2025-07-30",
-          "accn": "0000950170-25-100235",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
           "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
-          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
           "status": "ok",
           "original": {
             "cik": "0000789019",
@@ -2827,6 +2730,22 @@
               "accn": "0000950170-25-100235",
               "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
               "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "245122000000",
+              "unit": "USD",
+              "period_start": "2023-07-01",
+              "period_end": "2024-06-30",
+              "fiscal_year": 2024,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
             }
           ],
           "revision_candidate": false,
@@ -2848,6 +2767,633 @@
       "warnings": [
         "unequal_period_lengths: current 365 days, prior 366 days; reported growth, not week-normalized"
       ]
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "revenue",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "rejection_counts": {},
+      "rejected_candidates": [],
+      "rejected_candidates_truncated": 0,
+      "cik": "0000789019",
+      "value": "331839000000",
+      "unit": "USD",
+      "reported_fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
+      "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "status": "ok",
+      "original": {
+        "cik": "0000789019",
+        "metric": "revenue",
+        "value": "331839000000",
+        "unit": "USD",
+        "period_start": "2025-07-01",
+        "period_end": "2026-06-30",
+        "fiscal_year": 2026,
+        "reported_fy": 2026,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2026-07-29",
+        "accn": "0001193125-26-323660",
+        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      },
+      "history": [
+        {
+          "cik": "0000789019",
+          "metric": "revenue",
+          "value": "331839000000",
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "fiscal_year": 2026,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+      ],
+      "revision_candidate": false,
+      "warnings": []
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "gross_profit",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "rejection_counts": {},
+      "rejected_candidates": [],
+      "rejected_candidates_truncated": 0,
+      "cik": "0000789019",
+      "value": "225465000000",
+      "unit": "USD",
+      "reported_fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
+      "tag": "us-gaap:GrossProfit",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "status": "ok",
+      "original": {
+        "cik": "0000789019",
+        "metric": "gross_profit",
+        "value": "225465000000",
+        "unit": "USD",
+        "period_start": "2025-07-01",
+        "period_end": "2026-06-30",
+        "fiscal_year": 2026,
+        "reported_fy": 2026,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2026-07-29",
+        "accn": "0001193125-26-323660",
+        "tag": "us-gaap:GrossProfit",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      },
+      "history": [
+        {
+          "cik": "0000789019",
+          "metric": "gross_profit",
+          "value": "225465000000",
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "fiscal_year": 2026,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:GrossProfit",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+      ],
+      "revision_candidate": false,
+      "warnings": []
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "operating_income",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "rejection_counts": {},
+      "rejected_candidates": [],
+      "rejected_candidates_truncated": 0,
+      "cik": "0000789019",
+      "value": "155237000000",
+      "unit": "USD",
+      "reported_fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
+      "tag": "us-gaap:OperatingIncomeLoss",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "status": "ok",
+      "original": {
+        "cik": "0000789019",
+        "metric": "operating_income",
+        "value": "155237000000",
+        "unit": "USD",
+        "period_start": "2025-07-01",
+        "period_end": "2026-06-30",
+        "fiscal_year": 2026,
+        "reported_fy": 2026,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2026-07-29",
+        "accn": "0001193125-26-323660",
+        "tag": "us-gaap:OperatingIncomeLoss",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      },
+      "history": [
+        {
+          "cik": "0000789019",
+          "metric": "operating_income",
+          "value": "155237000000",
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "fiscal_year": 2026,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:OperatingIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+      ],
+      "revision_candidate": false,
+      "warnings": []
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "net_income",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "rejection_counts": {},
+      "rejected_candidates": [],
+      "rejected_candidates_truncated": 0,
+      "cik": "0000789019",
+      "value": "133749000000",
+      "unit": "USD",
+      "reported_fy": 2026,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2026-07-29",
+      "accn": "0001193125-26-323660",
+      "tag": "us-gaap:NetIncomeLoss",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+      "status": "ok",
+      "original": {
+        "cik": "0000789019",
+        "metric": "net_income",
+        "value": "133749000000",
+        "unit": "USD",
+        "period_start": "2025-07-01",
+        "period_end": "2026-06-30",
+        "fiscal_year": 2026,
+        "reported_fy": 2026,
+        "fp": "FY",
+        "form": "10-K",
+        "filed": "2026-07-29",
+        "accn": "0001193125-26-323660",
+        "tag": "us-gaap:NetIncomeLoss",
+        "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+      },
+      "history": [
+        {
+          "cik": "0000789019",
+          "metric": "net_income",
+          "value": "133749000000",
+          "unit": "USD",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "fiscal_year": 2026,
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:NetIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+        }
+      ],
+      "revision_candidate": false,
+      "warnings": []
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "gross_margin",
+      "unit": "percent",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "value": "67.94409337058031153661866145932214",
+      "inputs": [
+        {
+          "fiscal_year": 2026,
+          "metric": "revenue",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "cik": "0000789019",
+          "value": "331839000000",
+          "unit": "USD",
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "status": "ok",
+          "original": {
+            "cik": "0000789019",
+            "metric": "revenue",
+            "value": "331839000000",
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "fiscal_year": 2026,
+            "reported_fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "accn": "0001193125-26-323660",
+            "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          "history": [
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "331839000000",
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "fiscal_year": 2026,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+            }
+          ],
+          "revision_candidate": false,
+          "warnings": []
+        },
+        {
+          "fiscal_year": 2026,
+          "metric": "gross_profit",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "cik": "0000789019",
+          "value": "225465000000",
+          "unit": "USD",
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:GrossProfit",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "status": "ok",
+          "original": {
+            "cik": "0000789019",
+            "metric": "gross_profit",
+            "value": "225465000000",
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "fiscal_year": 2026,
+            "reported_fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "accn": "0001193125-26-323660",
+            "tag": "us-gaap:GrossProfit",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          "history": [
+            {
+              "cik": "0000789019",
+              "metric": "gross_profit",
+              "value": "225465000000",
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "fiscal_year": 2026,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:GrossProfit",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+            }
+          ],
+          "revision_candidate": false,
+          "warnings": []
+        }
+      ],
+      "display_value": "67.94",
+      "exact_fraction": {
+        "numerator": "7515500",
+        "denominator": "110613"
+      },
+      "precision": {
+        "significant_digits": 34,
+        "rounding": "ROUND_HALF_EVEN",
+        "display_places": 2
+      },
+      "status": "ok",
+      "formula": "gross_profit / revenue * 100",
+      "warnings": []
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "operating_margin",
+      "unit": "percent",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "value": "46.78081840892722073053498835278554",
+      "inputs": [
+        {
+          "fiscal_year": 2026,
+          "metric": "revenue",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "cik": "0000789019",
+          "value": "331839000000",
+          "unit": "USD",
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "status": "ok",
+          "original": {
+            "cik": "0000789019",
+            "metric": "revenue",
+            "value": "331839000000",
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "fiscal_year": 2026,
+            "reported_fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "accn": "0001193125-26-323660",
+            "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          "history": [
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "331839000000",
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "fiscal_year": 2026,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+            }
+          ],
+          "revision_candidate": false,
+          "warnings": []
+        },
+        {
+          "fiscal_year": 2026,
+          "metric": "operating_income",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "cik": "0000789019",
+          "value": "155237000000",
+          "unit": "USD",
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:OperatingIncomeLoss",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "status": "ok",
+          "original": {
+            "cik": "0000789019",
+            "metric": "operating_income",
+            "value": "155237000000",
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "fiscal_year": 2026,
+            "reported_fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "accn": "0001193125-26-323660",
+            "tag": "us-gaap:OperatingIncomeLoss",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          "history": [
+            {
+              "cik": "0000789019",
+              "metric": "operating_income",
+              "value": "155237000000",
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "fiscal_year": 2026,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:OperatingIncomeLoss",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+            }
+          ],
+          "revision_candidate": false,
+          "warnings": []
+        }
+      ],
+      "display_value": "46.78",
+      "exact_fraction": {
+        "numerator": "15523700",
+        "denominator": "331839"
+      },
+      "precision": {
+        "significant_digits": 34,
+        "rounding": "ROUND_HALF_EVEN",
+        "display_places": 2
+      },
+      "status": "ok",
+      "formula": "operating_income / revenue * 100",
+      "warnings": []
+    },
+    {
+      "fiscal_year": 2026,
+      "metric": "revenue_growth",
+      "unit": "percent",
+      "period_start": "2025-07-01",
+      "period_end": "2026-06-30",
+      "value": "17.78868679984665843165651488691059",
+      "inputs": [
+        {
+          "fiscal_year": 2026,
+          "metric": "revenue",
+          "period_start": "2025-07-01",
+          "period_end": "2026-06-30",
+          "cik": "0000789019",
+          "value": "331839000000",
+          "unit": "USD",
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "status": "ok",
+          "original": {
+            "cik": "0000789019",
+            "metric": "revenue",
+            "value": "331839000000",
+            "unit": "USD",
+            "period_start": "2025-07-01",
+            "period_end": "2026-06-30",
+            "fiscal_year": 2026,
+            "reported_fy": 2026,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2026-07-29",
+            "accn": "0001193125-26-323660",
+            "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+          },
+          "history": [
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "331839000000",
+              "unit": "USD",
+              "period_start": "2025-07-01",
+              "period_end": "2026-06-30",
+              "fiscal_year": 2026,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+            }
+          ],
+          "revision_candidate": false,
+          "warnings": []
+        },
+        {
+          "fiscal_year": 2025,
+          "metric": "revenue",
+          "period_start": "2024-07-01",
+          "period_end": "2025-06-30",
+          "cik": "0000789019",
+          "value": "281724000000",
+          "unit": "USD",
+          "reported_fy": 2026,
+          "fp": "FY",
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accn": "0001193125-26-323660",
+          "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "status": "ok",
+          "original": {
+            "cik": "0000789019",
+            "metric": "revenue",
+            "value": "281724000000",
+            "unit": "USD",
+            "period_start": "2024-07-01",
+            "period_end": "2025-06-30",
+            "fiscal_year": 2025,
+            "reported_fy": 2025,
+            "fp": "FY",
+            "form": "10-K",
+            "filed": "2025-07-30",
+            "accn": "0000950170-25-100235",
+            "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+            "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+          },
+          "history": [
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "281724000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2025,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2025-07-30",
+              "accn": "0000950170-25-100235",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+            },
+            {
+              "cik": "0000789019",
+              "metric": "revenue",
+              "value": "281724000000",
+              "unit": "USD",
+              "period_start": "2024-07-01",
+              "period_end": "2025-06-30",
+              "fiscal_year": 2025,
+              "reported_fy": 2026,
+              "fp": "FY",
+              "form": "10-K",
+              "filed": "2026-07-29",
+              "accn": "0001193125-26-323660",
+              "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+              "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+            }
+          ],
+          "revision_candidate": false,
+          "warnings": []
+        }
+      ],
+      "display_value": "17.79",
+      "exact_fraction": {
+        "numerator": "417625",
+        "denominator": "23477"
+      },
+      "precision": {
+        "significant_digits": 34,
+        "rounding": "ROUND_HALF_EVEN",
+        "display_places": 2
+      },
+      "status": "ok",
+      "formula": "(current_revenue - prior_revenue) / prior_revenue * 100",
+      "warnings": []
     }
   ]
 }

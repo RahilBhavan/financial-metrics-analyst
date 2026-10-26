@@ -25,11 +25,12 @@ Microsoft FY2026 is reviewed from its FY2026 Form 10-K (accession 0001193125-26-
 ## Selection and accounting rules
 
 - Match the exact reviewed start and end dates, USD, approved US-GAAP tags, annual filing forms and `fp=FY`. The filing's `fy` is stored separately as `reported_fy`, because a comparative fact can describe an earlier year.
-- Verify the accession, filing date, report date, issuer and safe document name against submissions metadata. Only the available submissions history is indexed.
+- Verify the accession, filing date, report date, issuer and safe document name against submissions metadata. The index covers SEC's `recent` list (about 1,000 filings) plus any paged submission files in the snapshot manifest, and `fetch` downloads those pages. When an older candidate's filing is not indexed, the result carries `history_incomplete`, because its original value and revision status cannot be verified.
+- A later filing repeats a period as a comparative under its own, later `fy`. A quarterly fact's `fy` must equal its filing's fiscal year. An annual fact's `fy` must match its filing's report year, except that a 52/53-week year ending in the first week of January may carry the prior year.
 - Select the latest eligible filing on or before the inclusive `as_of` date. A rejected same-end annual candidate at the same or a newer filing date blocks an older value. Unknown candidate dates also block. The result names the blockers instead of returning a stale number.
-- The blocker test treats unknown durations, and durations of 300 days or more, as potentially annual. Known shorter quarter and year-to-date facts are rejected but do not block an otherwise valid annual fact. This is a reviewed-period policy, not a general detector for every malformed SEC record.
-- Collapse identical duplicates. Conflicting eligible values on one filing date produce ambiguity. Keep the original values and filing history. A changed value is a revision candidate, not proof of a formal restatement. Quarterly selection applies the same conflict and blocker rules to quarter-length 10-Q and 10-Q/A candidates.
-- Ratios use one filing accession. Growth may use the latest common filing only when both comparative values equal the latest individually selected values. The result discloses this choice. A changed latest value prevents substitution.
+- The blocker test treats unknown durations, and durations of 300 days or more, as potentially annual, and 70–119 days as potentially quarterly. Other same-end facts (year-to-date, one-month stubs) are rejected but do not block. This is a reviewed-period policy, not a general detector for every malformed SEC record.
+- Collapse identical duplicates. Conflicting eligible values on one filing date produce ambiguity. Keep the original values and filing history. A changed value is a revision candidate, not proof of a formal restatement. Annual and quarterly selection share one implementation, so every eligibility, filed-before-period-end, conflict and blocker rule applies to both.
+- Ratios use one filing accession. Any ratio may use the latest common filing only when both operand values equal the latest individually selected values. The result discloses this choice. A changed latest value prevents substitution. Ratio operands carry provenance and history; the candidate audit stays on the fact rows.
 - Gross margin = gross profit / revenue × 100. Operating margin = operating income / revenue × 100. Growth = (current revenue − prior revenue) / prior revenue × 100. Revenue denominators must be positive. Missing inputs stay unavailable. They never become zero.
 - Keep exact input decimals and exact rational percentages. Decimal renderings use 34 significant digits. Display percentages use two decimal places and `ROUND_HALF_EVEN`.
 
@@ -64,7 +65,7 @@ The named standard revenue tag is absent from the company's downloaded API taxon
 
 ## Questions and model proposals
 
-`ask` accepts issuer names or tickers, common metric synonyms, year lists or ranges, and an optional filing cutoff. A missing company, year or metric produces a clarification request. So do ambiguous "profit", "margin" and "change" prompts. The parser does not drop unsupported extra requests. It is a bounded parser, not general natural-language understanding.
+`ask` accepts issuer names or tickers, common metric synonyms and plurals, year lists, ranges (`2023-2025`, `2023–2025`, `2023 through 2025`, `between 2023 and 2025`), `FY24`-style years, and an optional filing cutoff. A missing company, year or metric produces a clarification request. So does an unqualified "profit" (gross, operating or net) or "margin" (gross or operating), and a change question about anything except revenue growth. The parser does not drop unsupported extra requests. It is a bounded parser, not general natural-language understanding.
 
 | Outcome | Exit code |
 | --- | ---: |
@@ -72,7 +73,9 @@ The named standard revenue tag is absent from the company's downloaded API taxon
 | `refused` (unsupported request) | 2 |
 | `needs_clarification` (for example `ask 'Microsoft profit 2025'`) | 3 |
 
-Use `--json` for structured output, `--details` for expanded text, or `--html PATH` for a local report with expandable evidence. The operator CLI writes HTML. The MCP tools do not write files.
+Use `--json` for structured output, `--details` for expanded text, or `--html PATH` for a local report with expandable evidence. The operator CLI writes HTML. The MCP tools do not write files. Write HTML outside `reports/`: committed reports use a fixed clock, and CI fails if they change.
+
+`analyze` defaults to the issuer of `--data-dir` (Apple for the bundled data) and every reviewed year for it. `--quarter Q2` reads the latest reviewed Q2 (or the one `--years` names) and labels its column, for example `Q2 FY2027`. Quarterly ratios are refused, not dropped.
 
 An optional host can propose **arguments only**. The same deterministic tools validate them. To try that boundary without a model:
 
@@ -82,7 +85,7 @@ python3 -B -m financial_metrics proposal <<'JSON'
 JSON
 ```
 
-Proposals cannot contain financial answers, URLs, filenames or executable actions. Validation checks the allowed arguments and scope. It does not prove that a model interpreted the original question correctly.
+`as_of` is optional in a proposal; without it, the snapshot date applies, as in `ask` and `analyze`. Proposals cannot contain financial answers, URLs, filenames or executable actions. Validation checks the allowed arguments and scope. It does not prove that a model interpreted the original question correctly.
 
 ## Optional SEC refresh
 
@@ -93,4 +96,4 @@ python3 -B -m financial_metrics fetch --ticker NVDA --output local-snapshots/new
 python3 -B -m financial_metrics demo --data-dir local-snapshots/new-capture
 ```
 
-A custom data directory loads only its own reviewed issuer. The bundled default loads all ten. Tests cover the refresher with controlled HTTP responses. A live refresh with a user's contact was not run. The bundled raw snapshots were downloaded with curl. Their manifests record source URLs, sizes, SHA-256 hashes and capture-day packaging timestamps. Hashes detect changes relative to a trusted manifest. They do not authenticate an untrusted manifest.
+A data directory serves its root issuer plus any reviewed issuer subdirectories, so a copied `data/` folder keeps all ten. Subdirectory issuers load on first use, and snapshot files may be up to 32 MiB. Tests cover the refresher with controlled HTTP responses. `scripts/live_refresh_check.py` (or the manual `Live SEC refresh check` workflow) fetches every issuer and compares only the financial answer, reporting snapshot identity separately. It was run live once, on 2026-10-18, for AAPL, MSFT and NVDA, before the expansion to ten issuers (`reports/live-refresh.json`). The bundled raw snapshots were downloaded with curl. Their manifests record source URLs, sizes, SHA-256 hashes and capture-day packaging timestamps. Hashes detect changes relative to a trusted manifest. They do not authenticate an untrusted manifest.

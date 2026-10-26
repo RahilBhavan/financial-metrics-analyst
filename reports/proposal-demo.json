@@ -104,20 +104,6 @@
           "metric": "revenue",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "281724000000",
           "unit": "USD",
@@ -171,20 +157,6 @@
           "metric": "operating_income",
           "period_start": "2024-07-01",
           "period_end": "2025-06-30",
-          "rejection_counts": {
-            "filed_after_as_of": 1
-          },
-          "rejected_candidates": [
-            {
-              "accn": "0001193125-26-323660",
-              "start": "2024-07-01",
-              "end": "2025-06-30",
-              "unit": "USD",
-              "filed": "2026-07-29",
-              "reason": "filed_after_as_of"
-            }
-          ],
-          "rejected_candidates_truncated": 0,
           "cik": "0000789019",
           "value": "128528000000",
           "unit": "USD",
