@@ -16,7 +16,7 @@ This project has two parts. The first is a hand-written MCP stdio server and CLI
 | Check | Result | Source |
 | --- | --- | --- |
 | Source and intent evaluation | 947 / 947 cases pass (161 before the ten-issuer expansion) | `reports/evaluation.json` |
-| Unit tests | 167 run, 166 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
+| Unit tests | 168 run, 167 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
 | Official `mcp==1.30.0` SDK interoperability | 33 / 33 checks pass | `reports/sdk-smoke.json` |
 | Agent: correct tool and arguments, 42 in-scope tasks | 42 / 42 | `reports/agent-eval.json` |
 | Agent: out-of-scope refusals, false refusals | 8 / 8, 0 | `reports/agent-eval.json` |
@@ -47,7 +47,7 @@ python3 -B -m financial_metrics smoke
 python3 -B -m financial_metrics demo
 ```
 
-On Python 3.9 and 3.14.7 the test command printed `Ran 167 tests` and `OK (skipped=1)`; CI also runs 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
+On Python 3.9 and 3.14.7 the test command printed `Ran 168 tests` and `OK (skipped=1)`; CI also runs 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
 
 More commands:
 

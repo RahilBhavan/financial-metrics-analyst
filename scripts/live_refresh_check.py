@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 
 from financial_metrics.__main__ import analyze  # noqa: E402
 from financial_metrics.fetch import fetch_snapshot  # noqa: E402
+from financial_metrics.domain import AUDIT_KEYS  # noqa: E402
 from financial_metrics.policy import METRICS, PROFILES, TAGS  # noqa: E402
 
 # Every reviewed period, derived from the profiles: (ticker, bundled directory, years, quarter or None).
@@ -41,11 +42,13 @@ def recent(path):
 def reviewed_output(result):
     """The financial answer only: values, provenance, arithmetic, and result warnings.
 
-    Snapshot identity (capture time, companyfacts hash) changes whenever SEC adds any fact,
-    so it is reported separately rather than counted as a change in reviewed output.
+    Snapshot identity (capture time, companyfacts hash) and the candidate audit (rejected
+    candidates, including filings after the cutoff) change whenever SEC adds a filing,
+    so they are reported separately rather than counted as a change in reviewed output.
     """
     result = json.loads(json.dumps(result, default=str))
-    return json.dumps({"status": result["status"], "results": result.get("results"),
+    results = [{k: v for k, v in row.items() if k not in AUDIT_KEYS} for row in result.get("results") or []]
+    return json.dumps({"status": result["status"], "results": results,
                        "warnings": [w for w in result.get("context", {}).get("warnings", []) if not w.startswith("snapshot_older_than")]},
                       sort_keys=True)
 

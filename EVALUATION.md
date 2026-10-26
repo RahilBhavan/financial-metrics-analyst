@@ -2,7 +2,7 @@
 
 This file records the 947-case source and intent evaluation (161 cases before the ten-issuer expansion), the SDK check and their reproduction commands. The agent's 50-task evaluation is in [docs/treasury-agent.md](docs/treasury-agent.md).
 
-**Update, 26 October 2026 (multi-model review fixes).** 167 test methods run (166 pass, one skipped as before) on Python 3.14.7 and 3.9. The source and intent evaluation passes 947/947 and the official SDK check passes 33/33. A three-model review (Claude Opus 5.5, GPT 6.1 Sol, Gemini 4 Argon) found no wrong bundled numbers. It did find failures that a refresh or ordinary use would trigger, now fixed with regression tests in `tests/test_regressions.py`:
+**Update, 26 October 2026 (multi-model review fixes).** 168 test methods run (167 pass, one skipped as before) on Python 3.14.7 and 3.9. The source and intent evaluation passes 947/947 and the official SDK check passes 33/33. A three-model review (Claude Opus 5.5, GPT 6.1 Sol, Gemini 4 Argon) found no wrong bundled numbers. It did find failures that a refresh or ordinary use would trigger, now fixed with regression tests in `tests/test_regressions.py`:
 
 - Annual and quarterly selection share one implementation. Quarters gain the filed-before-period-end check, parsed report dates, and a 70–119-day blocker window, so one-month stubs do not block. Annual years ending in the first week of January may carry the prior `fy`. A quarterly metric whose tag is absent from the issuer's taxonomy now reports `standard_tag_absent`, as annual results do. The 20 affected "not reported" expectations changed accordingly.
 - Snapshots can include SEC's paged submission files, and `fetch` downloads them. On the real KHC case, a missing older filing used to make the restated value the silent "original"; it now raises `history_incomplete`.
@@ -77,11 +77,11 @@ Run commands from the project directory. `python3 scripts/regenerate_reports.py`
 
 | Command | Exit | Result |
 | --- | ---: | --- |
-| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 167 (one skipped); 947 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
+| `python3 -B -m financial_metrics.evaluate` | 0 | Baseline 77 tests, superseded by 168 (one skipped); 947 evaluation cases; AAPL, MSFT and NVDA reports; printed timing |
 | `python3 -B -m financial_metrics smoke` | 0 | Nine facts, six numeric ratios, expected refusal, clean subprocess exit |
 | `python3 -B -m financial_metrics demo --html /tmp/apple-report.html` | 0 | Three-year Apple table and expandable local report |
 | `python3 -B -m financial_metrics ask "What were Apple's net sales and operating profit in FY2023 through FY2025?"` | 0 | Six requested facts through MCP |
-| `python3 -B -m financial_metrics ask 'Apple profit 2025' --json` | 3 | Expected clarification between operating and net income |
+| `python3 -B -m financial_metrics ask 'Apple profit 2025' --json` | 3 | Expected clarification among gross profit, operating income and net income |
 | `python3 -B -m financial_metrics analyze --metrics ebitda` | 2 | Expected refusal |
 | `python3 -B -m financial_metrics analyze --years 2023 --metrics revenue --as-of 2024-10-31 --json` | 0 | Original Apple FY2023 accession selected |
 | `python3 -B -m financial_metrics analyze --ticker MSFT --years 2023 2024 2025 2026` | 0 | Four reviewed years, FY2023-FY2026, with no scope warning |

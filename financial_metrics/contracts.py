@@ -154,7 +154,7 @@ def validate_schema(value, schema, path="arguments", root=None):
                 # Fractions are dropped because Python 3.9 parses only 3- or 6-digit fractions.
                 datetime.fromisoformat(value[:10] + "T" + re.sub(r"\.[0-9]+", "", value[11:]).upper().replace("Z", "+00:00"))
         except ValueError:
-            raise Refusal("invalid_arguments", path + " has an invalid date")
+            raise Refusal("invalid_date", path + " has an invalid date")
     elif kind == "integer":
         if not schema.get("minimum", value) <= value <= schema.get("maximum", value):
             raise Refusal(field_code(path), path + " is outside the allowed range")

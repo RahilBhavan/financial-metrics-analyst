@@ -22,7 +22,8 @@ def analyze(data_dir, ticker, years, metrics, as_of, quarter=None):
         as_of = as_of or resolved["lookup_timestamp"][:10]
         if quarter:
             if not years:
-                raise Refusal("unsupported_quarter", "This issuer has no reviewed " + quarter + " quarter.")
+                labels = sorted({q for _, q in PROFILE_BY_TICKER.get(ticker, {}).get("quarters", {})})
+                raise Refusal("unsupported_quarter", "This issuer has no reviewed " + quarter + " quarter. Reviewed: " + ", ".join(labels) + ".")
             if len(years) != 1:
                 raise Refusal("unsupported_years", "Name exactly one fiscal year with --quarter.")
             # Quarterly ratios are not calculated; the tool refuses them rather than dropping them here.
@@ -83,6 +84,7 @@ def main():
                     raise Refusal("invalid_proposal", "Proposal must be a JSON object on stdin.")
                 ticker, years, metrics, as_of = validate_proposal(proposal)
             else:
+                args.quarter = args.quarter.upper() if getattr(args, "quarter", None) else None
                 ticker, years = defaults(args.data_dir, args.ticker, args.years, args.quarter)
                 metrics, as_of = args.metrics, args.as_of
             result = analyze(args.data_dir, ticker, years, metrics, as_of, getattr(args, "quarter", None))

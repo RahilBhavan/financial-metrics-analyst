@@ -177,6 +177,8 @@ class RefreshCheckTests(unittest.TestCase):
         moved = copy.deepcopy(result)
         moved['context'].update(snapshot_sha256='0' * 64, snapshot_captured_at='2026-10-18T00:00:00+00:00')
         self.assertEqual(module.reviewed_output(result), module.reviewed_output(moved))
+        moved['results'][0]['rejection_counts'] = {'filed_after_as_of': 9}
+        self.assertEqual(module.reviewed_output(result), module.reviewed_output(moved))
         moved['results'][0]['value'] = '1'
         self.assertNotEqual(module.reviewed_output(result), module.reviewed_output(moved))
         checked = {(ticker, tuple(years), quarter) for ticker, _, years, quarter in module.CHECKS}
@@ -237,6 +239,10 @@ class ContractCodeTests(unittest.TestCase):
         metric = call_tool(service, 'calculate_metrics', {'cik': NVDA, 'fiscal_years': [2025], 'metrics': ['ebitda'], 'as_of': '2026-09-21'})
         self.assertEqual(metric['structuredContent']['code'], 'unsupported_metric')
 
+    def test_impossible_cutoff_is_invalid_date(self):
+        result = call_tool(Analyst(), 'calculate_metrics', {'cik': '0000320193', 'fiscal_years': [2025], 'metrics': ['revenue'], 'as_of': '2026-02-30'})
+        self.assertEqual(result['structuredContent']['code'], 'invalid_date')
+
     def test_date_time_requires_rfc3339(self):
         schema = {'type': 'string', 'format': 'date-time'}
         for good in ('2026-09-21T22:17:57+00:00', '2026-09-21T22:17:57.5Z', '2026-09-21t22:17:57z'):
@@ -274,6 +280,7 @@ class QuestionVariantTests(unittest.TestCase):
                 self.assertEqual(parse_question(question)[1], years)
         self.assertEqual(parse_question('Apple gross profit margin 2024')[2], ['gross_margin'])
         self.assertEqual(parse_question('Apple sales growth 2024')[2], ['revenue_growth'])
+        self.assertEqual(parse_question('How did Apple revenue growth change from 2023 to 2025?')[2], ['revenue_growth'])
         self.assertEqual(parse_question("What's Apple's revenues in 2025?")[2], ['revenue'])
         for question, code in [('Apple margin 2024', 'ambiguous_margin'), ('Apple profit 2025', 'ambiguous_profit'),
                                ('How did Apple operating margin change from 2023 to 2025?', 'ambiguous_change')]:
@@ -316,7 +323,7 @@ class CliTests(unittest.TestCase):
         self.assertEqual(smoke(DEFAULT_DATA / 'nvda')['facts'], 9)
 
     def test_quarter_option_labels_quarter(self):
-        result = cli('analyze', '--ticker', 'NVDA', '--quarter', 'Q2')
+        result = cli('analyze', '--ticker', 'NVDA', '--quarter', 'q2')
         self.assertEqual(result.returncode, 0, result.stdout)
         self.assertIn('Q2 FY2027', result.stdout)
         self.assertNotIn('| FY2027', result.stdout)

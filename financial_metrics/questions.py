@@ -86,10 +86,13 @@ def parse_question(question):
         raise Clarification("ambiguous_margin", "Which margin: gross margin or operating margin?", ["Gross margin", "Operating margin"])
     if re.search(r"\bprofits?\b", text):
         raise Clarification("ambiguous_profit", "Which profit measure?", ["Gross profit", "Operating income", "Net income"])
-    if re.search(CHANGE, text) and any(metric != "revenue_growth" for metric in metrics):
-        # Only revenue has a calculated change; never silently answer a change question with levels.
-        raise Clarification("ambiguous_change", "Do you want the annual values, or year-over-year revenue growth? Changes in other metrics are not calculated.",
-                            ["Annual values", "Revenue growth"])
+    if re.search(CHANGE, text):
+        if any(metric != "revenue_growth" for metric in metrics):
+            # Only revenue has a calculated change; never silently answer a change question with levels.
+            raise Clarification("ambiguous_change", "Do you want the annual values, or year-over-year revenue growth? Changes in other metrics are not calculated.",
+                                ["Annual values", "Revenue growth"])
+        # "How did revenue growth change" asks for the growth series itself.
+        text = re.sub(CHANGE, " ", text)
     if not metrics:
         raise Clarification("metric_required", "Which metric should I show?", [LABELS[m] for m in METRICS])
     residual = re.sub(r"[,?.!&']", " ", text).split()

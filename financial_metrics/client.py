@@ -130,8 +130,8 @@ def smoke(data_dir=None):
         refused = client.call("calculate_metrics", {**args, "metrics": ["ebitda"]})
         break_even = client.call("get_break_even", {"firm": "MSTR"})
         # An issuer that does not report a metric (Robinhood has no operating income) answers partially, never with zero.
-        complete = facts["status"] == "ok" or (ticker != "AAPL" and facts["status"] == "partial"
-                                               and all(r["status"] in ("ok", "insufficient_data") for r in facts["results"]))
+        complete = facts["status"] == "ok" or (ticker != "AAPL" and facts["status"] == "partial" and all(
+            r["status"] == "ok" or r.get("reason") == "standard_tag_absent" for r in facts["results"]))
         if not complete or refused["status"] != "refused" or break_even["status"] != "ok":
             raise RuntimeError("Smoke result mismatch")
         counts = {"facts": len(facts["results"]), "numeric_ratios": sum(r["status"] == "ok" for r in metrics["results"])}
