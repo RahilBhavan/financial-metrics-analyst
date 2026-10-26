@@ -1,0 +1,155 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Block, Inc.",
+  "cik": "0001512673",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale thousands of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "total net revenue",
+    "gross_profit": "gross profit",
+    "operating_income": "operating income (loss)",
+    "net_income": "net income attributable to common stockholders"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "days": 365,
+      "accession": "0001628280-26-012254",
+      "filed": "2026-02-26",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026012254/xyz-20251231.htm",
+      "revenue": "21915623000",
+      "gross_profit": "7504886000",
+      "operating_income": "-278839000",
+      "net_income": "9772000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "days": 366,
+      "accession": "0001628280-26-012254",
+      "filed": "2026-02-26",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026012254/xyz-20251231.htm",
+      "revenue": "24121053000",
+      "gross_profit": "8889036000",
+      "operating_income": "892327000",
+      "net_income": "2897047000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "days": 365,
+      "accession": "0001628280-26-012254",
+      "filed": "2026-02-26",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026012254/xyz-20251231.htm",
+      "revenue": "24193683000",
+      "gross_profit": "10359929000",
+      "operating_income": "1708406000",
+      "net_income": "1305636000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2022-01-01",
+    "end": "2022-12-31",
+    "value": "17531587000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0001628280-25-007376"
+  },
+  "point_in_time": {
+    "as_of": "2026-02-25",
+    "accession": "0001628280-25-007376",
+    "filed": "2025-02-24",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "revenue": "21915623000",
+        "gross_profit": "7504886000",
+        "operating_income": "-278839000",
+        "net_income": "9772000"
+      },
+      "2024": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "revenue": "24121053000",
+        "gross_profit": "8889036000",
+        "operating_income": "892327000",
+        "net_income": "2897047000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "21915623000",
+        "21915623000"
+      ],
+      "2024": [
+        "24121053000",
+        "24121053000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filing_accession": "0001628280-25-038920",
+      "filed": "2025-08-07",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025038920/sq-20250630.htm",
+      "form": "10-Q",
+      "revenue": "6054457000",
+      "gross_profit": "2536530000",
+      "operating_income": "484293000",
+      "net_income": "538458000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001628280-25-050234",
+      "filed": "2025-11-06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025050234/sq-20250930.htm",
+      "form": "10-Q",
+      "revenue": "6114952000",
+      "gross_profit": "2661570000",
+      "operating_income": "409440000",
+      "net_income": "461544000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001628280-26-032200",
+      "filed": "2026-05-07",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026032200/xyz-20260331.htm",
+      "form": "10-Q",
+      "revenue": "6056847000",
+      "gross_profit": "2909239000",
+      "operating_income": "-171990000",
+      "net_income": "-308681000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filing_accession": "0001628280-26-053368",
+      "filed": "2026-08-05",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1512673/000162828026053368/xyz-20260630.htm",
+      "form": "10-Q",
+      "revenue": "6617687000",
+      "gross_profit": "3166081000",
+      "operating_income": "446870000",
+      "net_income": "88517000"
+    }
+  ]
+}

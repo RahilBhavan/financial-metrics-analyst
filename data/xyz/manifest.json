@@ -1,0 +1,18 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-25T21:26:18-04:00",
+  "scope_review": "XYZ reviewed annual periods and the latest four 10-Q quarters; later periods need human review",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001512673.json",
+      "sha256": "3f7fc57b09ca4de7d85161afc54a58352968e1f998d5c8facce2547ab8b65d0e",
+      "bytes": 2726025
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0001512673.json",
+      "sha256": "25fd1d2e336a1bb198412bcb9da6416210a29005a9a6613041e28f865c32d85b",
+      "bytes": 157166
+    }
+  },
+  "acquisition_note": "Public SEC API bodies downloaded unmodified with curl on 2026-10-25 using the User-Agent \"Rahil Bhavan <contact email>\"."
+}

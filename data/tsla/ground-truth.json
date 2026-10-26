@@ -1,0 +1,155 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Tesla, Inc.",
+  "cik": "0001318605",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale millions of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "total revenues",
+    "gross_profit": "gross profit",
+    "operating_income": "income from operations",
+    "net_income": "net income attributable to common stockholders"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "days": 365,
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "revenue": "96773000000",
+      "gross_profit": "17660000000",
+      "operating_income": "8891000000",
+      "net_income": "14997000000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "days": 366,
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "revenue": "97690000000",
+      "gross_profit": "17450000000",
+      "operating_income": "7076000000",
+      "net_income": "7091000000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "days": 365,
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "revenue": "94827000000",
+      "gross_profit": "17094000000",
+      "operating_income": "4355000000",
+      "net_income": "3794000000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2022-01-01",
+    "end": "2022-12-31",
+    "value": "81462000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0001628280-25-003063"
+  },
+  "point_in_time": {
+    "as_of": "2026-01-28",
+    "accession": "0001628280-25-003063",
+    "filed": "2025-01-30",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "revenue": "96773000000",
+        "gross_profit": "17660000000",
+        "operating_income": "8891000000",
+        "net_income": "14997000000"
+      },
+      "2024": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "revenue": "97690000000",
+        "gross_profit": "17450000000",
+        "operating_income": "7076000000",
+        "net_income": "7091000000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "96773000000",
+        "96773000000"
+      ],
+      "2024": [
+        "97690000000",
+        "97690000000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001628280-25-045968",
+      "filed": "2025-10-23",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+      "form": "10-Q",
+      "revenue": "28095000000",
+      "gross_profit": "5054000000",
+      "operating_income": "1624000000",
+      "net_income": "1373000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001628280-26-026673",
+      "filed": "2026-04-23",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+      "form": "10-Q",
+      "revenue": "22387000000",
+      "gross_profit": "4720000000",
+      "operating_income": "941000000",
+      "net_income": "477000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filing_accession": "0001628280-26-049270",
+      "filed": "2026-07-23",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+      "form": "10-Q",
+      "revenue": "28236000000",
+      "gross_profit": "4751000000",
+      "operating_income": "398000000",
+      "net_income": "1114000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q3",
+      "start": "2026-07-01",
+      "end": "2026-09-30",
+      "filing_accession": "0001628280-26-066775",
+      "filed": "2026-10-22",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+      "form": "10-Q",
+      "revenue": "28046000000",
+      "gross_profit": "5494000000",
+      "operating_income": "718000000",
+      "net_income": "787000000"
+    }
+  ]
+}

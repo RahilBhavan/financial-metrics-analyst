@@ -3,7 +3,7 @@
 import re
 
 from .contracts import obj, validate_schema
-from .policy import MAX_YEARS, Clarification, Refusal
+from .policy import MAX_YEARS, PROFILES, Clarification, Refusal
 
 ALIASES = {
     "revenue": "revenue", "sales": "revenue", "net sales": "revenue", "total revenue": "revenue",
@@ -14,8 +14,14 @@ ALIASES = {
     "revenue growth": "revenue_growth", "yoy revenue growth": "revenue_growth",
     "year-over-year revenue growth": "revenue_growth",
 }
-COMPANIES = {"apple": "AAPL", "aapl": "AAPL", "microsoft": "MSFT", "msft": "MSFT",
-             "nvidia": "NVDA", "nvda": "NVDA"}
+# Names and tickers a question may use. A bare "v" is never read as Visa.
+COMPANIES = {"apple": "AAPL", "aapl": "AAPL", "microsoft": "MSFT", "msft": "MSFT", "nvidia": "NVDA", "nvda": "NVDA",
+             "coinbase": "COIN", "coin": "COIN", "strategy": "MSTR", "microstrategy": "MSTR", "mstr": "MSTR",
+             "robinhood": "HOOD", "hood": "HOOD", "block": "XYZ", "xyz": "XYZ", "paypal": "PYPL", "pypl": "PYPL",
+             "visa": "V", "tesla": "TSLA", "tsla": "TSLA"}
+COMPANY_WORDS = "|".join(sorted(COMPANIES, key=len, reverse=True))
+CHOICES = ["Apple (AAPL)", "Microsoft (MSFT)", "NVIDIA (NVDA)", "Coinbase (COIN)", "Strategy (MSTR)", "Robinhood (HOOD)",
+           "Block (XYZ)", "PayPal (PYPL)", "Visa (V)", "Tesla (TSLA)"]
 FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|fcf|cash flow|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|net margin|execute|shell|ignore|delete|send|email)\b"
 FILLER = {"what", "was", "were", "is", "the", "for", "in", "from", "to", "through", "and", "please", "show",
           "me", "give", "tell", "about", "of", "between", "fiscal", "years", "year", "fy", "how", "did", "change", "over"}
@@ -34,13 +40,13 @@ def parse_question(question):
     as_of = matches[0].group(1) if matches else None
     if matches:
         text = text[:matches[0].start()] + " " + text[matches[0].end():]
-    entities = {COMPANIES[m.group()] for m in re.finditer(r"\b(?:apple|aapl|microsoft|msft|nvidia|nvda)\b", text)}
+    entities = {COMPANIES[m.group()] for m in re.finditer(r"\b(?:" + COMPANY_WORDS + r")\b", text)}
     if len(entities) > 1:
         raise Refusal("unsupported_comparison", "Ask for one issuer at a time; cross-company comparisons are not supported.")
     if not entities:
-        raise Clarification("company_required", "Which reviewed company should I use?", ["Apple (AAPL)", "Microsoft (MSFT)", "NVIDIA (NVDA)"])
+        raise Clarification("company_required", "Which reviewed company should I use?", CHOICES)
     ticker = entities.pop()
-    text = re.sub(r"\b(?:apple|aapl|microsoft|msft|nvidia|nvda)(?:'s)?\b", " ", text)
+    text = re.sub(r"\b(?:" + COMPANY_WORDS + r")(?:'s)?\b", " ", text)
     range_match = re.search(r"\b(?:fy\s*)?(\d{4})\s*(?:through|to|-)\s*(?:fy\s*)?(\d{4})\b", text)
     if range_match:
         start, end = map(int, range_match.groups())
@@ -77,7 +83,7 @@ def parse_question(question):
     return ticker, sorted(years), list(dict.fromkeys(metrics)), as_of
 
 
-PROPOSAL_SCHEMA = obj({"ticker": {"type": "string", "enum": ["AAPL", "MSFT", "NVDA"]},
+PROPOSAL_SCHEMA = obj({"ticker": {"type": "string", "enum": [profile["ticker"] for profile in PROFILES.values()]},
                        "fiscal_years": {"type": "array", "minItems": 1, "maxItems": MAX_YEARS, "uniqueItems": True,
                                         "items": {"type": "integer", "minimum": 2023, "maximum": 2026}},
                        "metrics": {"type": "array", "minItems": 1, "maxItems": 7, "uniqueItems": True,

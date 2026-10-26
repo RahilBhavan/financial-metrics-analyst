@@ -37,7 +37,7 @@ class SECClient:
             raise Refusal("invalid_user_agent", "Use an identifying ASCII User-Agent containing your real contact email.")
         self.user_agent = user_agent
         if cik not in PROFILES:
-            raise Refusal("unsupported_company", "Refresh supports the reviewed AAPL, MSFT, and NVDA issuers.")
+            raise Refusal("unsupported_company", "Refresh supports the reviewed issuers: " + ", ".join(sorted(TICKER_CIKS)) + ".")
         self.cik = cik
         self.endpoints = endpoints_for(cik)
         self.opener = opener or urllib.request.build_opener(NoRedirect())
@@ -88,7 +88,7 @@ def fetch_snapshot(output_dir, user_agent, ticker="AAPL"):
     if output_dir.exists():
         raise Refusal("target_exists", "Choose a new directory; existing snapshots are never overwritten.")
     if not isinstance(ticker, str) or ticker.upper() not in TICKER_CIKS:
-        raise Refusal("unsupported_company", "Refresh supports AAPL, MSFT, and NVDA.")
+        raise Refusal("unsupported_company", "Refresh supports: " + ", ".join(sorted(TICKER_CIKS)) + ".")
     cik = TICKER_CIKS[ticker.upper()]
     client = SECClient(user_agent, cik)
     payloads = {name: client.get(name) for name in endpoints_for(cik)}

@@ -1,0 +1,155 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "PayPal Holdings, Inc.",
+  "cik": "0001633917",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale millions of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "net revenues",
+    "gross_profit": null,
+    "operating_income": "operating income",
+    "net_income": "net income (loss)"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "days": 365,
+      "accession": "0001633917-26-000024",
+      "filed": "2026-02-03",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "revenue": "29771000000",
+      "gross_profit": null,
+      "operating_income": "5028000000",
+      "net_income": "4246000000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "days": 366,
+      "accession": "0001633917-26-000024",
+      "filed": "2026-02-03",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "revenue": "31797000000",
+      "gross_profit": null,
+      "operating_income": "5325000000",
+      "net_income": "4147000000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "days": 365,
+      "accession": "0001633917-26-000024",
+      "filed": "2026-02-03",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+      "revenue": "33172000000",
+      "gross_profit": null,
+      "operating_income": "6065000000",
+      "net_income": "5233000000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2022-01-01",
+    "end": "2022-12-31",
+    "value": "27518000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000019/pypl-20241231.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0001633917-25-000019"
+  },
+  "point_in_time": {
+    "as_of": "2026-02-02",
+    "accession": "0001633917-25-000019",
+    "filed": "2025-02-04",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000019/pypl-20241231.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-31",
+        "revenue": "29771000000",
+        "gross_profit": null,
+        "operating_income": "5028000000",
+        "net_income": "4246000000"
+      },
+      "2024": {
+        "start": "2024-01-01",
+        "end": "2024-12-31",
+        "revenue": "31797000000",
+        "gross_profit": null,
+        "operating_income": "5325000000",
+        "net_income": "4147000000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "29771000000",
+        "29771000000"
+      ],
+      "2024": [
+        "31797000000",
+        "31797000000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2025-01-01",
+      "end": "2025-03-31",
+      "filing_accession": "0001633917-25-000064",
+      "filed": "2025-04-29",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000064/pypl-20250331.htm",
+      "form": "10-Q",
+      "revenue": "7791000000",
+      "operating_income": "1530000000",
+      "net_income": "1287000000",
+      "gross_profit": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filing_accession": "0001633917-25-000161",
+      "filed": "2025-07-29",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000161/pypl-20250630.htm",
+      "form": "10-Q",
+      "revenue": "8288000000",
+      "operating_income": "1504000000",
+      "net_income": "1261000000",
+      "gross_profit": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001633917-25-000196",
+      "filed": "2025-10-28",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000196/pypl-20250930.htm",
+      "form": "10-Q",
+      "revenue": "8417000000",
+      "operating_income": "1520000000",
+      "net_income": "1248000000",
+      "gross_profit": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001633917-26-000067",
+      "filed": "2026-05-05",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000067/pypl-20260331.htm",
+      "form": "10-Q",
+      "revenue": "8353000000",
+      "operating_income": "1488000000",
+      "net_income": "1113000000",
+      "gross_profit": null
+    }
+  ]
+}

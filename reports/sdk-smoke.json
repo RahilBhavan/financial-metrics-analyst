@@ -3,8 +3,8 @@
   "sdk_version": "1.30.0",
   "python": "3.11.16",
   "transport": "stdio subprocess",
-  "passed": 28,
-  "total": 28,
+  "passed": 33,
+  "total": 33,
   "checks": [
     {
       "case": "protocol negotiation",
@@ -88,6 +88,26 @@
     },
     {
       "case": "get_break_even refused",
+      "passed": true
+    },
+    {
+      "case": "resolve_company ok",
+      "passed": true
+    },
+    {
+      "case": "get_annual_facts ok",
+      "passed": true
+    },
+    {
+      "case": "get_quarterly_facts ok",
+      "passed": true
+    },
+    {
+      "case": "get_quarterly_facts partial",
+      "passed": true
+    },
+    {
+      "case": "get_quarterly_facts refused",
       "passed": true
     },
     {

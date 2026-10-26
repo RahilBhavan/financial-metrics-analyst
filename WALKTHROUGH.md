@@ -26,7 +26,7 @@ flowchart LR
 
 ## Read the code in this order
 
-1. `financial_metrics/policy.py`: the three issuer profiles, reviewed fiscal intervals, supporting revenue periods, tags, and accounting decisions.
+1. `financial_metrics/policy.py`: the ten issuer profiles, reviewed fiscal intervals and quarters, supporting revenue periods, tags, and accounting decisions.
 2. The issuer and reference `ground-truth.json` cards: independently transcribed filing evidence, including the limits of each source check.
 3. `financial_metrics/domain.py`: manifest validation, issuer routing, candidate selection, revision history, common-filing comparison, and exact arithmetic.
 4. `financial_metrics/contracts.py` and `tools.py`: closed nested schemas and the seven exposed operations: four SEC tools and three treasury tools. Invalid output becomes a refusal before crossing the tool boundary.

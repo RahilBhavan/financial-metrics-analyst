@@ -42,5 +42,63 @@
     "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
     "source_section": "Consolidated Statements of Operations, printed page 29, Total net sales, 2022 column; USD millions scaled to USD",
     "latest_matching_accession": "0000320193-24-000123"
-  }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-03-30",
+      "end": "2025-06-28",
+      "filing_accession": "0000320193-25-000073",
+      "filed": "2025-08-01",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000073/aapl-20250628.htm",
+      "form": "10-Q",
+      "revenue": "94036000000",
+      "gross_profit": "43718000000",
+      "operating_income": "28202000000",
+      "net_income": "23434000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-09-28",
+      "end": "2025-12-27",
+      "filing_accession": "0000320193-26-000006",
+      "filed": "2026-01-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227.htm",
+      "form": "10-Q",
+      "revenue": "143756000000",
+      "gross_profit": "69231000000",
+      "operating_income": "50852000000",
+      "net_income": "42097000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2025-12-28",
+      "end": "2026-03-28",
+      "filing_accession": "0000320193-26-000013",
+      "filed": "2026-05-01",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000013/aapl-20260328.htm",
+      "form": "10-Q",
+      "revenue": "111184000000",
+      "gross_profit": "54781000000",
+      "operating_income": "35885000000",
+      "net_income": "29578000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q3",
+      "start": "2026-03-29",
+      "end": "2026-06-27",
+      "filing_accession": "0000320193-26-000020",
+      "filed": "2026-07-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+      "form": "10-Q",
+      "revenue": "109417000000",
+      "gross_profit": "54770000000",
+      "operating_income": "35695000000",
+      "net_income": "29789000000"
+    }
+  ]
 }

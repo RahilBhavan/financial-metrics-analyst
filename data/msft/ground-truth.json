@@ -57,5 +57,63 @@
     "source_url": "https://www.microsoft.com/investor/reports/ar24/index.html",
     "source_section": "Income Statements, Total revenue, 2022 column",
     "latest_matching_accession": "0000950170-24-087843"
-  }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-01-01",
+      "end": "2025-03-31",
+      "filing_accession": "0000950170-25-061046",
+      "filed": "2025-04-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025061046/msft-20250331.htm",
+      "form": "10-Q",
+      "revenue": "70066000000",
+      "gross_profit": "48147000000",
+      "operating_income": "32000000000",
+      "net_income": "25824000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filing_accession": "0001193125-25-256321",
+      "filed": "2025-10-29",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+      "form": "10-Q",
+      "revenue": "77673000000",
+      "gross_profit": "53630000000",
+      "operating_income": "37961000000",
+      "net_income": "27747000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2025-10-01",
+      "end": "2025-12-31",
+      "filing_accession": "0001193125-26-027207",
+      "filed": "2026-01-28",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/msft-20251231.htm",
+      "form": "10-Q",
+      "revenue": "81273000000",
+      "gross_profit": "55295000000",
+      "operating_income": "38275000000",
+      "net_income": "38458000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q3",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filing_accession": "0001193125-26-191507",
+      "filed": "2026-04-29",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm",
+      "form": "10-Q",
+      "revenue": "82886000000",
+      "gross_profit": "56058000000",
+      "operating_income": "38398000000",
+      "net_income": "31778000000"
+    }
+  ]
 }
