@@ -19,7 +19,7 @@ The runtime uses the Python standard library. Every financial number carries fil
 | --- | --- | --- |
 | T3-native integration | 6 / 6 checks pass, no project MCP setup or separate API key | `reports/t3-smoke.json` |
 | Source and intent evaluation | 2,736 / 2,736 cases pass | `reports/evaluation.json` |
-| Unit tests | 209 run, 208 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
+| Unit tests | 210 run, 209 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
 | Official `mcp==1.30.0` SDK interoperability | 41 / 41 checks pass | `reports/sdk-smoke.json` |
 | Agent: correct tool and arguments, 42 in-scope tasks | 42 / 42 | `reports/agent-eval.json` |
 | Agent: out-of-scope refusals, false refusals | 8 / 8, 0 | `reports/agent-eval.json` |
@@ -54,7 +54,7 @@ python3 -B -m financial_metrics smoke
 python3 -B -m financial_metrics demo
 ```
 
-The current local Python 3.14.7 run has 209 tests with one skip; CI runs Python 3.9, 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
+The current local Python 3.14.7 run has 210 tests with one skip; CI runs Python 3.9, 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
 
 More commands:
 

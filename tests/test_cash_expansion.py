@@ -109,6 +109,23 @@ class CashExpansionTests(unittest.TestCase):
             row = analyst.get_quarterly_facts(analyst.cik, 2026, 'Q2', ['free_cash_flow'], '2026-09-21')['results'][0]
             self.assertEqual((row['status'], row['value']), ('insufficient_data', None), defect)
 
+    def test_decreasing_positive_ytd_capex_is_unavailable_for_capex_and_fcf(self):
+        for current_ytd, expected_status in ((1, 'insufficient_data'), (2373000000, 'ok')):
+            analyst = Analyst()
+            rows = analyst.facts['facts']['us-gaap']['PaymentsToAcquirePropertyPlantAndEquipment']['units']['USD']
+            for row in rows:
+                if row.get('start') == '2025-09-28' and row['end'] == '2026-03-28':
+                    row['val'] = current_ytd
+            for metric in ('capital_expenditures', 'free_cash_flow'):
+                with self.subTest(current_ytd=current_ytd, metric=metric):
+                    row = analyst.get_quarterly_facts(analyst.cik, 2026, 'Q2', [metric], '2026-09-21')['results'][0]
+                    self.assertEqual(row['status'], expected_status)
+                    if expected_status == 'insufficient_data':
+                        self.assertIsNone(row['value'])
+                        self.assertEqual(row['reason'], 'negative_capital_expenditures')
+                    elif metric == 'capital_expenditures':
+                        self.assertEqual(row['value'], '0')
+
     def test_subtraction_is_exact_in_a_low_precision_decimal_context(self):
         analyst = Analyst()
         with localcontext() as context:

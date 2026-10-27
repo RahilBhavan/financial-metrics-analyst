@@ -355,6 +355,8 @@ class Analyst:
                     if baseline['status'] != 'ok' or number(baseline['value']) != number(operands[1]['value']):
                         return {**base, 'status': 'insufficient_data', 'reason': 'prior_ytd_revised_after_current_ytd', 'inputs': inputs}
                 value -= Fraction(number(operands[1]['value']))
+            if component == 'capital_expenditures' and value < 0:
+                return {**base, 'status': 'insufficient_data', 'reason': 'negative_capital_expenditures', 'inputs': inputs}
             values.append(value)
             warnings.extend(w for row in operands for w in row['warnings'])
         if len({row['accn'] for row in inputs}) > 1:
@@ -364,8 +366,6 @@ class Analyst:
             width = len(inputs) // 2
             if any(a['accn'] != b['accn'] for a, b in zip(inputs[:width], inputs[width:])):
                 return {**base, 'status': 'insufficient_data', 'reason': 'inconsistent_filing_basis', 'inputs': inputs}
-            if values[1] < 0:
-                return {**base, 'status': 'insufficient_data', 'reason': 'negative_capital_expenditures', 'inputs': inputs}
             value = values[0] - values[1]
             formula = 'operating_cash_flow - capital_expenditures'
         else:
