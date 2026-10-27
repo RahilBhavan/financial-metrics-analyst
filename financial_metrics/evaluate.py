@@ -179,6 +179,24 @@ def run():
                 early = client.call('get_quarterly_facts', {'cik': cik, 'fiscal_year': quarter['fiscal_year'], 'quarter': quarter['quarter'],
                                                             'metrics': ['revenue'], 'as_of': day_before})
                 record('point_in_time', label + ' revenue not visible the day before its 10-Q', 'insufficient_data', early['results'][0]['status'])
+        for ticker, directory in ISSUERS:
+            card = json.loads((directory / 'cash-expansion-ground-truth.json').read_text())
+            cik = CIK_OF[ticker]
+            cash_metrics = ['operating_cash_flow', 'investing_cash_flow', 'financing_cash_flow', 'capital_expenditures', 'free_cash_flow']
+            samples = [('calculate_metrics', {'cik': cik, 'fiscal_years': [int(year)], 'metrics': cash_metrics, 'as_of': row['filed']}, row)
+                       for year, row in card['years'].items()]
+            samples += [('get_quarterly_facts', {'cik': cik, 'fiscal_year': row['fiscal_year'], 'quarter': row['quarter'],
+                                               'metrics': cash_metrics, 'as_of': row['filed']}, row) for row in card['quarters']]
+            for tool, args, expected in samples:
+                result = client.call(tool, args)
+                for row in result['results']:
+                    label = ticker + ' ' + row['period_end'] + ' ' + row['metric']
+                    record('expanded_cash_values', label, expected[row['metric']], row['value'])
+                    if row['status'] == 'ok':
+                        sources = expected.get('inputs', [expected])
+                        actual = row.get('inputs', [row])
+                        record('expanded_cash_provenance', label,
+                               sorted({r['source_url'] for r in sources}), sorted({r['source_url'] for r in actual}))
         paypal = next(q for q in json.loads((DEFAULT_DATA / 'pypl/ground-truth.json').read_text())['reviewed_quarters']
                       if (q['fiscal_year'], q['quarter']) == (2025, 'Q2'))
         args = {'cik': CIK_OF['PYPL'], 'fiscal_year': 2025, 'quarter': 'Q2', 'metrics': ['net_income']}
@@ -213,7 +231,7 @@ def run():
                any('newer_annual' in w for w in latest_msft['context']['warnings']))
         for name, tool, args in [
             ('EBITDA', 'calculate_metrics', {**arguments, 'metrics': ['ebitda']}),
-            ('FCF', 'calculate_metrics', {**arguments, 'metrics': ['free_cash_flow']}),
+            ('adjusted FCF', 'calculate_metrics', {**arguments, 'metrics': ['adjusted_free_cash_flow']}),
             ('unreviewed year', 'calculate_metrics', {**arguments, 'fiscal_years': [2026]}),
             ('supporting year not public', 'calculate_metrics', {**arguments, 'fiscal_years': [2022]}),
             ('future as-of', 'calculate_metrics', {**arguments, 'as_of': '2026-09-22'}),
@@ -231,7 +249,7 @@ def run():
             cik, captured = CIK_OF[ticker], date.fromisoformat(CAPTURED[ticker])
             base = dict(cik=cik, fiscal_years=[2025], metrics=['revenue'], as_of=captured.isoformat())
             reviewed = PROFILES[cik]['quarters']
-            fiscal_year, quarter = next(key for key in [(2025, 'Q1'), (2025, 'Q2'), (2025, 'Q3'), (2026, 'Q1'), (2026, 'Q2'), (2026, 'Q3')] if key not in reviewed)
+            fiscal_year, quarter = next(key for key in [(y, q) for y in range(2024, 2028) for q in ('Q1', 'Q2', 'Q3')] if key not in reviewed)
             for name, tool, args in [
                     (ticker + ' unreviewed year FY2026', 'calculate_metrics', {**base, 'fiscal_years': [2026]}),
                     (ticker + ' EBITDA', 'calculate_metrics', {**base, 'metrics': ['ebitda']}),
@@ -319,7 +337,7 @@ def run():
         ('Apple revenue 2023 through 2024 and 2025', 'needs_clarification:ambiguous_years'),
         ('Apple vs NVIDIA revenue 2025', 'refused:unsupported_comparison'),
         ('Apple net margin 2025', 'refused:unsupported_question'),
-        ('Apple free cash flow 2025', 'refused:unsupported_question'),
+        ('Apple adjusted free cash flow 2025', 'refused:unsupported_question'),
         ('Apple adjusted operating income 2025', 'refused:unsupported_question'),
         ('Apple revenue 2022', 'refused:unsupported_years'),
         ('Apple revenue 2019 through 2021', 'refused:unsupported_years'),
@@ -348,7 +366,7 @@ def run():
         unit_tests=dict(run=tests.testsRun, failures=len(tests.failures), errors=len(tests.errors), skipped=len(tests.skipped)),
         evaluation_counts=counts, evaluation_passed=sum(c['passed'] for c in cases), evaluation_total=len(cases), coverage=coverage,
         cases=cases,
-        limitations=['Ten reviewed issuers with issuer-specific annual coverage and four reviewed 10-Q quarters each.',
+        limitations=['Twelve reviewed issuers with issuer-specific annual coverage and six reviewed 10-Q quarters each.',
                      'Metrics an issuer does not report (gross profit for COIN, HOOD, PYPL and V; operating income for HOOD) are expected to be unavailable, not zero.',
                      'The SEC companyfacts API held no facts for the PYPL and V 10-Qs filed in July 2026, so those periods are not reviewed.',
                      'Microsoft FY2023-FY2025 provenance uses as_of 2025-07-30 to match its independently read 2025 report; values are also checked at the snapshot date.',

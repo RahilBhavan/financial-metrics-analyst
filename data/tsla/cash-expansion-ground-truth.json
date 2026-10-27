@@ -1,0 +1,307 @@
+{
+  "verification": "Visible SEC cash-flow statements only; no companyfacts or runtime calculation engine read.",
+  "ticker": "TSLA",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "accession": "0001628280-24-002390",
+      "filed": "2024-01-29",
+      "end": "2023-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024002390/tsla-20231231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "13256000000",
+      "capital_expenditures": "8898000000",
+      "investing_cash_flow": "-15584000000",
+      "financing_cash_flow": "2589000000",
+      "free_cash_flow": "4358000000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "accession": "0001628280-25-003063",
+      "filed": "2025-01-30",
+      "end": "2024-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025003063/tsla-20241231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "14923000000",
+      "capital_expenditures": "11339000000",
+      "investing_cash_flow": "-18787000000",
+      "financing_cash_flow": "3853000000",
+      "free_cash_flow": "3584000000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "end": "2025-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "14747000000",
+      "capital_expenditures": "8527000000",
+      "investing_cash_flow": "-15478000000",
+      "financing_cash_flow": "1139000000",
+      "free_cash_flow": "6220000000"
+    }
+  },
+  "quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2025-01-01",
+      "end": "2025-03-31",
+      "filed": "2025-04-23",
+      "inputs": [
+        {
+          "accession": "0001628280-25-018911",
+          "filed": "2025-04-23",
+          "end": "2025-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "2156000000",
+          "capital_expenditures": "1492000000",
+          "investing_cash_flow": "-1651000000",
+          "financing_cash_flow": "-332000000"
+        }
+      ],
+      "operating_cash_flow": "2156000000",
+      "investing_cash_flow": "-1651000000",
+      "financing_cash_flow": "-332000000",
+      "capital_expenditures": "1492000000",
+      "free_cash_flow": "664000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filed": "2025-07-24",
+      "inputs": [
+        {
+          "accession": "0001628280-25-035806",
+          "filed": "2025-07-24",
+          "end": "2025-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "4696000000",
+          "capital_expenditures": "3886000000",
+          "investing_cash_flow": "-4595000000",
+          "financing_cash_flow": "-554000000"
+        },
+        {
+          "accession": "0001628280-25-018911",
+          "filed": "2025-04-23",
+          "end": "2025-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "2156000000",
+          "capital_expenditures": "1492000000",
+          "investing_cash_flow": "-1651000000",
+          "financing_cash_flow": "-332000000"
+        }
+      ],
+      "operating_cash_flow": "2540000000",
+      "investing_cash_flow": "-2944000000",
+      "financing_cash_flow": "-222000000",
+      "capital_expenditures": "2394000000",
+      "free_cash_flow": "146000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filed": "2025-10-23",
+      "inputs": [
+        {
+          "accession": "0001628280-25-045968",
+          "filed": "2025-10-23",
+          "end": "2025-09-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by financing activities"
+          },
+          "operating_cash_flow": "10934000000",
+          "capital_expenditures": "6134000000",
+          "investing_cash_flow": "-8950000000",
+          "financing_cash_flow": "429000000"
+        },
+        {
+          "accession": "0001628280-25-035806",
+          "filed": "2025-07-24",
+          "end": "2025-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "4696000000",
+          "capital_expenditures": "3886000000",
+          "investing_cash_flow": "-4595000000",
+          "financing_cash_flow": "-554000000"
+        }
+      ],
+      "operating_cash_flow": "6238000000",
+      "investing_cash_flow": "-4355000000",
+      "financing_cash_flow": "983000000",
+      "capital_expenditures": "2248000000",
+      "free_cash_flow": "3990000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filed": "2026-04-23",
+      "inputs": [
+        {
+          "accession": "0001628280-26-026673",
+          "filed": "2026-04-23",
+          "end": "2026-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "3937000000",
+          "capital_expenditures": "2493000000",
+          "investing_cash_flow": "-5023000000",
+          "financing_cash_flow": "1172000000"
+        }
+      ],
+      "operating_cash_flow": "3937000000",
+      "investing_cash_flow": "-5023000000",
+      "financing_cash_flow": "1172000000",
+      "capital_expenditures": "2493000000",
+      "free_cash_flow": "1444000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filed": "2026-07-23",
+      "inputs": [
+        {
+          "accession": "0001628280-26-049270",
+          "filed": "2026-07-23",
+          "end": "2026-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "8634000000",
+          "capital_expenditures": "8282000000",
+          "investing_cash_flow": "-10951000000",
+          "financing_cash_flow": "1209000000"
+        },
+        {
+          "accession": "0001628280-26-026673",
+          "filed": "2026-04-23",
+          "end": "2026-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026026673/tsla-20260331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "3937000000",
+          "capital_expenditures": "2493000000",
+          "investing_cash_flow": "-5023000000",
+          "financing_cash_flow": "1172000000"
+        }
+      ],
+      "operating_cash_flow": "4697000000",
+      "investing_cash_flow": "-5928000000",
+      "financing_cash_flow": "37000000",
+      "capital_expenditures": "5789000000",
+      "free_cash_flow": "-1092000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q3",
+      "start": "2026-07-01",
+      "end": "2026-09-30",
+      "filed": "2026-10-22",
+      "inputs": [
+        {
+          "accession": "0001628280-26-066775",
+          "filed": "2026-10-22",
+          "end": "2026-09-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by financing activities"
+          },
+          "operating_cash_flow": "14897000000",
+          "capital_expenditures": "13014000000",
+          "investing_cash_flow": "-14928000000",
+          "financing_cash_flow": "1536000000"
+        },
+        {
+          "accession": "0001628280-26-049270",
+          "filed": "2026-07-23",
+          "end": "2026-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026049270/tsla-20260630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment excluding finance leases, net of sales",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "8634000000",
+          "capital_expenditures": "8282000000",
+          "investing_cash_flow": "-10951000000",
+          "financing_cash_flow": "1209000000"
+        }
+      ],
+      "operating_cash_flow": "6263000000",
+      "investing_cash_flow": "-3977000000",
+      "financing_cash_flow": "327000000",
+      "capital_expenditures": "4732000000",
+      "free_cash_flow": "1531000000"
+    }
+  ]
+}

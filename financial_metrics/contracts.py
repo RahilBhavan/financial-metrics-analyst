@@ -4,7 +4,7 @@ import json
 import re
 from datetime import date, datetime
 
-from .policy import ANNUAL_TAGS, ANNUAL_YEARS, MAX_YEARS, METRICS, POLICY, REVIEWED_TAGS, TAGS, Refusal
+from .policy import ANNUAL_TAGS, ANNUAL_YEARS, CASH_FLOW_TAGS, MAX_YEARS, METRICS, POLICY, REVIEWED_TAGS, Refusal
 
 
 def obj(properties, optional=()):
@@ -46,7 +46,7 @@ CONTEXT = obj({"company": COMPANY, "as_of": DATE,
 def definitions(quarterly):
     """Annual and quarterly results differ only in which forms and fiscal periods are valid."""
     forms, fps = (["10-Q", "10-Q/A"], QUARTER_FPS) if quarterly else (["10-K", "10-K/A"], ["FY"])
-    facts = TAGS if quarterly else ANNUAL_TAGS
+    facts = ANNUAL_TAGS
     core = {"cik": CIK_SCHEMA, "metric": {"enum": list(facts)}, "value": DECIMAL, "unit": {"const": "USD"},
             "fiscal_year": YEAR, "period_start": DATE, "period_end": DATE, "reported_fy": YEAR,
             "fp": {"enum": fps}, "form": {"enum": forms}, "filed": DATE,
@@ -65,12 +65,22 @@ def definitions(quarterly):
     ratio_error = obj({**RATIO_BASE, "status": {"const": "insufficient_data"}, "value": {"type": "null"}, "reason": TEXT,
                        "inputs": array({"oneOf": [{"$ref": "#/$defs/operand_ok"}, {"$ref": "#/$defs/fact_error"}]}, 2, 2)},
                       optional=("inputs",))
+    cash_base = {**ROW, 'metric': {'enum': list(CASH_FLOW_TAGS) + ['capital_expenditures', 'free_cash_flow'] if quarterly else ['free_cash_flow']},
+                 'unit': {'const': 'USD'}, 'fp': {'enum': fps},
+                 'inputs': array({'$ref': '#/$defs/operand_ok'}, 0, 4)}
+    cash_ok = obj({**cash_base, 'status': {'const': 'ok'}, 'value': DECIMAL,
+                   'inputs': array({'$ref': '#/$defs/operand_ok'}, 1, 4),
+                   'formula': {'enum': (['current_ytd', 'current_ytd - previous_ytd', 'operating_cash_flow - capital_expenditures']
+                                        if quarterly else ['operating_cash_flow - capital_expenditures'])},
+                   'warnings': WARNINGS})
+    cash_error = obj({**cash_base, 'status': {'const': 'insufficient_data'}, 'value': {'type': 'null'}, 'reason': TEXT})
     return {"fact_core": obj(core), "rejection": REJECTION, "fact_ok": obj({**provenance, **AUDIT}),
             # Ratio operands keep provenance; the candidate audit stays on the requested fact rows.
             "operand_ok": obj(provenance), "fact_error": error,
             "fact": {"oneOf": [{"$ref": "#/$defs/fact_ok"}, {"$ref": "#/$defs/fact_error"}]},
-            "ratio_ok": ratio_ok, "ratio_error": ratio_error,
-            "result": {"oneOf": [{"$ref": "#/$defs/" + name} for name in ("fact_ok", "fact_error", "ratio_ok", "ratio_error")]}}
+            "ratio_ok": ratio_ok, "ratio_error": ratio_error, "cash_ok": cash_ok, "cash_error": cash_error,
+            "result": {"oneOf": [{"$ref": "#/$defs/" + name} for name in ( ("fact_ok", "fact_error", "cash_ok", "cash_error") if quarterly
+                else ("fact_ok", "fact_error", "ratio_ok", "ratio_error", "cash_ok", "cash_error"))]}}
 
 
 def output_schema(kind):
@@ -80,9 +90,9 @@ def output_schema(kind):
                        "lookup_timestamp": {"type": "string", "format": "date-time"}, "lookup_is_cached": {"const": True},
                        "source_url": {"type": "string", "pattern": r"^https://data\.sec\.gov/submissions/CIK[0-9]{10}\.json$"}})
     else:
-        limit = len(TAGS) if quarterly else MAX_YEARS * len(METRICS)
+        limit = len(ANNUAL_TAGS) + 1 if quarterly else MAX_YEARS * len(METRICS)
         success = obj({"status": {"enum": ["ok", "partial"]}, "context": CONTEXT,
-                       "results": array({"$ref": "#/$defs/fact" if kind in ("get_annual_facts", "get_quarterly_facts") else "#/$defs/result"}, 1, limit)})
+                       "results": array({"$ref": "#/$defs/fact" if kind == "get_annual_facts" else "#/$defs/result"}, 1, limit)})
     return {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "$defs": definitions(quarterly),
             "oneOf": [success, REFUSAL]}
 

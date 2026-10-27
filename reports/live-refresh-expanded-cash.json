@@ -1,0 +1,2639 @@
+{
+  "AAPL": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:23+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AAPL Q1 FY2025": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:56+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AAPL Q1 FY2026": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:57+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AAPL Q2 FY2025": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:56+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AAPL Q2 FY2026": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:57+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AAPL Q3 FY2025": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:56+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AAPL Q3 FY2026": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:58+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 21,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001140361-26-037584",
+      "0001140361-26-038021",
+      "0001140361-26-038022",
+      "0001140361-26-038024",
+      "0001140361-26-038026",
+      "0001140361-26-038027",
+      "0001140361-26-038028",
+      "0001140361-26-038307",
+      "0001140361-26-038667",
+      "0001140361-26-038669",
+      "0001140361-26-038672",
+      "0001140361-26-038674",
+      "0001140361-26-039158",
+      "0001140361-26-039785",
+      "0001140361-26-040126",
+      "0001140361-26-040127",
+      "0001140361-26-040540",
+      "0001950047-26-009738",
+      "0001950047-26-010286",
+      "0001958244-26-000636",
+      "0001959173-26-007235",
+      "0001969223-26-001055"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:21:52+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD Q1 FY2025": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:17+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD Q1 FY2026": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:18+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD Q2 FY2025": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:17+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD Q2 FY2026": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:18+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD Q3 FY2024": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:17+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "AMD Q3 FY2025": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:18+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:32+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:04+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:04+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:04+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN Q2 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:05+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN Q3 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:04+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "COIN Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:04+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:37+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:07+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:08+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:07+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD Q2 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:08+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD Q3 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:07+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "HOOD Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:07+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:21:55+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC Q1 FY2025": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:19+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC Q1 FY2026": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:20+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC Q2 FY2025": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:20+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC Q2 FY2026": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:21+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC Q3 FY2024": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:19+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "INTC Q3 FY2025": {
+    "as_of": "2026-10-27",
+    "checked_at": "2026-10-27T00:22:20+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSFT": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:27+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSFT Q1 FY2025": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:58+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSFT Q1 FY2026": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:22:00+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSFT Q2 FY2025": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:59+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSFT Q2 FY2026": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:22:00+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSFT Q3 FY2025": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:21:59+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSFT Q3 FY2026": {
+    "as_of": "2026-09-21",
+    "checked_at": "2026-10-27T00:22:01+00:00",
+    "companyfacts_added": 5,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0000789019-26-000226",
+      "0000789019-26-000228",
+      "0001193125-26-427849",
+      "0001193125-26-427867",
+      "0001193125-26-427876",
+      "0001214659-26-013218"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": false
+  },
+  "MSTR": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:34+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSTR Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:05+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSTR Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:06+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSTR Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:06+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSTR Q2 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:07+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSTR Q3 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:05+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "MSTR Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:06+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001193125-26-431146",
+      "0001193125-26-432159"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:21:29+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2024,
+      2025,
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA Q1 FY2026": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:22:02+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA Q1 FY2027": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:22:03+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2027
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA Q2 FY2026": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:22:02+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA Q2 FY2027": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:22:03+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2027
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA Q3 FY2025": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:22:01+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "NVDA Q3 FY2026": {
+    "as_of": "2026-09-22",
+    "checked_at": "2026-10-27T00:22:02+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [
+      [
+        "10-Q",
+        "2020-08-19"
+      ]
+    ],
+    "dropped_from_recent_window": 5,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001197647-26-000011",
+      "0001696841-26-000014",
+      "0002152188-26-000007"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:43+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:11+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:12+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL Q2 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:10+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:11+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL Q3 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:10+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "PYPL Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:11+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:48+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:14+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:15+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:15+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA Q2 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:16+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:15+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "TSLA Q3 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:16+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:46+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:12+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:13+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:13+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V Q2 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:14+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V Q3 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:12+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "V Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:13+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:21:41+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2023,
+      2024,
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "gross_margin",
+      "operating_margin",
+      "revenue_growth",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": null,
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ Q1 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:09+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ Q1 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:10+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": "Q1",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ Q2 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:09+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ Q2 FY2026": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:10+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2026
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": "Q2",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ Q3 FY2024": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:08+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2024
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  },
+  "XYZ Q3 FY2025": {
+    "as_of": "2026-10-25",
+    "checked_at": "2026-10-27T00:22:09+00:00",
+    "companyfacts_added": 0,
+    "companyfacts_changed": 0,
+    "companyfacts_removed": 0,
+    "dropped_annual_or_quarterly": [],
+    "dropped_from_recent_window": 0,
+    "fiscal_years": [
+      2025
+    ],
+    "metrics": [
+      "revenue",
+      "gross_profit",
+      "operating_income",
+      "net_income",
+      "operating_cash_flow",
+      "investing_cash_flow",
+      "financing_cash_flow",
+      "capital_expenditures",
+      "free_cash_flow"
+    ],
+    "new_filings": [
+      "0001950047-26-010400"
+    ],
+    "quarter": "Q3",
+    "reviewed_output_identical": true,
+    "snapshot_identical": true
+  }
+}

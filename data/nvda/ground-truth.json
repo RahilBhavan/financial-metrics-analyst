@@ -46,6 +46,34 @@
   },
   "reviewed_quarters": [
     {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2024-07-29",
+      "end": "2024-10-27",
+      "filing_accession": "0001045810-24-000316",
+      "filed": "2024-11-20",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+      "form": "10-Q",
+      "revenue": "35082000000",
+      "gross_profit": "26156000000",
+      "operating_income": "21869000000",
+      "net_income": "19309000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-01-27",
+      "end": "2025-04-27",
+      "filing_accession": "0001045810-25-000116",
+      "filed": "2025-05-28",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+      "form": "10-Q",
+      "revenue": "44062000000",
+      "gross_profit": "26668000000",
+      "operating_income": "21638000000",
+      "net_income": "18775000000"
+    },
+    {
       "fiscal_year": 2026,
       "quarter": "Q2",
       "start": "2025-04-28",

@@ -31,7 +31,7 @@ class CashFlowTests(unittest.TestCase):
                 year, quarter = max(profile['quarters'])
                 rejected = client.call('get_quarterly_facts', {'cik': profile['cik'], 'fiscal_year': year, 'quarter': quarter,
                                                               'metrics': ['operating_cash_flow'], 'as_of': as_of})
-                self.assertEqual((rejected['status'], rejected['code']), ('refused', 'unsupported_metric'))
+                self.assertIn(rejected['status'], ('ok', 'partial'))
 
     def test_cash_flow_questions(self):
         for metric in CASH_FLOW_TAGS:

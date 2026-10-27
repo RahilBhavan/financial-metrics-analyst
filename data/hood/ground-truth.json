@@ -97,6 +97,34 @@
   },
   "reviewed_quarters": [
     {
+      "fiscal_year": 2024,
+      "quarter": "Q3",
+      "start": "2024-07-01",
+      "end": "2024-09-30",
+      "filing_accession": "0001783879-24-000296",
+      "filed": "2024-10-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387924000296/hood-20240930.htm",
+      "form": "10-Q",
+      "revenue": "637000000",
+      "net_income": "150000000",
+      "gross_profit": null,
+      "operating_income": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2025-01-01",
+      "end": "2025-03-31",
+      "filing_accession": "0001783879-25-000145",
+      "filed": "2025-05-01",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387925000145/hood-20250331.htm",
+      "form": "10-Q",
+      "revenue": "927000000",
+      "net_income": "336000000",
+      "gross_profit": null,
+      "operating_income": null
+    },
+    {
       "fiscal_year": 2025,
       "quarter": "Q2",
       "start": "2025-04-01",

@@ -12,7 +12,7 @@ from .contracts import TEXT, obj, validate_schema
 from .direct import DirectClient
 from .domain import DEFAULT_DATA
 from .evidence import evidence_catalog, render_selection
-from .policy import CASH_FLOW_TAGS, METRICS, TAGS, Refusal
+from .policy import CASH_FLOW_TAGS, METRICS, QUARTER_METRICS, Refusal
 from .tools import TOOLS
 from .tracing import trace_numbers
 
@@ -27,8 +27,8 @@ ANSWER = obj({'question': {'type': 'string', 'maxLength': 500},
 def scope(data_dir=DEFAULT_DATA):
     with DirectClient(data_dir) as client:
         profiles = client.reviewed_profiles().values()
-    return {'status': 'ok', 'annual_metrics': list(METRICS), 'quarterly_metrics': list(TAGS),
-            'cash_flow': {'metrics': list(CASH_FLOW_TAGS), 'frequency': 'annual only', 'unit': 'signed USD'},
+    return {'status': 'ok', 'annual_metrics': list(METRICS), 'quarterly_metrics': list(QUARTER_METRICS),
+            'cash_flow': {'metrics': list(CASH_FLOW_TAGS), 'frequency': 'annual and standalone quarter', 'unit': 'signed USD'},
             'issuers': [{'ticker': p['ticker'], 'name': p['name'], 'cik': p['cik'], 'annual_years': sorted(p['periods']),
                         'quarters': [{'fiscal_year': y, 'quarter': q, 'start': dates[0], 'end': dates[1]}
                                      for (y, q), dates in sorted(p['quarters'].items())]} for p in profiles],

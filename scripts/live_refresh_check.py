@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT))
 from financial_metrics.__main__ import analyze  # noqa: E402
 from financial_metrics.fetch import fetch_snapshot  # noqa: E402
 from financial_metrics.domain import AUDIT_KEYS  # noqa: E402
-from financial_metrics.policy import METRICS, PROFILES, TAGS  # noqa: E402
+from financial_metrics.policy import METRICS, PROFILES, QUARTER_METRICS  # noqa: E402
 
 # Every reviewed period, derived from the profiles: (ticker, bundled directory, years, quarter or None).
 CHECKS = [(p["ticker"], str(Path("data", p["directory"])), sorted(p["periods"]), None) for p in PROFILES.values()]
@@ -71,7 +71,7 @@ def main():
             old_recent, new_recent = recent(ROOT / bundled), recent(live)
             # one explicit as_of keeps both runs on the same filing cutoff
             as_of = json.loads(Path(ROOT, bundled, 'manifest.json').read_text())['captured_at'][:10]
-            metrics = list(TAGS) if quarter else list(METRICS)
+            metrics = list(QUARTER_METRICS) if quarter else list(METRICS)
             a = analyze(str(ROOT / bundled), ticker, years, metrics, as_of, quarter)
             b = analyze(live, ticker, years, metrics, as_of, quarter)
             dropped = sorted(set(old_recent) - set(new_recent))

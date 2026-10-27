@@ -1,0 +1,183 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Intel Corporation",
+  "cik": "0000050863",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale millions of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "net revenue",
+    "gross_profit": "gross profit",
+    "operating_income": "operating income (loss)",
+    "net_income": "net income (loss) attributable to intel"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-30",
+      "days": 364,
+      "accession": "0000050863-26-000011",
+      "filed": "2026-01-23",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "revenue": "54228000000",
+      "gross_profit": "21711000000",
+      "operating_income": "93000000",
+      "net_income": "1689000000"
+    },
+    "2024": {
+      "start": "2023-12-31",
+      "end": "2024-12-28",
+      "days": 364,
+      "accession": "0000050863-26-000011",
+      "filed": "2026-01-23",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "revenue": "53101000000",
+      "gross_profit": "17345000000",
+      "operating_income": "-11678000000",
+      "net_income": "-18756000000"
+    },
+    "2025": {
+      "start": "2024-12-29",
+      "end": "2025-12-27",
+      "days": 364,
+      "accession": "0000050863-26-000011",
+      "filed": "2026-01-23",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "revenue": "52853000000",
+      "gross_profit": "18375000000",
+      "operating_income": "-2214000000",
+      "net_income": "-267000000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2021-12-26",
+    "end": "2022-12-31",
+    "value": "63054000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0000050863-25-000009"
+  },
+  "point_in_time": {
+    "as_of": "2026-01-22",
+    "accession": "0000050863-25-000009",
+    "filed": "2025-01-31",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-30",
+        "revenue": "54228000000",
+        "gross_profit": "21711000000",
+        "operating_income": "93000000",
+        "net_income": "1689000000"
+      },
+      "2024": {
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "revenue": "53101000000",
+        "gross_profit": "17345000000",
+        "operating_income": "-11678000000",
+        "net_income": "-18756000000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "54228000000",
+        "54228000000"
+      ],
+      "2024": [
+        "53101000000",
+        "53101000000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2024,
+      "quarter": "Q3",
+      "start": "2024-06-30",
+      "end": "2024-09-28",
+      "filing_accession": "0000050863-24-000149",
+      "filed": "2024-11-01",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000149/intc-20240928.htm",
+      "form": "10-Q",
+      "revenue": "13284000000",
+      "gross_profit": "1997000000",
+      "operating_income": "-9057000000",
+      "net_income": "-16639000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2024-12-29",
+      "end": "2025-03-29",
+      "filing_accession": "0000050863-25-000074",
+      "filed": "2025-04-25",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000074/intc-20250329.htm",
+      "form": "10-Q",
+      "revenue": "12667000000",
+      "gross_profit": "4672000000",
+      "operating_income": "-301000000",
+      "net_income": "-821000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-03-30",
+      "end": "2025-06-28",
+      "filing_accession": "0000050863-25-000109",
+      "filed": "2025-07-24",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000109/intc-20250628.htm",
+      "form": "10-Q",
+      "revenue": "12859000000",
+      "gross_profit": "3542000000",
+      "operating_income": "-3176000000",
+      "net_income": "-2918000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-06-29",
+      "end": "2025-09-27",
+      "filing_accession": "0000050863-25-000179",
+      "filed": "2025-11-06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000179/intc-20250927.htm",
+      "form": "10-Q",
+      "revenue": "13653000000",
+      "gross_profit": "5218000000",
+      "operating_income": "683000000",
+      "net_income": "4063000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-12-28",
+      "end": "2026-03-28",
+      "filing_accession": "0000050863-26-000079",
+      "filed": "2026-04-24",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000079/intc-20260328.htm",
+      "form": "10-Q",
+      "revenue": "13577000000",
+      "gross_profit": "5347000000",
+      "operating_income": "-3136000000",
+      "net_income": "-3728000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-03-29",
+      "end": "2026-06-27",
+      "filing_accession": "0000050863-26-000157",
+      "filed": "2026-07-24",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000157/intc-20260627.htm",
+      "form": "10-Q",
+      "revenue": "16128000000",
+      "gross_profit": "6509000000",
+      "operating_income": "1796000000",
+      "net_income": "-11033000000"
+    }
+  ]
+}

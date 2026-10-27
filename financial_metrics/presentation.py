@@ -45,7 +45,8 @@ def detail_lines(row):
             lines.append("Blocked by " + blocker["accn"] + " filed " + str(blocker["filed"]) + ": " + blocker["reason"])
     if row.get("formula"):
         lines.append("Formula: " + row["formula"])
-        lines.append("Exact percentage: " + row["exact_fraction"]["numerator"] + "/" + row["exact_fraction"]["denominator"])
+        if "exact_fraction" in row:
+            lines.append("Exact percentage: " + row["exact_fraction"]["numerator"] + "/" + row["exact_fraction"]["denominator"])
     for source in row.get("inputs", [row]):
         if source["status"] != "ok":
             if source is not row:

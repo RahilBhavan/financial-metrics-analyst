@@ -1,0 +1,307 @@
+{
+  "verification": "Visible SEC cash-flow statements only; no companyfacts or runtime calculation engine read.",
+  "ticker": "NVDA",
+  "unit": "USD",
+  "years": {
+    "2024": {
+      "start": "2023-01-30",
+      "accession": "0001045810-24-000029",
+      "filed": "2024-02-21",
+      "end": "2024-01-28",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "28090000000",
+      "capital_expenditures": "1069000000",
+      "investing_cash_flow": "-10566000000",
+      "financing_cash_flow": "-13633000000",
+      "free_cash_flow": "27021000000"
+    },
+    "2025": {
+      "start": "2024-01-29",
+      "accession": "0001045810-25-000023",
+      "filed": "2025-02-26",
+      "end": "2025-01-26",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "64089000000",
+      "capital_expenditures": "3236000000",
+      "investing_cash_flow": "-20421000000",
+      "financing_cash_flow": "-42359000000",
+      "free_cash_flow": "60853000000"
+    },
+    "2026": {
+      "start": "2025-01-27",
+      "accession": "0001045810-26-000021",
+      "filed": "2026-02-25",
+      "end": "2026-01-25",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "102718000000",
+      "capital_expenditures": "6042000000",
+      "investing_cash_flow": "-52228000000",
+      "financing_cash_flow": "-48474000000",
+      "free_cash_flow": "96676000000"
+    }
+  },
+  "quarters": [
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2024-07-29",
+      "end": "2024-10-27",
+      "filed": "2024-11-20",
+      "inputs": [
+        {
+          "accession": "0001045810-24-000316",
+          "filed": "2024-11-20",
+          "end": "2024-10-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "47460000000",
+          "capital_expenditures": "2159000000",
+          "investing_cash_flow": "-13223000000",
+          "financing_cash_flow": "-32410000000"
+        },
+        {
+          "accession": "0001045810-24-000264",
+          "filed": "2024-08-28",
+          "end": "2024-07-28",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "29833000000",
+          "capital_expenditures": "1346000000",
+          "investing_cash_flow": "-8877000000",
+          "financing_cash_flow": "-19665000000"
+        }
+      ],
+      "operating_cash_flow": "17627000000",
+      "investing_cash_flow": "-4346000000",
+      "financing_cash_flow": "-12745000000",
+      "capital_expenditures": "813000000",
+      "free_cash_flow": "16814000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-01-27",
+      "end": "2025-04-27",
+      "filed": "2025-05-28",
+      "inputs": [
+        {
+          "accession": "0001045810-25-000116",
+          "filed": "2025-05-28",
+          "end": "2025-04-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "27414000000",
+          "capital_expenditures": "1227000000",
+          "investing_cash_flow": "-5216000000",
+          "financing_cash_flow": "-15553000000"
+        }
+      ],
+      "operating_cash_flow": "27414000000",
+      "investing_cash_flow": "-5216000000",
+      "financing_cash_flow": "-15553000000",
+      "capital_expenditures": "1227000000",
+      "free_cash_flow": "26187000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2025-04-28",
+      "end": "2025-07-27",
+      "filed": "2025-08-27",
+      "inputs": [
+        {
+          "accession": "0001045810-25-000209",
+          "filed": "2025-08-27",
+          "end": "2025-07-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "42779000000",
+          "capital_expenditures": "3122000000",
+          "investing_cash_flow": "-12343000000",
+          "financing_cash_flow": "-27386000000"
+        },
+        {
+          "accession": "0001045810-25-000116",
+          "filed": "2025-05-28",
+          "end": "2025-04-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "27414000000",
+          "capital_expenditures": "1227000000",
+          "investing_cash_flow": "-5216000000",
+          "financing_cash_flow": "-15553000000"
+        }
+      ],
+      "operating_cash_flow": "15365000000",
+      "investing_cash_flow": "-7127000000",
+      "financing_cash_flow": "-11833000000",
+      "capital_expenditures": "1895000000",
+      "free_cash_flow": "13470000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q3",
+      "start": "2025-07-28",
+      "end": "2025-10-26",
+      "filed": "2025-11-19",
+      "inputs": [
+        {
+          "accession": "0001045810-25-000230",
+          "filed": "2025-11-19",
+          "end": "2025-10-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "66530000000",
+          "capital_expenditures": "4758000000",
+          "investing_cash_flow": "-21367000000",
+          "financing_cash_flow": "-42266000000"
+        },
+        {
+          "accession": "0001045810-25-000209",
+          "filed": "2025-08-27",
+          "end": "2025-07-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "42779000000",
+          "capital_expenditures": "3122000000",
+          "investing_cash_flow": "-12343000000",
+          "financing_cash_flow": "-27386000000"
+        }
+      ],
+      "operating_cash_flow": "23751000000",
+      "investing_cash_flow": "-9024000000",
+      "financing_cash_flow": "-14880000000",
+      "capital_expenditures": "1636000000",
+      "free_cash_flow": "22115000000"
+    },
+    {
+      "fiscal_year": 2027,
+      "quarter": "Q1",
+      "start": "2026-01-26",
+      "end": "2026-04-26",
+      "filed": "2026-05-20",
+      "inputs": [
+        {
+          "accession": "0001045810-26-000052",
+          "filed": "2026-05-20",
+          "end": "2026-04-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "50344000000",
+          "capital_expenditures": "1757000000",
+          "investing_cash_flow": "-26429000000",
+          "financing_cash_flow": "-21283000000"
+        }
+      ],
+      "operating_cash_flow": "50344000000",
+      "investing_cash_flow": "-26429000000",
+      "financing_cash_flow": "-21283000000",
+      "capital_expenditures": "1757000000",
+      "free_cash_flow": "48587000000"
+    },
+    {
+      "fiscal_year": 2027,
+      "quarter": "Q2",
+      "start": "2026-04-27",
+      "end": "2026-07-26",
+      "filed": "2026-08-26",
+      "inputs": [
+        {
+          "accession": "0001045810-26-000075",
+          "filed": "2026-08-26",
+          "end": "2026-07-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "74421000000",
+          "capital_expenditures": "4434000000",
+          "investing_cash_flow": "-35124000000",
+          "financing_cash_flow": "-27459000000"
+        },
+        {
+          "accession": "0001045810-26-000052",
+          "filed": "2026-05-20",
+          "end": "2026-04-26",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases related to property and equipment and intangible assets",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "50344000000",
+          "capital_expenditures": "1757000000",
+          "investing_cash_flow": "-26429000000",
+          "financing_cash_flow": "-21283000000"
+        }
+      ],
+      "operating_cash_flow": "24077000000",
+      "investing_cash_flow": "-8695000000",
+      "financing_cash_flow": "-6176000000",
+      "capital_expenditures": "2677000000",
+      "free_cash_flow": "21400000000"
+    }
+  ]
+}

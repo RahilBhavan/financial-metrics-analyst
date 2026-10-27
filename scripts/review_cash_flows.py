@@ -27,10 +27,12 @@ def read_statement(path, scale):
                     cells.append(cell)
             if not cells:
                 continue
-            label = cells[0].lower().replace('\xa0', ' ')
+            label = cells[0].lower().replace('\xa0', ' ').replace('(', '').replace(')', '')
+            if 'continuing operations' in label or 'discontinued operations' in label:
+                continue
             for kind in ('operating', 'investing', 'financing'):
                 activity = r'(?:operating activities|operations)' if kind == 'operating' else kind + r'(?: activities)?'
-                if re.search(r'^(?:net )?cash (?:generated|provided|used|flows|from).*' + activity, label):
+                if re.search(r'^(?:net )?cash (?:generated|provided|used|flows|from).*' + activity + r'[:.]?$', label):
                     numbers = [c for c in cells[1:] if re.fullmatch(r'\(?-?[\d,]+\)?|[—–-]', c)]
                     if numbers:
                         found[kind + '_cash_flow'] = (cells[0], numbers)

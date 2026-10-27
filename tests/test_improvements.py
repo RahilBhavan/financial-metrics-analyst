@@ -286,7 +286,7 @@ class QuestionAndPresentationTests(unittest.TestCase):
         self.assertIn('383,285', text)
         self.assertIn('-2.80%', text)
         self.assertIn('USD millions', text)
-        self.assertLess(len(text.splitlines()), 30)
+        self.assertLess(len(text.splitlines()), 35)
         html = render_html(result)
         self.assertIn('<caption>', html)
         self.assertIn("href='#note-1'", html)

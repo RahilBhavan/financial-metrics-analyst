@@ -55,13 +55,13 @@ def changed(rows, **fields):
 
 
 class CoverageTests(unittest.TestCase):
-    def test_ten_issuers_with_four_reviewed_quarters_each(self):
-        self.assertEqual(len(SERVICE.issuers) + len(SERVICE.pending), 10)
+    def test_twelve_issuers_with_six_reviewed_quarters_each(self):
+        self.assertEqual(len(SERVICE.issuers) + len(SERVICE.pending), 12)
         self.assertEqual(sorted(p["ticker"] for p in PROFILES.values()),
-                         sorted(["AAPL", "MSFT", "NVDA", "COIN", "MSTR", "HOOD", "XYZ", "PYPL", "V", "TSLA"]))
+                         sorted(["AAPL", "MSFT", "NVDA", "COIN", "MSTR", "HOOD", "XYZ", "PYPL", "V", "TSLA", "AMD", "INTC"]))
         for cik, profile in PROFILES.items():
             with self.subTest(ticker=profile["ticker"]):
-                self.assertGreaterEqual(len(profile["quarters"]), 4)
+                self.assertGreaterEqual(len(profile["quarters"]), 6)
                 self.assertEqual(len(CARDS[cik]["reviewed_quarters"]), len(profile["quarters"]))
                 self.assertEqual(SERVICE.resolve_company(profile["ticker"].lower())["cik"], cik)
 
