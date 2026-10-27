@@ -14,8 +14,15 @@ TAGS = {
     "operating_income": "OperatingIncomeLoss",
     "net_income": "NetIncomeLoss",
 }
-METRICS = tuple(TAGS) + ("gross_margin", "operating_margin", "revenue_growth")
-LABELS = {"revenue": "Revenue", "gross_profit": "Gross profit", "operating_income": "Operating income",
+CASH_FLOW_TAGS = {
+    "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities",
+    "investing_cash_flow": "NetCashProvidedByUsedInInvestingActivities",
+    "financing_cash_flow": "NetCashProvidedByUsedInFinancingActivities",
+}
+ANNUAL_TAGS = {**TAGS, **CASH_FLOW_TAGS}
+METRICS = tuple(ANNUAL_TAGS) + ("gross_margin", "operating_margin", "revenue_growth")
+LABELS = {"operating_cash_flow": "Operating cash flow", "investing_cash_flow": "Investing cash flow",
+          "financing_cash_flow": "Financing cash flow", "revenue": "Revenue", "gross_profit": "Gross profit", "operating_income": "Operating income",
           "net_income": "Net income", "gross_margin": "Gross margin",
           "operating_margin": "Operating margin", "revenue_growth": "Revenue growth"}
 # Four years lets the full MSFT FY2023-FY2026 profile fit in one request.
@@ -120,6 +127,7 @@ REVIEWED_QUARTERS = {
     },
 }
 for _profile in PROFILES.values():
+    _profile["tags"] = {**ANNUAL_TAGS, **_profile.get("tags", {})}
     _profile["quarters"] = REVIEWED_QUARTERS[_profile["ticker"]]
 # Everything below derives from PROFILES so adding a reviewed period changes one place.
 TICKERS = tuple(profile["ticker"] for profile in PROFILES.values())
@@ -133,12 +141,13 @@ KHC_REFERENCE_PROFILE = {
     "directory": "reference-cases/khc",
 }
 POLICY = {
-    "version": "reviewed-annual-quarterly-v4",
-    "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; consolidated USD",
+    "version": "reviewed-annual-quarterly-v5",
+    "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
     "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
     "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
     "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
     "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
+    "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.",
     "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
     "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
     "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places.",

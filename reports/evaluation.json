@@ -201,12 +201,20 @@
     }
   },
   "unit_tests": {
-    "run": 168,
+    "run": 202,
     "failures": 0,
     "errors": 0,
     "skipped": 1
   },
   "evaluation_counts": {
+    "cash_flow_provenance": {
+      "passed": 186,
+      "total": 186
+    },
+    "cash_flow_values": {
+      "passed": 93,
+      "total": 93
+    },
     "exact_ratios": {
       "passed": 78,
       "total": 78
@@ -252,52 +260,52 @@
       "total": 42
     }
   },
-  "evaluation_passed": 947,
-  "evaluation_total": 947,
+  "evaluation_passed": 1226,
+  "evaluation_total": 1226,
   "coverage": {
     "AAPL FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 21
+      "requested_results": 30,
+      "numeric_results": 30
     },
     "MSFT FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 21
+      "requested_results": 30,
+      "numeric_results": 30
     },
     "MSFT FY2026": {
-      "requested_results": 7,
-      "numeric_results": 7
+      "requested_results": 10,
+      "numeric_results": 10
     },
     "NVDA FY2024-FY2026": {
-      "requested_results": 21,
-      "numeric_results": 21
+      "requested_results": 30,
+      "numeric_results": 30
     },
     "COIN FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 15
+      "requested_results": 30,
+      "numeric_results": 24
     },
     "MSTR FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 21
+      "requested_results": 30,
+      "numeric_results": 30
     },
     "HOOD FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 9
+      "requested_results": 30,
+      "numeric_results": 18
     },
     "XYZ FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 21
+      "requested_results": 30,
+      "numeric_results": 30
     },
     "PYPL FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 15
+      "requested_results": 30,
+      "numeric_results": 24
     },
     "V FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 15
+      "requested_results": 30,
+      "numeric_results": 24
     },
     "TSLA FY2023-FY2025": {
-      "requested_results": 21,
-      "numeric_results": 21
+      "requested_results": 30,
+      "numeric_results": 30
     }
   },
   "cases": [
@@ -6576,6 +6584,3075 @@
         "0001628280-25-003063",
         false
       ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2023 operating_cash_flow",
+      "expected": "110543000000",
+      "actual": "110543000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2023 operating_cash_flow",
+      "expected": [
+        "0000320193",
+        "2022-09-25",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2022-09-25",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2023 investing_cash_flow",
+      "expected": "3705000000",
+      "actual": "3705000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2023 investing_cash_flow",
+      "expected": [
+        "0000320193",
+        "2022-09-25",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2022-09-25",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2023 financing_cash_flow",
+      "expected": "-108488000000",
+      "actual": "-108488000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2023 financing_cash_flow",
+      "expected": [
+        "0000320193",
+        "2022-09-25",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2022-09-25",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2024 operating_cash_flow",
+      "expected": "118254000000",
+      "actual": "118254000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2024 operating_cash_flow",
+      "expected": [
+        "0000320193",
+        "2023-10-01",
+        "2024-09-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2023-10-01",
+        "2024-09-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2024 investing_cash_flow",
+      "expected": "2935000000",
+      "actual": "2935000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2024 investing_cash_flow",
+      "expected": [
+        "0000320193",
+        "2023-10-01",
+        "2024-09-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2023-10-01",
+        "2024-09-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2024 financing_cash_flow",
+      "expected": "-121983000000",
+      "actual": "-121983000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2024 financing_cash_flow",
+      "expected": [
+        "0000320193",
+        "2023-10-01",
+        "2024-09-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2023-10-01",
+        "2024-09-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2025 operating_cash_flow",
+      "expected": "111482000000",
+      "actual": "111482000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2025 operating_cash_flow",
+      "expected": [
+        "0000320193",
+        "2024-09-29",
+        "2025-09-27",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2024-09-29",
+        "2025-09-27",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2025 investing_cash_flow",
+      "expected": "15195000000",
+      "actual": "15195000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2025 investing_cash_flow",
+      "expected": [
+        "0000320193",
+        "2024-09-29",
+        "2025-09-27",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2024-09-29",
+        "2025-09-27",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "AAPL FY2025 financing_cash_flow",
+      "expected": "-120686000000",
+      "actual": "-120686000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2025 financing_cash_flow",
+      "expected": [
+        "0000320193",
+        "2024-09-29",
+        "2025-09-27",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000320193",
+        "2024-09-29",
+        "2025-09-27",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "AAPL FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2023 operating_cash_flow",
+      "expected": "87582000000",
+      "actual": "87582000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2023 operating_cash_flow",
+      "expected": [
+        "0000789019",
+        "2022-07-01",
+        "2023-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2022-07-01",
+        "2023-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2023 investing_cash_flow",
+      "expected": "-22680000000",
+      "actual": "-22680000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2023 investing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2022-07-01",
+        "2023-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2022-07-01",
+        "2023-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2023 financing_cash_flow",
+      "expected": "-43935000000",
+      "actual": "-43935000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2023 financing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2022-07-01",
+        "2023-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2022-07-01",
+        "2023-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2024 operating_cash_flow",
+      "expected": "118548000000",
+      "actual": "118548000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2024 operating_cash_flow",
+      "expected": [
+        "0000789019",
+        "2023-07-01",
+        "2024-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2023-07-01",
+        "2024-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2024 investing_cash_flow",
+      "expected": "-96970000000",
+      "actual": "-96970000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2024 investing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2023-07-01",
+        "2024-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2023-07-01",
+        "2024-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2024 financing_cash_flow",
+      "expected": "-37757000000",
+      "actual": "-37757000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2024 financing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2023-07-01",
+        "2024-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2023-07-01",
+        "2024-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2025 operating_cash_flow",
+      "expected": "136162000000",
+      "actual": "136162000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2025 operating_cash_flow",
+      "expected": [
+        "0000789019",
+        "2024-07-01",
+        "2025-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2024-07-01",
+        "2025-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2025 investing_cash_flow",
+      "expected": "-72599000000",
+      "actual": "-72599000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2025 investing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2024-07-01",
+        "2025-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2024-07-01",
+        "2025-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2025 financing_cash_flow",
+      "expected": "-51699000000",
+      "actual": "-51699000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2025 financing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2024-07-01",
+        "2025-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2024-07-01",
+        "2025-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2026 operating_cash_flow",
+      "expected": "182935000000",
+      "actual": "182935000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2026 operating_cash_flow",
+      "expected": [
+        "0000789019",
+        "2025-07-01",
+        "2026-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2025-07-01",
+        "2026-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2026 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2026 investing_cash_flow",
+      "expected": "-139500000000",
+      "actual": "-139500000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2026 investing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2025-07-01",
+        "2026-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2025-07-01",
+        "2026-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2026 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSFT FY2026 financing_cash_flow",
+      "expected": "-52546000000",
+      "actual": "-52546000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2026 financing_cash_flow",
+      "expected": [
+        "0000789019",
+        "2025-07-01",
+        "2026-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0000789019",
+        "2025-07-01",
+        "2026-06-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSFT FY2026 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2024 operating_cash_flow",
+      "expected": "28090000000",
+      "actual": "28090000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2024 operating_cash_flow",
+      "expected": [
+        "0001045810",
+        "2023-01-30",
+        "2024-01-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2023-01-30",
+        "2024-01-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2024 investing_cash_flow",
+      "expected": "-10566000000",
+      "actual": "-10566000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2024 investing_cash_flow",
+      "expected": [
+        "0001045810",
+        "2023-01-30",
+        "2024-01-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2023-01-30",
+        "2024-01-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2024 financing_cash_flow",
+      "expected": "-13633000000",
+      "actual": "-13633000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2024 financing_cash_flow",
+      "expected": [
+        "0001045810",
+        "2023-01-30",
+        "2024-01-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2023-01-30",
+        "2024-01-28",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2025 operating_cash_flow",
+      "expected": "64089000000",
+      "actual": "64089000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2025 operating_cash_flow",
+      "expected": [
+        "0001045810",
+        "2024-01-29",
+        "2025-01-26",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2024-01-29",
+        "2025-01-26",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2025 investing_cash_flow",
+      "expected": "-20421000000",
+      "actual": "-20421000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2025 investing_cash_flow",
+      "expected": [
+        "0001045810",
+        "2024-01-29",
+        "2025-01-26",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2024-01-29",
+        "2025-01-26",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2025 financing_cash_flow",
+      "expected": "-42359000000",
+      "actual": "-42359000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2025 financing_cash_flow",
+      "expected": [
+        "0001045810",
+        "2024-01-29",
+        "2025-01-26",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2024-01-29",
+        "2025-01-26",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2026 operating_cash_flow",
+      "expected": "102718000000",
+      "actual": "102718000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2026 operating_cash_flow",
+      "expected": [
+        "0001045810",
+        "2025-01-27",
+        "2026-01-25",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2025-01-27",
+        "2026-01-25",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2026 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2026 investing_cash_flow",
+      "expected": "-52228000000",
+      "actual": "-52228000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2026 investing_cash_flow",
+      "expected": [
+        "0001045810",
+        "2025-01-27",
+        "2026-01-25",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2025-01-27",
+        "2026-01-25",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2026 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "NVDA FY2026 financing_cash_flow",
+      "expected": "-48474000000",
+      "actual": "-48474000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2026 financing_cash_flow",
+      "expected": [
+        "0001045810",
+        "2025-01-27",
+        "2026-01-25",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001045810",
+        "2025-01-27",
+        "2026-01-25",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "NVDA FY2026 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2023 operating_cash_flow",
+      "expected": "673376000",
+      "actual": "673376000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2023 operating_cash_flow",
+      "expected": [
+        "0001679788",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2023 investing_cash_flow",
+      "expected": "-206176000",
+      "actual": "-206176000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2023 investing_cash_flow",
+      "expected": [
+        "0001679788",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2023 financing_cash_flow",
+      "expected": "-838205000",
+      "actual": "-838205000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2023 financing_cash_flow",
+      "expected": [
+        "0001679788",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2024 operating_cash_flow",
+      "expected": "3103935000",
+      "actual": "3103935000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2024 operating_cash_flow",
+      "expected": [
+        "0001679788",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2024 investing_cash_flow",
+      "expected": "-201003000",
+      "actual": "-201003000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2024 investing_cash_flow",
+      "expected": [
+        "0001679788",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2024 financing_cash_flow",
+      "expected": "2903078000",
+      "actual": "2903078000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2024 financing_cash_flow",
+      "expected": [
+        "0001679788",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2025 operating_cash_flow",
+      "expected": "2426383000",
+      "actual": "2426383000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2025 operating_cash_flow",
+      "expected": [
+        "0001679788",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2025 investing_cash_flow",
+      "expected": "-2049550000",
+      "actual": "-2049550000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2025 investing_cash_flow",
+      "expected": [
+        "0001679788",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "COIN FY2025 financing_cash_flow",
+      "expected": "740282000",
+      "actual": "740282000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2025 financing_cash_flow",
+      "expected": [
+        "0001679788",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001679788",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "COIN FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2023 operating_cash_flow",
+      "expected": "12712000",
+      "actual": "12712000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2023 operating_cash_flow",
+      "expected": [
+        "0001050446",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2023 investing_cash_flow",
+      "expected": "-1905237000",
+      "actual": "-1905237000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2023 investing_cash_flow",
+      "expected": [
+        "0001050446",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2023 financing_cash_flow",
+      "expected": "1889886000",
+      "actual": "1889886000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2023 financing_cash_flow",
+      "expected": [
+        "0001050446",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2024 operating_cash_flow",
+      "expected": "-53032000",
+      "actual": "-53032000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2024 operating_cash_flow",
+      "expected": [
+        "0001050446",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2024 investing_cash_flow",
+      "expected": "-22086237000",
+      "actual": "-22086237000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2024 investing_cash_flow",
+      "expected": [
+        "0001050446",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2024 financing_cash_flow",
+      "expected": "22132641000",
+      "actual": "22132641000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2024 financing_cash_flow",
+      "expected": [
+        "0001050446",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2025 operating_cash_flow",
+      "expected": "-67241000",
+      "actual": "-67241000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2025 operating_cash_flow",
+      "expected": [
+        "0001050446",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2025 investing_cash_flow",
+      "expected": "-22512295000",
+      "actual": "-22512295000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2025 investing_cash_flow",
+      "expected": [
+        "0001050446",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "MSTR FY2025 financing_cash_flow",
+      "expected": "24843527000",
+      "actual": "24843527000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2025 financing_cash_flow",
+      "expected": [
+        "0001050446",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001050446",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "MSTR FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2023 operating_cash_flow",
+      "expected": "1181000000",
+      "actual": "1181000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2023 operating_cash_flow",
+      "expected": [
+        "0001783879",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2023 investing_cash_flow",
+      "expected": "-582000000",
+      "actual": "-582000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2023 investing_cash_flow",
+      "expected": [
+        "0001783879",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2023 financing_cash_flow",
+      "expected": "-610000000",
+      "actual": "-610000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2023 financing_cash_flow",
+      "expected": [
+        "0001783879",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2024 operating_cash_flow",
+      "expected": "-157000000",
+      "actual": "-157000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2024 operating_cash_flow",
+      "expected": [
+        "0001783879",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2024 investing_cash_flow",
+      "expected": "-148000000",
+      "actual": "-148000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2024 investing_cash_flow",
+      "expected": [
+        "0001783879",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2024 financing_cash_flow",
+      "expected": "-345000000",
+      "actual": "-345000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2024 financing_cash_flow",
+      "expected": [
+        "0001783879",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2025 operating_cash_flow",
+      "expected": "1638000000",
+      "actual": "1638000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2025 operating_cash_flow",
+      "expected": [
+        "0001783879",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2025 investing_cash_flow",
+      "expected": "141000000",
+      "actual": "141000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2025 investing_cash_flow",
+      "expected": [
+        "0001783879",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "HOOD FY2025 financing_cash_flow",
+      "expected": "-590000000",
+      "actual": "-590000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2025 financing_cash_flow",
+      "expected": [
+        "0001783879",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001783879",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "HOOD FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2023 operating_cash_flow",
+      "expected": "100961000",
+      "actual": "100961000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2023 operating_cash_flow",
+      "expected": [
+        "0001512673",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2023 investing_cash_flow",
+      "expected": "683201000",
+      "actual": "683201000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2023 investing_cash_flow",
+      "expected": [
+        "0001512673",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2023 financing_cash_flow",
+      "expected": "-240137000",
+      "actual": "-240137000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2023 financing_cash_flow",
+      "expected": [
+        "0001512673",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2024 operating_cash_flow",
+      "expected": "1707350000",
+      "actual": "1707350000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2024 operating_cash_flow",
+      "expected": [
+        "0001512673",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2024 investing_cash_flow",
+      "expected": "649952000",
+      "actual": "649952000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2024 investing_cash_flow",
+      "expected": [
+        "0001512673",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2024 financing_cash_flow",
+      "expected": "1952662000",
+      "actual": "1952662000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2024 financing_cash_flow",
+      "expected": [
+        "0001512673",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2025 operating_cash_flow",
+      "expected": "2579714000",
+      "actual": "2579714000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2025 operating_cash_flow",
+      "expected": [
+        "0001512673",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2025 investing_cash_flow",
+      "expected": "-2801932000",
+      "actual": "-2801932000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2025 investing_cash_flow",
+      "expected": [
+        "0001512673",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "XYZ FY2025 financing_cash_flow",
+      "expected": "-613099000",
+      "actual": "-613099000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2025 financing_cash_flow",
+      "expected": [
+        "0001512673",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001512673",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "XYZ FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2023 operating_cash_flow",
+      "expected": "4843000000",
+      "actual": "4843000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2023 operating_cash_flow",
+      "expected": [
+        "0001633917",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2023 investing_cash_flow",
+      "expected": "752000000",
+      "actual": "752000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2023 investing_cash_flow",
+      "expected": [
+        "0001633917",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2023 financing_cash_flow",
+      "expected": "-2993000000",
+      "actual": "-2993000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2023 financing_cash_flow",
+      "expected": [
+        "0001633917",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2024 operating_cash_flow",
+      "expected": "7450000000",
+      "actual": "7450000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2024 operating_cash_flow",
+      "expected": [
+        "0001633917",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2024 investing_cash_flow",
+      "expected": "1689000000",
+      "actual": "1689000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2024 investing_cash_flow",
+      "expected": [
+        "0001633917",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2024 financing_cash_flow",
+      "expected": "-8276000000",
+      "actual": "-8276000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2024 financing_cash_flow",
+      "expected": [
+        "0001633917",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2025 operating_cash_flow",
+      "expected": "6416000000",
+      "actual": "6416000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2025 operating_cash_flow",
+      "expected": [
+        "0001633917",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2025 investing_cash_flow",
+      "expected": "797000000",
+      "actual": "797000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2025 investing_cash_flow",
+      "expected": [
+        "0001633917",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "PYPL FY2025 financing_cash_flow",
+      "expected": "-5958000000",
+      "actual": "-5958000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2025 financing_cash_flow",
+      "expected": [
+        "0001633917",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001633917",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "PYPL FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2023 operating_cash_flow",
+      "expected": "20755000000",
+      "actual": "20755000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2023 operating_cash_flow",
+      "expected": [
+        "0001403161",
+        "2022-10-01",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2022-10-01",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2023 investing_cash_flow",
+      "expected": "-2006000000",
+      "actual": "-2006000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2023 investing_cash_flow",
+      "expected": [
+        "0001403161",
+        "2022-10-01",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2022-10-01",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2023 financing_cash_flow",
+      "expected": "-17772000000",
+      "actual": "-17772000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2023 financing_cash_flow",
+      "expected": [
+        "0001403161",
+        "2022-10-01",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2022-10-01",
+        "2023-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2024 operating_cash_flow",
+      "expected": "19950000000",
+      "actual": "19950000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2024 operating_cash_flow",
+      "expected": [
+        "0001403161",
+        "2023-10-01",
+        "2024-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2023-10-01",
+        "2024-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2024 investing_cash_flow",
+      "expected": "-1926000000",
+      "actual": "-1926000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2024 investing_cash_flow",
+      "expected": [
+        "0001403161",
+        "2023-10-01",
+        "2024-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2023-10-01",
+        "2024-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2024 financing_cash_flow",
+      "expected": "-20633000000",
+      "actual": "-20633000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2024 financing_cash_flow",
+      "expected": [
+        "0001403161",
+        "2023-10-01",
+        "2024-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2023-10-01",
+        "2024-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2025 operating_cash_flow",
+      "expected": "23059000000",
+      "actual": "23059000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2025 operating_cash_flow",
+      "expected": [
+        "0001403161",
+        "2024-10-01",
+        "2025-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2024-10-01",
+        "2025-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2025 investing_cash_flow",
+      "expected": "708000000",
+      "actual": "708000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2025 investing_cash_flow",
+      "expected": [
+        "0001403161",
+        "2024-10-01",
+        "2025-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2024-10-01",
+        "2025-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "V FY2025 financing_cash_flow",
+      "expected": "-18963000000",
+      "actual": "-18963000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2025 financing_cash_flow",
+      "expected": [
+        "0001403161",
+        "2024-10-01",
+        "2025-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001403161",
+        "2024-10-01",
+        "2025-09-30",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "V FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2023 operating_cash_flow",
+      "expected": "13256000000",
+      "actual": "13256000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2023 operating_cash_flow",
+      "expected": [
+        "0001318605",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2023 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2023 investing_cash_flow",
+      "expected": "-15584000000",
+      "actual": "-15584000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2023 investing_cash_flow",
+      "expected": [
+        "0001318605",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2023 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2023 financing_cash_flow",
+      "expected": "2589000000",
+      "actual": "2589000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2023 financing_cash_flow",
+      "expected": [
+        "0001318605",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2023-01-01",
+        "2023-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2023 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2024 operating_cash_flow",
+      "expected": "14923000000",
+      "actual": "14923000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2024 operating_cash_flow",
+      "expected": [
+        "0001318605",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2024 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2024 investing_cash_flow",
+      "expected": "-18787000000",
+      "actual": "-18787000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2024 investing_cash_flow",
+      "expected": [
+        "0001318605",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2024 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2024 financing_cash_flow",
+      "expected": "3853000000",
+      "actual": "3853000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2024 financing_cash_flow",
+      "expected": [
+        "0001318605",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2024-01-01",
+        "2024-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2024 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2025 operating_cash_flow",
+      "expected": "14747000000",
+      "actual": "14747000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2025 operating_cash_flow",
+      "expected": [
+        "0001318605",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInOperatingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2025 operating_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2025 investing_cash_flow",
+      "expected": "-15478000000",
+      "actual": "-15478000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2025 investing_cash_flow",
+      "expected": [
+        "0001318605",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInInvestingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2025 investing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "group": "cash_flow_values",
+      "case": "TSLA FY2025 financing_cash_flow",
+      "expected": "1139000000",
+      "actual": "1139000000",
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2025 financing_cash_flow",
+      "expected": [
+        "0001318605",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "actual": [
+        "0001318605",
+        "2025-01-01",
+        "2025-12-31",
+        "USD",
+        "us-gaap:NetCashProvidedByUsedInFinancingActivities"
+      ],
+      "passed": true
+    },
+    {
+      "group": "cash_flow_provenance",
+      "case": "TSLA FY2025 financing_cash_flow reviewed filing in history",
+      "expected": true,
+      "actual": true,
       "passed": true
     },
     {

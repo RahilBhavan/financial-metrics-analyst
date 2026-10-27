@@ -11,7 +11,7 @@ The server implements MCP **2025-11-25** over newline-delimited JSON-RPC on stdi
 | Tool | Data | What it returns |
 | --- | --- | --- |
 | `resolve_company` | SEC submissions snapshot | The reviewed issuer for one of 10 tickers: AAPL, MSFT, NVDA, COIN, MSTR, HOOD, XYZ, PYPL, V or TSLA. No network or fuzzy search. |
-| `get_annual_facts` | SEC companyfacts snapshot | Reviewed annual facts (FY2023–FY2025 for every issuer, FY2026 for MSFT and NVDA), with filing provenance, candidate rejections and revision history. |
+| `get_annual_facts` | SEC companyfacts snapshot | Reviewed annual income and cash-flow facts (FY2023–FY2025 for most issuers, FY2024–FY2026 for NVDA, plus FY2026 for MSFT), with filing provenance, candidate rejections and revision history. |
 | `get_quarterly_facts` | SEC companyfacts snapshot | Each issuer's four latest reviewed 10-Q quarters (Q1 to Q3), with exact quarter dates and no year-to-date values. Other quarters are refused. |
 | `calculate_metrics` | SEC companyfacts snapshot | Annual facts, gross and operating margins, and revenue growth as exact rational results. |
 | `get_treasury_actions` | dat-accretion export | Capital actions for MSTR, BMNR and SBET, with the change in net coins per share. |
@@ -59,4 +59,12 @@ python3.11 -m venv .venv-sdk
 .venv-sdk/bin/python -B scripts/verify_sdk.py
 ```
 
-It uses the official `mcp==1.30.0` client and the `jsonschema==4.26.0` validator. `requirements-sdk-test.txt` pins every transitive package by hash; it is compiled from `requirements-sdk-test.in` with `uv pip compile --generate-hashes --python-version 3.11 --python-platform linux`. It negotiates the protocol, discovers seven tools, validates their schema documents, calls every tool across all three issuers, exercises two refusals, checks that the independent validator rejects six malformed nested outputs, and pings. The 28 checks are recorded in [reports/sdk-smoke.json](../reports/sdk-smoke.json). This is interoperability evidence with a second client. It is not protocol certification or a test in every desktop host.
+It uses the official `mcp==1.30.0` client and the `jsonschema==4.26.0` validator. `requirements-sdk-test.txt` pins every transitive package by hash; it is compiled from `requirements-sdk-test.in` with `uv pip compile --generate-hashes --python-version 3.11 --python-platform linux`. It negotiates the protocol, discovers seven tools, validates their schema documents, calls every tool across expanded issuer coverage, exercises refusals and signed annual cash flow, checks that the independent validator rejects six malformed nested outputs, and pings. The 37 checks are recorded in [reports/sdk-smoke.json](../reports/sdk-smoke.json). This is interoperability evidence with a second client. It is not protocol certification or a test in every desktop host.
+
+## Native host and API verification
+
+`python3 -B scripts/verify_host.py` drives Claude Code's native MCP client with an isolated configuration pointing at `server_stdio.py`. Its four checks require correlated tool calls/results for annual cash flow, a Tesla quarter, treasury break-even and an expected refusal; model prose alone cannot pass. The 26 October run passed 4/4. This establishes one real host integration, not desktop GUI compatibility.
+
+`python3 -B scripts/verify_api.py` runs three agent tasks through the live Messages API. It requires `ANTHROPIC_API_KEY`; without one it writes `not_run` and exits 2. The current report records missing credentials, not a successful live API test.
+
+`get_annual_facts` and `calculate_metrics` now accept `operating_cash_flow`, `investing_cash_flow` and `financing_cash_flow`. These are signed annual USD facts with full provenance. `get_quarterly_facts` accepts only the four income metrics, and its schema rejects cash-flow requests.

@@ -1,0 +1,53 @@
+{
+  "verification": "Visible annual cash-flow statement; scripts/review_cash_flows.py never reads companyfacts.",
+  "ticker": "TSLA",
+  "cik": "0001318605",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "13256000000",
+      "investing_cash_flow": "-15584000000",
+      "financing_cash_flow": "2589000000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "14923000000",
+      "investing_cash_flow": "-18787000000",
+      "financing_cash_flow": "3853000000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "accession": "0001628280-26-003952",
+      "filed": "2026-01-29",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "14747000000",
+      "investing_cash_flow": "-15478000000",
+      "financing_cash_flow": "1139000000"
+    }
+  }
+}

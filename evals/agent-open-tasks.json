@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "created": "2026-10-26",
+  "count": 6,
+  "purpose": "Open wording, multi-metric answers, latest reviewed quarter and unavailable metrics. Development evaluation, separate from the frozen holdout.",
+  "tasks": [
+    {
+      "id": "P01",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "Walk me through Tesla's FY2025 income statement. Include revenue, gross profit, operating income, net income and filing sources.",
+      "expected_tools": [
+        "get_annual_facts",
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0001318605",
+        "metrics": [
+          "revenue",
+          "gross_profit",
+          "operating_income",
+          "net_income"
+        ],
+        "fiscal_years": [
+          2025
+        ]
+      },
+      "expected_record": {
+        "metric": "revenue",
+        "fiscal_year": 2025,
+        "status": "ok"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "revenue",
+            "value": "94827000000"
+          }
+        ],
+        [
+          {
+            "field": "gross_profit",
+            "value": "17094000000"
+          }
+        ],
+        [
+          {
+            "field": "operating_income",
+            "value": "4355000000"
+          }
+        ],
+        [
+          {
+            "field": "net_income",
+            "value": "3794000000"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "P02",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "Compare Strategy's net income with cash from operations in FY2025. Give the reported figures without judging management.",
+      "expected_tools": [
+        "get_annual_facts",
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0001050446",
+        "metrics": [
+          "net_income",
+          "operating_cash_flow"
+        ],
+        "fiscal_years": [
+          2025
+        ]
+      },
+      "expected_record": {
+        "metric": "net_income",
+        "fiscal_year": 2025,
+        "status": "ok"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "net_income",
+            "value": "-3848152000"
+          }
+        ],
+        [
+          {
+            "field": "operating_cash_flow",
+            "value": "-67241000"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "P03",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "Where did Coinbase's cash come from and go in FY2025? Show operating, investing and financing totals with signed values.",
+      "expected_tools": [
+        "get_annual_facts",
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0001679788",
+        "metrics": [
+          "operating_cash_flow",
+          "investing_cash_flow",
+          "financing_cash_flow"
+        ],
+        "fiscal_years": [
+          2025
+        ]
+      },
+      "expected_record": {
+        "metric": "operating_cash_flow",
+        "fiscal_year": 2025,
+        "status": "ok"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "operating_cash_flow",
+            "value": "2426383000"
+          }
+        ],
+        [
+          {
+            "field": "investing_cash_flow",
+            "value": "-2049550000"
+          }
+        ],
+        [
+          {
+            "field": "financing_cash_flow",
+            "value": "740282000"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "P04",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "What is Tesla's latest reviewed quarterly revenue? Use the latest available reviewed quarter, and name it.",
+      "expected_tools": [
+        "get_quarterly_facts"
+      ],
+      "expected_arguments": {
+        "cik": "0001318605",
+        "metrics": [
+          "revenue"
+        ],
+        "fiscal_year": 2026,
+        "quarter": "Q3"
+      },
+      "expected_record": {
+        "metric": "revenue",
+        "fiscal_year": 2026,
+        "status": "ok",
+        "fp": "Q3"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "revenue",
+            "value": "28046000000"
+          }
+        ]
+      ]
+    },
+    {
+      "id": "P05",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "What does Robinhood report for gross profit in FY2025? If it does not report that measure, explain the missing data without inventing a zero.",
+      "expected_tools": [
+        "get_annual_facts",
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0001783879",
+        "metrics": [
+          "gross_profit"
+        ],
+        "fiscal_years": [
+          2025
+        ]
+      },
+      "expected_record": {
+        "metric": "gross_profit",
+        "fiscal_year": 2025,
+        "status": "insufficient_data"
+      },
+      "expected_numbers": []
+    },
+    {
+      "id": "P06",
+      "category": "sec_facts",
+      "in_scope": true,
+      "question": "Give me a concise FY2025 financial snapshot for Visa: revenue and net income, with their filing.",
+      "expected_tools": [
+        "get_annual_facts",
+        "calculate_metrics"
+      ],
+      "expected_arguments": {
+        "cik": "0001403161",
+        "metrics": [
+          "revenue",
+          "net_income"
+        ],
+        "fiscal_years": [
+          2025
+        ]
+      },
+      "expected_record": {
+        "metric": "revenue",
+        "fiscal_year": 2025,
+        "status": "ok"
+      },
+      "expected_numbers": [
+        [
+          {
+            "field": "revenue",
+            "value": "40000000000"
+          }
+        ],
+        [
+          {
+            "field": "net_income",
+            "value": "20058000000"
+          }
+        ]
+      ]
+    }
+  ]
+}

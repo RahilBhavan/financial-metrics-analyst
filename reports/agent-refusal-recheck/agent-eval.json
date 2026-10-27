@@ -1,0 +1,112 @@
+{
+ "meta": {
+  "started": "2026-10-26T21:44:39+00:00",
+  "backend": "claude-code-cli-json-protocol",
+  "model_requested": "haiku",
+  "code_commit": "f34ccf2a87bd8b97fbabbac37020aaa9714df75f",
+  "python": "3.14.7",
+  "repeats": 2,
+  "source_sha256": "c0e1b7fb9a0dea378575ccc8a3a53497ae5f961abd056ec5f8001d39dd5de33c",
+  "models_seen": [
+   "claude-haiku-5-5"
+  ],
+  "tasks_file": "evals/agent-expanded-tasks.json",
+  "tasks_sha256": "b1afe506856d13332c7831a5254dc1b354002240ffc483020f215f6b7fd703d7"
+ },
+ "summary": {
+  "per_task_reliability": {
+   "I07": {
+    "runs": 2,
+    "passed": 2,
+    "pass_rate": 1,
+    "pass_rate_sample_stddev": 0.0
+   }
+  },
+  "tasks": 2,
+  "statuses": {
+   "refused": 2
+  },
+  "tool_selection": {
+   "passed": 0,
+   "total": 0,
+   "rate": null
+  },
+  "arguments": {
+   "passed": 0,
+   "total": 0,
+   "rate": null
+  },
+  "answer_numbers": {
+   "passed": 0,
+   "total": 0,
+   "rate": null
+  },
+  "numbers_traced_delivered": {
+   "passed": 0,
+   "total": 0,
+   "rate": null
+  },
+  "numbers_traced_first_draft": {
+   "passed": 0,
+   "total": 0,
+   "rate": null
+  },
+  "answers_withheld_untraced": 0,
+  "refusal_out_of_scope": {
+   "passed": 2,
+   "total": 2,
+   "rate": 1.0
+  },
+  "false_refusals_in_scope": 0,
+  "latency_ms": {
+   "p50": 3790.1,
+   "p90": 3697.6,
+   "max": 3882.6
+  },
+  "tokens_per_task_mean": 5713,
+  "cost_usd_per_task_mean": 0.000927,
+  "cost_usd_total": 0.001853,
+  "tool_calls_per_task_mean": 0,
+  "by_category": {}
+ },
+ "scores": [
+  {
+   "id": "I07",
+   "repeat": 1,
+   "category": "out_of_scope",
+   "in_scope": false,
+   "status": "refused",
+   "latency_ms": 3697.6,
+   "cost_usd": 0.0014156,
+   "turns": 1,
+   "tokens": 5698,
+   "tool_calls": 0,
+   "numbers_delivered": 0,
+   "numbers_delivered_traced": 0,
+   "numbers_first_draft": 0,
+   "numbers_first_draft_traced": 0,
+   "rewrites": 0,
+   "refusal_correct": true,
+   "data_tool_calls": 0
+  },
+  {
+   "id": "I07",
+   "repeat": 2,
+   "category": "out_of_scope",
+   "in_scope": false,
+   "status": "refused",
+   "latency_ms": 3882.6,
+   "cost_usd": 0.00043746999999999997,
+   "turns": 1,
+   "tokens": 5728,
+   "tool_calls": 0,
+   "numbers_delivered": 0,
+   "numbers_delivered_traced": 0,
+   "numbers_first_draft": 0,
+   "numbers_first_draft_traced": 0,
+   "rewrites": 0,
+   "refusal_correct": true,
+   "data_tool_calls": 0
+  }
+ ]
+}

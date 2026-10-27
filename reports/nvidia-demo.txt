@@ -2,15 +2,18 @@ NVIDIA Corporation | NVDA | CIK 0001045810
 As of 2026-02-25; SEC snapshot 2026-09-22T00:00:00-04:00
 Amounts: USD millions. Percentages: 2 decimal places. FY labels use each issuer's fiscal calendar.
 
-Metric           | FY2024      | FY2025  | FY2026
------------------+-------------+---------+--------
-Revenue          | 60,922      | 130,497 | 215,938
-Gross profit     | 44,301      | 97,858  | 153,463
-Operating income | 32,972      | 81,453  | 130,387
-Net income       | 29,760      | 72,880  | 120,067
-Gross margin     | 72.72%      | 74.99%  | 71.07%
-Operating margin | 54.12%      | 62.42%  | 60.38%
-Revenue growth   | 125.85% [1] | 114.20% | 65.47%
+Metric              | FY2024      | FY2025  | FY2026
+--------------------+-------------+---------+--------
+Revenue             | 60,922      | 130,497 | 215,938
+Gross profit        | 44,301      | 97,858  | 153,463
+Operating income    | 32,972      | 81,453  | 130,387
+Net income          | 29,760      | 72,880  | 120,067
+Operating cash flow | 28,090      | 64,089  | 102,718
+Investing cash flow | -10,566     | -20,421 | -52,228
+Financing cash flow | -13,633     | -42,359 | -48,474
+Gross margin        | 72.72%      | 74.99%  | 71.07%
+Operating margin    | 54.12%      | 62.42%  | 60.38%
+Revenue growth      | 125.85% [1] | 114.20% | 65.47%
 FY2024: 2023-01-30 to 2024-01-28
 FY2025: 2024-01-29 to 2025-01-26
 FY2026: 2025-01-27 to 2026-01-25

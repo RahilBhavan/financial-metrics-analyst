@@ -12,7 +12,7 @@ from pathlib import Path
 
 from .client import Client
 from .domain import Analyst, DEFAULT_DATA, today
-from .policy import CIK, METRICS, PROFILES, TAGS, KHC_REFERENCE_PROFILE, Refusal
+from .policy import CASH_FLOW_TAGS, CIK, METRICS, PROFILES, TAGS, KHC_REFERENCE_PROFILE, Refusal
 from .questions import parse_question
 from .presentation import render, render_html
 
@@ -145,6 +145,20 @@ def run():
                     row = indexed[year, metric]
                     record('stale_values', ticker + ' ' + str(year) + ' ' + metric + ' original filing kept; revision flag matches source text',
                            [pit['accession'], pit['years'][str(year)][metric] != newest], [row['original']['accn'], row['revision_candidate']])
+        for profile in PROFILES.values():
+            card = json.loads((ROOT / 'data' / profile['directory'] / 'cash-flow-ground-truth.json').read_text())
+            resolved = client.call('resolve_company', {'ticker': profile['ticker']})
+            cash = client.call('get_annual_facts', {'cik': profile['cik'], 'fiscal_years': sorted(profile['periods']),
+                                                  'metrics': list(CASH_FLOW_TAGS), 'as_of': resolved['lookup_timestamp'][:10]})
+            for row in cash['results']:
+                expected = card['years'][str(row['fiscal_year'])]
+                name = profile['ticker'] + ' FY' + str(row['fiscal_year']) + ' ' + row['metric']
+                record('cash_flow_values', name, expected[row['metric']], row['value'])
+                record('cash_flow_provenance', name, [profile['cik'], expected['start'], expected['end'], 'USD',
+                                                     'us-gaap:' + CASH_FLOW_TAGS[row['metric']]],
+                       [row.get(k) for k in ('cik', 'period_start', 'period_end', 'unit', 'tag')])
+                record('cash_flow_provenance', name + ' reviewed filing in history', True,
+                       any(h['accn'] == expected['accession'] and h['value'] == expected[row['metric']] for h in row.get('history', [])))
         for ticker, directory in ISSUERS:
             cik, tags = CIK_OF[ticker], PROFILES[CIK_OF[ticker]].get('tags', TAGS)
             for quarter in json.loads((directory / 'ground-truth.json').read_text())['reviewed_quarters']:

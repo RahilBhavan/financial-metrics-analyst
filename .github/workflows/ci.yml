@@ -32,6 +32,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -B -m unittest discover -s tests
       - run: python -B -m financial_metrics smoke
+      - name: T3 native requests replay without model keys or MCP setup
+        run: python -B scripts/verify_t3.py --requests evals/t3-requests.json --output "$RUNNER_TEMP/t3-replay.json"
       - name: Committed reports match current code
         run: |
           python -B scripts/regenerate_reports.py

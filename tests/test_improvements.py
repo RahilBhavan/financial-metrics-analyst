@@ -128,9 +128,9 @@ class RealReferenceTests(unittest.TestCase):
 
     def test_microsoft_results_against_independent_report(self):
         golden = json.loads((DEFAULT_DATA / 'msft/ground-truth.json').read_text())
-        result = self.msft.calculate_metrics('0000789019', [2023, 2024, 2025], list(METRICS), '2025-07-30')
+        result = self.msft.calculate_metrics('0000789019', [2023, 2024, 2025], list(TAGS) + ['gross_margin', 'operating_margin', 'revenue_growth'], '2025-07-30')
         self.assertEqual(result['status'], 'ok')
-        self.assertEqual(len(result['results']), 3 * len(METRICS))
+        self.assertEqual(len(result['results']), 3 * (len(TAGS) + 3))
         for row in result['results']:
             year, metric = row['fiscal_year'], row['metric']
             values = golden['years'][str(year)]
@@ -290,7 +290,7 @@ class QuestionAndPresentationTests(unittest.TestCase):
         html = render_html(result)
         self.assertIn('<caption>', html)
         self.assertIn("href='#note-1'", html)
-        self.assertEqual(html.count('Full structured audit record'), 3 * len(METRICS))
+        self.assertEqual(html.count('Full structured audit record'), len(result['results']))
         self.assertIn('Exact percentage:', html)
         result['context']['company']['name'] = '<script>alert(1)</script>'
         result['results'][0]['warnings'].append('<img src=x onerror=alert(1)>')

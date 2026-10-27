@@ -1,0 +1,53 @@
+{
+  "verification": "Visible annual cash-flow statement; scripts/review_cash_flows.py never reads companyfacts.",
+  "ticker": "MSTR",
+  "cik": "0001050446",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-31",
+      "accession": "0001050446-26-000020",
+      "filed": "2026-02-19",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "12712000",
+      "investing_cash_flow": "-1905237000",
+      "financing_cash_flow": "1889886000"
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "end": "2024-12-31",
+      "accession": "0001050446-26-000020",
+      "filed": "2026-02-19",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "-53032000",
+      "investing_cash_flow": "-22086237000",
+      "financing_cash_flow": "22132641000"
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "end": "2025-12-31",
+      "accession": "0001050446-26-000020",
+      "filed": "2026-02-19",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1050446/000105044626000020/mstr-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by financing activities"
+      },
+      "operating_cash_flow": "-67241000",
+      "investing_cash_flow": "-22512295000",
+      "financing_cash_flow": "24843527000"
+    }
+  }
+}

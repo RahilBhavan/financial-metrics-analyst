@@ -9,6 +9,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
+from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -59,7 +60,9 @@ def main():
     parser.add_argument("--output", default=str(ROOT / "reports" / "live-refresh.json"))
     args = parser.parse_args()
     report = {}
-    with tempfile.TemporaryDirectory() as tmp:
+    scratch = Path.home() / "scratch" / "financial-metrics-analyst"
+    scratch.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=scratch, prefix="live-refresh-") as tmp:
         for ticker, bundled, years, quarter in CHECKS:
             live = str(Path(tmp, ticker))
             if not Path(live).exists():
@@ -74,6 +77,8 @@ def main():
             dropped = sorted(set(old_recent) - set(new_recent))
             label = ticker + (" " + quarter + " FY" + str(years[0]) if quarter else "")
             report[label] = {
+                "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "fiscal_years": years, "quarter": quarter, "metrics": metrics, "as_of": as_of,
                 "companyfacts_added": len(set(new) - set(old)),
                 "companyfacts_removed": len(set(old) - set(new)),
                 "companyfacts_changed": sum(1 for k in old if k in new and old[k] != new[k]),
