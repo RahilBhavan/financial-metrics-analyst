@@ -43,6 +43,8 @@ def evidence_items(result, call_index):
         if row['status'] == 'ok':
             text += row.get('display_value', row['value']) + ('%' if row['unit'] == 'percent' else ' USD')
             text += ' (' + row['period_start'] + ' to ' + row['period_end'] + ').'
+            if row.get('formula'):
+                text += ' Calculation: ' + row['formula'] + '.'
             sources = [row] if 'source_url' in row else row.get('inputs', [])
             add('r' + str(i), row, text, [r['source_url'] for r in sources if 'source_url' in r], ('results', i), ('value', 'display_value'))
         else:

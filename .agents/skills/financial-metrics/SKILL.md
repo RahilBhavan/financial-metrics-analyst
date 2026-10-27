@@ -1,11 +1,11 @@
 ---
 name: financial-metrics
-description: Answer questions about the project's reviewed SEC income, annual cash flows and crypto-treasury records directly in T3, using local validated evidence. No model API key or MCP configuration.
+description: Answer questions about the project's reviewed SEC income, annual and quarterly cash flows, cash capex and free cash flow and crypto-treasury records directly in T3, using local validated evidence. No model API key or MCP configuration.
 ---
 
 Use the current T3 model to interpret the question. The Python commands below call no model, launch no MCP server and use no network. Provider usage follows the user's existing T3 account; do not promise free inference.
 
-Run commands from the repository root. Start with `python3 -B -m financial_metrics.t3 scope` and, when needed, `python3 -B -m financial_metrics.t3 tools`. Both return JSON. Scope is issuer-specific; do not infer unreviewed years or quarters. Cash flow is annual only.
+Run commands from the repository root. Start with `python3 -B -m financial_metrics.t3 scope` and, when needed, `python3 -B -m financial_metrics.t3 tools`. Both return JSON. Scope is issuer-specific; do not infer unreviewed years or quarters. Cash flow and cash capex support annual and reviewed standalone quarters. Use get_quarterly_facts for quarters and calculate_metrics for annual free_cash_flow. Quarterly cash flows derive current YTD minus prior-quarter YTD; Q1 uses YTD. Preserve the calculation, source filings and basis warnings. Free cash flow means operating cash flow minus cash capital expenditures; it is not an issuer-adjusted measure.
 
 For SEC questions, inspect `resolve_company` first. Use the date portion of `lookup_timestamp` as `as_of` unless the user specified an earlier cutoff. For treasury questions, use the named firm, action and weeks; when the question names an action, pass its `action` filter. BitMine weekly ATM issuance is `est_issuance`, not filed sales.
 

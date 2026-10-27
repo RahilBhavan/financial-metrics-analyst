@@ -97,6 +97,34 @@
   "reviewed_quarters": [
     {
       "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2025-01-01",
+      "end": "2025-03-31",
+      "filing_accession": "0001628280-25-018911",
+      "filed": "2025-04-23",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025018911/tsla-20250331.htm",
+      "form": "10-Q",
+      "revenue": "19335000000",
+      "gross_profit": "3153000000",
+      "operating_income": "399000000",
+      "net_income": "409000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filing_accession": "0001628280-25-035806",
+      "filed": "2025-07-24",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828025035806/tsla-20250630.htm",
+      "form": "10-Q",
+      "revenue": "22496000000",
+      "gross_profit": "3878000000",
+      "operating_income": "923000000",
+      "net_income": "1172000000"
+    },
+    {
+      "fiscal_year": 2025,
       "quarter": "Q3",
       "start": "2025-07-01",
       "end": "2025-09-30",

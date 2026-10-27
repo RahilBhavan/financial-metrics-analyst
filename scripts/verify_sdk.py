@@ -59,7 +59,13 @@ async def main():
                 ("get_annual_facts", cash_args, "ok"),
                 ("calculate_metrics", cash_args, "ok"),
                 ("get_quarterly_facts", {"cik": "0000320193", "fiscal_year": 2026, "quarter": "Q3",
-                                         "metrics": ["operating_cash_flow"], "as_of": "2026-09-21"}, "refused"),
+                                         "metrics": ["adjusted_free_cash_flow"], "as_of": "2026-09-21"}, "refused"),
+            ])
+            calls.extend([
+                ("resolve_company", {"ticker": "AMD"}, "ok"),
+                ("get_annual_facts", {"cik": "0000002488", "fiscal_years": [2025], "metrics": ["capital_expenditures"], "as_of": "2026-10-26"}, "ok"),
+                ("get_quarterly_facts", {"cik": "0000320193", "fiscal_year": 2026, "quarter": "Q2", "metrics": ["operating_cash_flow", "capital_expenditures", "free_cash_flow"], "as_of": "2026-09-21"}, "ok"),
+                ("calculate_metrics", {"cik": "0000050863", "fiscal_years": [2025], "metrics": ["free_cash_flow"], "as_of": "2026-10-26"}, "ok"),
             ])
             for tool, args, status in calls:
                 result = await session.call_tool(tool, args)

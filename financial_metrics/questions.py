@@ -8,6 +8,7 @@ from .policy import ANNUAL_YEARS, LABELS, MAX_YEARS, METRICS, TICKERS, Clarifica
 ALIASES = {
     "revenue": "revenue", "sales": "revenue", "net sales": "revenue", "total revenue": "revenue",
     "operating income": "operating_income", "operating profit": "operating_income",
+    "free cash flow": "free_cash_flow", "fcf": "free_cash_flow", "capital expenditures": "capital_expenditures", "capex": "capital_expenditures",
     "operating cash flow": "operating_cash_flow", "cash from operations": "operating_cash_flow",
     "investing cash flow": "investing_cash_flow", "financing cash flow": "financing_cash_flow",
     "net income": "net_income", "net profit": "net_income",
@@ -20,11 +21,11 @@ ALIASES = {
 COMPANIES = {"apple": "AAPL", "aapl": "AAPL", "microsoft": "MSFT", "msft": "MSFT", "nvidia": "NVDA", "nvda": "NVDA",
              "coinbase": "COIN", "coin": "COIN", "strategy": "MSTR", "microstrategy": "MSTR", "mstr": "MSTR",
              "robinhood": "HOOD", "hood": "HOOD", "block": "XYZ", "xyz": "XYZ", "paypal": "PYPL", "pypl": "PYPL",
-             "visa": "V", "tesla": "TSLA", "tsla": "TSLA"}
+             "amd": "AMD", "advanced micro devices": "AMD", "intel": "INTC", "intc": "INTC", "visa": "V", "tesla": "TSLA", "tsla": "TSLA"}
 COMPANY_WORDS = "|".join(sorted(COMPANIES, key=len, reverse=True))
 CHOICES = ["Apple (AAPL)", "Microsoft (MSFT)", "NVIDIA (NVDA)", "Coinbase (COIN)", "Strategy (MSTR)", "Robinhood (HOOD)",
-           "Block (XYZ)", "PayPal (PYPL)", "Visa (V)", "Tesla (TSLA)"]
-FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|fcf|free cash flow|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|net margin|execute|shell|ignore|delete|send|email)\b"
+           "AMD (AMD)", "Intel (INTC)", "Block (XYZ)", "PayPal (PYPL)", "Visa (V)", "Tesla (TSLA)"]
+FORBIDDEN = r"\b(forecast\w*|predict\w*|projected|ebitda|valuation|adjusted|quarter\w*|q[1-4]|ttm|calendar|net margin|execute|shell|ignore|delete|send|email)\b"
 FILLER = {"what", "was", "were", "is", "the", "for", "in", "from", "to", "through", "and", "please", "show",
           "me", "give", "tell", "about", "of", "fiscal", "years", "year", "fy", "how", "did", "over",
           "vs", "versus", "inc", "corp", "corporation", "its", "their"}
@@ -106,7 +107,7 @@ def parse_question(question):
 PROPOSAL_SCHEMA = obj({"ticker": {"type": "string", "enum": list(TICKERS)},
                        "fiscal_years": {"type": "array", "minItems": 1, "maxItems": MAX_YEARS, "uniqueItems": True,
                                         "items": REVIEWED_YEAR},
-                       "metrics": {"type": "array", "minItems": 1, "maxItems": 7, "uniqueItems": True,
+                       "metrics": {"type": "array", "minItems": 1, "maxItems": len(METRICS), "uniqueItems": True,
                                    "items": {"type": "string", "enum": sorted(set(ALIASES.values()))}},
                        "as_of": {"type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"}},
                       # Like ask and analyze, an omitted cutoff means the snapshot date.

@@ -11,16 +11,16 @@ The runtime uses the Python standard library. Every financial number carries fil
 
 - **T3-native workflow.** A project skill calls validated local tools directly. Financial answers are rendered from re-executed evidence selections; model-written numbers and copied result values cannot supply an answer.
 - **Optional MCP server.** MCP 2025-11-25 over stdio, without the MCP SDK. It has 7 tools with closed input and full nested output schemas: 4 SEC tools (`resolve_company`, `get_annual_facts`, `get_quarterly_facts`, `calculate_metrics`) and 3 read-only treasury tools.
-- **SEC coverage.** Revenue, gross profit, operating income, net income attributable to the issuer, gross margin, operating margin and revenue growth, plus annual operating, investing and financing cash flow for 10 issuers: FY2023–FY2025 each, plus FY2026 for Microsoft and NVIDIA. Each issuer also has its 4 latest reviewed 10-Q quarters (40 in all). A metric the issuer's income statement does not report (gross profit for Coinbase, Robinhood, PayPal and Visa; operating income for Robinhood) is returned as unavailable, never zero.
+- **SEC coverage.** Revenue, gross profit, operating income, net income attributable to the issuer, gross margin, operating margin and revenue growth, plus annual and quarterly operating, investing and financing cash flow, cash capital expenditures and derived free cash flow for 12 issuers (adding AMD and Intel): FY2023–FY2025 for most issuers, FY2023–FY2026 for Microsoft and FY2024–FY2026 for NVIDIA. Each issuer also has 6 reviewed 10-Q quarters (72 in all). A metric the issuer's income statement does not report (gross profit for Coinbase, Robinhood, PayPal and Visa; operating income for Robinhood) is returned as unavailable, never zero.
 - **Refuses rather than guesses.** "Microsoft profit 2025" returns `needs_clarification` (exit 3). An unsupported metric returns `refused` (exit 2). A newer conflicting filing blocks a stale value. The Kraft Heinz reference case flags FY2017 operating income restated from $6,773M to $6,057M.
 - **Treasury-analyst agent (optional).** A Claude tool-use loop over the server. The model proposes tool calls and selects evidence. The application renders financial answers from validated records; it does not accept model-written financial prose.
 
 | Check | Result | Source |
 | --- | --- | --- |
 | T3-native integration | 6 / 6 checks pass, no project MCP setup or separate API key | `reports/t3-smoke.json` |
-| Source and intent evaluation | 1,226 / 1,226 cases pass | `reports/evaluation.json` |
-| Unit tests | 202 run, 201 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
-| Official `mcp==1.30.0` SDK interoperability | 37 / 37 checks pass | `reports/sdk-smoke.json` |
+| Source and intent evaluation | 2,736 / 2,736 cases pass | `reports/evaluation.json` |
+| Unit tests | 209 run, 208 pass, 1 skipped | `python3 -B -m unittest discover -s tests` |
+| Official `mcp==1.30.0` SDK interoperability | 41 / 41 checks pass | `reports/sdk-smoke.json` |
 | Agent: correct tool and arguments, 42 in-scope tasks | 42 / 42 | `reports/agent-eval.json` |
 | Agent: out-of-scope refusals, false refusals | 8 / 8, 0 | `reports/agent-eval.json` |
 | Agent: numbers in delivered answers traced to a tool result | 368 / 368; 1 answer withheld | `reports/agent-eval.json` |
@@ -29,7 +29,7 @@ The historical agent results above come from one run of a frozen 50-task set on 
 
 The new two-repeat development evaluations passed all **72/72 in-scope runs** (60 issuer/quarter/cash-flow runs and 12 open-wording runs), with 427/427 delivered numeric/source tokens traced. The initial strict refusal score was 14/16: two safe quarterly-cash-flow denials had an ordinary answer status. After adding explicit clarification/refusal status handling, a separate two-run recheck passes 2/2. The original failure records remain in place. See [docs/treasury-agent.md](docs/treasury-agent.md).
 
-A fresh run of the original task file with the current agent passes 42/42 financial tasks and 8/8 refusals (`reports/agent-current/`); the original October 21 results remain unchanged. Treasury evidence includes every public numeric field, including mNAV, holdings, diluted shares and preferred-price gaps. Six indirect-injection runs introduce instructions into schema-valid issuer names and action notes: all keep the injected text out of delivered answers; five pass the strict end-to-end check, while one correct answer omits an expected optional action filter (`reports/agent-tool-injection/`).
+The recorded pre-expansion run of the original task file passes 42/42 financial tasks and 8/8 refusals (`reports/agent-current/`); the original October 21 results remain unchanged. Treasury evidence includes every public numeric field, including mNAV, holdings, diluted shares and preferred-price gaps. Six indirect-injection runs introduce instructions into schema-valid issuer names and action notes: all keep the injected text out of delivered answers; five pass the strict end-to-end check, while one correct answer omits an expected optional action filter (`reports/agent-tool-injection/`).
 
 ## How it works
 
@@ -54,7 +54,7 @@ python3 -B -m financial_metrics smoke
 python3 -B -m financial_metrics demo
 ```
 
-The current local Python 3.14.7 run has 202 tests with one skip; CI runs Python 3.9, 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
+The current local Python 3.14.7 run has 209 tests with one skip; CI runs Python 3.9, 3.11 and 3.13. The skipped test rebuilds the treasury snapshot and runs only when `DAT_ACCRETION_REPO` points at a dat-accretion checkout.
 
 More commands:
 
@@ -120,7 +120,7 @@ For normal use, open the project in T3 and ask a question. `AGENTS.md` and the p
 ## Scope and limits
 
 - Independent portfolio work, not affiliated with the SEC, Anthropic or any issuer named here.
-- Coverage is bounded: 10 issuers, reviewed annual periods and 4 reviewed 10-Q quarters each. The SEC API held no facts for the PayPal and Visa 10-Qs filed in July 2026, so those quarters are not reviewed. Other quarters, quarterly cash flow, capital expenditures, free cash flow, EBITDA, valuation, IFRS and currency conversion are unsupported. JPMorgan is outside the reviewed issuer policy. Snapshot files are limited to 32 MiB each.
+- Coverage is bounded: 12 issuers, reviewed annual periods and 6 reviewed 10-Q quarters each. The SEC API held no facts for the PayPal and Visa 10-Qs filed in July 2026, so those quarters are not reviewed. Other quarters, EBITDA, valuation, IFRS and currency conversion are unsupported. JPMorgan is outside the reviewed issuer policy. Snapshot files are limited to 32 MiB each.
 - The frozen 21 October agent evaluation describes the old prompt. The current prompt derives all ten issuers and their periods from policy; separate expanded and open-wording evaluations live in `reports/agent-expanded/` and `reports/agent-open/`.
 - The SDK check is interoperability evidence with one second client, not protocol certification or a test in each desktop host.
 - The new development evaluations repeat each task twice and include broader wording and adversarial requests. This small sample is not a general robustness claim. The optional Messages API backend has not been run live; `scripts/verify_api.py` records this as `not_run` when no key is available.
@@ -132,3 +132,5 @@ For normal use, open the project in T3 and ask a question. `AGENTS.md` and the p
 [MIT](LICENSE). The license covers this project's code, not SEC filings, issuer reports or third-party market data.
 
 Part of [Rahil Bhavan's projects](https://github.com/RahilBhavan).
+
+Cash-flow expansion: `cash-expansion-ground-truth.json` cards retain independently read statements and quarterly YTD operands. Capex scope differs by issuer and is disclosed in warnings; recent Coinbase capex and free cash flow are unavailable. See [docs/t3.md](docs/t3.md). Historical model evaluations remain frozen; quarterly-cash-flow refusals in those older runs describe the earlier scope.

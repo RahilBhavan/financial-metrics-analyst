@@ -1,0 +1,27 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-27T00:06:59.586500+00:00",
+  "scope_review": "AMD reviewed periods only; future periods require human review.",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+      "sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "bytes": 3672449
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000002488.json",
+      "sha256": "a17f4dbd4097965a9f05b1bb5a1eb38c0c1016d4038597e304a9dbddbd8991e0",
+      "bytes": 162189
+    },
+    "CIK0000002488-submissions-001.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000002488-submissions-001.json",
+      "sha256": "cefcee88a135b876a449bc010e0763d978936a3cfb15b0289b102aeda3dc49af",
+      "bytes": 315948
+    },
+    "CIK0000002488-submissions-002.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000002488-submissions-002.json",
+      "sha256": "df6d75cf8c6a92eb0f8967164837a5499848861c23c1db84b1ed846d052c5fd9",
+      "bytes": 51139
+    }
+  }
+}

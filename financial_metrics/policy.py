@@ -19,9 +19,11 @@ CASH_FLOW_TAGS = {
     "investing_cash_flow": "NetCashProvidedByUsedInInvestingActivities",
     "financing_cash_flow": "NetCashProvidedByUsedInFinancingActivities",
 }
-ANNUAL_TAGS = {**TAGS, **CASH_FLOW_TAGS}
-METRICS = tuple(ANNUAL_TAGS) + ("gross_margin", "operating_margin", "revenue_growth")
-LABELS = {"operating_cash_flow": "Operating cash flow", "investing_cash_flow": "Investing cash flow",
+CAPEX_TAG = "PaymentsToAcquirePropertyPlantAndEquipment"
+ANNUAL_TAGS = {**TAGS, **CASH_FLOW_TAGS, "capital_expenditures": CAPEX_TAG}
+QUARTER_METRICS = tuple(ANNUAL_TAGS) + ("free_cash_flow",)
+METRICS = tuple(ANNUAL_TAGS) + ("gross_margin", "operating_margin", "revenue_growth", "free_cash_flow")
+LABELS = {"capital_expenditures": "Cash capital expenditures", "free_cash_flow": "Free cash flow (operating cash flow minus cash capital expenditures)", "operating_cash_flow": "Operating cash flow", "investing_cash_flow": "Investing cash flow",
           "financing_cash_flow": "Financing cash flow", "revenue": "Revenue", "gross_profit": "Gross profit", "operating_income": "Operating income",
           "net_income": "Net income", "gross_margin": "Gross margin",
           "operating_margin": "Operating margin", "revenue_growth": "Revenue growth"}
@@ -62,73 +64,94 @@ PROFILES = {
                   "support_periods": {2022: ("2021-10-01", "2022-09-30")}},
     "0001318605": calendar_profile("0001318605", "Tesla, Inc.", "TSLA", "tsla", {"revenue": "Revenues"}),
 }
-# Reviewed fiscal quarters: (fiscal year, quarter) -> (start, end). The latest four 10-Q periods in each snapshot that
+# Additional reviewed semiconductor issuers use 52/53-week fiscal years.
+for _cik, _name, _ticker in (("0000002488", "Advanced Micro Devices, Inc.", "AMD"),
+                            ("0000050863", "Intel Corporation", "INTC")):
+    PROFILES[_cik] = {"cik": _cik, "name": _name, "ticker": _ticker, "directory": _ticker.lower(), "fye_month": 12,
+                      "periods": {2023: ("2023-01-01", "2023-12-30"), 2024: ("2023-12-31", "2024-12-28"),
+                                  2025: ("2024-12-29", "2025-12-27")},
+                      "support_periods": {2022: ("2021-12-26", "2022-12-31")}}
+# Reviewed fiscal quarters: (fiscal year, quarter) -> (start, end). Six 10-Q periods per issuer that
 # the SEC companyfacts API serves; each is transcribed in the issuer's ground-truth.json from the 10-Q income statement.
-REVIEWED_QUARTERS = {
-    "AAPL": {
-        (2025, "Q3"): ("2025-03-30", "2025-06-28"),
-        (2026, "Q1"): ("2025-09-28", "2025-12-27"),
-        (2026, "Q2"): ("2025-12-28", "2026-03-28"),
-        (2026, "Q3"): ("2026-03-29", "2026-06-27"),
-    },
-    "MSFT": {
-        (2025, "Q3"): ("2025-01-01", "2025-03-31"),
-        (2026, "Q1"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q2"): ("2025-10-01", "2025-12-31"),
-        (2026, "Q3"): ("2026-01-01", "2026-03-31"),
-    },
-    "NVDA": {
-        (2026, "Q2"): ("2025-04-28", "2025-07-27"),
-        (2026, "Q3"): ("2025-07-28", "2025-10-26"),
-        (2027, "Q1"): ("2026-01-26", "2026-04-26"),
-        (2027, "Q2"): ("2026-04-27", "2026-07-26"),
-    },
-    "COIN": {
-        (2025, "Q2"): ("2025-04-01", "2025-06-30"),
-        (2025, "Q3"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q1"): ("2026-01-01", "2026-03-31"),
-        (2026, "Q2"): ("2026-04-01", "2026-06-30"),
-    },
-    "MSTR": {
-        (2025, "Q2"): ("2025-04-01", "2025-06-30"),
-        (2025, "Q3"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q1"): ("2026-01-01", "2026-03-31"),
-        (2026, "Q2"): ("2026-04-01", "2026-06-30"),
-    },
-    "HOOD": {
-        (2025, "Q2"): ("2025-04-01", "2025-06-30"),
-        (2025, "Q3"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q1"): ("2026-01-01", "2026-03-31"),
-        (2026, "Q2"): ("2026-04-01", "2026-06-30"),
-    },
-    "XYZ": {
-        (2025, "Q2"): ("2025-04-01", "2025-06-30"),
-        (2025, "Q3"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q1"): ("2026-01-01", "2026-03-31"),
-        (2026, "Q2"): ("2026-04-01", "2026-06-30"),
-    },
-    "PYPL": {
-        (2025, "Q1"): ("2025-01-01", "2025-03-31"),
-        (2025, "Q2"): ("2025-04-01", "2025-06-30"),
-        (2025, "Q3"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q1"): ("2026-01-01", "2026-03-31"),
-    },
-    "V": {
-        (2025, "Q2"): ("2025-01-01", "2025-03-31"),
-        (2025, "Q3"): ("2025-04-01", "2025-06-30"),
-        (2026, "Q1"): ("2025-10-01", "2025-12-31"),
-        (2026, "Q2"): ("2026-01-01", "2026-03-31"),
-    },
-    "TSLA": {
-        (2025, "Q3"): ("2025-07-01", "2025-09-30"),
-        (2026, "Q1"): ("2026-01-01", "2026-03-31"),
-        (2026, "Q2"): ("2026-04-01", "2026-06-30"),
-        (2026, "Q3"): ("2026-07-01", "2026-09-30"),
-    },
-}
+REVIEWED_QUARTERS = {'AAPL': {(2025, 'Q1'): ('2024-09-29', '2024-12-28'),
+          (2025, 'Q2'): ('2024-12-29', '2025-03-29'),
+          (2025, 'Q3'): ('2025-03-30', '2025-06-28'),
+          (2026, 'Q1'): ('2025-09-28', '2025-12-27'),
+          (2026, 'Q2'): ('2025-12-28', '2026-03-28'),
+          (2026, 'Q3'): ('2026-03-29', '2026-06-27')},
+ 'MSFT': {(2025, 'Q1'): ('2024-07-01', '2024-09-30'),
+          (2025, 'Q2'): ('2024-10-01', '2024-12-31'),
+          (2025, 'Q3'): ('2025-01-01', '2025-03-31'),
+          (2026, 'Q1'): ('2025-07-01', '2025-09-30'),
+          (2026, 'Q2'): ('2025-10-01', '2025-12-31'),
+          (2026, 'Q3'): ('2026-01-01', '2026-03-31')},
+ 'NVDA': {(2025, 'Q3'): ('2024-07-29', '2024-10-27'),
+          (2026, 'Q1'): ('2025-01-27', '2025-04-27'),
+          (2026, 'Q2'): ('2025-04-28', '2025-07-27'),
+          (2026, 'Q3'): ('2025-07-28', '2025-10-26'),
+          (2027, 'Q1'): ('2026-01-26', '2026-04-26'),
+          (2027, 'Q2'): ('2026-04-27', '2026-07-26')},
+ 'COIN': {(2024, 'Q3'): ('2024-07-01', '2024-09-30'),
+          (2025, 'Q1'): ('2025-01-01', '2025-03-31'),
+          (2025, 'Q2'): ('2025-04-01', '2025-06-30'),
+          (2025, 'Q3'): ('2025-07-01', '2025-09-30'),
+          (2026, 'Q1'): ('2026-01-01', '2026-03-31'),
+          (2026, 'Q2'): ('2026-04-01', '2026-06-30')},
+ 'MSTR': {(2024, 'Q3'): ('2024-07-01', '2024-09-30'),
+          (2025, 'Q1'): ('2025-01-01', '2025-03-31'),
+          (2025, 'Q2'): ('2025-04-01', '2025-06-30'),
+          (2025, 'Q3'): ('2025-07-01', '2025-09-30'),
+          (2026, 'Q1'): ('2026-01-01', '2026-03-31'),
+          (2026, 'Q2'): ('2026-04-01', '2026-06-30')},
+ 'HOOD': {(2024, 'Q3'): ('2024-07-01', '2024-09-30'),
+          (2025, 'Q1'): ('2025-01-01', '2025-03-31'),
+          (2025, 'Q2'): ('2025-04-01', '2025-06-30'),
+          (2025, 'Q3'): ('2025-07-01', '2025-09-30'),
+          (2026, 'Q1'): ('2026-01-01', '2026-03-31'),
+          (2026, 'Q2'): ('2026-04-01', '2026-06-30')},
+ 'XYZ': {(2024, 'Q3'): ('2024-07-01', '2024-09-30'),
+         (2025, 'Q1'): ('2025-01-01', '2025-03-31'),
+         (2025, 'Q2'): ('2025-04-01', '2025-06-30'),
+         (2025, 'Q3'): ('2025-07-01', '2025-09-30'),
+         (2026, 'Q1'): ('2026-01-01', '2026-03-31'),
+         (2026, 'Q2'): ('2026-04-01', '2026-06-30')},
+ 'PYPL': {(2024, 'Q2'): ('2024-04-01', '2024-06-30'),
+          (2024, 'Q3'): ('2024-07-01', '2024-09-30'),
+          (2025, 'Q1'): ('2025-01-01', '2025-03-31'),
+          (2025, 'Q2'): ('2025-04-01', '2025-06-30'),
+          (2025, 'Q3'): ('2025-07-01', '2025-09-30'),
+          (2026, 'Q1'): ('2026-01-01', '2026-03-31')},
+ 'V': {(2024, 'Q3'): ('2024-04-01', '2024-06-30'),
+       (2025, 'Q1'): ('2024-10-01', '2024-12-31'),
+       (2025, 'Q2'): ('2025-01-01', '2025-03-31'),
+       (2025, 'Q3'): ('2025-04-01', '2025-06-30'),
+       (2026, 'Q1'): ('2025-10-01', '2025-12-31'),
+       (2026, 'Q2'): ('2026-01-01', '2026-03-31')},
+ 'TSLA': {(2025, 'Q1'): ('2025-01-01', '2025-03-31'),
+          (2025, 'Q2'): ('2025-04-01', '2025-06-30'),
+          (2025, 'Q3'): ('2025-07-01', '2025-09-30'),
+          (2026, 'Q1'): ('2026-01-01', '2026-03-31'),
+          (2026, 'Q2'): ('2026-04-01', '2026-06-30'),
+          (2026, 'Q3'): ('2026-07-01', '2026-09-30')},
+ 'AMD': {(2024, 'Q3'): ('2024-06-30', '2024-09-28'),
+         (2025, 'Q1'): ('2024-12-29', '2025-03-29'),
+         (2025, 'Q2'): ('2025-03-30', '2025-06-28'),
+         (2025, 'Q3'): ('2025-06-29', '2025-09-27'),
+         (2026, 'Q1'): ('2025-12-28', '2026-03-28'),
+         (2026, 'Q2'): ('2026-03-29', '2026-06-27')},
+ 'INTC': {(2024, 'Q3'): ('2024-06-30', '2024-09-28'),
+          (2025, 'Q1'): ('2024-12-29', '2025-03-29'),
+          (2025, 'Q2'): ('2025-03-30', '2025-06-28'),
+          (2025, 'Q3'): ('2025-06-29', '2025-09-27'),
+          (2026, 'Q1'): ('2025-12-28', '2026-03-28'),
+          (2026, 'Q2'): ('2026-03-29', '2026-06-27')}}
 for _profile in PROFILES.values():
     _profile["tags"] = {**ANNUAL_TAGS, **_profile.get("tags", {})}
-    _profile["quarters"] = REVIEWED_QUARTERS[_profile["ticker"]]
+    if _profile["ticker"] in ("NVDA", "V"):
+        _profile["tags"]["capital_expenditures"] = "PaymentsToAcquireProductiveAssets"
+    if _profile["ticker"] == "HOOD":
+        _profile["tags"]["capital_expenditures"] = "PaymentsToAcquireOtherProductiveAssets"
+    _profile["quarters"] = REVIEWED_QUARTERS.get(_profile["ticker"], {})
 # Everything below derives from PROFILES so adding a reviewed period changes one place.
 TICKERS = tuple(profile["ticker"] for profile in PROFILES.values())
 PROFILE_BY_TICKER = {profile["ticker"]: profile for profile in PROFILES.values()}
@@ -141,13 +164,13 @@ KHC_REFERENCE_PROFILE = {
     "directory": "reference-cases/khc",
 }
 POLICY = {
-    "version": "reviewed-annual-quarterly-v5",
-    "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
+    "version": "reviewed-annual-quarterly-v6",
+    "scope": "Twelve reviewed issuers including AMD and INTC FY2023-FY2025; AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; six reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
     "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
     "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
     "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
     "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
-    "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. No quarterly YTD subtraction, capital expenditures or free cash flow inference.",
+    "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. Standalone quarterly cash flows use current YTD minus preceding-quarter YTD (first quarter uses YTD directly), with both sources retained and mixed-filing basis disclosed. Cash capital expenditures are positive investing cash payments for property, plant and equipment (productive assets for NVDA and V; other productive assets for HOOD); INTC excludes property additions classified as financing cash flows; AMD capex excludes discontinued operations while operating cash flow is consolidated; NVDA includes intangible assets and V includes technology in the filed line; HOOD excludes separately reported capitalized software; exclude acquisitions and noncash leases. Missing standard capex tags remain unavailable, including recent COIN periods. Free cash flow is operating cash flow minus cash capital expenditures, not an issuer-adjusted measure.",
     "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
     "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
     "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places.",

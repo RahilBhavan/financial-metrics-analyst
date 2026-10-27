@@ -4,6 +4,8 @@ This file records the 1,226-case source and intent evaluation (947 before cash-f
 
 **T3-native completion, 26 October 2026.** Six integration questions passed through a T3-hosted Codex model using direct local calls, without a model API key or project MCP setup (`reports/t3-smoke.json`). The requests are saved in `evals/t3-requests.json` and replayed in CI without a model call. Direct-path tests deny network/subprocess events and remove model keys. The native evidence command re-executes calls rather than accepting model-supplied results or prose.
 
+**Coverage expansion, 26 October 2026.** Twelve issuers (adding AMD and INTC), 37 issuer-years and 72 reviewed 10-Q quarters. 209 unit tests run with zero failures/errors and one expected treasury-rebuild skip; 2,736/2,736 deterministic checks pass, including 545 expanded cash-value checks and 527 source checks for available values. The expanded SDK interoperability check passes 41/41; the live SEC comparison matches all 84 annual/quarter checks (`reports/live-refresh-expanded-cash.json`). Annual and standalone-quarter operating/investing/financing cash flows, cash capital expenditures and explicitly defined free cash flow are supported. Missing tags remain unavailable; issuer-specific capex scope and mixed-filing calculations are disclosed. Historical model evaluations below retain their original scope and are not fresh evaluations of these new features.
+
 **Update, 26 October 2026 (cash flow and agent completion).** 202 unit tests run (201 pass, one treasury-rebuild skip). The deterministic evaluation passes 1,226/1,226: the prior 947 cases plus 93 independently transcribed annual cash-flow values and 186 provenance/history checks. The official SDK passes 37/37 checks, including cash-flow values/signs and refusal of quarterly cash flow. Native Claude Code MCP hosting passes 4/4 checks (`reports/host-smoke.json`). The live SEC refresh passes all 50 issuer/quarter checks at the bundled filing cutoffs (`reports/live-refresh-ten-issuers.json`). Model development evaluations and their two repeats are documented in [docs/treasury-agent.md](docs/treasury-agent.md); the frozen holdout stays unchanged. The optional live Messages API smoke is explicitly `not_run` without an API key (`reports/api-smoke.json`).
 
 **Completion audit (same date).** Current-agent compatibility: 42/42 financial tasks and 8/8 refusals on a fresh run of the original unchanged task file (`reports/agent-current/`). The evidence renderer exposes all public numeric treasury fields, and regression tests reject prose without digits, incorrect field/week selections, sign mismatches and malformed refusal arguments. Six schema-valid tool-text injection runs omitted the injected output; five passed strict task checks, while one correct answer omitted an expected optional action filter (`reports/agent-tool-injection/`). See the agent documentation for the exact limits. The optional Messages API adapter has not been exercised live. The user-selected T3-native route replaces that requirement; see docs/t3.md and reports/t3-smoke.json.
@@ -23,18 +25,20 @@ Annual cash-flow source cards (`data/*/cash-flow-ground-truth.json`, plus the ro
 
 | Evaluation group (26 October 2026) | Passed / total | What it checks |
 | --- | ---: | --- |
-| annual cash-flow values | 93 / 93 | Signed operating, investing and financing cash flow against independent filing cards |
-| cash-flow provenance | 186 / 186 | Periods, CIK, unit, standard tags and reviewed filing/value in history |
-| filing values | 300 / 300 | Every annual and quarterly value against the card transcribed from the filing |
-| provenance | 250 / 250 | Accession, filing URL, dates, tag, unit, filing date and form per value |
-| exact ratios | 78 / 78 | Gross margin, operating margin and growth against exact rational arithmetic |
-| point in time | 96 / 96 | An earlier cutoff returns the older filing's values; a quarter is invisible the day before its 10-Q |
-| stale values | 25 / 25 | The older filing stays the original; revision flags match the filing text; a newer relabelled PayPal record blocks a later cutoff |
+| annual cash-flow values | 111 / 111 | Signed operating, investing and financing cash flow against independent filing cards |
+| expanded cash values | 545 / 545 | Annual and quarterly operating, investing and financing cash flows, cash capex and derived free cash flow against independent statements |
+| expanded cash provenance | 527 / 527 | Both YTD source filings retained for every available derived quarter |
+| cash-flow provenance | 222 / 222 | Periods, CIK, unit, standard tags and reviewed filing/value in history |
+| filing values | 452 / 452 | Every annual and quarterly value against the card transcribed from the filing |
+| provenance | 392 / 392 | Accession, filing URL, dates, tag, unit, filing date and form per value |
+| exact ratios | 96 / 96 | Gross margin, operating margin and growth against exact rational arithmetic |
+| point in time | 144 / 144 | An earlier cutoff returns the older filing's values; a quarter is invisible the day before its 10-Q |
+| stale values | 33 / 33 | The older filing stays the original; revision flags match the filing text; a newer relabelled PayPal record blocks a later cutoff |
 | question answers | 18 / 18 | Natural-language questions on the new issuers return the card's values, or "not reported" |
 | question intent | 78 / 78 | Accepted paraphrases, clarifications (profit, margin, change, missing company, year or metric) and refusals |
-| tool refusals | 42 / 42 | Unreviewed year, quarter, ticker, metric, future cutoff and bad quarter labels, for each added issuer |
-| scope behavior | 47 / 47 | Duration warnings, and metrics an issuer does not report staying unavailable instead of zero |
-| supporting values | 10 / 10 | The prior-year revenue that growth needs, with its filing |
+| tool refusals | 50 / 50 | Unreviewed year, quarter, ticker, metric, future cutoff and bad quarter labels, for each added issuer |
+| scope behavior | 53 / 53 | Duration warnings, and metrics an issuer does not report staying unavailable instead of zero |
+| supporting values | 12 / 12 | The prior-year revenue that growth needs, with its filing |
 | real reference cases | 3 / 3 | Kraft Heinz restatement and missing revenue tag |
 
 Expected values for the seven added issuers, and for every issuer's quarters, come from `scripts/review_filings.py`. It reads the visible income statement in each cited filing document and never opens `companyfacts.json`. The first full run agreed with the server on every value. That includes NVIDIA's Q2 FY2027 quarter, which an earlier hand transcription had already recorded. Two disagreements surfaced and were fixed in the script: Robinhood's 2026 quarters first used consolidated net income instead of net income attributable to Robinhood, and a negative amount split across two cells in one Strategy 10-Q. The SEC API holds no facts for the PayPal and Visa 10-Qs filed in July 2026 (re-fetched on 25 October), so those two quarters are not reviewed and the next-oldest are used.
@@ -49,14 +53,14 @@ Verified on 23 September 2026 with Python 3.9.6 for the baseline and Python 3.11
 
 | Evaluation group | Passed / total |
 | --- | ---: |
-| exact ratios | 30 / 30 |
-| filing values | 44 / 44 |
-| provenance | 44 / 44 |
+| exact ratios | 96 / 96 |
+| filing values | 452 / 452 |
+| provenance | 392 / 392 |
 | question intent | 14 / 14 |
 | real reference cases | 3 / 3 |
-| scope behavior | 11 / 11 |
-| supporting values | 3 / 3 |
-| tool refusals | 12 / 12 |
+| scope behavior | 53 / 53 |
+| supporting values | 12 / 12 |
+| tool refusals | 50 / 50 |
 
 Every evaluation case includes expected and actual values in [reports/evaluation.json](reports/evaluation.json). Test methods can contain multiple subtests; these are not added to the method count. The unit suite and enumerated evaluation overlap in coverage, so their counts should not be combined into a single accuracy score.
 
@@ -126,9 +130,9 @@ API downloads succeeded. At capture time some direct archive HTML requests retur
 
 ## Remaining limits
 
-- Ten reviewed companies with issuer-specific annual coverage and four reviewed 10-Q quarters each. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
+- Twelve reviewed companies with issuer-specific annual coverage and six reviewed 10-Q quarters each. This remains a bounded issuer and accounting policy, not a general taxonomy resolver. KHC's net-income attribution illustrates why additional issuers need separate review.
 - Historical filing-date filtering does not recreate past API contents or intraday availability. Changed values are flagged; formal restatement classification requires source evidence.
-- Quarters beyond the four reviewed per issuer (including the fiscal fourth quarter, which has no 10-Q), forecasts, EBITDA, quarterly cash flow, capital expenditures, free cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
+- Quarters beyond the six reviewed per issuer (including the fiscal fourth quarter, which has no 10-Q), forecasts, EBITDA, issuer-adjusted free cash flow, valuation, IFRS, currency conversion, and unreviewed fiscal years remain unsupported.
 - The optional refresher supports all ten tickers and uses controlled HTTP test doubles for success, retries, timeouts, redirects, size limits, wrong identity, and partial failures. The 26 October live refresh passed all ten issuers and forty quarters. No source-availability SLA is measured.
 - Full nested schemas constrain structure. They do not by themselves establish correct source transcription, arithmetic, or semantic consistency; those have separate tests.
 - The baseline evaluation calls no model. The optional treasury-analyst agent, added in October, is evaluated separately. Natural-language interpretation remains bounded. The separate model evaluations check tool arguments and selected evidence, with per-task repeat statistics.

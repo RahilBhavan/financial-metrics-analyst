@@ -1,0 +1,183 @@
+{
+  "evidence_kind": "independently_checked_SEC_filing_values",
+  "issuer": "Advanced Micro Devices, Inc.",
+  "cik": "0000002488",
+  "verification": "Transcribed from the visible Consolidated Statements of Operations in each cited filing document by scripts/review_filings.py (scale millions of USD, converted to exact USD). companyfacts is not read. Metrics the statements do not report are null.",
+  "statement_labels": {
+    "revenue": "net revenue",
+    "gross_profit": "gross profit",
+    "operating_income": "operating income",
+    "net_income": "net income"
+  },
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "end": "2023-12-30",
+      "days": 364,
+      "accession": "0000002488-26-000018",
+      "filed": "2026-02-04",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "revenue": "22680000000",
+      "gross_profit": "10460000000",
+      "operating_income": "401000000",
+      "net_income": "854000000"
+    },
+    "2024": {
+      "start": "2023-12-31",
+      "end": "2024-12-28",
+      "days": 364,
+      "accession": "0000002488-26-000018",
+      "filed": "2026-02-04",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "revenue": "25785000000",
+      "gross_profit": "12725000000",
+      "operating_income": "1900000000",
+      "net_income": "1641000000"
+    },
+    "2025": {
+      "start": "2024-12-29",
+      "end": "2025-12-27",
+      "days": 364,
+      "accession": "0000002488-26-000018",
+      "filed": "2026-02-04",
+      "form": "10-K",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "revenue": "34639000000",
+      "gross_profit": "17152000000",
+      "operating_income": "3694000000",
+      "net_income": "4335000000"
+    }
+  },
+  "supporting_revenue": {
+    "fiscal_year": 2022,
+    "start": "2021-12-26",
+    "end": "2022-12-31",
+    "value": "23601000000",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+    "source_section": "Consolidated Statements of Operations, fiscal year 2022 revenue column",
+    "latest_matching_accession": "0000002488-25-000012"
+  },
+  "point_in_time": {
+    "as_of": "2026-02-03",
+    "accession": "0000002488-25-000012",
+    "filed": "2025-02-05",
+    "form": "10-K",
+    "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+    "years": {
+      "2023": {
+        "start": "2023-01-01",
+        "end": "2023-12-30",
+        "revenue": "22680000000",
+        "gross_profit": "10460000000",
+        "operating_income": "401000000",
+        "net_income": "854000000"
+      },
+      "2024": {
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "revenue": "25785000000",
+        "gross_profit": "12725000000",
+        "operating_income": "1900000000",
+        "net_income": "1641000000"
+      }
+    },
+    "overlap_revenue_older_vs_newest": {
+      "2023": [
+        "22680000000",
+        "22680000000"
+      ],
+      "2024": [
+        "25785000000",
+        "25785000000"
+      ]
+    }
+  },
+  "reviewed_quarters": [
+    {
+      "fiscal_year": 2024,
+      "quarter": "Q3",
+      "start": "2024-06-30",
+      "end": "2024-09-28",
+      "filing_accession": "0000002488-24-000163",
+      "filed": "2024-10-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000163/amd-20240928.htm",
+      "form": "10-Q",
+      "revenue": "6819000000",
+      "gross_profit": "3419000000",
+      "operating_income": "724000000",
+      "net_income": "771000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2024-12-29",
+      "end": "2025-03-29",
+      "filing_accession": "0000002488-25-000047",
+      "filed": "2025-05-07",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+      "form": "10-Q",
+      "revenue": "7438000000",
+      "gross_profit": "3736000000",
+      "operating_income": "806000000",
+      "net_income": "709000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-03-30",
+      "end": "2025-06-28",
+      "filing_accession": "0000002488-25-000108",
+      "filed": "2025-08-06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+      "form": "10-Q",
+      "revenue": "7685000000",
+      "gross_profit": "3059000000",
+      "operating_income": "-134000000",
+      "net_income": "872000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-06-29",
+      "end": "2025-09-27",
+      "filing_accession": "0000002488-25-000166",
+      "filed": "2025-11-05",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+      "form": "10-Q",
+      "revenue": "9246000000",
+      "gross_profit": "4780000000",
+      "operating_income": "1270000000",
+      "net_income": "1243000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-12-28",
+      "end": "2026-03-28",
+      "filing_accession": "0000002488-26-000076",
+      "filed": "2026-05-06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000076/amd-20260328.htm",
+      "form": "10-Q",
+      "revenue": "10253000000",
+      "gross_profit": "5416000000",
+      "operating_income": "1476000000",
+      "net_income": "1383000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-03-29",
+      "end": "2026-06-27",
+      "filing_accession": "0000002488-26-000123",
+      "filed": "2026-08-05",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm",
+      "form": "10-Q",
+      "revenue": "11536000000",
+      "gross_profit": "6203000000",
+      "operating_income": "1990000000",
+      "net_income": "2297000000"
+    }
+  ]
+}

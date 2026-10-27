@@ -1,0 +1,294 @@
+{
+  "verification": "Visible SEC cash-flow statements only; no companyfacts or runtime calculation engine read.",
+  "ticker": "COIN",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "accession": "0001679788-24-000022",
+      "filed": "2024-02-15",
+      "end": "2023-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978824000022/coin-20231231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash (used in) provided by financing activities"
+      },
+      "operating_cash_flow": "922951000",
+      "investing_cash_flow": "5392000",
+      "financing_cash_flow": "-811332000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    "2024": {
+      "start": "2024-01-01",
+      "accession": "0001679788-25-000022",
+      "filed": "2025-02-13",
+      "end": "2024-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by (used in) operating activities",
+        "investing_cash_flow": "Net cash (used in) provided by investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "2556844000",
+      "investing_cash_flow": "-282385000",
+      "financing_cash_flow": "2828921000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    "2025": {
+      "start": "2025-01-01",
+      "accession": "0001679788-26-000015",
+      "filed": "2026-02-12",
+      "end": "2025-12-31",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000015/coin-20251231.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash provided by (used in) financing activities"
+      },
+      "operating_cash_flow": "2426383000",
+      "investing_cash_flow": "-2049550000",
+      "financing_cash_flow": "740282000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    }
+  },
+  "quarters": [
+    {
+      "fiscal_year": 2024,
+      "quarter": "Q3",
+      "start": "2024-07-01",
+      "end": "2024-09-30",
+      "filed": "2024-10-30",
+      "inputs": [
+        {
+          "accession": "0001679788-24-000187",
+          "filed": "2024-10-30",
+          "end": "2024-09-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978824000187/coin-20240930.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "1592226000",
+          "investing_cash_flow": "-232969000",
+          "financing_cash_flow": "682663000",
+          "capital_expenditures": null
+        },
+        {
+          "accession": "0001679788-24-000149",
+          "filed": "2024-08-01",
+          "end": "2024-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978824000149/coin-20240630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "895682000",
+          "investing_cash_flow": "-144292000",
+          "financing_cash_flow": "993988000",
+          "capital_expenditures": null
+        }
+      ],
+      "operating_cash_flow": "696544000",
+      "investing_cash_flow": "-88677000",
+      "financing_cash_flow": "-311325000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2025-01-01",
+      "end": "2025-03-31",
+      "filed": "2025-05-08",
+      "inputs": [
+        {
+          "accession": "0001679788-25-000089",
+          "filed": "2025-05-08",
+          "end": "2025-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000089/coin-20250331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash (used in) provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "-182727000",
+          "investing_cash_flow": "-231653000",
+          "financing_cash_flow": "-893802000",
+          "capital_expenditures": null
+        }
+      ],
+      "operating_cash_flow": "-182727000",
+      "investing_cash_flow": "-231653000",
+      "financing_cash_flow": "-893802000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-04-01",
+      "end": "2025-06-30",
+      "filed": "2025-07-31",
+      "inputs": [
+        {
+          "accession": "0001679788-25-000154",
+          "filed": "2025-07-31",
+          "end": "2025-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000154/coin-20250630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "145747000",
+          "investing_cash_flow": "-916809000",
+          "financing_cash_flow": "-1284939000",
+          "capital_expenditures": null
+        },
+        {
+          "accession": "0001679788-25-000089",
+          "filed": "2025-05-08",
+          "end": "2025-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000089/coin-20250331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash (used in) provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "-182727000",
+          "investing_cash_flow": "-231653000",
+          "financing_cash_flow": "-893802000",
+          "capital_expenditures": null
+        }
+      ],
+      "operating_cash_flow": "328474000",
+      "investing_cash_flow": "-685156000",
+      "financing_cash_flow": "-391137000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-07-01",
+      "end": "2025-09-30",
+      "filed": "2025-10-30",
+      "inputs": [
+        {
+          "accession": "0001679788-25-000208",
+          "filed": "2025-10-30",
+          "end": "2025-09-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000208/coin-20250930.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash (used in) provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by financing activities"
+          },
+          "operating_cash_flow": "-638768000",
+          "investing_cash_flow": "-1652383000",
+          "financing_cash_flow": "1896096000",
+          "capital_expenditures": null
+        },
+        {
+          "accession": "0001679788-25-000154",
+          "filed": "2025-07-31",
+          "end": "2025-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000154/coin-20250630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities"
+          },
+          "operating_cash_flow": "145747000",
+          "investing_cash_flow": "-916809000",
+          "financing_cash_flow": "-1284939000",
+          "capital_expenditures": null
+        }
+      ],
+      "operating_cash_flow": "-784515000",
+      "investing_cash_flow": "-735574000",
+      "financing_cash_flow": "3181035000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2026-01-01",
+      "end": "2026-03-31",
+      "filed": "2026-05-07",
+      "inputs": [
+        {
+          "accession": "0001679788-26-000054",
+          "filed": "2026-05-07",
+          "end": "2026-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000054/coin-20260331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "182744000",
+          "investing_cash_flow": "-239064000",
+          "financing_cash_flow": "-864907000",
+          "capital_expenditures": null
+        }
+      ],
+      "operating_cash_flow": "182744000",
+      "investing_cash_flow": "-239064000",
+      "financing_cash_flow": "-864907000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "filed": "2026-07-30",
+      "inputs": [
+        {
+          "accession": "0001679788-26-000088",
+          "filed": "2026-07-30",
+          "end": "2026-06-30",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000088/coin-20260630.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "380054000",
+          "investing_cash_flow": "-500554000",
+          "financing_cash_flow": "-3573227000",
+          "capital_expenditures": null
+        },
+        {
+          "accession": "0001679788-26-000054",
+          "filed": "2026-05-07",
+          "end": "2026-03-31",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/1679788/000167978826000054/coin-20260331.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "182744000",
+          "investing_cash_flow": "-239064000",
+          "financing_cash_flow": "-864907000",
+          "capital_expenditures": null
+        }
+      ],
+      "operating_cash_flow": "197310000",
+      "investing_cash_flow": "-261490000",
+      "financing_cash_flow": "-2708320000",
+      "capital_expenditures": null,
+      "free_cash_flow": null
+    }
+  ]
+}

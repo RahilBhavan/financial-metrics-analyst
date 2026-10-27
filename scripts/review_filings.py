@@ -53,7 +53,10 @@ SPECS = {
     "TSLA": dict(directory="tsla", fye=12, scale=10**6,
                  net_income=[r"net income(?: \(loss\))? attributable to common stockholders"]),
 }
-NEW_ISSUERS = ("COIN", "MSTR", "HOOD", "XYZ", "PYPL", "V", "TSLA")
+SPECS.update({"AMD": dict(directory="amd", fye=12, scale=10**6),
+              "INTC": dict(directory="intc", fye=12, scale=10**6,
+                           net_income=[r"net income(?: \(loss\))? attributable to intel"])})
+NEW_ISSUERS = ("AMD", "INTC", "COIN", "MSTR", "HOOD", "XYZ", "PYPL", "V", "TSLA")
 
 
 class Tables(HTMLParser):
@@ -138,7 +141,8 @@ def find_statement(path, spec, min_years=2):
             enough = len(header_years(table)) >= min_years
         except ValueError:
             enough = False
-        if enough and len(found) == len(METRICS) - len(spec.get("missing", ())):
+        if (enough and len(found) == len(METRICS) - len(spec.get("missing", ()))
+                and all(not any("." in cell for cell in cells) for _, cells in found.values())):
             return table, found
     raise ValueError("no income statement found in " + str(path))
 
@@ -195,7 +199,7 @@ def fiscal_year(end, fye):
     return end.year + (1 if end.month > fye else 0)
 
 
-def review_quarters(ticker, spec, cache, user_agent, count=4):
+def review_quarters(ticker, spec, cache, user_agent, count=6):
     cik, filings = snapshot_filings(spec["directory"])
     periodic = sorted((f for f in filings if f["form"] in ("10-K", "10-Q")), key=lambda f: f["reportDate"])
     quarters = [f for f in periodic if f["form"] == "10-Q" and f["reportDate"] not in spec.get("skip_reports", ())][-count:]
@@ -227,6 +231,15 @@ def review_annual(ticker, spec, cache, user_agent):
     latest, prior = ends[-1], ends[-2]
     ten_k = {end: min((f for f in annual if f["reportDate"] == end and f["form"] == "10-K"), key=lambda f: f["filingDate"]) for end in ends}
     amendments = {end: [f for f in annual if f["reportDate"] == end and f["form"] == "10-K/A" and f["primaryDocument"] == ten_k[end]["primaryDocument"]] for end in ends}
+    for end in amendments:
+        financial_amendments = []
+        for filing in amendments[end]:
+            try:
+                find_statement(fetch(cache, user_agent, cik, filing), spec, min_years=3)
+            except ValueError:
+                continue  # A Part III-only amendment does not reissue the financial statements.
+            financial_amendments.append(filing)
+        amendments[end] = financial_amendments
     newest, older = ten_k[latest], ten_k[prior]
     result = {"years": {}, "newest": newest, "older": older, "amendments": amendments[latest]}
     for filing, key in ((newest, "newest"), (older, "older")):

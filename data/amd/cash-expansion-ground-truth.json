@@ -1,0 +1,307 @@
+{
+  "verification": "Visible SEC cash-flow statements only; no companyfacts or runtime calculation engine read.",
+  "ticker": "AMD",
+  "unit": "USD",
+  "years": {
+    "2023": {
+      "start": "2023-01-01",
+      "accession": "0000002488-24-000012",
+      "filed": "2024-01-31",
+      "end": "2023-12-30",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000012/amd-20231230.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases of property and equipment",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "1667000000",
+      "capital_expenditures": "546000000",
+      "investing_cash_flow": "-1423000000",
+      "financing_cash_flow": "-1146000000",
+      "free_cash_flow": "1121000000"
+    },
+    "2024": {
+      "start": "2023-12-31",
+      "accession": "0000002488-25-000012",
+      "filed": "2025-02-05",
+      "end": "2024-12-28",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases of property and equipment",
+        "investing_cash_flow": "Net cash provided by (used in) investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "3041000000",
+      "capital_expenditures": "636000000",
+      "investing_cash_flow": "-1101000000",
+      "financing_cash_flow": "-2062000000",
+      "free_cash_flow": "2405000000"
+    },
+    "2025": {
+      "start": "2024-12-29",
+      "accession": "0000002488-26-000018",
+      "filed": "2026-02-04",
+      "end": "2025-12-27",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "labels": {
+        "operating_cash_flow": "Net cash provided by operating activities",
+        "capital_expenditures": "Purchases of property and equipment",
+        "investing_cash_flow": "Net cash used in investing activities",
+        "financing_cash_flow": "Net cash used in financing activities"
+      },
+      "operating_cash_flow": "7709000000",
+      "capital_expenditures": "974000000",
+      "investing_cash_flow": "-5533000000",
+      "financing_cash_flow": "-431000000",
+      "free_cash_flow": "6735000000"
+    }
+  },
+  "quarters": [
+    {
+      "fiscal_year": 2024,
+      "quarter": "Q3",
+      "start": "2024-06-30",
+      "end": "2024-09-28",
+      "filed": "2024-10-30",
+      "inputs": [
+        {
+          "accession": "0000002488-24-000163",
+          "filed": "2024-10-30",
+          "end": "2024-09-28",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000163/amd-20240928.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash provided by (used in) investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "1742000000",
+          "capital_expenditures": "428000000",
+          "investing_cash_flow": "113000000",
+          "financing_cash_flow": "-1891000000"
+        },
+        {
+          "accession": "0000002488-24-000123",
+          "filed": "2024-07-31",
+          "end": "2024-06-29",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000123/amd-20240629.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash provided by (used in) investing activities",
+            "financing_cash_flow": "Net cash used in financing activities"
+          },
+          "operating_cash_flow": "1114000000",
+          "capital_expenditures": "296000000",
+          "investing_cash_flow": "251000000",
+          "financing_cash_flow": "-1185000000"
+        }
+      ],
+      "operating_cash_flow": "628000000",
+      "investing_cash_flow": "-138000000",
+      "financing_cash_flow": "-706000000",
+      "capital_expenditures": "132000000",
+      "free_cash_flow": "496000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q1",
+      "start": "2024-12-29",
+      "end": "2025-03-29",
+      "filed": "2025-05-07",
+      "inputs": [
+        {
+          "accession": "0000002488-25-000047",
+          "filed": "2025-05-07",
+          "end": "2025-03-29",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "939000000",
+          "capital_expenditures": "212000000",
+          "investing_cash_flow": "-357000000",
+          "financing_cash_flow": "1666000000"
+        }
+      ],
+      "operating_cash_flow": "939000000",
+      "investing_cash_flow": "-357000000",
+      "financing_cash_flow": "1666000000",
+      "capital_expenditures": "212000000",
+      "free_cash_flow": "727000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q2",
+      "start": "2025-03-30",
+      "end": "2025-06-28",
+      "filed": "2025-08-06",
+      "inputs": [
+        {
+          "accession": "0000002488-25-000108",
+          "filed": "2025-08-06",
+          "end": "2025-06-28",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash flows provided by operations",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash flows (used in) provided by investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities of continuing operations"
+          },
+          "operating_cash_flow": "2950000000",
+          "capital_expenditures": "494000000",
+          "investing_cash_flow": "-2655000000",
+          "financing_cash_flow": "347000000"
+        },
+        {
+          "accession": "0000002488-25-000047",
+          "filed": "2025-05-07",
+          "end": "2025-03-29",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities"
+          },
+          "operating_cash_flow": "939000000",
+          "capital_expenditures": "212000000",
+          "investing_cash_flow": "-357000000",
+          "financing_cash_flow": "1666000000"
+        }
+      ],
+      "operating_cash_flow": "2011000000",
+      "investing_cash_flow": "-2298000000",
+      "financing_cash_flow": "-1319000000",
+      "capital_expenditures": "282000000",
+      "free_cash_flow": "1729000000"
+    },
+    {
+      "fiscal_year": 2025,
+      "quarter": "Q3",
+      "start": "2025-06-29",
+      "end": "2025-09-27",
+      "filed": "2025-11-05",
+      "inputs": [
+        {
+          "accession": "0000002488-25-000166",
+          "filed": "2025-11-05",
+          "end": "2025-09-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash flows provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash flows (used in) provided by investing activities",
+            "financing_cash_flow": "Net cash used in financing activities of continuing operations"
+          },
+          "operating_cash_flow": "5109000000",
+          "capital_expenditures": "752000000",
+          "investing_cash_flow": "-3992000000",
+          "financing_cash_flow": "-103000000"
+        },
+        {
+          "accession": "0000002488-25-000108",
+          "filed": "2025-08-06",
+          "end": "2025-06-28",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash flows provided by operations",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash flows (used in) provided by investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities of continuing operations"
+          },
+          "operating_cash_flow": "2950000000",
+          "capital_expenditures": "494000000",
+          "investing_cash_flow": "-2655000000",
+          "financing_cash_flow": "347000000"
+        }
+      ],
+      "operating_cash_flow": "2159000000",
+      "investing_cash_flow": "-1337000000",
+      "financing_cash_flow": "-450000000",
+      "capital_expenditures": "258000000",
+      "free_cash_flow": "1901000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q1",
+      "start": "2025-12-28",
+      "end": "2026-03-28",
+      "filed": "2026-05-06",
+      "inputs": [
+        {
+          "accession": "0000002488-26-000076",
+          "filed": "2026-05-06",
+          "end": "2026-03-28",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000076/amd-20260328.htm",
+          "labels": {
+            "capital_expenditures": "Purchases of property and equipment",
+            "operating_cash_flow": "Net cash flows provided by operating activities of continuing operations",
+            "investing_cash_flow": "Net cash used in investing activities of continuing operations",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities of continuing operations"
+          },
+          "capital_expenditures": "389000000",
+          "operating_cash_flow": "2955000000",
+          "investing_cash_flow": "-2565000000",
+          "financing_cash_flow": "-350000000"
+        }
+      ],
+      "operating_cash_flow": "2955000000",
+      "investing_cash_flow": "-2565000000",
+      "financing_cash_flow": "-350000000",
+      "capital_expenditures": "389000000",
+      "free_cash_flow": "2566000000"
+    },
+    {
+      "fiscal_year": 2026,
+      "quarter": "Q2",
+      "start": "2026-03-29",
+      "end": "2026-06-27",
+      "filed": "2026-08-05",
+      "inputs": [
+        {
+          "accession": "0000002488-26-000123",
+          "filed": "2026-08-05",
+          "end": "2026-06-27",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm",
+          "labels": {
+            "operating_cash_flow": "Net cash provided by operating activities",
+            "capital_expenditures": "Purchases of property and equipment",
+            "investing_cash_flow": "Net cash used in investing activities",
+            "financing_cash_flow": "Net cash provided by (used in) financing activities of continuing operations"
+          },
+          "operating_cash_flow": "5321000000",
+          "capital_expenditures": "1197000000",
+          "investing_cash_flow": "-5415000000",
+          "financing_cash_flow": "-365000000"
+        },
+        {
+          "accession": "0000002488-26-000076",
+          "filed": "2026-05-06",
+          "end": "2026-03-28",
+          "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000076/amd-20260328.htm",
+          "labels": {
+            "capital_expenditures": "Purchases of property and equipment",
+            "operating_cash_flow": "Net cash flows provided by operating activities of continuing operations",
+            "investing_cash_flow": "Net cash used in investing activities of continuing operations",
+            "financing_cash_flow": "Net cash (used in) provided by financing activities of continuing operations"
+          },
+          "capital_expenditures": "389000000",
+          "operating_cash_flow": "2955000000",
+          "investing_cash_flow": "-2565000000",
+          "financing_cash_flow": "-350000000"
+        }
+      ],
+      "operating_cash_flow": "2366000000",
+      "investing_cash_flow": "-2850000000",
+      "financing_cash_flow": "-15000000",
+      "capital_expenditures": "808000000",
+      "free_cash_flow": "1558000000"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 import json
 
-from .policy import ANNUAL_TAGS, MAX_YEARS, METRICS, PROFILES, QUARTERS, TAGS, Refusal
+from .policy import ANNUAL_TAGS, MAX_YEARS, METRICS, PROFILES, QUARTERS, QUARTER_METRICS, Refusal
 from .contracts import DATE, REVIEWED_YEAR, output_schema, treasury_output_schema, validate_schema
 from .treasury import ACTIONS, FIRMS
 
@@ -28,19 +28,19 @@ TOOLS = [
     {"name": "resolve_company", "description": "Resolve one reviewed ticker (" + TICKERS + ") to its issuer using the bundled SEC submissions snapshot. No network or fuzzy search.",
      "inputSchema": {"type": "object", "additionalProperties": False, "required": ["ticker"],
                      "properties": {"ticker": {"type": "string", "pattern": "^[A-Za-z]{1,5}$"}}}},
-    {"name": "get_annual_facts", "description": "Read reviewed annual income and operating, investing and financing cash-flow facts (signed USD) for " + TICKERS + " (FY2023-FY2025, plus FY2026 for MSFT and NVDA where reviewed), with filing provenance, candidate rejections, and revision history. A metric the issuer's income statement does not report, such as gross profit for a bank-like filer, is returned as insufficient_data, never zero. as_of is inclusive and cannot exceed the snapshot date.",
+    {"name": "get_annual_facts", "description": "Read reviewed annual income, operating/investing/financing cash flows and cash capital expenditures (signed USD) for " + TICKERS + " (FY2023-FY2025, plus FY2026 for MSFT and NVDA where reviewed), with filing provenance, candidate rejections, and revision history. A metric the issuer's income statement does not report, such as gross profit for a bank-like filer, is returned as insufficient_data, never zero. as_of is inclusive and cannot exceed the snapshot date.",
      "inputSchema": analysis_schema(tuple(ANNUAL_TAGS))},
-    {"name": "get_quarterly_facts", "description": "Read the reviewed fiscal quarters (the four latest 10-Q periods per issuer in the snapshot, Q1 to Q3; the fiscal fourth quarter has no 10-Q) using exact quarter dates, excluding year-to-date values. Other quarters are refused.",
+    {"name": "get_quarterly_facts", "description": "Read the reviewed fiscal quarters (six reviewed 10-Q periods per issuer in the snapshot, Q1 to Q3; the fiscal fourth quarter has no 10-Q) using exact quarter dates. Income facts are direct three-month records; cash-flow totals and cash capex use current YTD minus preceding-quarter YTD with both filing sources. Free cash flow is operating cash flow minus cash capital expenditures. Other quarters are refused.",
      "inputSchema": {"type": "object", "additionalProperties": False,
                      "required": ["cik", "fiscal_year", "quarter", "metrics", "as_of"],
                      "properties": {
                          "cik": {"type": "string", "pattern": "^[0-9]{10}$"},
                          "fiscal_year": {"type": "integer", "minimum": min(QUARTER_YEARS), "maximum": max(QUARTER_YEARS)},
                          "quarter": {"type": "string", "enum": sorted({quarter for _, quarter in QUARTERS})},
-                         "metrics": {"type": "array", "minItems": 1, "maxItems": len(TAGS), "uniqueItems": True,
-                                     "items": {"type": "string", "enum": list(TAGS)}},
+                         "metrics": {"type": "array", "minItems": 1, "maxItems": len(QUARTER_METRICS), "uniqueItems": True,
+                                     "items": {"type": "string", "enum": list(QUARTER_METRICS)}},
                          "as_of": DATE}}},
-    {"name": "calculate_metrics", "description": "Calculate reviewed annual facts, gross and operating margins, and revenue growth for " + TICKERS + ". Percentages are exact rational results rendered as decimal strings. Unsupported scope is refused.",
+    {"name": "calculate_metrics", "description": "Calculate reviewed annual facts, gross and operating margins, revenue growth and free cash flow (operating cash flow minus cash capital expenditures) for " + TICKERS + ". Percentages are exact rational results rendered as decimal strings. Unsupported scope is refused.",
      "inputSchema": analysis_schema(METRICS)},
 ]
 for tool in TOOLS:

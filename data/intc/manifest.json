@@ -1,0 +1,27 @@
+{
+  "evidence_kind": "sec_api_snapshot",
+  "captured_at": "2026-10-27T00:07:02.947948+00:00",
+  "scope_review": "INTC reviewed periods only; future periods require human review.",
+  "files": {
+    "companyfacts.json": {
+      "source_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json",
+      "sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "bytes": 4311809
+    },
+    "submissions.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000050863.json",
+      "sha256": "f04f1a2215ca448e8661d5dd6fea91c878168cf6f8edef08c7cab602659c4111",
+      "bytes": 159311
+    },
+    "CIK0000050863-submissions-001.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000050863-submissions-001.json",
+      "sha256": "78c7faef4a09d1fb474783539cee5a9010847bc88e625bd11f431ec4e18880a6",
+      "bytes": 313362
+    },
+    "CIK0000050863-submissions-002.json": {
+      "source_url": "https://data.sec.gov/submissions/CIK0000050863-submissions-002.json",
+      "sha256": "fbd1edb817f0242876887ea7b3c9ed01c39bd35c41252a9bfde20f45cca367ff",
+      "bytes": 152616
+    }
+  }
+}

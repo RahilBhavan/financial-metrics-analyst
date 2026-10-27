@@ -5,12 +5,12 @@ import json
 import os
 import re
 from collections import Counter
-from datetime import date
+from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation, localcontext, ROUND_HALF_EVEN
 from fractions import Fraction
 from pathlib import Path
 
-from .policy import ANNUAL_TAGS, MAX_SNAPSHOT_BYTES, MAX_YEARS, METRICS, POLICY, PROFILES, TAGS, Refusal
+from .policy import ANNUAL_TAGS, MAX_SNAPSHOT_BYTES, MAX_YEARS, METRICS, POLICY, PROFILES, QUARTER_METRICS, TAGS, Refusal
 
 DEFAULT_DATA = Path(__file__).resolve().parent.parent / "data"
 FILING_KEYS = ("accessionNumber", "filingDate", "reportDate", "form", "primaryDocument")
@@ -177,9 +177,12 @@ class Analyst:
             return fy == report.year or (fy == report.year - 1 and (report.month, report.day) <= (1, 7))
         return fy == self.fiscal_year_of(filing["reportDate"])
 
-    def _select_period(self, fiscal_year, fp, start, end, metric, as_of):
+    def _select_period(self, fiscal_year, fp, start, end, metric, as_of, ytd=False):
         """Annual (fp FY) and quarterly selection share every eligibility and blocking rule."""
         kind = PERIOD_KINDS["annual" if fp == "FY" else "quarter"]
+        if ytd:
+            expected_duration = (iso_date(end) - iso_date(start)).days + 1
+            kind = {**PERIOD_KINDS['quarter'], 'may_block': lambda days: days is None or abs(days - expected_duration) <= 10}
         tag = self.profile.get("tags", TAGS)[metric]
         eligible, rejected, dangerous, unindexed = [], [], [], []
         counts = Counter()
@@ -209,7 +212,7 @@ class Analyst:
                     reason = "period_mismatch"
                 elif unit != "USD":
                     reason = "unit_mismatch"
-                elif raw.get("form") not in kind["forms"] or raw.get("fp") != fp:
+                elif raw.get("form") not in kind["forms"] or (raw.get("fp") not in ("Q1", "Q2", "Q3") if ytd else raw.get("fp") != fp):
                     reason = kind["wrong_form"]
                 elif not filing:
                     reason = "accession_not_indexed"
@@ -228,6 +231,8 @@ class Analyst:
                             reason = "unsafe_source_identifier"
                         else:
                             value = number(raw.get("val"))
+                            if metric == "capital_expenditures" and value < 0:
+                                raise Refusal("invalid_fact", "Cash capital expenditure payment must be nonnegative.")
                     except (Refusal, ValueError):
                         reason = "invalid_fact"
                 if reason:
@@ -255,7 +260,16 @@ class Analyst:
             base["fp"] = fp
         if not eligible:
             return {**base, "status": "insufficient_data", "reason": "standard_tag_absent" if not units else kind["none"], "value": None}
-        return self._choose(base, eligible, dangerous, unindexed)
+        selected = self._choose(base, eligible, dangerous, unindexed)
+        if metric == 'capital_expenditures' and selected['status'] == 'ok':
+            basis = {'INTC': 'investing cash capex only; excludes property additions classified in financing activities',
+                     'AMD': 'capex excludes discontinued operations; operating cash flow is consolidated',
+                     'NVDA': 'includes property, equipment and intangible assets',
+                     'V': 'includes property, equipment and technology',
+                     'HOOD': 'property and equipment only; excludes separately filed capitalized software'}
+            if self.profile['ticker'] in basis:
+                selected['warnings'].append('cash_capex_scope: ' + basis[self.profile['ticker']])
+        return selected
 
     @staticmethod
     def _choose(base, eligible, dangerous, unindexed=()):
@@ -295,14 +309,74 @@ class Analyst:
         quarters = self.profile.get("quarters", {})
         if key not in quarters:
             raise Refusal("unsupported_quarter", "This issuer does not have that reviewed fiscal quarter.")
-        if (not isinstance(metrics, list) or not 1 <= len(metrics) <= len(TAGS)
-                or len(set(metrics)) != len(metrics) or any(metric not in TAGS for metric in metrics)):
-            raise Refusal("unsupported_metric", "Quarterly facts support: " + ", ".join(TAGS))
+        if (not isinstance(metrics, list) or not 1 <= len(metrics) <= len(QUARTER_METRICS)
+                or len(set(metrics)) != len(metrics) or any(metric not in QUARTER_METRICS for metric in metrics)):
+            raise Refusal("unsupported_metric", "Quarterly facts support: " + ", ".join(QUARTER_METRICS))
         if iso_date(as_of) > self.captured_date:
             raise Refusal("as_of_after_snapshot", "Cannot establish facts after snapshot date " + str(self.captured_date))
         start, end = quarters[key]
-        results = [self._select_period(fiscal_year, quarter, start, end, metric, as_of) for metric in metrics]
+        results = [self._select_period(fiscal_year, quarter, start, end, metric, as_of) if metric in TAGS
+                   else self._cash_result(fiscal_year, metric, as_of, quarter) for metric in metrics]
         return self._response(results, as_of)
+
+    def _cash_result(self, year, metric, as_of, quarter=None):
+        """Exact USD derivations retain every filed operand; never treat a YTD value as a quarter."""
+        periods = self.profile['quarters'] if quarter else self.periods
+        start, end = periods[(year, quarter) if quarter else year]
+        base = {'fiscal_year': year, 'metric': metric, 'unit': 'USD', 'period_start': start,
+                'period_end': end, 'fp': quarter or 'FY', 'value': None}
+        metrics = ('operating_cash_flow', 'capital_expenditures') if metric == 'free_cash_flow' else (metric,)
+        inputs, values, warnings = [], [], []
+        for component in metrics:
+            if quarter:
+                # The preceding 10-K establishes the fiscal-year start, including 52/53-week calendars.
+                annual_ends = [f['reportDate'] for f in self.filings.values()
+                               if f['form'] == '10-K' and f['reportDate'] < end]
+                if not annual_ends:
+                    return {**base, 'status': 'insufficient_data', 'reason': 'fiscal_year_start_unavailable', 'inputs': inputs}
+                fiscal_start = (iso_date(max(annual_ends)) + timedelta(days=1)).isoformat()
+                if not 0 < (iso_date(end) - iso_date(fiscal_start)).days < 300:
+                    return {**base, 'status': 'insufficient_data', 'reason': 'invalid_ytd_period', 'inputs': inputs}
+                operands = [self._select_period(year, quarter, fiscal_start, end, component, as_of, ytd=True)]
+                if quarter != 'Q1':
+                    previous_end = (iso_date(start) - timedelta(days=1)).isoformat()
+                    operands.append(self._select_period(year, 'Q' + str(int(quarter[1]) - 1), fiscal_start,
+                                                        previous_end, component, as_of, ytd=True))
+            else:
+                operands = [self._select(year, component, as_of)]
+            if any(row['status'] != 'ok' for row in operands):
+                return {**base, 'status': 'insufficient_data', 'reason': 'operand_unavailable', 'inputs': inputs}
+            inputs.extend({k: v for k, v in row.items() if k not in AUDIT_KEYS} for row in operands)
+            value = Fraction(number(operands[0]['value']))
+            if len(operands) == 2:
+                if operands[1]['filed'] > operands[0]['filed']:
+                    baseline = self._select_period(year, 'Q' + str(int(quarter[1]) - 1), fiscal_start,
+                                                   previous_end, component, operands[0]['filed'], ytd=True)
+                    if baseline['status'] != 'ok' or number(baseline['value']) != number(operands[1]['value']):
+                        return {**base, 'status': 'insufficient_data', 'reason': 'prior_ytd_revised_after_current_ytd', 'inputs': inputs}
+                value -= Fraction(number(operands[1]['value']))
+            values.append(value)
+            warnings.extend(w for row in operands for w in row['warnings'])
+        if len({row['accn'] for row in inputs}) > 1:
+            warnings.append('mixed_filing_basis: standalone quarter uses separately filed year-to-date operands')
+        if metric == 'free_cash_flow':
+            # Compare same endpoints on a common filing basis before subtracting capex.
+            width = len(inputs) // 2
+            if any(a['accn'] != b['accn'] for a, b in zip(inputs[:width], inputs[width:])):
+                return {**base, 'status': 'insufficient_data', 'reason': 'inconsistent_filing_basis', 'inputs': inputs}
+            if values[1] < 0:
+                return {**base, 'status': 'insufficient_data', 'reason': 'negative_capital_expenditures', 'inputs': inputs}
+            value = values[0] - values[1]
+            formula = 'operating_cash_flow - capital_expenditures'
+        else:
+            value = values[0]
+            formula = 'current_ytd - previous_ytd' if quarter != 'Q1' else 'current_ytd'
+        # All input decimals terminate; Fraction preserves exact subtraction independently of ambient context.
+        with localcontext() as context:
+            context.prec = 100
+            rendered = decimal_text(Decimal(value.numerator) / Decimal(value.denominator))
+        return {**base, 'status': 'ok', 'value': rendered, 'formula': formula,
+                'inputs': inputs, 'warnings': sorted(set(warnings))}
 
     def _response(self, results, as_of):
         return {"status": "ok" if all(r["status"] == "ok" for r in results) else "partial",
@@ -324,6 +398,9 @@ class Analyst:
         results = []
         for year in sorted(fiscal_years):
             for metric in metrics:
+                if metric == 'free_cash_flow':
+                    results.append(self._cash_result(year, metric, as_of))
+                    continue
                 if metric in ANNUAL_TAGS:
                     results.append(select(year, metric))
                     continue
