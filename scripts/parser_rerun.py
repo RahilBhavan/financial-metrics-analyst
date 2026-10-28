@@ -41,8 +41,8 @@ def main():
 
     code, body = ask("Microsoft profit 2026")
     record("python3 -B -m financial_metrics ask --json 'Microsoft profit 2026'", code, body)
-    if (code, body.get("status"), body.get("choices")) != (3, "needs_clarification", ["Operating income", "Net income"]):
-        problems.append("'Microsoft profit 2026' did not ask operating income or net income (exit 3)")
+    if (code, body.get("status"), body.get("choices")) != (3, "needs_clarification", ["Gross profit", "Operating income", "Net income"]):
+        problems.append("'Microsoft profit 2026' did not ask gross profit, operating income or net income (exit 3)")
 
     snapshot = None
     for metric, (question, value) in EXPECTED.items():

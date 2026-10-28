@@ -1,4 +1,4 @@
-Rerun 2026-10-26: snapshot captured 2026-09-21 (35 days old); operating income 155.237B, net income 133.749B, 0001193125-26-323660.
+Rerun 2026-10-28: snapshot captured 2026-09-21 (37 days old); operating income 155.237B, net income 133.749B, 0001193125-26-323660.
 Result: all figures match the card.
 Snapshot older than 7 days: yes, not refreshed (needs an SEC contact User-Agent).
 
@@ -7,8 +7,9 @@ exit 3
 {
   "status": "needs_clarification",
   "code": "ambiguous_profit",
-  "message": "Do you mean operating income or net income?",
+  "message": "Which profit measure?",
   "choices": [
+    "Gross profit",
     "Operating income",
     "Net income"
   ]
@@ -29,12 +30,13 @@ exit 0
     "evidence_kind": "sec_api_snapshot",
     "snapshot_sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
     "policy": {
-      "version": "reviewed-annual-quarterly-v4",
-      "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; consolidated USD",
+      "version": "reviewed-annual-quarterly-v6",
+      "scope": "Twelve reviewed issuers including AMD and INTC FY2023-FY2025; AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; six reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
       "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
       "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
       "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
       "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
+      "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. Standalone quarterly cash flows use current YTD minus preceding-quarter YTD (first quarter uses YTD directly), with both sources retained and mixed-filing basis disclosed. Cash capital expenditures are positive investing cash payments for property, plant and equipment (productive assets for NVDA and V; other productive assets for HOOD); INTC excludes property additions classified as financing cash flows; AMD capex excludes discontinued operations while operating cash flow is consolidated; NVDA includes intangible assets and V includes technology in the filed line; HOOD excludes separately reported capitalized software; exclude acquisitions and noncash leases. Missing standard capex tags remain unavailable, including recent COIN periods. Free cash flow is operating cash flow minus cash capital expenditures, not an issuer-adjusted measure.",
       "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
       "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
       "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places."
@@ -118,12 +120,13 @@ exit 0
     "evidence_kind": "sec_api_snapshot",
     "snapshot_sha256": "f8aae2965b20ad0df44bdf7ccbedf797d275b6b8dc030154a7a311361bb7246f",
     "policy": {
-      "version": "reviewed-annual-quarterly-v4",
-      "scope": "Ten reviewed issuers: AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; four reviewed 10-Q quarters each; one prior revenue period supports growth; consolidated USD",
+      "version": "reviewed-annual-quarterly-v6",
+      "scope": "Twelve reviewed issuers including AMD and INTC FY2023-FY2025; AAPL FY2023-FY2025, MSFT FY2023-FY2026, NVDA FY2024-FY2026, and COIN, MSTR, HOOD, XYZ, PYPL, V and TSLA FY2023-FY2025; six reviewed 10-Q quarters each; one prior revenue period supports growth; annual operating, investing and financing cash flow; consolidated USD",
       "selection": "Latest filing date on or before as_of, matching exact reviewed dates. Invalid same-date or newer annual or quarterly candidates block selection; conflicting values on any one filing date are ambiguous. A later 10-Q that repeats a quarter as its prior-year comparative is a revision candidate.",
       "as_of": "Inclusive filing date, end of day; no intraday point-in-time claim; later API corrections to old records cannot be reconstructed.",
       "revision": "Retain earliest eligible value and history; changed values are revision candidates, not proven formal restatements.",
       "net_income": "Net income attributable to the issuer (NetIncomeLoss), not income available to common shareholders and not consolidated net income including noncontrolling interests.",
+      "cash_flow": "Annual net cash provided by (positive) or used in (negative) operating, investing and financing activities; signed USD from standard tags. Standalone quarterly cash flows use current YTD minus preceding-quarter YTD (first quarter uses YTD directly), with both sources retained and mixed-filing basis disclosed. Cash capital expenditures are positive investing cash payments for property, plant and equipment (productive assets for NVDA and V; other productive assets for HOOD); INTC excludes property additions classified as financing cash flows; AMD capex excludes discontinued operations while operating cash flow is consolidated; NVDA includes intangible assets and V includes technology in the filed line; HOOD excludes separately reported capitalized software; exclude acquisitions and noncash leases. Missing standard capex tags remain unavailable, including recent COIN periods. Free cash flow is operating cash flow minus cash capital expenditures, not an issuer-adjusted measure.",
       "growth": "Reported annual growth; prior revenue must be positive; consecutive contiguous periods; unequal fiscal period lengths explicitly flagged, not normalized.",
       "basis": "Ratios use one accession. Growth may use the latest common filing only when its two values match the latest individually selected values; explain the older comparative basis explicitly.",
       "precision": "Exact input decimals and exact rational percentage retained; decimal rendering has 34 significant digits, ROUND_HALF_EVEN; display 2 decimal places."
