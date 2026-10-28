@@ -108,7 +108,7 @@ For normal use, open the project in T3 and ask a question. `AGENTS.md` and the p
 - [docs/issuer-expansion-research.md](docs/issuer-expansion-research.md): primary-source evidence for Microsoft FY2026 and NVIDIA.
 - [EVALUATION.md](EVALUATION.md): the 1,226-case evaluation by group, reproduction commands and remaining limits.
 - [WALKTHROUGH.md](WALKTHROUGH.md): one answer traced through the code, in reading order.
-- [IMPROVEMENT-PLAN.md](IMPROVEMENT-PLAN.md): the September 2026 reliability plan and its completion evidence.
+- [IMPROVEMENT-PLAN.md](docs/IMPROVEMENT-PLAN.md): the September 2026 reliability plan and its completion evidence.
 
 ## Sources
 
